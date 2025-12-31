@@ -44,8 +44,8 @@
   <summary>Table Of Contents</summary>
 
   - <a href="https://github.com/Melanated-Cyber-Kings/ARMAGEDDON/blob/main/README.md#-about-lab-1a">About Lab 1a</a>
-  - <a href="https://github.com/Melanated-Cyber-Kings/ARMAGEDDON/blob/main/README.md#-about-lab-1a">About Lab 1b</a>
-  - <a href="https://github.com/Melanated-Cyber-Kings/ARMAGEDDON/blob/main/README.md#-about-lab-1a">About Lab 1c</a>
+  - <a href="https://github.com/Melanated-Cyber-Kings/ARMAGEDDON/blob/main/README.md#-about-lab-1b">About Lab 1b</a>
+  - <a href="https://github.com/Melanated-Cyber-Kings/ARMAGEDDON/blob/main/README.md#-about-lab-1c">About Lab 1c</a>
 
 
 
@@ -65,3 +65,14 @@ This project shows how to connect your GCP Project to Github actions and run ter
 <br>
 
 <br>
+
+<h2 align="center">📌 About Lab 1b</h2>
+
+<br>
+Lab 1b
+
+
+<h2 align="center">📌 About Lab 1c</h2>
+
+<br>
+Lab 1c 
