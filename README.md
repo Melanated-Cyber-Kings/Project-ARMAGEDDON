@@ -45,7 +45,7 @@
 
   - <a href="https://github.com/Melanated-Cyber-Kings/ARMAGEDDON/blob/main/README.md#-about-lab-1a">About Lab 1a</a>
     - <a href="https://github.com/Melanated-Cyber-Kings/ARMAGEDDON/blob/main/README.md#-phase-0-ideation">Phase 0 Ideation:</a>
-      - <a href="https://github.com/Melanated-Cyber-Kings/GCP-Armageddon/tree/main?tab=readme-ov-file#step-1">0.1 Actors:</a>
+      - <a href="https://github.com/Melanated-Cyber-Kings/ARMAGEDDON/blob/main/README.md#-actors">0.1 Actors:</a>
       - <a href="https://github.com/Melanated-Cyber-Kings/GCP-Armageddon/tree/main?tab=readme-ov-file#step-1">0.2 Trust Problems:</a>
   - <a href="https://github.com/Melanated-Cyber-Kings/ARMAGEDDON/blob/main/README.md#-about-lab-1b">About Lab 1b</a>
   - <a href="https://github.com/Melanated-Cyber-Kings/ARMAGEDDON/blob/main/README.md#-about-lab-1c">About Lab 1c</a>
@@ -71,11 +71,15 @@ This lab demonstrates how AWS services securely interact using a trust chain. An
 
 <h2 align="center">🤔 Phase 0 Ideation</h2>
 
+<br>
+
 What exactly are you building? In this Lab EC2 is the app tier. The Flask app on the EC2 serves HTTP and runs the application logic. In addition the Database tier RDS MySQL. The Lab focuses on trust between EC2 and RDS, security groups, IAM roles, Service Manager, and Stateless vs Statefull design. Adding additional tiers would increase additinal moving parts making it harder to debug. You would add an additional tier if you were using ALB's ASG, Running containers, and so on. 
 
 
 
-<h2 align="center">🤔 Actors</h2>
+<h2 align="center">🤔 0.1 Actors</h2>
+
+<br>
 
 
 From this we identified system actors and their use cases
@@ -86,6 +90,39 @@ From this we identified system actors and their use cases
   - IAM, which is an identity system that wants to decide access
   - Secrets Manager, which is secure storage that wants to deliver secrets
   - RDS, which is the database that wants to accept trusted connections
+
+
+
+<br>
+
+<br>
+
+
+
+<h2 align="center">🤔 0.2 Trust Problems</h2>
+
+<br>
+
+Two trust problems identified. 
+
+<br>
+
+- Who can connect to the database?
+    
+- Who can authenticate to the database?
+
+<br>
+
+
+**Who can connect to the database?**
+
+This is solved by Security Groups at the network level and answers the important question, is traffic from this EC2 even allowed to reach the database. These rules are enforced before authentication where no usernames or passwordes are involved. This happens at the network level.
+
+**Who can authenticate to the database?**
+
+This is solved by the Secrets Manager and MySQL credentials. This answers the question if a connection is allowed, who is logging in. These rules are enforced after network access, where a username and password are required, and the credentials don not live on the EC2 disk, "Stateless".
+
+
 
 
 
