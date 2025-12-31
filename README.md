@@ -43,7 +43,11 @@
 <details>
   <summary>Table Of Contents</summary>
 
-  - <a href="https://github.com/Melanated-Cyber-Kings/GCP-Armageddon/tree/main?tab=readme-ov-file#-about-the-project">About Lab 1a</a>
+  - <a href="https://github.com/Melanated-Cyber-Kings/ARMAGEDDON/blob/main/README.md#-about-lab-1a">About Lab 1a</a>
+  - <a href="https://github.com/Melanated-Cyber-Kings/ARMAGEDDON/blob/main/README.md#-about-lab-1a">About Lab 1b</a>
+  - <a href="https://github.com/Melanated-Cyber-Kings/ARMAGEDDON/blob/main/README.md#-about-lab-1a">About Lab 1c</a>
+
+
 
 </details>
 
