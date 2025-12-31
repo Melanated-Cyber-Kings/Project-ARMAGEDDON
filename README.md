@@ -85,7 +85,7 @@ In this Lab EC2 is the app tier. The Flask app on the EC2 serves HTTP and runs t
 <br>
 
 
-From this we identified system actors and their use cases
+From this identify system actors and their use cases
 
 
   - User, which is a browser that wants to establish an HTTP response
