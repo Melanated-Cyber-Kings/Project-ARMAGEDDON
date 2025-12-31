@@ -44,7 +44,7 @@
   <summary>Table Of Contents</summary>
 
   - <a href="https://github.com/Melanated-Cyber-Kings/ARMAGEDDON/blob/main/README.md#-about-lab-1a">About Lab 1a</a>
-    - <a href="https://github.com/Melanated-Cyber-Kings/GCP-Armageddon/tree/main?tab=readme-ov-file#step-1">Phase 0 Ideation:</a>
+    - <a href="https://github.com/Melanated-Cyber-Kings/ARMAGEDDON/blob/main/README.md#-phase-0-ideation">Phase 0 Ideation:</a>
       - <a href="https://github.com/Melanated-Cyber-Kings/GCP-Armageddon/tree/main?tab=readme-ov-file#step-1">0.1 Actors:</a>
       - <a href="https://github.com/Melanated-Cyber-Kings/GCP-Armageddon/tree/main?tab=readme-ov-file#step-1">0.2 Trust Problems:</a>
   - <a href="https://github.com/Melanated-Cyber-Kings/ARMAGEDDON/blob/main/README.md#-about-lab-1b">About Lab 1b</a>
