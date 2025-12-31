@@ -45,6 +45,8 @@
 
   - <a href="https://github.com/Melanated-Cyber-Kings/ARMAGEDDON/blob/main/README.md#-about-lab-1a">About Lab 1a</a>
     - <a href="https://github.com/Melanated-Cyber-Kings/GCP-Armageddon/tree/main?tab=readme-ov-file#step-1">Phase 0 Ideation:</a>
+      - <a href="https://github.com/Melanated-Cyber-Kings/GCP-Armageddon/tree/main?tab=readme-ov-file#step-1">0.1 Actors:</a>
+      - <a href="https://github.com/Melanated-Cyber-Kings/GCP-Armageddon/tree/main?tab=readme-ov-file#step-1">0.2 Trust Problems:</a>
   - <a href="https://github.com/Melanated-Cyber-Kings/ARMAGEDDON/blob/main/README.md#-about-lab-1b">About Lab 1b</a>
   - <a href="https://github.com/Melanated-Cyber-Kings/ARMAGEDDON/blob/main/README.md#-about-lab-1c">About Lab 1c</a>
 
@@ -67,9 +69,30 @@ This lab demonstrates how AWS services securely interact using a trust chain. An
 
 
 
+<h2 align="center">🤔 Phase 0 Ideation</h2>
+
+What exactly are you building? In this Lab EC2 is the app tier. The Flask app on the EC2 serves HTTP and runs the application logic. In addition the Database tier RDS MySQL. The Lab focuses on trust between EC2 and RDS, security groups, IAM roles, Service Manager, and Stateless vs Statefull design. Adding additional tiers would increase additinal moving parts making it harder to debug. You would add an additional tier if you were using ALB's ASG, Running containers, and so on. 
+
+
+
+<h2 align="center">🤔 Actors</h2>
+
+
+From this we identified system actors and their use cases
+
+
+  - User, which is a browser that wants to establish an HTTP response
+  - EC2, which is a compute service that wants to establish DB credentials
+  - IAM, which is an identity system that wants to decide access
+  - Secrets Manager, which is secure storage that wants to deliver secrets
+  - RDS, which is the database that wants to accept trusted connections
+
 
 
 <br>
+
+<br>
+
 
 <h2 align="center">📌 About Lab 1b</h2>
 
@@ -77,6 +100,8 @@ This lab demonstrates how AWS services securely interact using a trust chain. An
 Lab 1b
 
 
+
+ <br>
 <h2 align="center">📌 About Lab 1c</h2>
 
 <br>
