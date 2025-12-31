@@ -49,3 +49,15 @@
 
 
 <br>
+
+<br>
+
+<h2 align="center">📌 About Lab 1a</h2>
+
+<br>
+
+This project shows how to connect your GCP Project to Github actions and run terraform to run a simple SNYK security scan. Although the objective is to run a simple SNYK scan, GCP infrastructure can still be spun up automatically instead of using the GCP console or gcloud CLI. 
+
+<br>
+
+<br>
