@@ -20,7 +20,6 @@
 
 
 
-
 **DevSecOps (Identity, Secrets, Least Privilege):**
 
 <a href="https://github.com/anthonyadeconsulting-source">Adeji Adeyei</a> , <a href="https://github.com/theswordpt-git">Voloxar Karsze</a> , <a href="https://github.com/Lew228">Shawn Mosby</a> , 
@@ -30,7 +29,7 @@
 
 **Dev Tooling:**
 
-<a href="https://github.com/waseeconsulting-git">Van Ngila</a> , <a href="https://github.com/DBs-art">Daniel Bryce</a> , <a href="https://github.com/BennyCampCloud">Campanella Godfrey Jr</a> , <a href="https://github.com/AnunnakiRa">Anunnaki MetuNetter AmenRa</a> , 
+<a href="https://github.com/waseeconsulting-git">Van Ngila</a> , <a href="https://github.com/DBs-art">Daniel Bryce</a> , <a href="https://github.com/BennyCampCloud">Campanella Godfrey Jr</a> and <a href="https://github.com/AnunnakiRa">Anunnaki MetuNetter AmenRa</a> 
 
 
 <br>
