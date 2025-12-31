@@ -33,9 +33,19 @@
 <a href="https://github.com/waseeconsulting-git">Van Ngila</a> , <a href="https://github.com/DBs-art">Daniel Bryce</a> , <a href="https://github.com/BennyCampCloud">Campanella Godfrey Jr</a> , <a href="https://github.com/AnunnakiRa">Anunnaki MetuNetter AmenRa</a> , 
 
 
+<br>
 
 
+---
+
+<br>
+
+<details>
+  <summary>Table Of Contents</summary>
+
+  - <a href="https://github.com/Melanated-Cyber-Kings/GCP-Armageddon/tree/main?tab=readme-ov-file#-about-the-project">About Lab 1a</a>
+
+</details>
 
 
-
-
+<br>
