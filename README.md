@@ -1,4 +1,4 @@
-<h1 align="center">ARMAGEDDON PROJECT</h1>
+<h1 align="center">ARMAGEDDON PROJECT LAB 1</h1>
 
 
 **Project Co-ordinator:** 
@@ -44,6 +44,7 @@
   <summary>Table Of Contents</summary>
 
   - <a href="https://github.com/Melanated-Cyber-Kings/ARMAGEDDON/blob/main/README.md#-about-lab-1a">About Lab 1a</a>
+    - <a href="https://github.com/Melanated-Cyber-Kings/GCP-Armageddon/tree/main?tab=readme-ov-file#step-1">Phase 0 Ideation:</a>
   - <a href="https://github.com/Melanated-Cyber-Kings/ARMAGEDDON/blob/main/README.md#-about-lab-1b">About Lab 1b</a>
   - <a href="https://github.com/Melanated-Cyber-Kings/ARMAGEDDON/blob/main/README.md#-about-lab-1c">About Lab 1c</a>
 
@@ -60,9 +61,13 @@
 
 <br>
 
-This project shows how to connect your GCP Project to Github actions and run terraform to run a simple SNYK security scan. Although the objective is to run a simple SNYK scan, GCP infrastructure can still be spun up automatically instead of using the GCP console or gcloud CLI. 
+This lab demonstrates how AWS services securely interact using a trust chain. An EC2 instance must first prove its identity through an IAM role, which allows it to retrieve database credentials from AWS Secrets Manager. With valid credentials and approved network access, the application can then connect to an RDS database that only accepts connections from the EC2 security group. Access is granted step by step, ensuring compute, secrets, and data are securely connected without exposing credentials.
 
 <br>
+
+
+
+
 
 <br>
 
