@@ -176,7 +176,7 @@ This lab demonstrates how AWS services securely interact using a trust chain. An
 
 <br>
 
-###**What exactly are you building?**
+### **What exactly are you building?**
 
 
 In this Lab EC2 is the app tier. The Flask app on the EC2 serves HTTP and runs the application logic. In addition the Database tier RDS MySQL. The Lab focuses on trust between EC2 and RDS, security groups, IAM roles, Service Manager, and Stateless vs Statefull design. Adding additional tiers would increase additinal moving parts making it harder to debug. You would add an additional tier if you were using ALB's ASG, Running containers, and so on. 
@@ -188,7 +188,7 @@ In this Lab EC2 is the app tier. The Flask app on the EC2 serves HTTP and runs t
 <br>
 
 
-###**From this identify system actors and their use cases**
+### **From this identify system actors and their use cases**
 
 
   - User, which is a browser that wants to establish an HTTP response
@@ -210,7 +210,7 @@ In this Lab EC2 is the app tier. The Flask app on the EC2 serves HTTP and runs t
 
 <br>
 
-###**Two trust problems identified**
+### **Two trust problems identified**
 
 <br>
 
