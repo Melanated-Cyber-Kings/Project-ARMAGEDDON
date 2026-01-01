@@ -72,7 +72,7 @@
 <br>
 
 ```bash
-git clone https://github.com/Melanated-Cyber-Kings/Class7-Homework.git
+git clone git@github.com:Melanated-Cyber-Kings/ARMAGEDDON.git
 ```
 
 <br>
