@@ -57,7 +57,7 @@
       - <a href="https://github.com/Melanated-Cyber-Kings/ARMAGEDDON/blob/main/README.md#-212-trust-problems">2.1.2 Trust Problems</a>
       - <a href="https://github.com/Melanated-Cyber-Kings/ARMAGEDDON/blob/main/README.md#-213-iam">2.1.3 IAM</a>
       - <a href="https://github.com/Melanated-Cyber-Kings/ARMAGEDDON/blob/main/README.md#-214-static-credentials">2.1.4 Static Credentials</a> 
-      - <a href="https://github.com/Melanated-Cyber-Kings/ARMAGEDDON/blob/main/README.md#-213-iam">2.1.5 Data Flow (You Should Be Able to Say This Out Loud)</a>
+      - <a href="https://github.com/Melanated-Cyber-Kings/ARMAGEDDON/blob/main/README.md#-215-data-flow-you-should-be-able-to-say-this-out-loud">2.1.5 Data Flow (You Should Be Able to Say This Out Loud)</a>
 
       
   - <a href="https://github.com/Melanated-Cyber-Kings/ARMAGEDDON/blob/main/README.md#-about-lab-1b">About Lab 1b</a>
@@ -269,6 +269,7 @@ Static credentials are forbidden. These are typically your username and password
 
 If the DB credentials are put into the application code or environment variables you would have violated **least privilege**, made rotation impossible, and failed a real security review. This Lab exists to break that habbit. Instead of static credentials, this lab uses an IAM role attached to the EC2 instance to dynamically retrieve database credentials from AWS Secrets Manager.
 
+<br>
 
 <h2 align="center">🤔 2.1.5 Data Flow (You Should Be Able to Say This Out Loud)</h2>
 
@@ -303,9 +304,12 @@ If the DB credentials are put into the application code or environment variables
 9. Response flows back to user
 
 <br> 
+
+
 <h2 align="center">📌 About Lab 1b</h2>
 
 <br>
+
 Lab 1b
 
 
