@@ -56,6 +56,8 @@
       - <a href="https://github.com/Melanated-Cyber-Kings/ARMAGEDDON/blob/main/README.md#-211-actors">2.1.1 Actors</a>
       - <a href="https://github.com/Melanated-Cyber-Kings/ARMAGEDDON/blob/main/README.md#-212-trust-problems">2.1.2 Trust Problems</a>
       - <a href="https://github.com/Melanated-Cyber-Kings/ARMAGEDDON/blob/main/README.md#-213-iam">2.1.3 IAM</a>
+      - <a href="https://github.com/Melanated-Cyber-Kings/ARMAGEDDON/blob/main/README.md#-213-iam">2.1.4 Static Credentials</a>
+
   - <a href="https://github.com/Melanated-Cyber-Kings/ARMAGEDDON/blob/main/README.md#-about-lab-1b">About Lab 1b</a>
   - <a href="https://github.com/Melanated-Cyber-Kings/ARMAGEDDON/blob/main/README.md#-about-lab-1c">About Lab 1c</a>
 
@@ -254,6 +256,17 @@ IAM does not allow the EC2 instance to connect to RDS, to open ports, or manage 
 <br>
 
 The EC2 instance does not have a username or password. Instead, AWS automatically gives it an IAM role, which acts like an identity badge. When the EC2 instance needs the database password, it asks AWS, “Who am I allowed to be?” The IAM role answers that question and checks its permissions. If the role is allowed, AWS Secrets Manager then gives the EC2 instance the secret. If not, access is denied. In other words The EC2 instance proves who it is using an IAM role, and if that role has permission, Secrets Manager allows it to retrieve the secret.
+
+
+<br>
+
+<h2 align="center">🤔 2.1.4 Static Credentials</h2>
+<br>
+
+Static credentials are forbidden. These are typically your username and password which you could store in the application code, environment variables and so on. However you shouldn't store fixed passwords on a server or in code makes them easy to leak, hard to rotate, and dangerous if compromised.
+
+If the DB credentials are put into the application code or environment variables you would have violated **least privilege**, made rotation impossible, and failed a real security review. This Lab exists to break that habbit. Instead of static credentials, this lab uses an IAM role attached to the EC2 instance to dynamically retrieve database credentials from AWS Secrets Manager.
+
 
 
 <h2 align="center">📌 About Lab 1b</h2>
