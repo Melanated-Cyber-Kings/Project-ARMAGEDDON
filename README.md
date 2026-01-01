@@ -50,11 +50,12 @@
 <details>
   <summary>Table Of Contents</summary>
 
-  - <a href="https://github.com/Melanated-Cyber-Kings/ARMAGEDDON/blob/main/README.md#-instructions">Instructions</a>
-  - <a href="https://github.com/Melanated-Cyber-Kings/ARMAGEDDON/blob/main/README.md#-about-lab-1a">About Lab 1a</a>
-    - <a href="https://github.com/Melanated-Cyber-Kings/ARMAGEDDON/blob/main/README.md#-phase-0-ideation">Phase 0 Ideation:</a>
-      - <a href="https://github.com/Melanated-Cyber-Kings/ARMAGEDDON/blob/main/README.md#-actors">0.1 Actors:</a>
-      - <a href="https://github.com/Melanated-Cyber-Kings/GCP-Armageddon/tree/main?tab=readme-ov-file#step-1">0.2 Trust Problems:</a>
+  - <a href="https://github.com/Melanated-Cyber-Kings/ARMAGEDDON/blob/main/README.md#-instructions">1. Instructions</a>
+  - <a href="https://github.com/Melanated-Cyber-Kings/ARMAGEDDON/blob/main/README.md#-about-lab-1a">2. About Lab 1a</a>
+    - <a href="https://github.com/Melanated-Cyber-Kings/ARMAGEDDON/blob/main/README.md#-phase-0-ideation">2.1 Ideation Phase 0</a>
+      - <a href="https://github.com/Melanated-Cyber-Kings/ARMAGEDDON/blob/main/README.md#-actors">2.1.1 Actors</a>
+      - <a href="https://github.com/Melanated-Cyber-Kings/GCP-Armageddon/tree/main?tab=readme-ov-file#step-1">2.1.2 Trust Problems</a>
+      - <a href="https://github.com/Melanated-Cyber-Kings/GCP-Armageddon/tree/main?tab=readme-ov-file#step-1">2.1.3 IAM</a>
   - <a href="https://github.com/Melanated-Cyber-Kings/ARMAGEDDON/blob/main/README.md#-about-lab-1b">About Lab 1b</a>
   - <a href="https://github.com/Melanated-Cyber-Kings/ARMAGEDDON/blob/main/README.md#-about-lab-1c">About Lab 1c</a>
 
@@ -71,7 +72,7 @@
 
 <br>
 
-<h2 align="center">📌 Instructions</h2>
+<h2 align="center">📌 1. Instructions</h2>
 
 <br>
 
@@ -157,7 +158,7 @@ git checkout -b Alastair-Davis-Armageddon-Branch
 
 
 
-<h2 align="center">📌 About Lab 1a</h2>
+<h2 align="center">📌 2. About Lab 1a</h2>
 
 <br>
 
@@ -167,7 +168,7 @@ This lab demonstrates how AWS services securely interact using a trust chain. An
 
 
 
-<h2 align="center">🤔 Phase 0 Ideation</h2>
+<h2 align="center">🤔 2.1 Ideation Phase 0 </h2>
 
 <br>
 
@@ -178,7 +179,7 @@ In this Lab EC2 is the app tier. The Flask app on the EC2 serves HTTP and runs t
 
 
 
-<h2 align="center">🤔 0.1 Actors</h2>
+<h2 align="center">🤔 2.1.1 Actors</h2>
 
 <br>
 
@@ -200,7 +201,8 @@ From this identify system actors and their use cases
 
 
 
-<h2 align="center">🤔 0.2 Trust Problems</h2>
+
+<h2 align="center">🤔 2.1.2 Trust Problems</h2>
 
 <br>
 
@@ -224,12 +226,26 @@ This is solved by Security Groups at the network level and answers the important
 This is solved by the Secrets Manager and MySQL credentials. This answers the question if a connection is allowed, who is logging in. These rules are enforced after network access, where a username and password are required, and the credentials don not live on the EC2 disk, "Stateless".
 
 
-
+Interview trap:
+If you explain credentials before security groups, you’re thinking backwards.
 
 
 <br>
 
 <br>
+
+
+
+<h2 align="center">🤔 2.1.3 IAM</h2>
+
+<br>
+
+IAM does not allow the EC2 instance to connect to RDS, open ports, or manage MySQL users. It only answers this question "Is the EC2 allowed to read this secret from the secrets manager?" If IAM is wrong the app fails before the DB connection and MySQL is never reached.
+
+
+
+<br>
+
 
 
 <h2 align="center">📌 About Lab 1b</h2>
