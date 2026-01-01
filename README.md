@@ -279,29 +279,29 @@ If the DB credentials are put into the application code or environment variables
 
 <br>
 
-1. User sends HTTP request to EC2
+**1.** User sends HTTP request to EC2
 
-2. EC2 application:
+**2.** EC2 application:
 
     - asks IAM: “Who am I?”
 
     - IAM says: “You are this role”
 
-3. EC2 calls Secrets Manager:
+**3.** EC2 calls Secrets Manager:
 
     - Secrets Manager verifies IAM policy
 
-4. Secrets are returned in memory
+**4.** Secrets are returned in memory
 
-5. EC2 opens TCP connection to RDS endpoint
+**5.** EC2 opens TCP connection to RDS endpoint
 
-6. RDS security group checks source SG
+**6.** RDS security group checks source SG
 
-7. MySQL authenticates user
+**7.** MySQL authenticates user
 
-8. Query executes
+**8.** Query executes
 
-9. Response flows back to user
+**9.** Response flows back to user
 
 <br> 
 
