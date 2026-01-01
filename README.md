@@ -240,7 +240,7 @@ If you explain credentials before security groups, you’re thinking backwards.
 
 <br>
 
-IAM does not allow the EC2 instance to connect to RDS, open ports, or manage MySQL users. It only answers this question "Is the EC2 allowed to read this secret from the secrets manager?" If IAM is wrong the app fails before the DB connection and MySQL is never reached.
+IAM does not allow the EC2 instance to connect to RDS, to open ports, or manage MySQL users. It only answers this question "Is the EC2 allowed to read this secret from the secrets manager?" If IAM is wrong the app fails before the DB connection and MySQL is never reached.
 
 
 
