@@ -225,6 +225,29 @@ In this Lab EC2 is the app tier. The Flask app on the EC2 serves HTTP and runs t
 
 This is solved by Security Groups at the network level and answers the important question, is traffic from this EC2 even allowed to reach the database. These rules are enforced before authentication where no usernames or passwordes are involved. This happens at the network level. Security groups control which servers can even reach the database, blocking traffic at the network level before any login happens.
 
+To get an idea of how this would logically flow think of it like this
+
+<br>
+
+**1. On the RDS side, you create a security group (sg-rds-lab) that says:**
+<br>
+- Allow inbound traffic on port 3306 (MySQL)
+- Source = the EC2’s security group (sg-ec2-lab)
+
+<br>
+
+**2. When the EC2 instance tries to connect:**
+<br>  
+- AWS checks the RDS security group
+- If the connection comes from a server in `sg-ec2-lab` and uses port `3306` → connection allowed
+- If not → connection blocked
+
+<br> 
+
+**3. This is enforced at the network level, before the database even asks for a username or password.**
+
+<br>
+
 **Who can authenticate to the database?**
 
 This is solved by the Secrets Manager and MySQL credentials. This answers the question if a connection is allowed, who is logging in. These rules are enforced after network access, where a username and password are required, and the credentials don not live on the EC2 disk, "Stateless".
@@ -285,13 +308,13 @@ If the DB credentials are put into the application code or environment variables
 
 **2.** EC2 application
 
-    - asks IAM: “Who am I?”
+- asks IAM: “Who am I?”
 
-    - IAM says: “You are this role”
+- IAM says: “You are this role”
 
 **3.** EC2 calls Secrets Manager
 
-    - Secrets Manager verifies IAM policy
+- Secrets Manager verifies IAM policy
 
 **4.** Secrets are returned in memory
 
