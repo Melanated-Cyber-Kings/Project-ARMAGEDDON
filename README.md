@@ -42,7 +42,7 @@
 <details>
   <summary>Table Of Contents</summary>
 
-  - <a href="https://github.com/Melanated-Cyber-Kings/ARMAGEDDON/blob/main/README.md#-about-lab-1a">Instructions</a>
+  - <a href="  - <a href="https://github.com/Melanated-Cyber-Kings/ARMAGEDDON/blob/main/README.md#-about-lab-1a">About Lab 1a</a>">Instructions</a>
   - <a href="https://github.com/Melanated-Cyber-Kings/ARMAGEDDON/blob/main/README.md#-about-lab-1a">About Lab 1a</a>
     - <a href="https://github.com/Melanated-Cyber-Kings/ARMAGEDDON/blob/main/README.md#-phase-0-ideation">Phase 0 Ideation:</a>
       - <a href="https://github.com/Melanated-Cyber-Kings/ARMAGEDDON/blob/main/README.md#-actors">0.1 Actors:</a>
@@ -128,6 +128,9 @@ git checkout -b Cameron-Cleveland-Armageddon-Branch
 ```
 ```bash
 git checkout -b Campanella-Godfrey-Jr-Armageddon-Branch
+```
+```bash
+git checkout -b Alastair-Davis-Armageddon-Branch
 ```
 
 <br>
