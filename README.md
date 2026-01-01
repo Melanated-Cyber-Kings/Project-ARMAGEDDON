@@ -240,12 +240,20 @@ If you explain credentials before security groups, you’re thinking backwards.
 
 <br>
 
-IAM does not allow the EC2 instance to connect to RDS, to open ports, or manage MySQL users. It only answers this question "Is the EC2 allowed to read this secret from the secrets manager?" If IAM is wrong the app fails before the DB connection and MySQL is never reached.
+IAM does not allow the EC2 instance to connect to RDS, to open ports, or manage MySQL users. It only answers this question "Is the EC2 allowed to read this secret from the secrets manager?" If IAM is wrong the app fails before the DB connection and MySQL is never reached. Below is the trust chain. 
 
+<br>
+
+**EC2 Instance**  
+↓ *(assume role)*  
+**IAM Role**  
+↓ *(policy allows)*  
+**AWS Resource**
 
 
 <br>
 
+The EC2 instance does not have a username or password. Instead, AWS automatically gives it an IAM role, which acts like an identity badge. When the EC2 instance needs the database password, it asks AWS, “Who am I allowed to be?” The IAM role answers that question and checks its permissions. If the role is allowed, AWS Secrets Manager then gives the EC2 instance the secret. If not, access is denied. In other words The EC2 instance proves who it is using an IAM role, and if that role has permission, Secrets Manager allows it to retrieve the secret.
 
 
 <h2 align="center">📌 About Lab 1b</h2>
