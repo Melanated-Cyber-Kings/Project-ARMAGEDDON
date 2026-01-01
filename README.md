@@ -330,6 +330,49 @@ If the DB credentials are put into the application code or environment variables
 
 <br> 
 
+### Refined Flow: EC2 Accessing RDS via Secrets Manager
+
+<br>
+
+1. **User sends HTTP request to EC2**
+   - A user hits your web application running on the EC2 instance.
+
+2. **EC2 application starts processing**
+   - The app uses its **IAM role** (instance profile) to get temporary credentials via AWS STS.
+
+3. **EC2 IAM role validated**
+   - IAM confirms the role is allowed to call Secrets Manager.
+
+4. **EC2 app calls Secrets Manager**
+   - `GetSecretValue` API is called.
+   - Secrets Manager checks the IAM policy.
+
+5. **Secrets returned to EC2 app**
+   - The secret (username/password) is **loaded into the app’s variables in RAM**:
+     - Example:  
+       ```python
+       db_username = secret["username"]
+       db_password = secret["password"]
+       ```
+   - ⚡ **Important:** The secret is never written to disk; it only exists in RAM while the app runs.
+
+6. **EC2 opens TCP connection to RDS endpoint**
+   - Uses `db_username` and `db_password` from variables to authenticate.
+
+7. **RDS security group checks**
+   - Connection allowed only if the source is `sg-ec2-lab` and port 3306 is used.
+   - Otherwise, connection is blocked.
+
+8. **MySQL authenticates user**
+   - RDS validates the credentials stored in the app’s variables.
+
+9. **Query executes and response flows back to user**
+   - Data is sent back to the user.
+   - After the connection is closed, **the variables (and secret) remain only in RAM temporarily** and disappear when the app stops.
+
+
+<br>
+
 
 <h2 align="center">📌 About Lab 1b</h2>
 
