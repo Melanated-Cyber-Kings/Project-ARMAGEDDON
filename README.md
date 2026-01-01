@@ -56,7 +56,7 @@
       - <a href="https://github.com/Melanated-Cyber-Kings/ARMAGEDDON/blob/main/README.md#-211-actors">2.1.1 Actors</a>
       - <a href="https://github.com/Melanated-Cyber-Kings/ARMAGEDDON/blob/main/README.md#-212-trust-problems">2.1.2 Trust Problems</a>
       - <a href="https://github.com/Melanated-Cyber-Kings/ARMAGEDDON/blob/main/README.md#-213-iam">2.1.3 IAM</a>
-      - <a href="https://github.com/Melanated-Cyber-Kings/ARMAGEDDON/blob/main/README.md#-214-static-credentials">2.1.4 Static Credentials</a> 
+      - <a href="https://github.com/Melanated-Cyber-Kings/ARMAGEDDON/blob/main/README.md#-214-static-credentials">2.1.4 Problems With Static Credentials</a> 
       - <a href="https://github.com/Melanated-Cyber-Kings/ARMAGEDDON/blob/main/README.md#-215-data-flow-you-should-be-able-to-say-this-out-loud">2.1.5 Data Flow (You Should Be Able to Say This Out Loud)</a>
 
       
@@ -287,7 +287,7 @@ The EC2 instance does not have a username or password. Instead, AWS automaticall
 
 <br>
 
-<h2 align="center">🤔 2.1.4 Static Credentials</h2>
+<h2 align="center">🤔 2.1.4 Problems With Static Credentials</h2>
 <br>
 
 Static credentials are forbidden. These are typically your username and password which you could store in the application code, environment variables and so on. However you shouldn't store fixed passwords on a server or in code makes them easy to leak, hard to rotate, and dangerous if compromised.
