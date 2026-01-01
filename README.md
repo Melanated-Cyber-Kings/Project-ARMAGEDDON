@@ -1,21 +1,28 @@
 <h1 align="center">ARMAGEDDON PROJECT LAB 1</h1>
 
 
+<br>
+
 **Project Co-ordinator:** 
 <a href="https://github.com/BalericaAI">THEO WAF CEO</a>
 
+<br>
 
 **Project Leader:** 
 <a href="https://github.com/Charles-Roro">Charles CEO</a>
 
+<br>
 
 **Project Group Leader:** 
 <a href="https://github.com/Brimah-Khalil-Kamara">Brimah Khalil Kamara</a>
 
+<br>
 
 **Cloud Engineers (Infrastructure & Netwroking):**
 
 <a href="https://github.com/BashiM1">Mohamed Bashir</a> , <a href="https://github.com/statuc30721">ST Tucker</a> , <a href="https://github.com/Futurist2099">Trevore Jerome</a> , <a href="https://github.com/jareonbailey-web">Jae Bailey</a> and <a href="https://github.com/twixxxman357">Alastair Davis</a>
+
+<br>
 
 
 
@@ -26,6 +33,7 @@
 <a href="https://github.com/Cameron-Cleveland">Cameron-Cleveland</a> and <a href="https://github.com/penorpencil44">Mark Thornhill</a>
 
 
+<br>
 
 **Dev Tooling:**
 
