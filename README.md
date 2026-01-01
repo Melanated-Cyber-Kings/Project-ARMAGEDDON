@@ -223,11 +223,13 @@ In this Lab EC2 is the app tier. The Flask app on the EC2 serves HTTP and runs t
 
 **Who can connect to the database?**
 
-This is solved by Security Groups at the network level and answers the important question, is traffic from this EC2 even allowed to reach the database. These rules are enforced before authentication where no usernames or passwordes are involved. This happens at the network level.
+This is solved by Security Groups at the network level and answers the important question, is traffic from this EC2 even allowed to reach the database. These rules are enforced before authentication where no usernames or passwordes are involved. This happens at the network level. Security groups control which servers can even reach the database, blocking traffic at the network level before any login happens.
 
 **Who can authenticate to the database?**
 
 This is solved by the Secrets Manager and MySQL credentials. This answers the question if a connection is allowed, who is logging in. These rules are enforced after network access, where a username and password are required, and the credentials don not live on the EC2 disk, "Stateless".
+
+
 
 
 Interview trap:
