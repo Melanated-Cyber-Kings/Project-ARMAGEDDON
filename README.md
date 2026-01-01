@@ -53,7 +53,7 @@
   - <a href="https://github.com/Melanated-Cyber-Kings/ARMAGEDDON/blob/main/README.md#-instructions">1. Instructions</a>
   - <a href="https://github.com/Melanated-Cyber-Kings/ARMAGEDDON/blob/main/README.md#-about-lab-1a">2. About Lab 1a</a>
     - <a href="https://github.com/Melanated-Cyber-Kings/ARMAGEDDON/blob/main/README.md#-21-ideation-phase-0-">2.1 Ideation Phase 0</a>
-      - <a href="https://github.com/Melanated-Cyber-Kings/ARMAGEDDON/blob/main/README.md#-actors">2.1.1 Actors</a>
+      - <a href="https://github.com/Melanated-Cyber-Kings/ARMAGEDDON/blob/main/README.md#-211-actors">2.1.1 Actors</a>
       - <a href="https://github.com/Melanated-Cyber-Kings/GCP-Armageddon/tree/main?tab=readme-ov-file#step-1">2.1.2 Trust Problems</a>
       - <a href="https://github.com/Melanated-Cyber-Kings/GCP-Armageddon/tree/main?tab=readme-ov-file#step-1">2.1.3 IAM</a>
   - <a href="https://github.com/Melanated-Cyber-Kings/ARMAGEDDON/blob/main/README.md#-about-lab-1b">About Lab 1b</a>
