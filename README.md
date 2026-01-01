@@ -56,8 +56,10 @@
       - <a href="https://github.com/Melanated-Cyber-Kings/ARMAGEDDON/blob/main/README.md#-211-actors">2.1.1 Actors</a>
       - <a href="https://github.com/Melanated-Cyber-Kings/ARMAGEDDON/blob/main/README.md#-212-trust-problems">2.1.2 Trust Problems</a>
       - <a href="https://github.com/Melanated-Cyber-Kings/ARMAGEDDON/blob/main/README.md#-213-iam">2.1.3 IAM</a>
-      - <a href="https://github.com/Melanated-Cyber-Kings/ARMAGEDDON/blob/main/README.md#-213-iam">2.1.4 Static Credentials</a>
+      - <a href="https://github.com/Melanated-Cyber-Kings/ARMAGEDDON/blob/main/README.md#-213-iam">2.1.4 Static Credentials</a> 
+      - <a href="https://github.com/Melanated-Cyber-Kings/ARMAGEDDON/blob/main/README.md#-213-iam">2.1.5 Data Flow (You Should Be Able to Say This Out Loud)</a>
 
+      
   - <a href="https://github.com/Melanated-Cyber-Kings/ARMAGEDDON/blob/main/README.md#-about-lab-1b">About Lab 1b</a>
   - <a href="https://github.com/Melanated-Cyber-Kings/ARMAGEDDON/blob/main/README.md#-about-lab-1c">About Lab 1c</a>
 
@@ -268,7 +270,39 @@ Static credentials are forbidden. These are typically your username and password
 If the DB credentials are put into the application code or environment variables you would have violated **least privilege**, made rotation impossible, and failed a real security review. This Lab exists to break that habbit. Instead of static credentials, this lab uses an IAM role attached to the EC2 instance to dynamically retrieve database credentials from AWS Secrets Manager.
 
 
+<h2 align="center">🤔 2.1.5 Data Flow (You Should Be Able to Say This Out Loud)</h2>
 
+<br>
+
+### **Here is the exact flow, step by step:**
+
+<br>
+
+1. User sends HTTP request to EC2
+
+2. EC2 application:
+
+    - asks IAM: “Who am I?”
+
+    - IAM says: “You are this role”
+
+3. EC2 calls Secrets Manager:
+
+    - Secrets Manager verifies IAM policy
+
+4. Secrets are returned in memory
+
+5. EC2 opens TCP connection to RDS endpoint
+
+6. RDS security group checks source SG
+
+7. MySQL authenticates user
+
+8. Query executes
+
+9. Response flows back to user
+
+<br> 
 <h2 align="center">📌 About Lab 1b</h2>
 
 <br>
