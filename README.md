@@ -56,7 +56,7 @@
       - <a href="https://github.com/Melanated-Cyber-Kings/ARMAGEDDON/blob/main/README.md#-211-actors">2.1.1 Actors</a>
       - <a href="https://github.com/Melanated-Cyber-Kings/ARMAGEDDON/blob/main/README.md#-212-trust-problems">2.1.2 Trust Problems</a>
       - <a href="https://github.com/Melanated-Cyber-Kings/ARMAGEDDON/blob/main/README.md#-213-iam">2.1.3 IAM</a>
-      - <a href="https://github.com/Melanated-Cyber-Kings/ARMAGEDDON/blob/main/README.md#-214-static-credentials">2.1.4 Problems With Static Credentials</a> 
+      - <a href="https://github.com/Melanated-Cyber-Kings/ARMAGEDDON/blob/main/README.md#-214-problems-with-static-credentials">2.1.4 Problems With Static Credentials</a> 
       - <a href="https://github.com/Melanated-Cyber-Kings/ARMAGEDDON/blob/main/README.md#-215-data-flow-you-should-be-able-to-say-this-out-loud">2.1.5 Data Flow (You Should Be Able to Say This Out Loud)</a>
 
       
