@@ -344,6 +344,8 @@ If the DB credentials are put into the application code or environment variables
      - STS validates the role
      - STS returns the temporary credentials
      - EC2 uses these credentials to call AWS services securely, like Secrets Manager
+    
+Why this matters is Security. Secrets don’t persist on disk. If someone gained access to the EC2 storage, they can’t see the secret. Also volatility. When the app restarts, the secret must be fetched again from Secrets Manager via IAM + STS.
 
 
 **3. EC2 IAM role validated**
