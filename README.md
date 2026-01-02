@@ -18,9 +18,9 @@
 
 <br>
 
-**Cloud Engineers (Infrastructure & Netwroking):**
+**Cloud Engineers (Infrastructure & Networking):**
 
-<a href="https://github.com/BashiM1">Mohamed Bashir</a> , <a href="https://github.com/statuc30721">ST Tucker</a> , <a href="https://github.com/Futurist2099">Trevore Jerome</a> , <a href="https://github.com/jareonbailey-web">Jae Bailey</a> and <a href="https://github.com/twixxxman357">Alastair Davis</a>
+<a href="https://github.com/BashiM1">Mahamed Bashir</a> , <a href="https://github.com/statuc30721">ST Tucker</a> , <a href="https://github.com/Futurist2099">Trevore Jerome(F-2099)</a> , <a href="https://github.com/jareonbailey-web">Jae Bailey</a> and <a href="https://github.com/twixxxman357">Alastair Davis</a>
 
 <br>
 
@@ -58,6 +58,9 @@
       - <a href="https://github.com/Melanated-Cyber-Kings/ARMAGEDDON/blob/main/README.md#-213-iam">2.1.3 IAM</a>
       - <a href="https://github.com/Melanated-Cyber-Kings/ARMAGEDDON/blob/main/README.md#-214-problems-with-static-credentials">2.1.4 Problems With Static Credentials</a> 
       - <a href="https://github.com/Melanated-Cyber-Kings/ARMAGEDDON/blob/main/README.md#-215-data-flow-you-should-be-able-to-say-this-out-loud">2.1.5 Data Flow (You Should Be Able to Say This Out Loud)</a>
+      - <a href="https://github.com/Melanated-Cyber-Kings/ARMAGEDDON/blob/main/README.md#-215-data-flow-you-should-be-able-to-say-this-out-loud">2.1.6 Stateful VS Stateless</a>
+
+      
 
       
   - <a href="https://github.com/Melanated-Cyber-Kings/ARMAGEDDON/blob/main/README.md#-about-lab-1b">About Lab 1b</a>
@@ -380,6 +383,13 @@ Why this matters is Security. Secrets don’t persist on disk. If someone gained
 
 <br>
 
+
+<br>
+
+
+<h2 align="center">🤔 2.1.6 Stateful VS Stateless</h2>
+
+The EC2 is stateless as it can be replaced at any time, whereas the RDS is stateful as data must persist. This is why EC2 can be terminated safely and RDS must be protected and private.
 
 <br>
 
