@@ -18,9 +18,9 @@
 
 <br>
 
-**Cloud Engineers (Infrastructure & Netwroking):**
+**Cloud Engineers (Infrastructure & Networking):**
 
-<a href="https://github.com/BashiM1">Mohamed Bashir</a> , <a href="https://github.com/statuc30721">ST Tucker</a> , <a href="https://github.com/Futurist2099">Trevore Jerome</a> , <a href="https://github.com/jareonbailey-web">Jae Bailey</a> and <a href="https://github.com/twixxxman357">Alastair Davis</a>
+<a href="https://github.com/BashiM1">Mahamed Bashir</a> , <a href="https://github.com/statuc30721">ST Tucker</a> , <a href="https://github.com/Futurist2099">Trevore Jerome(F-2099)</a> , <a href="https://github.com/jareonbailey-web">Jae Bailey</a> and <a href="https://github.com/twixxxman357">Alastair Davis</a>
 
 <br>
 
