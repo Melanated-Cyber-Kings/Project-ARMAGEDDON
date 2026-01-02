@@ -339,6 +339,12 @@ If the DB credentials are put into the application code or environment variables
 
 **2. EC2 application starts processing**
    - The app uses its **IAM role** (instance profile) to get temporary credentials via AWS STS.
+   - The STS (Security token Service) will issue temporary security credentials. When your EC2 instance has an IAM role attached (via instance profile), it doesn’t have permanent AWS keys. So instead
+     - EC2 contacts STS to get temporary credentials for its IAM role
+     - STS validates the role
+     - STS returns the temporary credentials
+     - EC2 uses these credentials to call AWS services securely, like Secrets Manager
+
 
 **3. EC2 IAM role validated**
    - IAM confirms the role is allowed to call Secrets Manager.
@@ -372,17 +378,6 @@ If the DB credentials are put into the application code or environment variables
 
 <br>
 
-The STS (Security token Service will issue temporary security credentials When your EC2 instance has an IAM role attached (via instance profile), it doesn’t have permanent AWS keys. So instead
-
-<br>
-
-**1. EC2 contacts STS to get temporary credentials for its IAM role.**
-
-**2. STS validates the role.**
-
-**3. STS returns the temporary credentials.**
-
-**4. EC2 uses these credentials to call AWS services securely, like Secrets Manager.**
 
 <br>
 
