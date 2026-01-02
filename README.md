@@ -304,29 +304,29 @@ If the DB credentials are put into the application code or environment variables
 
 <br>
 
-**1.** User sends HTTP request to EC2
+**1. User sends HTTP request to EC2**
 
-**2.** EC2 application
+**2. EC2 application**
 
 - asks IAM: “Who am I?”
 
 - IAM says: “You are this role”
 
-**3.** EC2 calls Secrets Manager
+**3 EC2 calls Secrets Manager**
 
 - Secrets Manager verifies IAM policy
 
-**4.** Secrets are returned in memory
+**4. Secrets are returned in memory**
 
-**5.** EC2 opens TCP connection to RDS endpoint
+**5. EC2 opens TCP connection to RDS endpoint**
 
-**6.** RDS security group checks source SG
+**6. RDS security group checks source SG**
 
-**7.** MySQL authenticates user
+**7. MySQL authenticates user**
 
-**8.** Query executes
+**8. Query executes**
 
-**9.** Response flows back to user
+**9. Response flows back to user**
 
 <br> 
 
@@ -334,20 +334,20 @@ If the DB credentials are put into the application code or environment variables
 
 <br>
 
-1. **User sends HTTP request to EC2**
+**1. User sends HTTP request to EC2**
    - A user hits your web application running on the EC2 instance.
 
-2. **EC2 application starts processing**
+**2. EC2 application starts processing**
    - The app uses its **IAM role** (instance profile) to get temporary credentials via AWS STS.
 
-3. **EC2 IAM role validated**
+**3. EC2 IAM role validated**
    - IAM confirms the role is allowed to call Secrets Manager.
 
-4. **EC2 app calls Secrets Manager**
+**4. EC2 app calls Secrets Manager**
    - `GetSecretValue` API is called.
    - Secrets Manager checks the IAM policy.
 
-5. **Secrets returned to EC2 app**
+**5. Secrets returned to EC2 app**
    - The secret (username/password) is **loaded into the app’s variables in RAM**:
      - Example:  
        ```python
@@ -356,20 +356,33 @@ If the DB credentials are put into the application code or environment variables
        ```
    - ⚡ **Important:** The secret is never written to disk; it only exists in RAM while the app runs.
 
-6. **EC2 opens TCP connection to RDS endpoint**
+**6. EC2 opens TCP connection to RDS endpoint**
    - Uses `db_username` and `db_password` from variables to authenticate.
 
-7. **RDS security group checks**
+**7. RDS security group checks**
    - Connection allowed only if the source is `sg-ec2-lab` and port 3306 is used.
    - Otherwise, connection is blocked.
 
-8. **MySQL authenticates user**
+**8. MySQL authenticates user**
    - RDS validates the credentials stored in the app’s variables.
 
-9. **Query executes and response flows back to user**
+**9. Query executes and response flows back to user**
    - Data is sent back to the user.
    - After the connection is closed, **the variables (and secret) remain only in RAM temporarily** and disappear when the app stops.
 
+<br>
+
+The STS (Security token Service will issue temporary security credentials When your EC2 instance has an IAM role attached (via instance profile), it doesn’t have permanent AWS keys. So instead
+
+<br>
+
+**1. EC2 contacts STS to get temporary credentials for its IAM role.**
+
+**2. STS validates the role.**
+
+**3. STS returns the temporary credentials.**
+
+**4. EC2 uses these credentials to call AWS services securely, like Secrets Manager.**
 
 <br>
 
