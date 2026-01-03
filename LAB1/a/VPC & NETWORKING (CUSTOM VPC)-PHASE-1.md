@@ -11,9 +11,9 @@
 
   - <a href="https://github.com/Melanated-Cyber-Kings/Project-ARMAGEDDON/blob/main/LAB1/a/VPC%20&%20NETWORKING%20(CUSTOM%20VPC)-PHASE-1.md#-11-goal-">1.1 Goal</a>
   - <a href="https://github.com/Melanated-Cyber-Kings/Project-ARMAGEDDON/blob/main/LAB1/a/VPC%20&%20NETWORKING%20(CUSTOM%20VPC)-PHASE-1.md#-12-what-to-do">1.2 What to do</a>
-  - <a href="https://github.com/Melanated-Cyber-Kings/ARMAGEDDON/blob/main/README.md#-212-trust-problems">1.3 Why</a>
+  - <a href="https://github.com/Melanated-Cyber-Kings/Project-ARMAGEDDON/blob/main/LAB1/a/VPC%20&%20NETWORKING%20(CUSTOM%20VPC)-PHASE-1.md#-11-goal-">1.3 Why</a>
     
-
+<br>
 
 
 </details>
@@ -76,9 +76,12 @@ You should put your EC2 and RDS in the same VPC while keeping them isolated in s
 
 <h2 align="center">🤔 1.3 Why</h2>
 
+<br>
+
 Doing it this way keeps EC2 publicly accessible while RDS stays private. Enforces network isolation so traffic must follow VPC routing + security groups and Prepares for Terraform-managed infrastructure and security-focused design.
 
 After your resources have been configured you can check to confirm VPC, subnets, and route tables exist in Terraform state by running terraform plan.
+
 
 
 
