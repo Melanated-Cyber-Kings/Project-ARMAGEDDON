@@ -1,4 +1,4 @@
-<h1 align="center">ARMAGEDDON PROJECT LAB 1</h1>
+<h1 align="center">ARMAGEDDON PROJECT LAB 1a</h1>
 
 
 <br>
@@ -20,7 +20,7 @@
 
 **Cloud Engineers (Infrastructure & Networking):**
 
-<a href="https://github.com/BashiM1">Mahamed Bashir</a> , <a href="https://github.com/statuc30721">ST Tucker</a> , <a href="https://github.com/Futurist2099">Trevore Jerome(F-2099)</a> , <a href="https://github.com/jareonbailey-web">Jae Bailey</a> and <a href="https://github.com/twixxxman357">Alastair Davis</a>
+<a href="https://github.com/BashiM1">Mahamed Bashir</a> , <a href="https://github.com/statuc30721">ST Tucker</a> , <a href="https://github.com/Futurist2099">Trevore Jerome (F-2099)</a> , <a href="https://github.com/jareonbailey-web">Jae Bailey</a> and <a href="https://github.com/twixxxman357">Alastair Davis</a>
 
 <br>
 
@@ -161,8 +161,10 @@ http://<EC2_PUBLIC_IP>/init        # Initialize database
 http://<EC2_PUBLIC_IP>/add?note=cloud_labs_are_real   # Add a record
 http://<EC2_PUBLIC_IP>/list       # View persisted records
 
+```
 
 ## Common Failure Modes
+
 
 | Failure                 | Lesson |
 |-------------------------|--------|
@@ -182,6 +184,3 @@ Completing this lab demonstrates the ability to:
 - Understand real-world AWS application security patterns
 
 > “I understand how real AWS applications securely connect compute to managed databases.”
-
-
-
