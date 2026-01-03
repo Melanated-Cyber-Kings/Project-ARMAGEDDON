@@ -1,4 +1,4 @@
-# EC2 → RDS Integration LAB1a
+# EC2 → RDS Integration LAB 1a
 
 Learn how to securely connect an **EC2 instance** to an **RDS MySQL database** using AWS best practices. This lab demonstrates a foundational cloud application pattern focused on **secure compute-to-database connectivity**.
 
@@ -125,4 +125,5 @@ Completing this lab demonstrates the ability to:
 - Understand real-world AWS application security patterns
 
 > “I understand how real AWS applications securely connect compute to managed databases.”
+
 
