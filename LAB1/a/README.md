@@ -1,3 +1,60 @@
+<h1 align="center">ARMAGEDDON PROJECT LAB 1</h1>
+
+
+<br>
+
+**Project Co-ordinator:** 
+<a href="https://github.com/BalericaAI">THEO WAF CEO</a>
+
+<br>
+
+**Project Leader:** 
+<a href="https://github.com/Charles-Roro">Charles CEO</a>
+
+<br>
+
+**Project Group Leader:** 
+<a href="https://github.com/Brimah-Khalil-Kamara">Brimah Khalil Kamara</a>
+
+<br>
+
+**Cloud Engineers (Infrastructure & Networking):**
+
+<a href="https://github.com/BashiM1">Mahamed Bashir</a> , <a href="https://github.com/statuc30721">ST Tucker</a> , <a href="https://github.com/Futurist2099">Trevore Jerome(F-2099)</a> , <a href="https://github.com/jareonbailey-web">Jae Bailey</a> and <a href="https://github.com/twixxxman357">Alastair Davis</a>
+
+<br>
+
+
+
+
+**DevSecOps (Identity, Secrets, Least Privilege):**
+
+<a href="https://github.com/anthonyadeconsulting-source">Adeji Adeyei</a> , <a href="https://github.com/theswordpt-git">Voloxar Karsze</a> , <a href="https://github.com/Lew228">Shawn Mosby</a> , 
+<a href="https://github.com/Cameron-Cleveland">Cameron-Cleveland</a> and <a href="https://github.com/penorpencil44">Mark Thornhill</a>
+
+
+<br>
+
+**Dev Tooling:**
+
+<a href="https://github.com/waseeconsulting-git">Van Ngila</a> , <a href="https://github.com/DBs-art">Daniel Bryce</a> , <a href="https://github.com/BennyCampCloud">Campanella Godfrey Jr</a> and <a href="https://github.com/AnunnakiRa">Anunnaki MetuNetter AmenRa</a> 
+
+
+<br>
+
+
+---
+
+<br>
+
+
+
+
+
+
+
+
+
 # EC2 → RDS Integration LAB 1a
 
 Learn how to securely connect an **EC2 instance** to an **RDS MySQL database** using AWS best practices. This lab demonstrates a foundational cloud application pattern focused on **secure compute-to-database connectivity**.
@@ -125,5 +182,6 @@ Completing this lab demonstrates the ability to:
 - Understand real-world AWS application security patterns
 
 > “I understand how real AWS applications securely connect compute to managed databases.”
+
 
 
