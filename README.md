@@ -1,4 +1,4 @@
-<h1 align="center">📌 1. Instructions</h1>
+<h1 align="center">📌 Instructions</h1>
 
 
 <br>
