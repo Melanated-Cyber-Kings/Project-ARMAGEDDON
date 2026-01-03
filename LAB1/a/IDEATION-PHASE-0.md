@@ -241,4 +241,5 @@ The EC2 is stateless as it can be replaced at any time, whereas the RDS is state
 
 
 <br>
-Lab 1c 
+
+
