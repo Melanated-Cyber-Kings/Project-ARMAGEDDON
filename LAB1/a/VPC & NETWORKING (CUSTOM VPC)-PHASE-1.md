@@ -22,6 +22,8 @@
 
 <h2 align="center">🤔 1 Map out resources you’ll define in Terraform</h2>
 
+<br>
+
 - aws_vpc (Custom)
 
 - aws_subnet (reference at least 2)
@@ -36,7 +38,7 @@
 
 - aws_iam_role & aws_iam_role_policy_attachment (EC2 → Secrets Manager)
 
-
+<br>
 
 <h2 align="center">🤔 1.1 Goal </h2>
 
@@ -44,6 +46,7 @@
 
 ### **What is the goal?**
 
+<br>
 
 You should put your EC2 and RDS in the same VPC while keeping them isolated in separate subnets.
 
@@ -81,6 +84,7 @@ You should put your EC2 and RDS in the same VPC while keeping them isolated in s
 Doing it this way keeps EC2 publicly accessible while RDS stays private. Enforces network isolation so traffic must follow VPC routing + security groups and Prepares for Terraform-managed infrastructure and security-focused design.
 
 After your resources have been configured you can check to confirm VPC, subnets, and route tables exist in Terraform state by running terraform plan.
+
 
 
 
