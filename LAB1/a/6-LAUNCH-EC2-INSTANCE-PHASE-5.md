@@ -9,7 +9,7 @@
 
   - <a href="https://github.com/Melanated-Cyber-Kings/Project-ARMAGEDDON/blob/main/LAB1/a/6-LAUNCH-EC2-INSTANCE-PHASE-5.md#-1-purpose">1 Purpose</a>
 
-  - <a href="https://github.com/Melanated-Cyber-Kings/Project-ARMAGEDDON/blob/main/LAB1/a/4-SECRETS-MANAGER-PHASE-3.md#-11-terraform-actions">1.1 Terraform Actions</a>
+  - <a href="https://github.com/Melanated-Cyber-Kings/Project-ARMAGEDDON/blob/main/LAB1/a/6-LAUNCH-EC2-INSTANCE-PHASE-5.md#-11-terraform-actionss">1.1 Terraform Actions</a>
   - <a href="https://github.com/Melanated-Cyber-Kings/Project-ARMAGEDDON/blob/main/LAB1/a/4-SECRETS-MANAGER-PHASE-3.md#-12-why-the-secret-is-created-before-rds">1.2 Why Each Setting Matters</a>
   - <a href="https://github.com/Melanated-Cyber-Kings/Project-ARMAGEDDON/blob/main/LAB1/a/4-SECRETS-MANAGER-PHASE-3.md#-13-terraform-checkpoint">1.3 Terraform checkpoint</a>
   - <a href="https://github.com/Melanated-Cyber-Kings/Project-ARMAGEDDON/blob/main/LAB1/a/4-SECRETS-MANAGER-PHASE-3.md#-13-terraform-checkpoint">1.4 Notes for Documentation</a>
@@ -137,4 +137,5 @@ aws ec2 describe-instances \
 - Using Terraform ensures that your EC2 launch is repeatable and consistent, a key principle in Infrastructure as Code.
 
 - The instance is stateless: any data stored on it will not persist beyond its lifecycle. The database holds all persistent data.
+
 
