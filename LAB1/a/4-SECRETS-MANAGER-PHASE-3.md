@@ -11,7 +11,7 @@
 
   - <a href="https://github.com/Melanated-Cyber-Kings/Project-ARMAGEDDON/blob/main/LAB1/a/4-SECRETS-MANAGER-PHASE-3.md#-11-terraform-actions">1.1 Terraform Action</a>
   - <a href="https://github.com/Melanated-Cyber-Kings/Project-ARMAGEDDON/blob/main/LAB1/a/4-SECRETS-MANAGER-PHASE-3.md#-12-why-the-secret-is-created-before-rds">1.2  Why the Secret Is Created Before RDS</a>
-  - <a href="https://github.com/Melanated-Cyber-Kings/Project-ARMAGEDDON/edit/main/LAB1/a/3-SECURITY-GROUPS-PHASE-2.md#-13-terraform-checkpoint">1.3 Terraform checkpoint</a>
+  - <a href="https://github.com/Melanated-Cyber-Kings/Project-ARMAGEDDON/blob/main/LAB1/a/4-SECRETS-MANAGER-PHASE-3.md#-13-terraform-checkpoint">1.3 Terraform checkpoint</a>
     
 <br>
 
