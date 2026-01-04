@@ -119,7 +119,7 @@ At this stage, host may still be a placeholder — that is expected.
 
 **What This Proves**
 
-= Database credentials are not stored in code or EC2
+- Database credentials are not stored in code or EC2
 
 - Secrets are managed centrally and securely
 
