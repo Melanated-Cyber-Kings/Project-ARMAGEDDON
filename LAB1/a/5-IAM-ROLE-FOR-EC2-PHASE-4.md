@@ -26,8 +26,7 @@
 <h2 align="center">👷 1 Purpose</h2>
 
 To allow the EC2 instance to securely retrieve database credentials from AWS Secrets Manager without storing any credentials on the instance.
-
-This establishes identity-based trust between EC2 and Secrets Manager and eliminates the need for static access keys.
+This establishes identity-based trust between EC2 and Secrets Manager and eliminates the need for static access keys. In this phase, an IAM role is attached to the EC2 instance to allow secure, identity-based access to Secrets Manager without storing credentials on the server.
 
 
 
@@ -156,4 +155,5 @@ aws ec2 describe-instances \
 - Credential delivery is secure and auditable
 
 <br>
+
 
