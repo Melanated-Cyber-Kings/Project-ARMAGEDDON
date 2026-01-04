@@ -12,6 +12,9 @@
   - <a href="https://github.com/Melanated-Cyber-Kings/Project-ARMAGEDDON/blob/main/LAB1/a/4-SECRETS-MANAGER-PHASE-3.md#-11-terraform-actions">1.1 Terraform Action</a>
   - <a href="https://github.com/Melanated-Cyber-Kings/Project-ARMAGEDDON/blob/main/LAB1/a/4-SECRETS-MANAGER-PHASE-3.md#-12-why-the-secret-is-created-before-rds">1.2  Why the Secret Is Created Before RDS</a>
   - <a href="https://github.com/Melanated-Cyber-Kings/Project-ARMAGEDDON/blob/main/LAB1/a/4-SECRETS-MANAGER-PHASE-3.md#-13-terraform-checkpoint">1.3 Terraform checkpoint</a>
+  - <a href="https://github.com/Melanated-Cyber-Kings/Project-ARMAGEDDON/blob/main/LAB1/a/4-SECRETS-MANAGER-PHASE-3.md#-13-terraform-checkpoint">1.4 Why you hardcode the secrets manager with a username and password?</a>
+
+   
     
 <br>
 
@@ -124,3 +127,53 @@ At this stage, host may still be a placeholder — that is expected.
 - Secrets are managed centrally and securely
 
 - The application will rely on IAM identity, not static credentials
+
+
+<br>
+
+
+<h2 align="center">👷 1.4 Why you hardcode the secrets manager with a username and password?</h2>
+
+<br>
+
+## Important to know
+
+If you hardcode the username/password directly in Terraform, you must treat that as sensitive and protect it.
+Secrets Manager is dynamic at runtime, but Terraform is still used to bootstrap the initial secret.
+
+This lab teaches the **runtime pattern**, not **perfect secret bootstrapping hygiene** — but we still do it safely.
+
+<br>
+
+## Why This Is Still OK in the Lab?
+
+<br>
+
+There are two different moments in time:
+
+<br>
+
+**Provisioning time (Terraform)**
+
+- Terraform needs some value to create the secret
+
+- This is a one-time bootstrap
+
+- The secret then lives in Secrets Manager, not in EC2 or code
+
+<br>
+
+**Runtime (EC2 application)**
+
+<br>
+
+- EC2 never sees hardcoded credentials
+
+- EC2 retrieves the secret dynamically using IAM
+
+- Password rotation does not require app or server changes
+
+  <br>
+
+The security win is at runtime, which is what employers care about most.
+
