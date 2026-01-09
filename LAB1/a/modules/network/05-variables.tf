@@ -30,3 +30,14 @@ variable "private_subnet_cidr" {
   description = "private subnet cidr range"
   type = string
 }
+############################################################
+variable "avail_zone" {
+    description = "availability zones for subnets"
+    type = string
+}
+############################################################
+variable "rtb_public_cidr" {
+  description = "route table public cidr"
+  type = string
+}
+############################################################

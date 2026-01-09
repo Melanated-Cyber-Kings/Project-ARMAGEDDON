@@ -33,7 +33,7 @@ variable "project" {
 }
 
 variable "avail_zone" {
-    description = "provider region"
+    description = "provider region, availability zone for resources"
     type = string
 }
 
@@ -44,5 +44,10 @@ variable "public_subnet_cidr" {
 
 variable "private_subnet_cidr" {
   description = "private subnet cidr range"
+  type = string
+}
+
+variable "rtb_public_cidr" {
+  description = "route table public cidr"
   type = string
 }
