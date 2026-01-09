@@ -3,6 +3,7 @@ provider "aws" {
 }
 
 # VPC / Network Module
+
 module "vpc" {
   source = "../../network"
 
@@ -11,4 +12,8 @@ module "vpc" {
   private_subnet_cidr = var.private_subnet_cidr
   env_prefix      = local.name_prefix
   avail_zone = var.avail_zone
+  rtb_public_cidr = var.rtb_public_cidr  # ✅ THIS LINE FIXES IT
+
 }
+
+

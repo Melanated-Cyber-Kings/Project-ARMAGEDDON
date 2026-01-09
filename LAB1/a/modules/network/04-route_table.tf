@@ -1,12 +1,12 @@
 ############# Public Route table ##########################
 
 resource "aws_route_table" "public" {
-  vpc_id = aws_vpc.vpc-lab-1c.id
+  vpc_id = aws_vpc.main.id
 
   #default gateway route
   route {
     cidr_block = var.rtb_public_cidr
-    gateway_id = aws_internet_gateway.igw-lab-1c.id
+    gateway_id = aws_internet_gateway.main.id
   }
 
   tags = {
