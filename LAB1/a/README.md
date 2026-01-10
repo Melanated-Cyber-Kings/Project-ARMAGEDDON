@@ -71,7 +71,7 @@ This pattern appears in:
 ### VS Code View
 
 <div align="center">
-  <img src="Images/Repository-Structure.png" alt="image1" width="800"/>
+  <img src="Images/Repo-Structure.png" alt="image1" width="800"/>
 </div>
 
 
