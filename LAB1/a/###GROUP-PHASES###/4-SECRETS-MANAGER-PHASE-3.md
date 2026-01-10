@@ -30,7 +30,9 @@
 <br>
 
 The purpose of this phase is to establish an identity-based secret retrieval model using AWS Secrets Manager. Database credentials are stored securely outside of EC2 instances and application code, and are retrieved dynamically at runtime using IAM roles. This eliminates hardcoded secrets and mirrors real-world AWS production patterns.
+
 <br>
+
 Terraform is used to provision infrastructure and define the existence of secrets, but does not manage secret values to prevent credential exposure in shared state.
 
 
