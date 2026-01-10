@@ -1,0 +1,9 @@
+terraform {
+  backend "s3" {
+    bucket         = "project-armageddon-tf-state"
+    key            = "lab-1a/terraform.tfstate"
+    region         = "ap-northeast-1"
+    dynamodb_table = "terraform-state-locks"
+    encrypt        = true
+  }
+}
