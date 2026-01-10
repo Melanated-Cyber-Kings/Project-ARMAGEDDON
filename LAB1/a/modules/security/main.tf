@@ -6,8 +6,8 @@ resource "aws_security_group" "ec2" {
   description = "Allow Web and SSH Traffic"
   vpc_id      = var.vpc_id
 
-  # --- DYNAMIC ---
-  # Loops through a list to create ingress rules
+  # --- DYNAMIC BLOCK---
+  # Loops through list to create ingress rules
   dynamic "ingress" {
     for_each = var.ec2_ingress_rules
     
@@ -44,13 +44,14 @@ resource "aws_security_group" "rds" {
   vpc_id      = var.vpc_id
 
   # Inbound: Allow MySQL from EC2 SG
-  ingress {
-    description     = "MySQL from EC2"
-    from_port       = 3306
-    to_port         = 3306
+    ingress {
+    description     = "Access Database from EC2"
+    from_port       = var.db_port       
+    to_port         = var.db_port       
     protocol        = "tcp"
     security_groups = [aws_security_group.ec2.id]
   }
+
 
   # Outbound: Allow All
   egress {

@@ -34,3 +34,9 @@ variable "ec2_ingress_rules" {
     cidr_blocks = list(string)
   }))
 }
+
+
+variable "db_port" {
+  description = "Port for Database"
+  type        = number
+}
