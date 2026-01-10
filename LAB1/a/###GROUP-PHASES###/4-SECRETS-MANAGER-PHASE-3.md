@@ -255,6 +255,92 @@ If populated externally, retrieving the value will return a JSON payload contain
 
 <br>
 
+<h2 align="center">👷 1.7 Secrets Manager Is A Long Lived Resource</h2>
+
+<br>
+
+Typically you DO NOT put long-lived resources in a root that you routinely destroy. As Secrets Manager is a long-lived resource, so what you should do is keep envs for ephemeral infrastructure such as your
+
+
+
+- **VPC**
+
+- **Subnets**
+
+- **EC2**
+
+- **Security groups**
+
+- **RDS (if you tear it down)**
+
+<br>
+
+These can safely be destroyed.
+
+<br>
+
+In this case you should create a second root for secrets. Inside this directory should be the backend.tf and the main.tf which creates the long lived Secrets Manager Container.
+
+<br>
+
+secrets/backend.tf:
+
+```bash
+terraform {
+  backend "s3" {
+    bucket         = "project-armageddon-tf-state"
+    key            = "lab1/a/secrets.tfstate"
+    region         = "ap-northeast-1"
+    dynamodb_table = "terraform-state-locks"
+    encrypt        = true
+  }
+}
+```
+
+<br>
+
+secrets/main.tf:
+
+<br>
+
+```bash
+provider "aws" {
+  region = "ap-northeast-1"
+}
+
+resource "aws_secretsmanager_secret" "rds_secret" {
+  name = "lab-1a/rds/mysql"
+}
+```
+
+<br>
+
+Run once:
+
+<br>
+
+```bash
+cd LAB1/a/secrets
+terraform init
+terraform apply
+```
+
+<br>
+
+<h2 align="center">👷 1.8 How envs uses the secret</h2>
+
+
+In envs, you do not create the secret. You only reference it.
+
+```bash
+data "aws_secretsmanager_secret" "rds" {
+  name = "lab-1a/rds/mysql"
+}
+```
+
+<br>
+
+
 ## Key Takeaway
 
 Terraform provisions the vault, not the keys. Secret values are generated and managed by AWS or controlled processes, while applications retrieve secrets dynamically using identity.
