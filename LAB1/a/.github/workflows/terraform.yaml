@@ -1,15 +1,18 @@
-name: Terraform Push Validation
+name: Terraform CI Validation
 on:
   push:
     branches:
-      - "**" # runs on all branches
+      - "**" # Run on all branches (student feature branches)
+  pull_request:
+    branches:
+      - main # Enforce checks before merging to main
 jobs:
   terraform:
-    name: Terraform Checks
+    name: Terraform Format & Validate
     runs-on: ubuntu-latest
     defaults:
       run:
-        working-directory: envs/lab-1a
+        working-directory: modules/envs/lab-1a
     steps:
       - name: Checkout repository
         uses: actions/checkout@v4
@@ -23,5 +26,5 @@ jobs:
         run: terraform fmt -check -recursive
       - name: Terraform Validate
         run: terraform validate
-      - name: Terraform Plan (safe mode)
+      - name: Terraform Plan (safe, no state, no locks)
         run: terraform plan -input=false -lock=false -refresh=false
