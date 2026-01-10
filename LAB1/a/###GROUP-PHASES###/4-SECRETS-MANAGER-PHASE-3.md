@@ -10,10 +10,12 @@
   - <a href="https://github.com/Melanated-Cyber-Kings/Project-ARMAGEDDON/blob/main/LAB1/a/4-SECRETS-MANAGER-PHASE-3.md#-1-purpose">1 Purpose</a>
 
   - <a href="https://github.com/Melanated-Cyber-Kings/Project-ARMAGEDDON/blob/main/LAB1/a/4-SECRETS-MANAGER-PHASE-3.md#-11-terraform-actions">1.1 Terraform Action</a>
-  - <a href="https://github.com/Melanated-Cyber-Kings/Project-ARMAGEDDON/blob/main/LAB1/a/4-SECRETS-MANAGER-PHASE-3.md#-12-why-the-secret-is-created-before-rds">1.2  Why the Secret Is Created Before RDS</a>
-  - <a href="https://github.com/Melanated-Cyber-Kings/Project-ARMAGEDDON/blob/main/LAB1/a/4-SECRETS-MANAGER-PHASE-3.md#-13-terraform-checkpoint">1.3 Terraform checkpoint</a>
-  - <a href="https://github.com/Melanated-Cyber-Kings/Project-ARMAGEDDON/blob/main/LAB1/a/4-SECRETS-MANAGER-PHASE-3.md#-13-terraform-checkpoint">1.4 Why you hardcode the secrets manager with a username and password?</a>
-
+  - <a href="https://github.com/Melanated-Cyber-Kings/Project-ARMAGEDDON/blob/main/LAB1/a/4-SECRETS-MANAGER-PHASE-3.md#-12-why-the-secret-is-created-before-rds">1.2 Why Terraform Does NOT Store Secret Values</a>
+  - <a href="https://github.com/Melanated-Cyber-Kings/Project-ARMAGEDDON/blob/main/LAB1/a/4-SECRETS-MANAGER-PHASE-3.md#-13-terraform-checkpoint">1.3 How the Secret Is Populated</a>
+  - <a href="https://github.com/Melanated-Cyber-Kings/Project-ARMAGEDDON/blob/main/LAB1/a/4-SECRETS-MANAGER-PHASE-3.md#-13-terraform-checkpoint">1.4 Runtime Secret Retrieval (EC2)</a>
+  - <a href="https://github.com/Melanated-Cyber-Kings/Project-ARMAGEDDON/blob/main/LAB1/a/4-SECRETS-MANAGER-PHASE-3.md#-13-terraform-checkpoint">1.5 Terraform Checkpoint</a>
+  - <a href="https://github.com/Melanated-Cyber-Kings/Project-ARMAGEDDON/blob/main/LAB1/a/4-SECRETS-MANAGER-PHASE-3.md#-13-terraform-checkpoint">1.6 Security Design Decision Summary</a>
+  
    
     
 <br>
@@ -25,8 +27,11 @@
 
 <h2 align="center">👷 1 Purpose</h2>
 
-To store database credentials securely outside of code and infrastructure, so the EC2 instance can retrieve them dynamically at runtime.
-This prevents hardcoding passwords and establishes the identity-based trust model used in real AWS environments. In this phase, Secrets Manager is used to securely store database credentials before RDS is created, ensuring the application can retrieve them dynamically without hardcoded secrets.
+<br>
+
+The purpose of this phase is to establish an identity-based secret retrieval model using AWS Secrets Manager. Database credentials are stored securely outside of EC2 instances and application code, and are retrieved dynamically at runtime using IAM roles. This eliminates hardcoded secrets and mirrors real-world AWS production patterns.
+<br>
+Terraform is used to provision infrastructure and define the existence of secrets, but does not manage secret values to prevent credential exposure in shared state.
 
 
 
@@ -35,6 +40,7 @@ This prevents hardcoding passwords and establishes the identity-based trust mode
 
 <h2 align="center">👷 1.1 Terraform Actions</h2>
 
+<br>
 
 **Create the secret container**
 
@@ -47,133 +53,205 @@ resource "aws_secretsmanager_secret" "rds_secret" {
 ```
 <br>
 
-This resource creates a secure location in AWS Secrets Manager where the database credentials will live.
+This resource creates a Secrets Manager container only.
+<br>
+
+- **No credentials are stored here**
+
+- **No secret values are known to Terraform**
+
+- **The secret can safely be referenced by other modules**
+<br>
+Terraform’s responsibility ends at declaring the secret’s existence.
 
 
-**Store the secret value**
+<br>
+
+
+<h2 align="center">👷 1.2 Why Terraform Does NOT Store Secret Values</h2>
+
+<br>
+
+This infrastructure uses:
+
+- **A shared S3 remote backend**
+
+- **DynamoDB state locking**
+
+- **Multiple operators applying Terraform**
+
+Because Terraform state is shared:
+
+
+- **Any secret value Terraform manages would be stored in plaintext in the state file**
+
+- **All users with backend access could retrieve credentials**
+
+- **Secrets Manager would no longer provide isolation**
+
+Therefore:
+
+Terraform must never be the source of truth for secret values in a shared-state environment.
+
+This follows industry best practices where:
+
+- **Terraform provisions infrastructure**
+
+- **AWS services or controlled processes manage credentials**
+
+<br>
+
+<h2 align="center">👷 1.3 How the Secret Is Populated</h2>
+
+<br>
+
+The secret value is populated outside of Terraform, using one of the following approaches.
+
+<br>
+
+**Option A: AWS RDS–Managed Credentials (Recommended)**
 
 ```bash
-resource "aws_secretsmanager_secret_version" "rds_secret_version" {
-  secret_id = aws_secretsmanager_secret.rds_secret.id
-
-  secret_string = jsonencode({
-    username = "admin"
-    password = "StrongPassword123!"
-    host     = "PLACEHOLDER"
-    port     = 3306
-    dbname   = "labdb"
-  })
+resource "aws_db_instance" "db" {
+  manage_master_user_password = true
 }
 ```
+<br>
+
+With this approach:
+
+- **AWS generates the database password**
+
+- **The password is stored automatically in Secrets Manager**
+
+- **Terraform never sees the secret value**
+
+- **Optional rotation can be enabled**
+  
+<br>
+
+This is the preferred production pattern.
 
 <br>
 
-- username and password match the RDS master credentials
-
-- host is a placeholder and will be updated after RDS is created
-
-- port and dbname define connection defaults used by the application
+**Option B: One-Time Bootstrap (Lab-Acceptable)**
 
 <br>
 
-The EC2 instance will later retrieve this JSON at runtime.
-
-
-<br>
-
-
-<h2 align="center">👷 1.2 Why the Secret Is Created Before RDS</h2>
+For learning purposes, the secret value may be populated manually via:
 
 <br>
 
-- It forces credentials to exist independently of the database
+- **AWS Console**
 
-- It Prevents hardcoding secrets in Terraform, AMIs, or user data
+- **AWS CLI**
 
-- Mirrors real-world workflows where secrets are managed separately from infrastructure
-
-- RDS will be created using the same credentials stored here, and the host value is updated once the RDS endpoint is known.
-
-
-<h2 align="center">👷 1.3 Terraform Checkpoint</h2>
-
+- **One-time controlled bootstrap script**
 <br>
 
-**After terraform apply, verify that the secret exists and contains credentials:**
+Example:
 
 ```bash
-aws secretsmanager get-secret-value \
+aws secretsmanager put-secret-value \
+  --secret-id lab/rds/mysql \
+  --secret-string '{"username":"admin","password":"REDACTED","dbname":"labdb"}'
+```
+<br>
+
+Terraform remains unaware of the secret contents.
+<br>
+## Key points about it:
+<br>
+
+1. Purpose
+
+    - **It injects the secret value (username/password/etc.) into your Secrets Manager container.**
+
+    - **Terraform does not see or store this value.**
+
+2. One-time only
+
+    - **You run it once, after the secret container exists (aws_secretsmanager_secret.rds_secret).**
+
+    - **After that, EC2 or your app can retrieve the secret at runtime via IAM.**
+
+3. Manual / CLI
+
+    - **Can be run from your local machine, admin machine, or any host with AWS CLI access.**
+
+    - **Requires IAM permissions: secretsmanager:PutSecretValue.**
+
+4. Safe for labs / Option B:
+
+    - **Even though the command has the secret hardcoded temporarily, it never enters Terraform state, so it’s safe for a shared-team lab environment.**
+
+<br>
+
+
+<h2 align="center">👷 1.4 Runtime Secret Retrieval (EC2)</h2>
+
+<br>
+
+At runtime:
+
+- **EC2 instances assume an IAM role**
+
+- **The role allows secretsmanager:GetSecretValue**
+
+- **The application retrieves credentials dynamically**
+
+No credentials are stored in:
+
+- **EC2 user data**
+
+- **AMIs**
+
+- **Application source code**
+
+- **Terraform variables**
+<br>
+This enforces a runtime identity-based trust model.
+
+<br>
+
+
+<h2 align="center">👷 1.5 Terraform Checkpoint</h2>
+
+<br>
+
+After terraform apply, verify that the secret container exists:
+<br>
+```bash
+aws secretsmanager describe-secret \
   --secret-id lab/rds/mysql
 ```
+<br>
 
-**Expected output:**
+## Expected result:
+<br>
 
-A JSON object containing at least:
+- **Secret exists**
 
-- username
+- **No Terraform-managed secret value is present**
 
-- password
-
-- host
-
-- port
-
-At this stage, host may still be a placeholder — that is expected.
-
-**What This Proves**
-
-- Database credentials are not stored in code or EC2
-
-- Secrets are managed centrally and securely
-
-- The application will rely on IAM identity, not static credentials
-
+If populated externally, retrieving the value will return a JSON payload containing credentials.
 
 <br>
 
-
-<h2 align="center">👷 1.4 Why you hardcode the secrets manager with a username and password?</h2>
-
-<br>
-
-## Important to know
-
-If you hardcode the username/password directly in Terraform, you must treat that as sensitive and protect it.
-Secrets Manager is dynamic at runtime, but Terraform is still used to bootstrap the initial secret.
-
-This lab teaches the **runtime pattern**, not **perfect secret bootstrapping hygiene** — but we still do it safely.
+<h2 align="center">👷 1.6 Security Design Decision Summary</h2>
 
 <br>
 
-## Why This Is Still OK in the Lab?
+| Decision                                 | Reason                            |
+|------------------------------------------|-----------------------------------|
+| Secret container managed by Terraform    | Safe and non-sensitive            |
+| Secret values excluded from Terraform    | Prevents leakage into shared state|
+| Runtime retrieval via IAM                | Eliminates static credentials     |
+| RDS or external bootstrap owns passwords | Aligns with real AWS practices    |
 
 <br>
 
-There are two different moments in time:
+## Key Takeaway
 
-<br>
-
-**Provisioning time (Terraform)**
-
-- Terraform needs some value to create the secret
-
-- This is a one-time bootstrap
-
-- The secret then lives in Secrets Manager, not in EC2 or code
-
-<br>
-
-**Runtime (EC2 application)**
-
-<br>
-
-- EC2 never sees hardcoded credentials
-
-- EC2 retrieves the secret dynamically using IAM
-
-- Password rotation does not require app or server changes
-
-  <br>
-
-The security win is at runtime, which is what employers care about most.
+Terraform provisions the vault, not the keys. Secret values are generated and managed by AWS or controlled processes, while applications retrieve secrets dynamically using identity.
 
