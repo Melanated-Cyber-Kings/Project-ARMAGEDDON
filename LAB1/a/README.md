@@ -28,6 +28,23 @@ This pattern appears in:
 ---
 
 ## 🧱 Architecture Overview
+<br>
+
+This lab builds a **2-tier AWS architecture**:
+
+- VPC with public and private subnets
+- EC2 instance in a public subnet (application tier)
+- RDS (MySQL) in a private subnet (database tier)
+- IAM role attached to EC2 for AWS API access
+- AWS Secrets Manager to store database credentials
+- Security Groups controlling network traffic
+- Terraform remote state stored in S3 with DynamoDB locking
+
+Infrastructure is defined using **reusable Terraform modules**, then assembled in an **environment configuration**.
+
+---
+
+
 
 ### Core Components
 
@@ -66,6 +83,33 @@ This pattern appears in:
 
 ---
 
+## How Bootstrap Works
+
+Terraform state must exist **before** shared infrastructure can be managed safely.
+
+The `bootstrap/` directory is used **once** to create:
+
+- An S3 bucket for Terraform remote state
+- A DynamoDB table for state locking
+
+### Bootstrap Flow
+
+```bash
+cd bootstrap
+terraform init
+terraform apply
+```
+
+After this:
+
+- Terraform state is stored remotely
+
+- State locking is enforced
+
+- The bootstrap/ directory is never modified again
+
+---
+
 ## 📁 Repository Structure
 
 ### VS Code View
@@ -74,4 +118,62 @@ This pattern appears in:
   <img src="Images/Repo-Structure.png" alt="image1" width="800"/>
 </div>
 
+---
 
+## 🌍 Each Environment
+
+Each environment:
+
+- References reusable modules from `modules/`
+- Defines environment-specific variables
+- Uses the remote backend created during the bootstrap process
+
+---
+
+## ✅ What This Enables
+
+- Multiple environments (lab, dev, prod)
+- Shared Terraform state across team members
+- Safe and consistent collaboration
+
+---
+
+## 🔍 CI / Validation (No Auto-Deploy)
+
+This repository uses **GitHub Actions** to automatically:
+
+- Format Terraform code using `terraform fmt`
+- Initialize Terraform **without a backend**
+- Validate Terraform configuration syntax
+
+<br>
+
+“The CI/CD pipeline checks Terraform quality and correctness. It does not deploy infrastructure. All real infrastructure changes are applied manually using a shared backend.”
+---
+
+## 🚫 No Automatic Deployment
+
+Infrastructure is **not deployed automatically**.
+
+All real `terraform apply` actions are:
+
+- Performed manually
+- Run locally
+- Executed against a shared remote backend (S3 + DynamoDB)
+
+This ensures **safety, transparency, and learning clarity**.
+
+---
+
+## 👩‍💻 How The Group Contributes
+
+Students are expected to:
+
+- Fork/clone the repository
+- Create feature branches
+- Make pushes to those feature branches 
+- Submit Pull Requests
+- Pass Terraform validation checks
+- Receive review feedback
+
+This simulates **real-world infrastructure workflows** without risking AWS resources.
