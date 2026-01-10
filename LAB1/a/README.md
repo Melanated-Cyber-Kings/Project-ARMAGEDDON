@@ -70,7 +70,8 @@ This pattern appears in:
 
 ### VS Code View
 
-![Repository Structure](./docs/repo-structure.png)
+<div align="center">
+  <img src="Images/Repository-Structure.png" alt="image1" width="800"/>
+</div>
 
-> _(Screenshot of the VS Code Explorer showing the structure below)_
 
