@@ -1,0 +1,76 @@
+# EC2 → RDS Integration Lab (Lab 1a)
+
+**Foundational Cloud Application Pattern using AWS and Terraform**
+
+---
+
+## 📌 Purpose
+
+This lab teaches one of the **most common real-world AWS architectures**:
+
+- Compute on **Amazon EC2**
+- A managed relational database on **Amazon RDS (MySQL)**
+- Secure networking with **VPCs and Security Groups**
+- Credential management using **AWS Secrets Manager**
+- Infrastructure as Code using **Terraform**
+
+The application itself is intentionally minimal.
+
+> The goal is to understand **infrastructure design, security boundaries, IAM trust, and Terraform workflows** — not application logic.
+
+This pattern appears in:
+- Enterprise internal tools  
+- SaaS backends  
+- Legacy migrations  
+- Cloud security assessments  
+- AWS interviews  
+
+---
+
+## 🧱 Architecture Overview
+
+### Core Components
+
+- **EC2 Instance**
+  - Runs a simple application
+  - Lives in a public subnet
+  - Uses an IAM role (no static credentials)
+
+- **Amazon RDS (MySQL)**
+  - Lives in private subnets
+  - Not publicly accessible
+  - Allows inbound traffic only from the EC2 security group (TCP 3306)
+
+- **AWS Secrets Manager**
+  - Stores database credentials
+  - Accessed dynamically by EC2 using IAM
+
+- **IAM**
+  - EC2 assumes an IAM role
+  - Temporary credentials are provided automatically
+  - No access keys are stored on disk
+
+---
+
+## 🔄 Logical Flow
+
+1. User sends an HTTP request to the EC2 instance
+2. EC2 retrieves database credentials from Secrets Manager
+3. EC2 initiates a MySQL connection to RDS
+4. Data is read or written
+5. Results are returned to the user
+
+> **Important:**  
+> EC2 initiates all connections.  
+> RDS never initiates traffic or API calls.
+
+---
+
+## 📁 Repository Structure
+
+### VS Code View
+
+![Repository Structure](./docs/repo-structure.png)
+
+> _(Screenshot of the VS Code Explorer showing the structure below)_
+
