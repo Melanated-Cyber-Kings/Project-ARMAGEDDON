@@ -63,6 +63,8 @@ This resource creates a Secrets Manager container only.
 - **No secret values are known to Terraform**
 
 - **The secret can safely be referenced by other modules**
+
+- **Requires no PutSecretValue or GetSecretValue permissions**
 <br>
 Terraform’s responsibility ends at declaring the secret’s existence.
 
