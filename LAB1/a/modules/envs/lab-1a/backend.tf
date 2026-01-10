@@ -1,3 +1,5 @@
+
+/*
 terraform {
   backend "s3" {
     bucket         = "project-armageddon-tf-state"
@@ -7,3 +9,4 @@ terraform {
     encrypt        = true
   }
 }
+*/
