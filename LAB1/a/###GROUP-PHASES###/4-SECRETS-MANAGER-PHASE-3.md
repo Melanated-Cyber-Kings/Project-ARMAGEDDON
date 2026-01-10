@@ -15,6 +15,8 @@
   - <a href="https://github.com/Melanated-Cyber-Kings/Project-ARMAGEDDON/blob/main/LAB1/a/4-SECRETS-MANAGER-PHASE-3.md#-13-terraform-checkpoint">1.4 Runtime Secret Retrieval (EC2)</a>
   - <a href="https://github.com/Melanated-Cyber-Kings/Project-ARMAGEDDON/blob/main/LAB1/a/4-SECRETS-MANAGER-PHASE-3.md#-13-terraform-checkpoint">1.5 Terraform Checkpoint</a>
   - <a href="https://github.com/Melanated-Cyber-Kings/Project-ARMAGEDDON/blob/main/LAB1/a/4-SECRETS-MANAGER-PHASE-3.md#-13-terraform-checkpoint">1.6 Security Design Decision Summary</a>
+  - <a href="https://github.com/Melanated-Cyber-Kings/Project-ARMAGEDDON/blob/main/LAB1/a/4-SECRETS-MANAGER-PHASE-3.md#-13-terraform-checkpoint">1.7 Secrets Manager Is A Long Lived Resource</a>
+  - <a href="https://github.com/Melanated-Cyber-Kings/Project-ARMAGEDDON/blob/main/LAB1/a/4-SECRETS-MANAGER-PHASE-3.md#-13-terraform-checkpoint">1.8 How envs uses the secret</a>
   
    
     
