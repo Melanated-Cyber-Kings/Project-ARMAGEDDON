@@ -192,6 +192,36 @@ Terraform remains unaware of the secret contents.
     - **Even though the command has the secret hardcoded temporarily, it never enters Terraform state, so it’s safe for a shared-team lab environment.**
 
 <br>
+1️⃣ What happens in your bootstrap step
+aws secretsmanager put-secret-value \
+  --secret-id lab/rds/mysql \
+  --secret-string '{"username":"admin","password":"REDACTED","dbname":"labdb"}'
+
+
+This adds a secret value to the container you created with Terraform (aws_secretsmanager_secret).
+
+AWS stores your JSON with the RDS credentials securely.
+
+Billing: still $0.40/month per secret — the value itself doesn’t increase the cost unless it’s huge.
+
+2️⃣ Why it’s called “dynamic”
+
+You’re not hardcoding the secret into Terraform.
+
+You run the CLI once to populate the secret.
+
+After this, EC2 or other apps can retrieve it dynamically at runtime using IAM.
+
+3️⃣ How it fits with Terraform
+
+aws_secretsmanager_secret → creates the empty safe (Terraform).
+
+aws secretsmanager put-secret-value → puts the username/password in that safe (one-time bootstrap).
+
+EC2 fetches it at runtime; Terraform does not see the value unless you use data "aws_secretsmanager_secret_version".
+
+
+<br>
 
 
 <h2 align="center">👷 1.4 Runtime Secret Retrieval (EC2)</h2>
