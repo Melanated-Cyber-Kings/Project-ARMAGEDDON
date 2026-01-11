@@ -51,3 +51,8 @@ variable "rtb_public_cidr" {
   description = "route table public cidr"
   type = string
 }
+
+variable "instance_type" {
+  type        = string
+  description = "The type of EC2 instance to launch"
+} 

@@ -5,3 +5,4 @@ provider "aws" {
 resource "aws_secretsmanager_secret" "rds_secret" {
   name = "lab-1a/rds/mysql"
 }
+

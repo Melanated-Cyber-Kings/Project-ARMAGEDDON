@@ -1,7 +1,7 @@
 provider "aws" {                                       
     region = var.region        
 }
-
+######################################################################################
 # VPC / Network Module
 
 module "vpc" {
@@ -15,10 +15,43 @@ module "vpc" {
   rtb_public_cidr = var.rtb_public_cidr  # ✅ THIS LINE FIXES IT
 
 }
+######################################################################################
+
+module "security" {
+  source    = "../../security"
+  vpc_id    = module.vpc.vpc_id
+  env_prefix = local.name_prefix
+}
+
+
+module "ec2" {
+  source             = "../../ec2"
+  env_prefix         = local.name_prefix
+  subnet_id          = module.vpc.public_subnet_id
+  instance_type      = var.instance_type
+  security_group_ids  = [module.security.ec2_sg_id]
+}
+
+######################################################################################
+
+
+######################################################################################
+
+
+
+
+
+
+
+
+
 
 # Reference the existing RDS secret
 data "aws_secretsmanager_secret" "rds" {
   name = "lab-1a/rds/mysql"
 }
+
+
+
 
 
