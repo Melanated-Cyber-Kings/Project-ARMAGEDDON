@@ -12,7 +12,7 @@ module "vpc" {
   private_subnet_cidr = var.private_subnet_cidr
   env_prefix      = local.name_prefix
   avail_zone = var.avail_zone
-  rtb_public_cidr = var.rtb_public_cidr  # ✅ THIS LINE FIXES IT
+  rtb_public_cidr = var.rtb_public_cidr  
 
 }
 ######################################################################################
@@ -30,10 +30,16 @@ module "ec2" {
   subnet_id          = module.vpc.public_subnet_id
   instance_type      = var.instance_type
   security_group_ids  = [module.security.ec2_sg_id]
+  instance_profile_name  = module.iam.instance_profile_name
 }
 
 ######################################################################################
-
+module "iam" {
+  source     = "../../iam"
+  region     = var.region
+  account_id = var.account_id
+  env_prefix = local.name_prefix
+}
 
 ######################################################################################
 

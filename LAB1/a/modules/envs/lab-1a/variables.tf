@@ -3,6 +3,10 @@ variable "region" {
   description = "The AWS region to deploy resources in"
 }
 
+variable "account_id" {
+  description = "AWS account ID"
+  type        = string
+}
 
 
 variable "vpc_cidr_block" {

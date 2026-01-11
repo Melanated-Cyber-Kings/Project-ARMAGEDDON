@@ -15,3 +15,8 @@ variable "security_group_ids" {
   description = "List of security group IDs to attach to EC2 instance"
   type        = list(string)
 }
+
+variable "instance_profile_name" {
+  description = "IAM instance profile name for EC2"
+  type        = string
+}
