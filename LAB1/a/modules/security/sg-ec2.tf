@@ -4,7 +4,7 @@ resource "aws_security_group" "ec2_sg" {
   vpc_id      = var.vpc_id
 
   tags = {
-    Name = "${var.env_prefix}-ec2-sg"
+    Name = "sg-ec2-${var.env_prefix}"
   }
 }
 

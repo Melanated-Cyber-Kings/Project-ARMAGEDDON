@@ -15,3 +15,17 @@ variable "tcp_ingress_rule" {
   })
 }
 */
+
+variable "tcp_ingress_rule" {
+  description = "tcp ingress in security group sg-rds-lab1a"
+  type = object({
+      cidr = string
+      port = number
+      description = string
+  })
+  default = {
+    cidr = "172.17.0.0/16"
+    port = 3306
+    description = "tcp ingress rule"
+  }
+}

@@ -21,6 +21,10 @@ module "security" {
   source    = "../../security"
   vpc_id    = module.vpc.vpc_id
   env_prefix = local.name_prefix
+  tcp_ingress_rule = {
+    port        = 3306
+    description = "MySQL access from EC2"
+  }
 }
 
 
