@@ -1,5 +1,5 @@
 locals {
-  name_prefix = "${var.project}-${var.env_prefix}"   # note the space after the dash
+  name_prefix = lower("${var.project}-${var.env_prefix}")
 
   instance_type_by_env = {
     lab1a = "t3.micro"
@@ -11,4 +11,9 @@ locals {
     Environment = var.env_prefix
     ManagedBy   = "Terraform"
   }
+
+  # RDS credentials pulled from Secrets Manager
+  rds_secret = jsondecode(
+    data.aws_secretsmanager_secret_version.rds.secret_string
+  )
 }

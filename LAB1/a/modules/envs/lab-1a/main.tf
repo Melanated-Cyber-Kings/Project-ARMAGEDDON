@@ -26,8 +26,7 @@ module "security" {
     description = "MySQL access from EC2"
   }
 }
-
-
+######################################################################################
 module "ec2" {
   source             = "../../ec2"
   env_prefix         = local.name_prefix
@@ -46,8 +45,16 @@ module "iam" {
 }
 
 ######################################################################################
+module "rds" {
+  source = "../../rds"
 
-
+  db_username            = local.rds_secret.username
+  db_password            = local.rds_secret.password
+  db_name                = local.rds_secret.dbname
+  db_subnet_group_name   = module.vpc.db_subnet_group_name
+  rds_security_group_id  = module.security.rds_sg_id
+}
+######################################################################################
 
 
 
@@ -61,7 +68,9 @@ data "aws_secretsmanager_secret" "rds" {
   name = "lab-1a/rds/mysql"
 }
 
-
+data "aws_secretsmanager_secret_version" "rds" {
+  secret_id = data.aws_secretsmanager_secret.rds.id
+}
 
 
 
