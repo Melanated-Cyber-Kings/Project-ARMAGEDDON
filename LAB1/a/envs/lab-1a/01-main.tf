@@ -5,7 +5,7 @@ provider "aws" {
 # VPC / Network Module
 
 module "vpc" {
-  source = "../../network"
+  source = "../../modules/network"
 
   vpc_cidr_block  = var.vpc_cidr_block
   public_subnet_cidr  = var.public_subnet_cidr
@@ -18,7 +18,7 @@ module "vpc" {
 ######################################################################################
 
 module "security" {
-  source    = "../../security"
+  source    = "../../modules/security"
   vpc_id    = module.vpc.vpc_id
   env_prefix = local.name_prefix
   tcp_ingress_rule = {
@@ -28,7 +28,7 @@ module "security" {
 }
 ######################################################################################
 module "ec2" {
-  source             = "../../ec2"
+  source             = "../../modules/ec2"
   env_prefix         = local.name_prefix
   subnet_id          = module.vpc.public_subnet_id
   instance_type      = var.instance_type
@@ -38,7 +38,7 @@ module "ec2" {
 
 ######################################################################################
 module "iam" {
-  source     = "../../iam"
+  source     = "../../modules/iam"
   region     = var.region
   account_id = var.account_id
   env_prefix = local.name_prefix
@@ -46,7 +46,7 @@ module "iam" {
 
 ######################################################################################
 module "rds" {
-  source = "../../rds"
+  source = "../../modules/rds"
 
 # Credentials dynamically pulled from Secrets Manager
   db_username            = local.rds_secret.username
