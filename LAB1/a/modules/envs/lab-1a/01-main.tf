@@ -48,9 +48,11 @@ module "iam" {
 module "rds" {
   source = "../../rds"
 
+# Credentials dynamically pulled from Secrets Manager
   db_username            = local.rds_secret.username
   db_password            = local.rds_secret.password
   db_name                = local.rds_secret.dbname
+
   db_subnet_group_name   = module.vpc.db_subnet_group_name
   rds_security_group_id  = module.security.rds_sg_id
 }
@@ -64,13 +66,17 @@ module "rds" {
 
 
 # Reference the existing RDS secret
+
+# This is the data block Terraform “sees” and evaluates during terraform plan and terraform apply:
+# Fetches the *current version* of an existing secret from AWS Secrets Manager
+# This does NOT create the secret
+# This makes a live AWS API call during plan/apply
 data "aws_secretsmanager_secret" "rds" {
   name = "lab-1a/rds/mysql"
 }
 
+#
 data "aws_secretsmanager_secret_version" "rds" {
   secret_id = data.aws_secretsmanager_secret.rds.id
 }
-
-
 
