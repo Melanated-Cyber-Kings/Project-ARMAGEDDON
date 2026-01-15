@@ -23,7 +23,7 @@ resource "aws_iam_policy" "ec2_secrets_policy" {
         Sid    = "ReadSpecificSecret"
         Effect = "Allow"
         Action = ["secretsmanager:GetSecretValue"]
-        Resource = "arn:aws:secretsmanager:${var.region}:${var.account_id}:secret:lab/rds/mysql*"
+        Resource = "arn:aws:secretsmanager:${var.region}:${var.account_id}:secret:${var.env_prefix}/rds/mysql*"
       }
     ]
   })
