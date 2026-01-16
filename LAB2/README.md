@@ -13,7 +13,7 @@
 
 <br>
 
-**Project Group Leader:** 
+**Project Group Leader:***
 <a href="https://github.com/Brimah-Khalil-Kamara">Brimah Khalil Kamara</a>
 
 <br>
