@@ -69,7 +69,7 @@ git checkout -b Cameron-Cleveland-Armageddon-Branch
 
 <br>
    
-5. Create Readme.md files in each folder you created above this will be the file that you will document your Armageddon Labs in and that will be presented to THEO, so make sure it's readable and that someone who wouldnt know how to do the homework/project can follow with little to no difficulty.
+4. Create Readme.md files in each folder you created above this will be the file that you will document your Armageddon Labs in and that will be presented to THEO, so make sure it's readable and that someone who wouldnt know how to do the homework/project can follow with little to no difficulty.
 
 
 <br>
