@@ -1,0 +1,225 @@
+###############################################################################
+# COURSE: ARMAGEDDON LABS
+# TRACK: LAB-1
+# COMPONENT: environment
+# PURPOSE: Define infrastructure and automation logic for the LAB-1 track.
+###############################################################################
+
+###############################################################################
+# Core Environment Inputs
+###############################################################################
+
+variable "region" {
+  type        = string
+  description = "The AWS region to deploy resources in"
+}
+
+variable "account_id" {
+  description = "AWS account ID"
+  type        = string
+}
+
+variable "project" {
+  description = "Project name"
+  type        = string
+}
+
+variable "env_prefix" {
+  description = "Project environment / naming prefix"
+  type        = string
+  default     = "lab-1c"
+
+  # NOTE: your original validation listed lab-1c repeatedly; keep simple/accurate.
+  validation {
+    condition     = contains(["lab-1a", "lab-1b", "lab-1c"], var.env_prefix)
+    error_message = "env_prefix must be one of: lab-1a, lab-1b, lab-1c"
+  }
+}
+
+variable "tags" {
+  description = "Tags applied to resources"
+  type        = map(string)
+  default     = {}
+}
+
+###############################################################################
+# Network Inputs
+###############################################################################
+
+variable "vpc_cidr_block" {
+  description = "VPC CIDR block"
+  type        = string
+}
+
+variable "avail_zone_1" {
+  description = "Availability zone for resources"
+  type        = string
+}
+
+variable "avail_zone_2" {
+  description = "Second availability zone for resources"
+  type        = string
+}
+
+variable "public_subnet_cidr" {
+  description = "First public subnet CIDR range"
+  type        = string
+}
+
+variable "public_subnet_cidr_2" {
+  description = "Second public subnet CIDR range"
+  type        = string
+}
+
+variable "private_subnet_cidr_1" {
+  description = "First private subnet CIDR range"
+  type        = string
+}
+
+variable "private_subnet_cidr_2" {
+  description = "Second private subnet CIDR range"
+  type        = string
+}
+
+variable "rtb_public_cidr" {
+  description = "Route table public CIDR (usually 0.0.0.0/0)"
+  type        = string
+}
+
+###############################################################################
+# EC2 Inputs
+###############################################################################
+
+variable "instance_type" {
+  type        = string
+  description = "EC2 instance type"
+}
+
+###############################################################################
+# RDS Inputs (credentials are not used directly; pulled from Secrets Manager)
+###############################################################################
+
+variable "db_name" {
+  description = "Unused in env stack; value is read from Secrets Manager."
+  type        = string
+  default     = null
+}
+
+variable "db_username" {
+  description = "Unused in env stack; credentials are pulled from Secrets Manager."
+  type        = string
+  default     = null
+}
+
+variable "db_password" {
+  description = "Unused in env stack; credentials are pulled from Secrets Manager."
+  type        = string
+  default     = null
+  sensitive   = true
+}
+
+variable "rds_multi_az" {
+  description = "Enable Multi-AZ for RDS."
+  type        = bool
+  default     = false
+}
+
+###############################################################################
+# KMS / Alerting
+###############################################################################
+
+variable "kms_key_arn" {
+  type        = string
+  description = "KMS Key ARN (if used by modules)"
+}
+
+variable "alert_email" {
+  type        = string
+  description = "Email to subscribe to SNS alerts"
+}
+
+###############################################################################
+# Bonus C — Ingress DNS / TLS / WAF / Observability
+###############################################################################
+
+variable "domain_name" {
+  description = "Base domain owned by the user (example: devlab405.click)"
+  type        = string
+}
+
+variable "app_subdomain" {
+  description = "Subdomain for the application"
+  type        = string
+  default     = "app"
+}
+
+variable "app_port" {
+  description = "Port the EC2 application listens on (target group port)"
+  type        = number
+  default     = 80
+}
+
+###############################################################################
+# DNS Mode (Option 2)
+###############################################################################
+
+variable "dns_mode" {
+  type        = string
+  description = "DNS mode: route53_managed | route53_existing | external"
+  default     = "route53_existing"
+
+  validation {
+    condition     = contains(["route53_managed", "route53_existing", "external"], var.dns_mode)
+    error_message = "dns_mode must be one of: route53_managed, route53_existing, external."
+  }
+}
+
+variable "route53_hosted_zone_id" {
+  type        = string
+  description = "Existing Route53 Hosted Zone ID when dns_mode=route53_existing."
+  default     = ""
+}
+
+###############################################################################
+# ALB 5xx Alarm Tuning
+###############################################################################
+
+variable "alb_5xx_threshold" {
+  description = "ALB 5xx threshold before alarm fires"
+  type        = number
+  default     = 10
+}
+
+variable "alb_5xx_period_seconds" {
+  description = "Metric evaluation window (seconds)"
+  type        = number
+  default     = 300
+}
+
+variable "alb_5xx_evaluation_periods" {
+  description = "Number of periods evaluated"
+  type        = number
+  default     = 1
+}
+
+###############################################################################
+# WAF Logging
+###############################################################################
+
+variable "waf_log_destination" {
+  description = "Choose ONE destination per WebACL: cloudwatch | s3 | firehose"
+  type        = string
+  default     = "cloudwatch"
+}
+
+variable "waf_log_retention_days" {
+  description = "Retention for WAF CloudWatch logs (days)"
+  type        = number
+  default     = 14
+}
+
+variable "enable_waf_sampled_requests_only" {
+  description = "Limit/redact sensitive fields in WAF logs"
+  type        = bool
+  default     = false
+}

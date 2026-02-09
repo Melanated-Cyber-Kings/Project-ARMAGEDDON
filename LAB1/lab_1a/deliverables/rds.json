@@ -1,0 +1,102 @@
+{
+    "DBInstances": [
+        {
+            "DBInstanceIdentifier": "lab-mysql",
+            "DBInstanceClass": "db.t3.micro",
+            "Engine": "mysql",
+            "DBInstanceStatus": "available",
+            "MasterUsername": "admin",
+            "DBName": "labdb",
+            "Endpoint": {
+                "Address": "lab-mysql.cne4ueim8lb3.ap-northeast-1.rds.amazonaws.com",
+                "Port": 3306,
+                "HostedZoneId": "Z24O6O9L7SGTNB"
+            },
+            "AllocatedStorage": 20,
+            "InstanceCreateTime": "2026-01-20T17:49:15.011000+00:00",
+            "PreferredBackupWindow": "15:02-15:32",
+            "BackupRetentionPeriod": 0,
+            "DBSecurityGroups": [],
+            "VpcSecurityGroups": [
+                {
+                    "VpcSecurityGroupId": "sg-02bb0ebcada51e224",
+                    "Status": "active"
+                }
+            ],
+            "DBParameterGroups": [
+                {
+                    "DBParameterGroupName": "default.mysql8.0",
+                    "ParameterApplyStatus": "in-sync"
+                }
+            ],
+            "AvailabilityZone": "ap-northeast-1c",
+            "DBSubnetGroup": {
+                "DBSubnetGroupName": "armageddon-lab-1a-db-subnet-group",
+                "DBSubnetGroupDescription": "Managed by Terraform",
+                "VpcId": "vpc-0ea1435ca15091d4f",
+                "SubnetGroupStatus": "Complete",
+                "Subnets": [
+                    {
+                        "SubnetIdentifier": "subnet-05726d35c5fdec73d",
+                        "SubnetAvailabilityZone": {
+                            "Name": "ap-northeast-1a"
+                        },
+                        "SubnetOutpost": {},
+                        "SubnetStatus": "Active"
+                    },
+                    {
+                        "SubnetIdentifier": "subnet-0ab27d311ab48be24",
+                        "SubnetAvailabilityZone": {
+                            "Name": "ap-northeast-1c"
+                        },
+                        "SubnetOutpost": {},
+                        "SubnetStatus": "Active"
+                    }
+                ]
+            },
+            "PreferredMaintenanceWindow": "thu:18:22-thu:18:52",
+            "UpgradeRolloutOrder": "second",
+            "PendingModifiedValues": {},
+            "MultiAZ": true,
+            "EngineVersion": "8.0.43",
+            "AutoMinorVersionUpgrade": true,
+            "ReadReplicaDBInstanceIdentifiers": [],
+            "LicenseModel": "general-public-license",
+            "StorageThroughput": 0,
+            "OptionGroupMemberships": [
+                {
+                    "OptionGroupName": "default:mysql-8-0",
+                    "Status": "in-sync"
+                }
+            ],
+            "SecondaryAvailabilityZone": "ap-northeast-1a",
+            "PubliclyAccessible": false,
+            "StorageType": "gp2",
+            "DbInstancePort": 0,
+            "StorageEncrypted": false,
+            "DbiResourceId": "db-J2PRCPLKEFOFORRBSF32RB2LEY",
+            "CACertificateIdentifier": "rds-ca-rsa2048-g1",
+            "DomainMemberships": [],
+            "CopyTagsToSnapshot": false,
+            "MonitoringInterval": 0,
+            "DBInstanceArn": "arn:aws:rds:ap-northeast-1:261519058382:db:lab-mysql",
+            "IAMDatabaseAuthenticationEnabled": false,
+            "DatabaseInsightsMode": "standard",
+            "PerformanceInsightsEnabled": false,
+            "DeletionProtection": false,
+            "AssociatedRoles": [],
+            "TagList": [],
+            "CustomerOwnedIpEnabled": false,
+            "NetworkType": "IPV4",
+            "ActivityStreamStatus": "stopped",
+            "BackupTarget": "region",
+            "CertificateDetails": {
+                "CAIdentifier": "rds-ca-rsa2048-g1",
+                "ValidTill": "2027-01-20T17:47:49+00:00"
+            },
+            "DedicatedLogVolume": false,
+            "IsStorageConfigUpgradeAvailable": false,
+            "EngineLifecycleSupport": "open-source-rds-extended-support"
+        }
+    ]
+}

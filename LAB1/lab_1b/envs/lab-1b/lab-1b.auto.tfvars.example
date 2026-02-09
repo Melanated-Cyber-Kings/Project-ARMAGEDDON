@@ -1,0 +1,79 @@
+###############################################################################
+# LAB 1C — Environment Variables (EXAMPLE)
+#
+# PURPOSE:
+# - Safe to commit to GitHub (placeholders only)
+# - Students copy to: lab-1c.auto.tfvars and then customize
+#
+# COPY:
+#   cp lab-1c.auto.tfvars.example lab-1c.auto.tfvars
+#
+# BACKEND:
+# - No S3 backend: terraform init -backend=false
+# - With S3 backend: terraform init -backend-config=backend.hcl
+###############################################################################
+
+###############################################################################
+# Core Lab Settings
+###############################################################################
+
+region     = "ap-northeast-1"
+env_prefix =i= "lab-1c"
+
+###############################################################################
+# Networking
+###############################################################################
+
+vpc_cidr = "10.30.0.0/16"
+
+public_subnet_cidr_1  = "10.30.10.0/24"
+public_subnet_cidr_2  = "10.30.11.0/24"
+
+private_subnet_cidr_1 = "10.30.20.0/24"
+private_subnet_cidr_2 = "10.30.21.0/24"
+
+avail_zone_1 = "ap-northeast-1a"
+avail_zone_2 = "ap-northeast-1c"
+
+###############################################################################
+# Compute
+###############################################################################
+
+instance_type = "t3.micro"
+
+###############################################################################
+# Secrets / KMS (used by rotation + EC2 IAM policies)
+###############################################################################
+
+# Use real values only in lab-1c.auto.tfvars (never commit that file)
+account_id  = "REPLACE_ME"
+kms_key_arn = "REPLACE_ME"
+
+###############################################################################
+# Bonus A — Private EC2 / SSM / VPC Endpoints
+###############################################################################
+
+# NAT is intentionally retained to allow patching / yum installs.
+# Later labs may remove NAT and rely only on endpoints + golden AMIs.
+
+# (no extra toggles required unless your repo adds them later)
+
+###############################################################################
+# Bonus C — ALB + TLS + WAF + Observability
+###############################################################################
+
+# Public domain owned by the student
+domain_name   = "chewbacca-growl.com"
+app_subdomain = "app"
+
+# Application port on EC2
+app_port = 80
+
+# ACM validation / DNS automation
+enable_route53  = false
+route53_zone_id = ""
+
+# ALB 5xx Alarm tuning
+alb_5xx_threshold          = 10
+alb_5xx_period_seconds     = 300
+alb_5xx_evaluation_periods = 1
