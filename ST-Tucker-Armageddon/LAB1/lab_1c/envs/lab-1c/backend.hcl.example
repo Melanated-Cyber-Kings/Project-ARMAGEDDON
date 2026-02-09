@@ -1,5 +1,0 @@
-bucket         = "REPLACE_WITH_YOUR_BUCKET"
-key            = "lab-1c/terraform.tfstate"
-region         = "REPLACE_WITH_YOUR_REGION"
-dynamodb_table = "terraform-state-locks"
-encrypt        = true
