@@ -34,3 +34,9 @@ variable "account_id" {
 variable "kms_key_arn" {
   type = string
 }
+
+variable "iam_instance_profile" {
+  description = "IAM instance profile name for EC2 instances"
+  type        = string
+  default     = "chewbacca-ec2-instance-profile"
+}

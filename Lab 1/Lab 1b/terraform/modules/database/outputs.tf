@@ -11,7 +11,7 @@ output "db_name" {
 }
 
 output "db_username" {
-  value = aws_db_instance.mysql.username
+  value     = aws_db_instance.mysql.username
   sensitive = true
 }
 

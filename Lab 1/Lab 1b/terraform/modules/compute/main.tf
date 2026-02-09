@@ -1,7 +1,7 @@
 # IAM Role for EC2
 resource "aws_iam_role" "ec2" {
   name = "${var.project_name}-ec2-role"
-  
+
   assume_role_policy = jsonencode({
     Version = "2012-10-17"
     Statement = [
@@ -14,7 +14,7 @@ resource "aws_iam_role" "ec2" {
       }
     ]
   })
-  
+
   tags = {
     Name        = "${var.project_name}-ec2-role"
     Project     = var.project_name
@@ -26,7 +26,7 @@ resource "aws_iam_role" "ec2" {
 resource "aws_iam_policy" "ec2_secrets" {
   name        = "${var.project_name}-ec2-secrets-policy"
   description = "Allow EC2 to read SSM and Secrets Manager"
-  
+
   policy = jsonencode({
     Version = "2012-10-17"
     Statement = [
@@ -91,26 +91,26 @@ resource "aws_instance" "app" {
   subnet_id              = var.subnet_id
   vpc_security_group_ids = [var.app_security_group_id]
   iam_instance_profile   = aws_iam_instance_profile.ec2.name
-  
-  key_name = var.key_name
-  
+
+ 
+
   user_data = base64encode(templatefile("${path.module}/userdata.sh", {
     project_name = var.project_name
     region       = var.region
   }))
-  
+
   root_block_device {
     volume_size = 20
     volume_type = "gp3"
     encrypted   = true
     kms_key_id  = var.kms_key_arn
   }
-  
+
   metadata_options {
     http_endpoint = "enabled"
     http_tokens   = "required"
   }
-  
+
   tags = {
     Name        = "${var.project_name}-app"
     Project     = var.project_name
@@ -121,7 +121,7 @@ resource "aws_instance" "app" {
 # Elastic IP
 resource "aws_eip" "app" {
   domain = "vpc"
-  
+
   tags = {
     Name        = "${var.project_name}-app-eip"
     Project     = var.project_name

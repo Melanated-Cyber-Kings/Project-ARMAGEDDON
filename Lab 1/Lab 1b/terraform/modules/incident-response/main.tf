@@ -1,7 +1,7 @@
 # SNS Topic for Alarms
 resource "aws_sns_topic" "alarms" {
   name = "${var.project_name}-alarms-topic"
-  
+
   tags = {
     Name        = "${var.project_name}-alarms-topic"
     Project     = var.project_name
@@ -12,7 +12,7 @@ resource "aws_sns_topic" "alarms" {
 # IAM Role for Lambda
 resource "aws_iam_role" "lambda" {
   name = "${var.project_name}-lambda-role"
-  
+
   assume_role_policy = jsonencode({
     Version = "2012-10-17"
     Statement = [
@@ -25,7 +25,7 @@ resource "aws_iam_role" "lambda" {
       }
     ]
   })
-  
+
   tags = {
     Name        = "${var.project_name}-lambda-role"
     Project     = var.project_name
@@ -37,7 +37,7 @@ resource "aws_iam_role" "lambda" {
 resource "aws_iam_policy" "lambda" {
   name        = "${var.project_name}-lambda-policy"
   description = "Policy for incident response Lambda"
-  
+
   policy = jsonencode({
     Version = "2012-10-17"
     Statement = [
@@ -86,7 +86,7 @@ resource "aws_iam_policy" "lambda" {
         Resource = "*"
       },
       {
-        Action = "sns:Publish"
+        Action   = "sns:Publish"
         Effect   = "Allow"
         Resource = "*"
       }
@@ -103,16 +103,16 @@ resource "aws_iam_role_policy_attachment" "lambda" {
 resource "aws_lambda_function" "incident_response" {
   function_name = "${var.project_name}-incident-response"
   description   = "Responds to database connectivity failures"
-  
+
   runtime = "python3.9"
   handler = "lambda_function.lambda_handler"
   timeout = 30
-  
+
   filename         = "${path.module}/lambda_function.zip"
   source_code_hash = filebase64sha256("${path.module}/lambda_function.zip")
-  
+
   role = aws_iam_role.lambda.arn
-  
+
   environment {
     variables = {
       DB_INSTANCE_ID = var.db_instance_id
@@ -120,7 +120,7 @@ resource "aws_lambda_function" "incident_response" {
       PROJECT_NAME   = var.project_name
     }
   }
-  
+
   tags = {
     Name        = "${var.project_name}-incident-response"
     Project     = var.project_name

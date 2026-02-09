@@ -1,0 +1,224 @@
+{
+  "ETag": "ETVPDKIKX0DER",
+  "DistributionConfig": {
+    "CallerReference": "terraform-20260208021512940200000001",
+    "Aliases": {
+      "Quantity": 2,
+      "Items": [
+        "givenchyops.com",
+        "app.givenchyops.com"
+      ]
+    },
+    "DefaultRootObject": "",
+    "Origins": {
+      "Quantity": 1,
+      "Items": [
+        {
+          "Id": "chewbacca-alb-origin01",
+          "DomainName": "None",
+          "OriginPath": "",
+          "CustomHeaders": {
+            "Quantity": 1,
+            "Items": [
+              {
+                "HeaderName": "X-Chewbacca-Growl",
+                "HeaderValue": "mdcYLQtpJJuDYqn0X0YvKqg37XDA2s9b"
+              }
+            ]
+          },
+          "CustomOriginConfig": {
+            "HTTPPort": 80,
+            "HTTPSPort": 443,
+            "OriginProtocolPolicy": "match-viewer",
+            "OriginSslProtocols": {
+              "Quantity": 1,
+              "Items": [
+                "TLSv1.2"
+              ]
+            },
+            "OriginReadTimeout": 30,
+            "OriginKeepaliveTimeout": 5
+          },
+          "ConnectionAttempts": 3,
+          "ConnectionTimeout": 10,
+          "OriginShield": {
+            "Enabled": false
+          },
+          "OriginAccessControlId": ""
+        }
+      ]
+    },
+    "OriginGroups": {
+      "Quantity": 0
+    },
+    "DefaultCacheBehavior": {
+      "TargetOriginId": "chewbacca-alb-origin01",
+      "TrustedSigners": {
+        "Enabled": false,
+        "Quantity": 0
+      },
+      "TrustedKeyGroups": {
+        "Enabled": false,
+        "Quantity": 0
+      },
+      "ViewerProtocolPolicy": "redirect-to-https",
+      "AllowedMethods": {
+        "Quantity": 7,
+        "Items": [
+          "HEAD",
+          "DELETE",
+          "POST",
+          "GET",
+          "OPTIONS",
+          "PUT",
+          "PATCH"
+        ],
+        "CachedMethods": {
+          "Quantity": 2,
+          "Items": [
+            "HEAD",
+            "GET"
+          ]
+        }
+      },
+      "SmoothStreaming": false,
+      "Compress": true,
+      "LambdaFunctionAssociations": {
+        "Quantity": 0
+      },
+      "FunctionAssociations": {
+        "Quantity": 0
+      },
+      "FieldLevelEncryptionId": "",
+      "CachePolicyId": "68f0e300-8ab6-4130-9c9a-21d8dcdaee51",
+      "OriginRequestPolicyId": "b1edc444-0035-4c18-8313-50cfb028d048",
+      "GrpcConfig": {
+        "Enabled": false
+      }
+    },
+    "CacheBehaviors": {
+      "Quantity": 2,
+      "Items": [
+        {
+          "PathPattern": "/static/*",
+          "TargetOriginId": "chewbacca-alb-origin01",
+          "TrustedSigners": {
+            "Enabled": false,
+            "Quantity": 0
+          },
+          "TrustedKeyGroups": {
+            "Enabled": false,
+            "Quantity": 0
+          },
+          "ViewerProtocolPolicy": "redirect-to-https",
+          "AllowedMethods": {
+            "Quantity": 3,
+            "Items": [
+              "HEAD",
+              "GET",
+              "OPTIONS"
+            ],
+            "CachedMethods": {
+              "Quantity": 2,
+              "Items": [
+                "HEAD",
+                "GET"
+              ]
+            }
+          },
+          "SmoothStreaming": false,
+          "Compress": true,
+          "LambdaFunctionAssociations": {
+            "Quantity": 0
+          },
+          "FunctionAssociations": {
+            "Quantity": 0
+          },
+          "FieldLevelEncryptionId": "",
+          "CachePolicyId": "bd4278dd-435b-44f6-afa5-33ef98af2cae",
+          "OriginRequestPolicyId": "3305d6d7-f782-42c2-bc2f-e3407d0c242d",
+          "GrpcConfig": {
+            "Enabled": false
+          }
+        },
+        {
+          "PathPattern": "/api/*",
+          "TargetOriginId": "chewbacca-alb-origin01",
+          "TrustedSigners": {
+            "Enabled": false,
+            "Quantity": 0
+          },
+          "TrustedKeyGroups": {
+            "Enabled": false,
+            "Quantity": 0
+          },
+          "ViewerProtocolPolicy": "redirect-to-https",
+          "AllowedMethods": {
+            "Quantity": 7,
+            "Items": [
+              "HEAD",
+              "DELETE",
+              "POST",
+              "GET",
+              "OPTIONS",
+              "PUT",
+              "PATCH"
+            ],
+            "CachedMethods": {
+              "Quantity": 2,
+              "Items": [
+                "HEAD",
+                "GET"
+              ]
+            }
+          },
+          "SmoothStreaming": false,
+          "Compress": true,
+          "LambdaFunctionAssociations": {
+            "Quantity": 0
+          },
+          "FunctionAssociations": {
+            "Quantity": 0
+          },
+          "FieldLevelEncryptionId": "",
+          "CachePolicyId": "68f0e300-8ab6-4130-9c9a-21d8dcdaee51",
+          "OriginRequestPolicyId": "5ca94390-912e-4f54-928c-0ed77261ea80",
+          "GrpcConfig": {
+            "Enabled": false
+          }
+        }
+      ]
+    },
+    "CustomErrorResponses": {
+      "Quantity": 0
+    },
+    "Comment": "chewbacca-cf01",
+    "Logging": {
+      "Enabled": false,
+      "IncludeCookies": false,
+      "Bucket": "",
+      "Prefix": ""
+    },
+    "PriceClass": "PriceClass_All",
+    "Enabled": true,
+    "ViewerCertificate": {
+      "CloudFrontDefaultCertificate": false,
+      "ACMCertificateArn": "arn:aws:acm:us-east-1:867344469617:certificate/7e942fb4-80ba-4025-9ba9-de9beea60454",
+      "SSLSupportMethod": "sni-only",
+      "MinimumProtocolVersion": "TLSv1.2_2021",
+      "Certificate": "arn:aws:acm:us-east-1:867344469617:certificate/7e942fb4-80ba-4025-9ba9-de9beea60454",
+      "CertificateSource": "acm"
+    },
+    "Restrictions": {
+      "GeoRestriction": {
+        "RestrictionType": "none",
+        "Quantity": 0
+      }
+    },
+    "WebACLId": "arn:aws:wafv2:us-east-1:867344469617:global/webacl/chewbacca-cf-waf01/beee08df-aa10-46f0-bc6a-faa533d62330",
+    "HttpVersion": "http2",
+    "IsIPV6Enabled": true,
+    "ContinuousDeploymentPolicyId": "",
+    "Staging": false
+  }
+}

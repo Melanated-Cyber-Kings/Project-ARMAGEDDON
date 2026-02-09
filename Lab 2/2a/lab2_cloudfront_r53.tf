@@ -1,3 +1,5 @@
+
+
 # lab2_cloudfront_r53.tf - Lab 2A
 
 locals {
@@ -17,10 +19,14 @@ resource "aws_acm_certificate" "cloudfront_cert" {
 
   subject_alternative_names = [
     "*.givenchyops.com",
+    #"*.ap-northeast-1.elb.amazonaws.com",
     local.app_fqdn
   ]
 
-  lifecycle { create_before_destroy = true }
+  lifecycle { 
+    create_before_destroy = true
+    #ignore_changes = [subject_alternative_names]
+   }
 }
 
 # DNS validation
@@ -66,7 +72,7 @@ resource "aws_route53_record" "apex_to_cloudfront" {
 }
 
 # Update existing app record to point to CloudFront
-/*resource "aws_route53_record" "app_to_cloudfront" {
+resource "aws_route53_record" "app_to_cloudfront" {
   allow_overwrite = true
   zone_id = local.zone_id
   name    = local.app_fqdn
@@ -77,4 +83,4 @@ resource "aws_route53_record" "apex_to_cloudfront" {
     zone_id                = aws_cloudfront_distribution.chewbacca_cf01.hosted_zone_id
     evaluate_target_health = false
   }
-}*/
+}

@@ -22,7 +22,7 @@ print('Port:', port)
 print('DB:', db_name)
 
 # Get secret
-secret = secrets.get_secret_value(SecretId='lab1b/rds/mysql')
+secret = secrets.get_secret_value(SecretId='my-lab1b/rds/mysql')
 secret_dict = json.loads(secret['SecretString'])
 print('User:', secret_dict['username'])
 

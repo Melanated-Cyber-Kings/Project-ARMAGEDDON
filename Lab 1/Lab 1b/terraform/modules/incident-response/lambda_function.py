@@ -39,7 +39,7 @@ def lambda_handler(event, context):
             
             # 2. Get credentials from Secrets Manager
             secrets = boto3.client('secretsmanager')
-            secret_response = secrets.get_secret_value(SecretId='lab1b/rds/mysql')
+            secret_response = secrets.get_secret_value(SecretId='my-lab1b/rds/mysql')
             secret = json.loads(secret_response['SecretString'])
             
             # 3. Check RDS instance status

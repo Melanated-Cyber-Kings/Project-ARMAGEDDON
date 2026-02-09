@@ -1,0 +1,28 @@
+{
+  "Changes": [
+    {
+      "Action": "DELETE",
+      "ResourceRecordSet": {
+        "Name": "givenchyops.com.",
+        "Type": "A",
+        "AliasTarget": {
+          "HostedZoneId": "Z14GRHDCWA56QT",
+          "DNSName": "chewbacca-alb01-130478073.ap-northeast-1.elb.amazonaws.com.",
+          "EvaluateTargetHealth": true
+        }
+      }
+    },
+    {
+      "Action": "DELETE",
+      "ResourceRecordSet": {
+        "Name": "app.givenchyops.com.",
+        "Type": "A",
+        "AliasTarget": {
+          "HostedZoneId": "Z14GRHDCWA56QT",
+          "DNSName": "chewbacca-alb01-130478073.ap-northeast-1.elb.amazonaws.com.",
+          "EvaluateTargetHealth": true
+        }
+      }
+    }
+  ]
+}

@@ -29,20 +29,32 @@ resource "aws_cloudfront_distribution" "chewbacca_cf01" {
 
   origin {
     origin_id   = "chewbacca-alb-origin01"
-    domain_name = "app.givenchyops.com"
+    domain_name = "alb-app.givenchyops.com" 
 
     custom_origin_config {
       http_port              = 80
       https_port             = 443
-      origin_protocol_policy = "match-viewer"
+      origin_protocol_policy = "https-only"
       origin_ssl_protocols   = ["TLSv1.2"]
+      origin_read_timeout      = 60  # Matches "Response timeout"
+      origin_keepalive_timeout = 60  # Matches "Keep-alive timeout"
     }
 
-    # Secret header for origin cloaking
     custom_header {
+      name  = "X-Chewbacca-Growl"  # ✅ Allowed header
+      value = var.custom_header_value
+      
+        # ADD THIS - Force Host header for SNI
+    /*custom_header {
+      name  = "Host"
+      value = "app.givenchyops.com"*/
+  }
+
+    # Secret header for origin cloaking
+    /*custom_header {
       name  = "X-Chewbacca-Growl"
       value = var.custom_header_value
-    }
+    }*/
   }
 
   default_cache_behavior {
@@ -54,7 +66,7 @@ resource "aws_cloudfront_distribution" "chewbacca_cf01" {
 
     # Lab 2B: Replace forwarded_values with cache/request policies
     cache_policy_id          = aws_cloudfront_cache_policy.chewbacca_cache_api_disabled01.id
-    origin_request_policy_id = aws_cloudfront_origin_request_policy.chewbacca_orp_default01.id
+    origin_request_policy_id = aws_cloudfront_origin_request_policy.chewbacca_orp_default01.id #"f65e65f8-d714-40dc-9b19-4b71a99efbf6"
     compress = true
   }
 
@@ -71,7 +83,7 @@ resource "aws_cloudfront_distribution" "chewbacca_cf01" {
 
     # Static content: Aggressive caching
     cache_policy_id            = aws_cloudfront_cache_policy.chewbacca_cache_static01.id
-    origin_request_policy_id   = aws_cloudfront_origin_request_policy.chewbacca_orp_static01.id
+    origin_request_policy_id   = aws_cloudfront_origin_request_policy.chewbacca_orp_static01.id   #"f65e65f8-d714-40dc-9b19-4b71a99efbf6"   
     #response_headers_policy_id = aws_cloudfront_response_headers_policy.chewbacca_response_headers01.id
 
     compress = true
@@ -87,13 +99,13 @@ resource "aws_cloudfront_distribution" "chewbacca_cf01" {
 
     # API: No caching (safe default)
     cache_policy_id          = aws_cloudfront_cache_policy.chewbacca_cache_api_disabled01.id
-    origin_request_policy_id = aws_cloudfront_origin_request_policy.chewbacca_orp_api01.id
+    origin_request_policy_id = aws_cloudfront_origin_request_policy.chewbacca_orp_api01.id  #"f65e65f8-d714-40dc-9b19-4b71a99efbf6"   #aws_cloudfront_origin_request_policy.chewbacca_orp_api01.id
 
     compress = true
   }
   
   # Attach WAF
-  #web_acl_id = aws_wafv2_web_acl.chewbacca_cf_waf01.arn
+   #web_acl_id = aws_wafv2_web_acl.chewbacca_cf_waf01.arn
 
   # Custom domains
   aliases = [

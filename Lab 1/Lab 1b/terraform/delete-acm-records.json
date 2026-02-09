@@ -1,0 +1,30 @@
+{
+  "Changes": [
+    {
+      "Action": "DELETE",
+      "ResourceRecordSet": {
+        "Name": "_ac40dcc7feb8532f73f6ab1434aaebaa.givenchyops.com.",
+        "Type": "CNAME",
+        "TTL": 60,
+        "ResourceRecords": [
+          {
+            "Value": "_41158c73ed86ac8d145ba32b2fc7b647.jkddzztszm.acm-validations.aws."
+          }
+        ]
+      }
+    },
+    {
+      "Action": "DELETE",
+      "ResourceRecordSet": {
+        "Name": "_3185d8f00df21cc48d4922882813f7df.app.givenchyops.com.",
+        "Type": "CNAME",
+        "TTL": 60,
+        "ResourceRecords": [
+          {
+            "Value": "_79e10db90bfff1a6372763e10365c48d.jkddzztszm.acm-validations.aws."
+          }
+        ]
+      }
+    }
+  ]
+}

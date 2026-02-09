@@ -2,8 +2,8 @@
 resource "aws_cloudwatch_log_group" "app" {
   name              = "/aws/ec2/lab1b-app"
   retention_in_days = 30
-  kms_key_id        = var.kms_key_arn
-  
+  kms_key_id        = aws_kms_key.logs.arn
+
   tags = {
     Name        = "${var.project_name}-app-logs"
     Project     = var.project_name
@@ -14,7 +14,7 @@ resource "aws_cloudwatch_log_group" "app" {
 # SNS Topic for Alarms (created here to avoid circular dependency)
 resource "aws_sns_topic" "alarms" {
   name = "${var.project_name}-monitoring-alarms"
-  
+
   tags = {
     Name        = "${var.project_name}-monitoring-alarms"
     Project     = var.project_name
@@ -27,7 +27,7 @@ resource "aws_cloudwatch_log_metric_filter" "db_connection_failure" {
   name           = "${var.project_name}-db-connection-failure"
   pattern        = "DB_CONNECTION_FAILURE"
   log_group_name = aws_cloudwatch_log_group.app.name
-  
+
   metric_transformation {
     name          = "DBConnectionFailureCount"
     namespace     = "Lab1b"
@@ -38,10 +38,11 @@ resource "aws_cloudwatch_log_metric_filter" "db_connection_failure" {
 
 # KMS Key for CloudWatch Logs encryption
 resource "aws_kms_key" "logs" {
-  description             = "KMS key for CloudWatch Logs encryption"
+  description             = "KMS key for CloudWatch Logs encryption - redeploy"
   deletion_window_in_days = 7
   enable_key_rotation     = true
-  
+
+
   policy = jsonencode({
     Version = "2012-10-17"
     Statement = [
@@ -76,9 +77,9 @@ resource "aws_kms_key" "logs" {
       }
     ]
   })
-  
+
   tags = {
-    Name        = "${var.project_name}-logs-kms"
+    Name        = "${var.project_name}-logs-kms-redeploy"
     Project     = var.project_name
     Environment = var.environment
   }
@@ -97,14 +98,14 @@ resource "aws_cloudwatch_metric_alarm" "db_connection_failure" {
   threshold           = "3"
   alarm_description   = "Triggers when database connection failures exceed threshold"
   treat_missing_data  = "notBreaching"
-  
+
   dimensions = {
     LogGroupName = aws_cloudwatch_log_group.app.name
   }
-  
+
   alarm_actions = [aws_sns_topic.alarms.arn]
   ok_actions    = [aws_sns_topic.alarms.arn]
-  
+
   tags = {
     Name        = "${var.project_name}-db-connection-failure-alarm"
     Project     = var.project_name
@@ -115,14 +116,14 @@ resource "aws_cloudwatch_metric_alarm" "db_connection_failure" {
 # CloudWatch Dashboard
 resource "aws_cloudwatch_dashboard" "main" {
   dashboard_name = "${var.project_name}-dashboard"
-  
+
   dashboard_body = jsonencode({
     widgets = [
       {
         type = "metric"
         properties = {
           metrics = [
-            ["Lab1b", "DBConnectionFailureCount", { "stat": "Sum" }]
+            ["Lab1b", "DBConnectionFailureCount", { "stat" : "Sum" }]
           ]
           period = 300
           stat   = "Sum"
@@ -156,4 +157,8 @@ resource "aws_cloudwatch_dashboard" "main" {
       }
     ]
   })
+}
+resource "aws_kms_alias" "logs" {
+  name          = "alias/${var.project_name}-logs-kms-redeploy"
+  target_key_id = aws_kms_key.logs.key_id
 }
