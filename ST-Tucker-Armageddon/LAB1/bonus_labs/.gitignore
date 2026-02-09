@@ -13,6 +13,7 @@
 # Terraform working directories (ALL levels)
 # ------------------------------------------------------------
 **/.terraform/
+.terraform/
 
 # ------------------------------------------------------------
 # Terraform state (NEVER commit)
