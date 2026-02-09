@@ -1,0 +1,8 @@
+{
+    "AttachedPolicies": [
+        {
+            "PolicyName": "armageddon-lab-1a-EC2ReadRDSSecret",
+            "PolicyArn": "arn:aws:iam::261519058382:policy/armageddon-lab-1a-EC2ReadRDSSecret"
+        }
+    ]
+}
