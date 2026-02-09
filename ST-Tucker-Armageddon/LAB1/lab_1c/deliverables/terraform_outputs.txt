@@ -1,0 +1,17 @@
+LAB-1C Deliverable: Terraform Outputs Evidence
+
+Date (YYYY-MM-DD):
+AWS Region:
+Lab Directory (envs/lab-1c):
+
+Commands:
+terraform output
+terraform output -json
+
+Record key outputs below (paste full output as needed):
+- vpc_id:
+- ec2_instance_id:
+- rds_endpoint:
+- log_group_name:
+- alarm_name:
+- sns_topic_arn:
