@@ -15,13 +15,13 @@ variable "env_prefix" {
 }
 
 
-variable "username" {
+variable "rds_username" {
   description = "RDS master username"
   type        = string
   sensitive   = true
 }
 
-variable "password" {
+variable "rds_password" {
   description = "RDS master password"
   type        = string
   sensitive   = true
@@ -38,7 +38,7 @@ variable "port" {
   default     = 3306
 }
 
-variable "dbname" {
+variable "db_name" {
   description = "Database name"
   type        = string
 }

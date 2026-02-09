@@ -3,7 +3,7 @@
 resource "aws_subnet" "public_a" {
   vpc_id = aws_vpc.main.id
   cidr_block       = var.public_subnet_cidr
-  availability_zone = var.avail_zone # Specify AZ
+  availability_zone = var.avail_zone_1 # Specify AZ
   map_public_ip_on_launch = true   # Allow public IPs to be assigned
 
   tags = {
@@ -13,8 +13,8 @@ resource "aws_subnet" "public_a" {
 ############# Private Subnets ##########################
 resource "aws_subnet" "private_a" {
   vpc_id = aws_vpc.main.id
-  cidr_block       = var.private_subnet_cidr
-  availability_zone = var.avail_zone  # Specify AZ
+  cidr_block       = var.private_subnet_cidr_1
+  availability_zone = var.avail_zone_1  # Specify AZ
   
 
   tags = {
@@ -22,4 +22,12 @@ resource "aws_subnet" "private_a" {
   }
 }
 ########################################################
-
+resource "aws_subnet" "private_c" {
+  vpc_id = aws_vpc.main.id
+  cidr_block       = var.private_subnet_cidr_2
+  availability_zone = var.avail_zone_2  # Specify AZ
+  
+  tags = {
+    Name = "${var.env_prefix}-private-subnet-1c"
+  }
+}

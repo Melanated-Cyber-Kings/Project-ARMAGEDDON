@@ -36,7 +36,12 @@ variable "project" {
   type = string
 }
 
-variable "avail_zone" {
+variable "avail_zone_1" {
+    description = "provider region, availability zone for resources"
+    type = string
+}
+
+variable "avail_zone_2" {
     description = "provider region, availability zone for resources"
     type = string
 }
@@ -46,7 +51,12 @@ variable "public_subnet_cidr" {
   type = string
 }
 
-variable "private_subnet_cidr" {
+variable "private_subnet_cidr_1" {
+  description = "private subnet cidr range"
+  type = string
+}
+
+variable "private_subnet_cidr_2" {
   description = "private subnet cidr range"
   type = string
 }
@@ -60,3 +70,28 @@ variable "instance_type" {
   type        = string
   description = "The type of EC2 instance to launch"
 } 
+
+# variable "db_name" {
+#   description = "Initial database name."
+#   type        = string
+# }
+
+# variable "db_username" {
+#   description = "DB master username (students should use Secrets Manager in 1B/1C)."
+#   type        = string
+# }
+
+# variable "db_password" {
+#   description = "DB master password (DO NOT hardcode in real life; for lab only)."
+#   type        = string
+#   sensitive   = true
+# }
+
+variable "instance_profile_name" {
+  description = "The IAM instance profile name to attach to the EC2"
+  type        = string
+}
+
+variable "kms_key_arn" {
+  type = string
+}

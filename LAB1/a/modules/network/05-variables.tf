@@ -26,12 +26,22 @@ variable "public_subnet_cidr" {
   type = string
 }
 ############################################################
-variable "private_subnet_cidr" {
+variable "private_subnet_cidr_1" {
   description = "private subnet cidr range"
   type = string
 }
 ############################################################
-variable "avail_zone" {
+variable "private_subnet_cidr_2" {
+  description = "private subnet cidr range"
+  type = string
+}
+############################################################
+variable "avail_zone_1" {
+    description = "availability zones for subnets"
+    type = string
+}
+############################################################
+variable "avail_zone_2" {
     description = "availability zones for subnets"
     type = string
 }

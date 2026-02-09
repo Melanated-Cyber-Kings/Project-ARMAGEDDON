@@ -20,3 +20,23 @@ variable "instance_profile_name" {
   description = "IAM instance profile name for EC2"
   type        = string
 }
+
+variable "rds_host" {
+  description = "RDS endpoint"
+  type        = string
+}
+
+variable "secret_id" {
+  description = "Secrets Manager secret ID"
+  type        = string
+}
+
+variable "region" {
+  description = "AWS region"
+  type        = string
+}
+
+variable "user_data_path" {
+  description = "Path to EC2 user_data script"
+  type        = string
+}

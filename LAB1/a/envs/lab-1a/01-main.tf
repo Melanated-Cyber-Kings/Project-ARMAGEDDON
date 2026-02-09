@@ -8,10 +8,12 @@ module "vpc" {
   source = "../../modules/network"
 
   vpc_cidr_block  = var.vpc_cidr_block
-  public_subnet_cidr  = var.public_subnet_cidr
-  private_subnet_cidr = var.private_subnet_cidr
+  public_subnet_cidr = var.public_subnet_cidr
+  private_subnet_cidr_1 = var.private_subnet_cidr_1
+  private_subnet_cidr_2 = var.private_subnet_cidr_2
   env_prefix      = local.name_prefix
-  avail_zone = var.avail_zone
+  avail_zone_1 = var.avail_zone_1
+  avail_zone_2 = var.avail_zone_2
   rtb_public_cidr = var.rtb_public_cidr  
 
 }
@@ -27,6 +29,15 @@ module "security" {
   }
 }
 ######################################################################################
+module "iam" {
+  source     = "../../modules/iam"
+  region     = var.region
+  account_id = var.account_id
+  env_prefix = local.name_prefix
+  kms_key_arn = var.kms_key_arn
+}
+
+######################################################################################
 module "ec2" {
   source             = "../../modules/ec2"
   env_prefix         = local.name_prefix
@@ -34,16 +45,13 @@ module "ec2" {
   instance_type      = var.instance_type
   security_group_ids  = [module.security.ec2_sg_id]
   instance_profile_name  = module.iam.instance_profile_name
+   # ✅ PASS VALUES INTO EC2 MODULE
+  rds_host  = module.rds.db_endpoint
+  secret_id = data.aws_secretsmanager_secret.rds.id
+  region = var.region
+  user_data_path = "${path.root}/scripts/user_data.sh.tpl"
+  depends_on = [module.iam]  # <-- ensures IAM exists first
 }
-
-######################################################################################
-module "iam" {
-  source     = "../../modules/iam"
-  region     = var.region
-  account_id = var.account_id
-  env_prefix = local.name_prefix
-}
-
 ######################################################################################
 module "rds" {
   source = "../../modules/rds"

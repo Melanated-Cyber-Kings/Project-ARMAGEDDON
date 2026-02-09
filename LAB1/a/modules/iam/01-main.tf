@@ -12,6 +12,25 @@ resource "aws_iam_role" "ec2_secrets_role" {
   })
 }
 
+resource "aws_iam_role_policy" "ec2_policy" {
+  name = "ec2_policy"
+  role = aws_iam_role.ec2_secrets_role.id
+
+  # Terraform's "jsonencode" function converts a
+  # Terraform expression result to valid JSON syntax.
+  policy = jsonencode({
+    Version = "2012-10-17"
+    Statement = [
+      {
+        Action = [
+          "ec2:Describe*",
+        ]
+        Effect   = "Allow"
+        Resource = "*"
+      },
+    ]
+  })
+}
 # Custom Policy to read Secrets Manager secret
 resource "aws_iam_policy" "ec2_secrets_policy" {
   name        = "${var.env_prefix}-EC2ReadRDSSecret"
@@ -22,8 +41,16 @@ resource "aws_iam_policy" "ec2_secrets_policy" {
       {
         Sid    = "ReadSpecificSecret"
         Effect = "Allow"
-        Action = ["secretsmanager:GetSecretValue"]
-        Resource = "arn:aws:secretsmanager:${var.region}:${var.account_id}:secret:${var.env_prefix}/rds/mysql*"
+        Action = ["secretsmanager:GetSecretValue",
+                  "secretsmanager:DescribeSecret"
+        ]
+        Resource = "arn:aws:secretsmanager:${var.region}:${var.account_id}:secret:lab-1a/rds/mysql*"
+      },
+      {
+        Sid    = "AllowKMSDecrypt"
+        Effect = "Allow"
+        Action = "kms:Decrypt"
+        Resource = var.kms_key_arn
       }
     ]
   })

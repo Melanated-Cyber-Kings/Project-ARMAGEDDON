@@ -14,10 +14,10 @@ resource "aws_secretsmanager_secret_version" "rds_secret_version" {
   secret_id = aws_secretsmanager_secret.rds_secret.id
 
   secret_string = jsonencode({
-    username = var.username
-    password = var.password
+    username = var.rds_username
+    password = var.rds_password
     #host     = var.address
     port     = var.port
-    dbname   = var.dbname
+    dbname   = var.db_name
   })
 }
