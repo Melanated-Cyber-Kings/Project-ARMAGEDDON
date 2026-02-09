@@ -65,17 +65,11 @@ git checkout -b Shawn-Mosby-Armageddon-Branch
 ```bash
 git checkout -b Cameron-Cleveland-Armageddon-Branch
 ```
-```bash
-git checkout -b Campanella-Godfrey-Jr-Armageddon-Branch
-```
-```bash
-git checkout -b Alastair-Davis-Armageddon-Branch
-```
+
 
 <br>
    
 5. Create Readme.md files in each folder you created above this will be the file that you will document your Armageddon Labs in and that will be presented to THEO, so make sure it's readable and that someone who wouldnt know how to do the homework/project can follow with little to no difficulty.
-
 
 
 <br>
