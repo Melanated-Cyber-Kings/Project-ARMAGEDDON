@@ -1,0 +1,12 @@
+{
+  "tokyo_rds": [
+    {
+      "region": "ap-northeast-1",
+      "id": "chewbacca-mysql",
+      "az": "ap-northeast-1d",
+      "endpoint": "chewbacca-mysql.cp4248amufw3.ap-northeast-1.rds.amazonaws.com"
+    }
+  ],
+  "saopaulo_rds": [],
+  "assertion": "PASS"
+}

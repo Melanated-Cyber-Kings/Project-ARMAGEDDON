@@ -1,0 +1,229 @@
+{
+  "tokyo": {
+    "region": "ap-northeast-1",
+    "transit_gateways": [
+      {
+        "TransitGatewayId": "tgw-07de96f77ea2bc528",
+        "TransitGatewayArn": "arn:aws:ec2:ap-northeast-1:867344469617:transit-gateway/tgw-07de96f77ea2bc528",
+        "State": "available",
+        "OwnerId": "867344469617",
+        "Description": "Tokyo Hub Transit Gateway V2",
+        "CreationTime": "2026-02-09 02:53:12+00:00",
+        "Options": {
+          "AmazonSideAsn": 64512,
+          "AutoAcceptSharedAttachments": "disable",
+          "DefaultRouteTableAssociation": "enable",
+          "AssociationDefaultRouteTableId": "tgw-rtb-03a5b7adbf78bb8e7",
+          "DefaultRouteTablePropagation": "enable",
+          "PropagationDefaultRouteTableId": "tgw-rtb-03a5b7adbf78bb8e7",
+          "VpnEcmpSupport": "enable",
+          "DnsSupport": "enable",
+          "SecurityGroupReferencingSupport": "disable",
+          "MulticastSupport": "disable",
+          "EncryptionSupport": {
+            "EncryptionState": "disabled"
+          }
+        },
+        "Tags": [
+          {
+            "Key": "Project",
+            "Value": "Chewbacca-Medical"
+          },
+          {
+            "Key": "Environment",
+            "Value": "Lab3A"
+          },
+          {
+            "Key": "Region",
+            "Value": "tokyo"
+          },
+          {
+            "Key": "Owner",
+            "Value": "Student"
+          },
+          {
+            "Key": "Name",
+            "Value": "shinjuku-hub-tgw-v3"
+          }
+        ]
+      }
+    ],
+    "attachments": [
+      {
+        "TransitGatewayAttachmentId": "tgw-attach-0c099631d2f77f5d1",
+        "TransitGatewayId": "tgw-07de96f77ea2bc528",
+        "TransitGatewayOwnerId": "867344469617",
+        "ResourceOwnerId": "867344469617",
+        "ResourceType": "peering",
+        "ResourceId": "tgw-005bb716f7fe4382c",
+        "State": "available",
+        "Association": {
+          "TransitGatewayRouteTableId": "tgw-rtb-03a5b7adbf78bb8e7",
+          "State": "associated"
+        },
+        "CreationTime": "2026-02-09 03:04:47+00:00",
+        "Tags": []
+      },
+      {
+        "TransitGatewayAttachmentId": "tgw-attach-0c96fe631df34f639",
+        "TransitGatewayId": "tgw-07de96f77ea2bc528",
+        "TransitGatewayOwnerId": "867344469617",
+        "ResourceOwnerId": "867344469617",
+        "ResourceType": "vpc",
+        "ResourceId": "vpc-0df1cebba33142153",
+        "State": "available",
+        "Association": {
+          "TransitGatewayRouteTableId": "tgw-rtb-0aea4c46f224b5da5",
+          "State": "associated"
+        },
+        "CreationTime": "2026-02-09 02:54:10+00:00",
+        "Tags": [
+          {
+            "Key": "Project",
+            "Value": "Chewbacca-Medical"
+          },
+          {
+            "Key": "Environment",
+            "Value": "Lab3A"
+          },
+          {
+            "Key": "Region",
+            "Value": "tokyo"
+          },
+          {
+            "Key": "Owner",
+            "Value": "Student"
+          },
+          {
+            "Key": "Name",
+            "Value": "shinjuku-tgw-attachment1"
+          }
+        ]
+      }
+    ]
+  },
+  "saopaulo": {
+    "region": "sa-east-1",
+    "transit_gateways": [
+      {
+        "TransitGatewayId": "tgw-005bb716f7fe4382c",
+        "TransitGatewayArn": "arn:aws:ec2:sa-east-1:867344469617:transit-gateway/tgw-005bb716f7fe4382c",
+        "State": "available",
+        "OwnerId": "867344469617",
+        "Description": "Sao Paulo Spoke Transit Gateway",
+        "CreationTime": "2026-02-09 03:03:48+00:00",
+        "Options": {
+          "AmazonSideAsn": 64513,
+          "AutoAcceptSharedAttachments": "disable",
+          "DefaultRouteTableAssociation": "enable",
+          "AssociationDefaultRouteTableId": "tgw-rtb-05265521932a7c69e",
+          "DefaultRouteTablePropagation": "enable",
+          "PropagationDefaultRouteTableId": "tgw-rtb-05265521932a7c69e",
+          "VpnEcmpSupport": "enable",
+          "DnsSupport": "enable",
+          "SecurityGroupReferencingSupport": "disable",
+          "MulticastSupport": "disable",
+          "EncryptionSupport": {
+            "EncryptionState": "disabled"
+          }
+        },
+        "Tags": [
+          {
+            "Key": "Project",
+            "Value": "Chewbacca-Medical"
+          },
+          {
+            "Key": "Environment",
+            "Value": "Lab3A"
+          },
+          {
+            "Key": "Region",
+            "Value": "sao-paulo"
+          },
+          {
+            "Key": "Owner",
+            "Value": "Student"
+          },
+          {
+            "Key": "Name",
+            "Value": "liberdade-spoke-tgw1"
+          }
+        ]
+      }
+    ],
+    "attachments": [
+      {
+        "TransitGatewayAttachmentId": "tgw-attach-0c099631d2f77f5d1",
+        "TransitGatewayId": "tgw-005bb716f7fe4382c",
+        "TransitGatewayOwnerId": "867344469617",
+        "ResourceOwnerId": "867344469617",
+        "ResourceType": "peering",
+        "ResourceId": "tgw-07de96f77ea2bc528",
+        "State": "available",
+        "Association": {
+          "TransitGatewayRouteTableId": "tgw-rtb-05265521932a7c69e",
+          "State": "associated"
+        },
+        "CreationTime": "2026-02-09 03:04:24+00:00",
+        "Tags": [
+          {
+            "Key": "Project",
+            "Value": "Chewbacca-Medical"
+          },
+          {
+            "Key": "Environment",
+            "Value": "Lab3A"
+          },
+          {
+            "Key": "Region",
+            "Value": "sao-paulo"
+          },
+          {
+            "Key": "Owner",
+            "Value": "Student"
+          },
+          {
+            "Key": "Name",
+            "Value": "liberdade-to-shinjuku-peering1"
+          }
+        ]
+      },
+      {
+        "TransitGatewayAttachmentId": "tgw-attach-0b99e4e2b6c3212a3",
+        "TransitGatewayId": "tgw-005bb716f7fe4382c",
+        "TransitGatewayOwnerId": "867344469617",
+        "ResourceOwnerId": "867344469617",
+        "ResourceType": "vpc",
+        "ResourceId": "vpc-0e22e2431f790e7eb",
+        "State": "available",
+        "Association": {
+          "TransitGatewayRouteTableId": "tgw-rtb-05265521932a7c69e",
+          "State": "associated"
+        },
+        "CreationTime": "2026-02-09 03:04:25+00:00",
+        "Tags": [
+          {
+            "Key": "Project",
+            "Value": "Chewbacca-Medical"
+          },
+          {
+            "Key": "Environment",
+            "Value": "Lab3A"
+          },
+          {
+            "Key": "Region",
+            "Value": "sao-paulo"
+          },
+          {
+            "Key": "Owner",
+            "Value": "Student"
+          },
+          {
+            "Key": "Name",
+            "Value": "liberdade-tgw-attachment1"
+          }
+        ]
+      }
+    ]
+  }
+}

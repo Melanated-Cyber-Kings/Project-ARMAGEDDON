@@ -1,0 +1,4 @@
+#ssh_key_name = "your-ssh-key-name"
+# tokyo_vpc_cidr = "10.100.0.0/16"
+# tokyo_tgw_id = "tgw-xxxxxxxx"
+# tokyo_tgw_route_table_id = "tgw-rtb-xxxxxxxx"
