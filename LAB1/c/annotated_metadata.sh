@@ -2,7 +2,7 @@
 # This line above tells the system to use the bash shell to run this script
 # The "#!" is called a "shebang" - it's like saying "use this program to run what follows"
 
-####################################################################
+#################################################################### 
 # This section installs the needed software and sets it up
 ####################################################################
 

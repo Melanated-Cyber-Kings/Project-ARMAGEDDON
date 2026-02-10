@@ -3,6 +3,7 @@
 # Subnets (Public + Private)
 ############################################
 
+
 # Explanation: Public subnets are like docking bays—ships can land directly from space (internet).
 resource "aws_subnet" "public_subnets" {
   count                   = length(var.public_subnet_cidrs)

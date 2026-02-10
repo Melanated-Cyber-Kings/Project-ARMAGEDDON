@@ -1,4 +1,4 @@
-# Explanation: Outputs are your mission report—what got built and where to find it.
+# Explanation: Outputs are your mission report—what got built and where to find it. 
 output "vpc_id" {
   value = aws_vpc.lab1_vpc01.id
 }

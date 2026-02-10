@@ -2,7 +2,7 @@
 # # SNS (PagerDuty simulation)
 # ############################################
 
-# Explanation: SNS is the distress beacon—when the DB dies, the galaxy (your inbox) must hear about it.
+# Explanation: SNS is the distress beacon—when the DB dies, the galaxy (your inbox) must hear about it.  
 resource "aws_sns_topic" "sns_topic01" {
   name = "${local.name_prefix}-db-incidents"
 }

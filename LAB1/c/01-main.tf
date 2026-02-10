@@ -1,5 +1,5 @@
 ############################################
-# Locals (naming convention: Chewbacca-*)
+# Locals (naming convention: Chewbacca-*) 
 ############################################
 locals {
   name_prefix = var.project_name

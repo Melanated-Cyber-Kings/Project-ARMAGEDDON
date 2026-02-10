@@ -5,7 +5,7 @@ locals {
   endpoint_services = ["ssm", "ssmmessages", "ec2messages", "logs", "secretsmanager"]
 }
 
-# Dynamically look up the full service name for each
+#  Dynamically look up the full service name for each
 data "aws_vpc_endpoint_service" "this" {
   for_each = toset(local.endpoint_services)
   service      = each.value

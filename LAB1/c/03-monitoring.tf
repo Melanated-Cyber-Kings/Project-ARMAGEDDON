@@ -1,6 +1,6 @@
 # ############################################
 # # CloudWatch Logs (Log Group)
-# ############################################
+# ############################################ 
 
 # Explanation: When the Falcon is on fire, logs tell you *which* wire sparked—ship them centrally.
 resource "aws_cloudwatch_log_group" "log_group01" {

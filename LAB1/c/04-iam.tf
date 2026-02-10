@@ -1,6 +1,6 @@
 ############################################
 # IAM Role + Instance Profile for EC2
-############################################
+############################################ 
 
 # Explanation: this role lets EC2 assume permissions safely.
 resource "aws_iam_role" "ec2_role01" {

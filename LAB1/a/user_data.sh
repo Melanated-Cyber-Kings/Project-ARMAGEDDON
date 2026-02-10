@@ -3,6 +3,7 @@ dnf update -y
 dnf install -y python3-pip
 pip3 install flask pymysql boto3
 
+
 mkdir -p /opt/rdsapp
 cat >/opt/rdsapp/app.py <<'PY'
 import json

@@ -2,6 +2,7 @@ provider "aws" {
   region = var.aws_region
 }
 
+
 # versions.tf here insteasd of versions.tf file
 terraform {
   required_version = ">= 1.5.0"

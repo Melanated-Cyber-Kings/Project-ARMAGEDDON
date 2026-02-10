@@ -2,7 +2,7 @@
 # # Secrets Manager (DB Credentials)
 # ############################################
 
-# Explanation: Secrets Manager is Chewbacca’s locked holster—credentials go here, not in code.
+# Explanation: Secrets Manager is Chewbacca’s locked holster—credentials go here, not in code. 
 resource "aws_secretsmanager_secret" "db_secret01" {
   name = var.secret_name
   recovery_window_in_days = 0

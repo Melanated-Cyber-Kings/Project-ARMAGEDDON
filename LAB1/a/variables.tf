@@ -4,6 +4,7 @@ variable "aws_region" {
   default     = "us-east-1"
 }
 
+
 variable "project_name" {
   description = "Prefix for naming convention."
   type        = string

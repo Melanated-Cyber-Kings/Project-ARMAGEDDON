@@ -7,7 +7,7 @@ pip3 install flask pymysql boto3
 
 mkdir -p /opt/rdsapp
 
-# 1) Write the app code
+# 1) Write the app code 
 cat >/opt/rdsapp/app.py <<'PY'
 import json
 import os

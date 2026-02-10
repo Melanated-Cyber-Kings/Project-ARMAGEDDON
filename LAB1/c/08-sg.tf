@@ -4,7 +4,7 @@
 # Design goals
 #   EC2 is private (no public IP)
 #   No SSH required (use SSM Session Manager)
-#   Private subnets don’t need NAT to talk to AWS control-plane services
+#   Private subnets don’t need NAT to talk to AWS control-plane services 
 #   Use VPC Interface Endpoints for:
 #     SSM, EC2Messages, SSMMessages (Session Manager)
 #     CloudWatch Logs

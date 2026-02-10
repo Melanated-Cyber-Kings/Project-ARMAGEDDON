@@ -1,5 +1,5 @@
 
-# VPC Endpoint Security Group
+# VPC Endpoint Security Group 
 resource "aws_security_group" "vpc_endpoints" {
   name        = "vpc-endpoints-sg"
   description = "Security group for all VPC Interface Endpoints"
