@@ -1,0 +1,166 @@
+{
+    "Reservations": [
+        {
+            "ReservationId": "r-0ebbdc3dc2cd08227",
+            "OwnerId": "420228061920",
+            "Groups": [],
+            "Instances": [
+                {
+                    "Architecture": "x86_64",
+                    "BlockDeviceMappings": [
+                        {
+                            "DeviceName": "/dev/xvda",
+                            "Ebs": {
+                                "AttachTime": "2026-01-20T22:28:05+00:00",
+                                "DeleteOnTermination": true,
+                                "Status": "attached",
+                                "VolumeId": "vol-0d2aeb8936ac09f0a"
+                            }
+                        }
+                    ],
+                    "ClientToken": "terraform-20260120222803134700000004",
+                    "EbsOptimized": false,
+                    "EnaSupport": true,
+                    "Hypervisor": "xen",
+                    "IamInstanceProfile": {
+                        "Arn": "arn:aws:iam::420228061920:instance-profile/armageddon-class-vii-instance-profile01",
+                        "Id": "AIPAWDV4LLLQCLKNXUKQK"
+                    },
+                    "NetworkInterfaces": [
+                        {
+                            "Association": {
+                                "IpOwnerId": "amazon",
+                                "PublicDnsName": "ec2-3-237-99-60.compute-1.amazonaws.com",
+                                "PublicIp": "3.237.99.60"
+                            },
+                            "Attachment": {
+                                "AttachTime": "2026-01-20T22:28:04+00:00",
+                                "AttachmentId": "eni-attach-0bede70a4f3b99024",
+                                "DeleteOnTermination": true,
+                                "DeviceIndex": 0,
+                                "Status": "attached",
+                                "NetworkCardIndex": 0
+                            },
+                            "Description": "",
+                            "Groups": [
+                                {
+                                    "GroupId": "sg-0b0def7b115ce9f70",
+                                    "GroupName": "armageddon-class-vii-ec2-sg01"
+                                }
+                            ],
+                            "Ipv6Addresses": [],
+                            "MacAddress": "02:8a:9a:0f:3d:15",
+                            "NetworkInterfaceId": "eni-0bcf5940deb8927b0",
+                            "OwnerId": "420228061920",
+                            "PrivateDnsName": "ip-172-17-1-42.ec2.internal",
+                            "PrivateIpAddress": "172.17.1.42",
+                            "PrivateIpAddresses": [
+                                {
+                                    "Association": {
+                                        "IpOwnerId": "amazon",
+                                        "PublicDnsName": "ec2-3-237-99-60.compute-1.amazonaws.com",
+                                        "PublicIp": "3.237.99.60"
+                                    },
+                                    "Primary": true,
+                                    "PrivateDnsName": "ip-172-17-1-42.ec2.internal",
+                                    "PrivateIpAddress": "172.17.1.42"
+                                }
+                            ],
+                            "SourceDestCheck": true,
+                            "Status": "in-use",
+                            "SubnetId": "subnet-0fc6b2e4eddcadeeb",
+                            "VpcId": "vpc-03310ba9c24a2cf5a",
+                            "InterfaceType": "interface",
+                            "Operator": {
+                                "Managed": false
+                            }
+                        }
+                    ],
+                    "RootDeviceName": "/dev/xvda",
+                    "RootDeviceType": "ebs",
+                    "SecurityGroups": [
+                        {
+                            "GroupId": "sg-0b0def7b115ce9f70",
+                            "GroupName": "armageddon-class-vii-ec2-sg01"
+                        }
+                    ],
+                    "SourceDestCheck": true,
+                    "Tags": [
+                        {
+                            "Key": "Name",
+                            "Value": "armageddon-class-vii-ec201"
+                        }
+                    ],
+                    "VirtualizationType": "hvm",
+                    "CpuOptions": {
+                        "CoreCount": 1,
+                        "ThreadsPerCore": 2
+                    },
+                    "CapacityReservationSpecification": {
+                        "CapacityReservationPreference": "open"
+                    },
+                    "HibernationOptions": {
+                        "Configured": false
+                    },
+                    "MetadataOptions": {
+                        "State": "applied",
+                        "HttpTokens": "required",
+                        "HttpPutResponseHopLimit": 2,
+                        "HttpEndpoint": "enabled",
+                        "HttpProtocolIpv6": "disabled",
+                        "InstanceMetadataTags": "disabled"
+                    },
+                    "EnclaveOptions": {
+                        "Enabled": false
+                    },
+                    "BootMode": "uefi-preferred",
+                    "PlatformDetails": "Linux/UNIX",
+                    "UsageOperation": "RunInstances",
+                    "UsageOperationUpdateTime": "2026-01-20T22:28:04+00:00",
+                    "PrivateDnsNameOptions": {
+                        "HostnameType": "ip-name",
+                        "EnableResourceNameDnsARecord": false,
+                        "EnableResourceNameDnsAAAARecord": false
+                    },
+                    "MaintenanceOptions": {
+                        "AutoRecovery": "default",
+                        "RebootMigration": "default"
+                    },
+                    "CurrentInstanceBootMode": "uefi",
+                    "NetworkPerformanceOptions": {
+                        "BandwidthWeighting": "default"
+                    },
+                    "Operator": {
+                        "Managed": false
+                    },
+                    "InstanceId": "i-02390a743e3afa588",
+                    "ImageId": "ami-0bdd88bd06d16ba03",
+                    "State": {
+                        "Code": 16,
+                        "Name": "running"
+                    },
+                    "PrivateDnsName": "ip-172-17-1-42.ec2.internal",
+                    "PublicDnsName": "ec2-3-237-99-60.compute-1.amazonaws.com",
+                    "StateTransitionReason": "",
+                    "AmiLaunchIndex": 0,
+                    "ProductCodes": [],
+                    "InstanceType": "t3.micro",
+                    "LaunchTime": "2026-01-20T22:28:04+00:00",
+                    "Placement": {
+                        "AvailabilityZoneId": "use1-az1",
+                        "GroupName": "",
+                        "Tenancy": "default",
+                        "AvailabilityZone": "us-east-1a"
+                    },
+                    "Monitoring": {
+                        "State": "disabled"
+                    },
+                    "SubnetId": "subnet-0fc6b2e4eddcadeeb",
+                    "VpcId": "vpc-03310ba9c24a2cf5a",
+                    "PrivateIpAddress": "172.17.1.42",
+                    "PublicIpAddress": "3.237.99.60"
+                }
+            ]
+        }
+    ]
+}

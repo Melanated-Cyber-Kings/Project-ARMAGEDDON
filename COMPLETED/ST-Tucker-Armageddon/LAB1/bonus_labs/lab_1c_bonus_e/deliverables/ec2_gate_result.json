@@ -1,0 +1,22 @@
+
+{
+  "gate": "secrets_and_role",
+  "timestamp_utc": "2026-02-06T18:50:08Z",
+  "region": "ap-northeast-1",
+  "instance_id": "i-0c383ff79071f0dfe",
+  "secret_id": "lab-1c/rds/mysql",
+  "resolved_instance_profile_arn": "arn:aws:iam::261519058382:instance-profile/lab-1c-ec2-secrets-profile",
+  "resolved_role_name": "lab-1c-ec2-secrets-role",
+  "caller_arn": "arn:aws:sts::261519058382:assumed-role/lab-1c-ec2-secrets-role/i-0c383ff79071f0dfe",
+  "toggles": {
+    "require_rotation": true,
+    "check_secret_policy_wildcard": true,
+    "check_secret_value_read": true
+  },
+  "status": "PASS",
+  "exit_code": 0,
+  "details": [
+"PASS: aws sts get-caller-identity succeeded (credentials OK).\nPASS: secret exists and is describable (lab-1c/rds/mysql).\nPASS: secret rotation enabled (lab-1c/rds/mysql).\nPASS: no resource policy found (OK) or not applicable (lab-1c/rds/mysql).\nPASS: instance has IAM instance profile attached (i-0c383ff79071f0dfe).\nPASS: resolved instance profile -> role (lab-1c-ec2-secrets-profile -> lab-1c-ec2-secrets-role).\nPASS: resolved role matches EXPECTED_ROLE_NAME (lab-1c-ec2-secrets-role).\nPASS: current caller is running as expected role (lab-1c-ec2-secrets-role).\nPASS: on-instance role can describe secret (lab-1c/rds/mysql).\nPASS: on-instance role can read secret value (lab-1c/rds/mysql) (value not printed)."],
+  "warnings": [],
+  "failures": []
+}
