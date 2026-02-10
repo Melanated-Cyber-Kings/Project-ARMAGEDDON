@@ -1,0 +1,785 @@
+Verification commands (CLI) for Bonus-B
+
+ALB exists and is active
+
+aws elbv2 describe-load-balancers
+--names chewbacca-alb01
+--query "LoadBalancers[0].State.Code"
+
+    "LoadBalancers": [
+        {
+            "LoadBalancerArn": "arn:aws:elasticloadbalancing:ap-northeast-1:620812304994:loadbalancer/app/lew-alb01/5bacfef0e722326b",
+            "DNSName": "lew-alb01-604473024.ap-northeast-1.elb.amazonaws.com",
+            "CanonicalHostedZoneId": "Z14GRHDCWA56QT",
+            "CreatedTime": "2026-01-24T02:22:32.854000+00:00",
+            "LoadBalancerName": "lew-alb01",
+            "Scheme": "internet-facing",
+            "VpcId": "vpc-0e69c2a5e1fea450c",
+            "State": {
+                "Code": "active"
+            },
+            "Type": "application",
+            "AvailabilityZones": [
+                {
+                    "ZoneName": "ap-northeast-1a",
+                    "SubnetId": "subnet-009458617990398dc",
+                    "LoadBalancerAddresses": []
+                },
+                {
+                    "ZoneName": "ap-northeast-1c",
+:...skipping...
+{
+    "LoadBalancers": [
+        {
+            "LoadBalancerArn": "arn:aws:elasticloadbalancing:ap-northeast-1:620812304994:loadbalancer/app/lew-alb01/5bacfef0e722326b",
+            "DNSName": "lew-alb01-604473024.ap-northeast-1.elb.amazonaws.com",
+            "CanonicalHostedZoneId": "Z14GRHDCWA56QT",
+            "CreatedTime": "2026-01-24T02:22:32.854000+00:00",
+            "LoadBalancerName": "lew-alb01",
+            "Scheme": "internet-facing",
+            "VpcId": "vpc-0e69c2a5e1fea450c",
+            "State": {
+                "Code": "active"
+            },
+            "Type": "application",
+            "AvailabilityZones": [
+                {
+                    "ZoneName": "ap-northeast-1a",
+                    "SubnetId": "subnet-009458617990398dc",
+                    "LoadBalancerAddresses": []
+                },
+                {
+                    "ZoneName": "ap-northeast-1c",
+                    "SubnetId": "subnet-0825f48986e3bb5df",
+:
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+{
+    "LoadBalancers": [
+        {
+            "LoadBalancerArn": "arn:aws:elasticloadbalancing:ap-northeast-1:620812304994:loadbalancer/app/lew-alb01/5bacfef0e722326b",
+            "DNSName": "lew-alb01-604473024.ap-northeast-1.elb.amazonaws.com",
+            "CanonicalHostedZoneId": "Z14GRHDCWA56QT",
+            "CreatedTime": "2026-01-24T02:22:32.854000+00:00",
+            "LoadBalancerName": "lew-alb01",
+            "Scheme": "internet-facing",
+            "VpcId": "vpc-0e69c2a5e1fea450c",
+            "State": {
+                "Code": "active"
+            },
+            "Type": "application",
+            "AvailabilityZones": [
+                {
+                    "ZoneName": "ap-northeast-1a",
+                    "SubnetId": "subnet-009458617990398dc",
+                    "LoadBalancerAddresses": []
+                },
+                {
+                    "ZoneName": "ap-northeast-1c",
+                    "SubnetId": "subnet-0825f48986e3bb5df",
+:...skipping...
+{
+    "LoadBalancers": [
+        {
+            "LoadBalancerArn": "arn:aws:elasticloadbalancing:ap-northeast-1:620812304994:loadbalancer/app/lew-alb01/5bacfef0e722326b",
+            "DNSName": "lew-alb01-604473024.ap-northeast-1.elb.amazonaws.com",
+            "CanonicalHostedZoneId": "Z14GRHDCWA56QT",
+            "CreatedTime": "2026-01-24T02:22:32.854000+00:00",
+            "LoadBalancerName": "lew-alb01",
+            "Scheme": "internet-facing",
+            "VpcId": "vpc-0e69c2a5e1fea450c",
+            "State": {
+                "Code": "active"
+            },
+            "Type": "application",
+            "AvailabilityZones": [
+                {
+                    "ZoneName": "ap-northeast-1a",
+                    "SubnetId": "subnet-009458617990398dc",
+                    "LoadBalancerAddresses": []
+                },
+                {
+                    "ZoneName": "ap-northeast-1c",
+                    "SubnetId": "subnet-0825f48986e3bb5df",
+                    "LoadBalancerAddresses": []
+:...skipping...
+{
+    "LoadBalancers": [
+        {
+            "LoadBalancerArn": "arn:aws:elasticloadbalancing:ap-northeast-1:620812304994:loadbalancer/app/lew-alb01/5bacfef0e722326b",
+            "DNSName": "lew-alb01-604473024.ap-northeast-1.elb.amazonaws.com",
+            "CanonicalHostedZoneId": "Z14GRHDCWA56QT",
+            "CreatedTime": "2026-01-24T02:22:32.854000+00:00",
+            "LoadBalancerName": "lew-alb01",
+            "Scheme": "internet-facing",
+            "VpcId": "vpc-0e69c2a5e1fea450c",
+            "State": {
+                "Code": "active"
+            },
+            "Type": "application",
+            "AvailabilityZones": [
+                {
+                    "ZoneName": "ap-northeast-1a",
+                    "SubnetId": "subnet-009458617990398dc",
+                    "LoadBalancerAddresses": []
+                },
+                {
+                    "ZoneName": "ap-northeast-1c",
+                    "SubnetId": "subnet-0825f48986e3bb5df",
+                    "LoadBalancerAddresses": []
+                }
+:...skipping...
+{
+    "LoadBalancers": [
+        {
+            "LoadBalancerArn": "arn:aws:elasticloadbalancing:ap-northeast-1:620812304994:loadbalancer/app/lew-alb01/5bacfef0e722326b",
+            "DNSName": "lew-alb01-604473024.ap-northeast-1.elb.amazonaws.com",
+            "CanonicalHostedZoneId": "Z14GRHDCWA56QT",
+            "CreatedTime": "2026-01-24T02:22:32.854000+00:00",
+            "LoadBalancerName": "lew-alb01",
+            "Scheme": "internet-facing",
+            "VpcId": "vpc-0e69c2a5e1fea450c",
+            "State": {
+                "Code": "active"
+            },
+            "Type": "application",
+            "AvailabilityZones": [
+                {
+                    "ZoneName": "ap-northeast-1a",
+                    "SubnetId": "subnet-009458617990398dc",
+                    "LoadBalancerAddresses": []
+                },
+                {
+                    "ZoneName": "ap-northeast-1c",
+                    "SubnetId": "subnet-0825f48986e3bb5df",
+                    "LoadBalancerAddresses": []
+                }
+            ],
+:...skipping...
+{
+    "LoadBalancers": [
+        {
+            "LoadBalancerArn": "arn:aws:elasticloadbalancing:ap-northeast-1:620812304994:loadbalancer/app/lew-alb01/5bacfef0e722326b",
+            "DNSName": "lew-alb01-604473024.ap-northeast-1.elb.amazonaws.com",
+            "CanonicalHostedZoneId": "Z14GRHDCWA56QT",
+            "CreatedTime": "2026-01-24T02:22:32.854000+00:00",
+            "LoadBalancerName": "lew-alb01",
+            "Scheme": "internet-facing",
+            "VpcId": "vpc-0e69c2a5e1fea450c",
+            "State": {
+                "Code": "active"
+            },
+            "Type": "application",
+            "AvailabilityZones": [
+                {
+                    "ZoneName": "ap-northeast-1a",
+                    "SubnetId": "subnet-009458617990398dc",
+                    "LoadBalancerAddresses": []
+                },
+                {
+                    "ZoneName": "ap-northeast-1c",
+                    "SubnetId": "subnet-0825f48986e3bb5df",
+                    "LoadBalancerAddresses": []
+                }
+            ],
+            "SecurityGroups": [
+:
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+{
+    "LoadBalancers": [
+        {
+            "LoadBalancerArn": "arn:aws:elasticloadbalancing:ap-northeast-1:620812304994:loadbalancer/app/lew-alb01/5bacfef0e722326b",
+            "DNSName": "lew-alb01-604473024.ap-northeast-1.elb.amazonaws.com",
+            "CanonicalHostedZoneId": "Z14GRHDCWA56QT",
+            "CreatedTime": "2026-01-24T02:22:32.854000+00:00",
+            "LoadBalancerName": "lew-alb01",
+            "Scheme": "internet-facing",
+            "VpcId": "vpc-0e69c2a5e1fea450c",
+            "State": {
+                "Code": "active"
+            },
+            "Type": "application",
+            "AvailabilityZones": [
+                {
+                    "ZoneName": "ap-northeast-1a",
+                    "SubnetId": "subnet-009458617990398dc",
+                    "LoadBalancerAddresses": []
+                },
+                {
+                    "ZoneName": "ap-northeast-1c",
+                    "SubnetId": "subnet-0825f48986e3bb5df",
+                    "LoadBalancerAddresses": []
+                }
+            ],
+            "SecurityGroups": [
+:...skipping...
+{
+    "LoadBalancers": [
+        {
+            "LoadBalancerArn": "arn:aws:elasticloadbalancing:ap-northeast-1:620812304994:loadbalancer/app/lew-alb01/5bacfef0e722326b",
+            "DNSName": "lew-alb01-604473024.ap-northeast-1.elb.amazonaws.com",
+            "CanonicalHostedZoneId": "Z14GRHDCWA56QT",
+            "CreatedTime": "2026-01-24T02:22:32.854000+00:00",
+            "LoadBalancerName": "lew-alb01",
+            "Scheme": "internet-facing",
+            "VpcId": "vpc-0e69c2a5e1fea450c",
+            "State": {
+                "Code": "active"
+            },
+            "Type": "application",
+            "AvailabilityZones": [
+                {
+                    "ZoneName": "ap-northeast-1a",
+                    "SubnetId": "subnet-009458617990398dc",
+                    "LoadBalancerAddresses": []
+                },
+                {
+                    "ZoneName": "ap-northeast-1c",
+                    "SubnetId": "subnet-0825f48986e3bb5df",
+                    "LoadBalancerAddresses": []
+                }
+            ],
+            "SecurityGroups": [
+                "sg-04745bee209f43d4e"
+:
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+{
+    "LoadBalancers": [
+        {
+            "LoadBalancerArn": "arn:aws:elasticloadbalancing:ap-northeast-1:620812304994:loadbalancer/app/lew-alb01/5bacfef0e722326b",
+            "DNSName": "lew-alb01-604473024.ap-northeast-1.elb.amazonaws.com",
+            "CanonicalHostedZoneId": "Z14GRHDCWA56QT",
+            "CreatedTime": "2026-01-24T02:22:32.854000+00:00",
+            "LoadBalancerName": "lew-alb01",
+            "Scheme": "internet-facing",
+            "VpcId": "vpc-0e69c2a5e1fea450c",
+            "State": {
+                "Code": "active"
+            },
+            "Type": "application",
+            "AvailabilityZones": [
+                {
+                    "ZoneName": "ap-northeast-1a",
+                    "SubnetId": "subnet-009458617990398dc",
+                    "LoadBalancerAddresses": []
+                },
+                {
+                    "ZoneName": "ap-northeast-1c",
+                    "SubnetId": "subnet-0825f48986e3bb5df",
+                    "LoadBalancerAddresses": []
+                }
+            ],
+            "SecurityGroups": [
+                "sg-04745bee209f43d4e"
+:...skipping...
+{
+    "LoadBalancers": [
+        {
+            "LoadBalancerArn": "arn:aws:elasticloadbalancing:ap-northeast-1:620812304994:loadbalancer/app/lew-alb01/5bacfef0e722326b",
+            "DNSName": "lew-alb01-604473024.ap-northeast-1.elb.amazonaws.com",
+            "CanonicalHostedZoneId": "Z14GRHDCWA56QT",
+            "CreatedTime": "2026-01-24T02:22:32.854000+00:00",
+            "LoadBalancerName": "lew-alb01",
+            "Scheme": "internet-facing",
+            "VpcId": "vpc-0e69c2a5e1fea450c",
+            "State": {
+                "Code": "active"
+            },
+            "Type": "application",
+            "AvailabilityZones": [
+                {
+                    "ZoneName": "ap-northeast-1a",
+                    "SubnetId": "subnet-009458617990398dc",
+                    "LoadBalancerAddresses": []
+                },
+                {
+                    "ZoneName": "ap-northeast-1c",
+                    "SubnetId": "subnet-0825f48986e3bb5df",
+                    "LoadBalancerAddresses": []
+                }
+            ],
+            "SecurityGroups": [
+                "sg-04745bee209f43d4e"
+            ],
+:...skipping...
+{
+    "LoadBalancers": [
+        {
+            "LoadBalancerArn": "arn:aws:elasticloadbalancing:ap-northeast-1:620812304994:loadbalancer/app/lew-alb01/5bacfef0e722326b",
+            "DNSName": "lew-alb01-604473024.ap-northeast-1.elb.amazonaws.com",
+            "CanonicalHostedZoneId": "Z14GRHDCWA56QT",
+            "CreatedTime": "2026-01-24T02:22:32.854000+00:00",
+            "LoadBalancerName": "lew-alb01",
+            "Scheme": "internet-facing",
+            "VpcId": "vpc-0e69c2a5e1fea450c",
+            "State": {
+                "Code": "active"
+            },
+            "Type": "application",
+            "AvailabilityZones": [
+                {
+                    "ZoneName": "ap-northeast-1a",
+                    "SubnetId": "subnet-009458617990398dc",
+                    "LoadBalancerAddresses": []
+                },
+                {
+                    "ZoneName": "ap-northeast-1c",
+                    "SubnetId": "subnet-0825f48986e3bb5df",
+                    "LoadBalancerAddresses": []
+                }
+            ],
+            "SecurityGroups": [
+                "sg-04745bee209f43d4e"
+            ],
+            "IpAddressType": "ipv4",
+            "EnablePrefixForIpv6SourceNat": "off"
+:...skipping...
+{
+    "LoadBalancers": [
+        {
+            "LoadBalancerArn": "arn:aws:elasticloadbalancing:ap-northeast-1:620812304994:loadbalancer/app/lew-alb01/5bacfef0e722326b",
+            "DNSName": "lew-alb01-604473024.ap-northeast-1.elb.amazonaws.com",
+            "CanonicalHostedZoneId": "Z14GRHDCWA56QT",
+            "CreatedTime": "2026-01-24T02:22:32.854000+00:00",
+            "LoadBalancerName": "lew-alb01",
+            "Scheme": "internet-facing",
+            "VpcId": "vpc-0e69c2a5e1fea450c",
+            "State": {
+                "Code": "active"
+            },
+            "Type": "application",
+            "AvailabilityZones": [
+                {
+                    "ZoneName": "ap-northeast-1a",
+                    "SubnetId": "subnet-009458617990398dc",
+                    "LoadBalancerAddresses": []
+                },
+                {
+                    "ZoneName": "ap-northeast-1c",
+                    "SubnetId": "subnet-0825f48986e3bb5df",
+                    "LoadBalancerAddresses": []
+                }
+            ],
+            "SecurityGroups": [
+                "sg-04745bee209f43d4e"
+            ],
+            "IpAddressType": "ipv4",
+            "EnablePrefixForIpv6SourceNat": "off"
+        }
+:
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+{
+    "LoadBalancers": [
+        {
+            "LoadBalancerArn": "arn:aws:elasticloadbalancing:ap-northeast-1:620812304994:loadbalancer/app/lew-alb01/5bacfef0e722326b",
+            "DNSName": "lew-alb01-604473024.ap-northeast-1.elb.amazonaws.com",
+            "CanonicalHostedZoneId": "Z14GRHDCWA56QT",
+            "CreatedTime": "2026-01-24T02:22:32.854000+00:00",
+            "LoadBalancerName": "lew-alb01",
+            "Scheme": "internet-facing",
+            "VpcId": "vpc-0e69c2a5e1fea450c",
+            "State": {
+                "Code": "active"
+            },
+            "Type": "application",
+            "AvailabilityZones": [
+                {
+                    "ZoneName": "ap-northeast-1a",
+                    "SubnetId": "subnet-009458617990398dc",
+                    "LoadBalancerAddresses": []
+                },
+                {
+                    "ZoneName": "ap-northeast-1c",
+                    "SubnetId": "subnet-0825f48986e3bb5df",
+                    "LoadBalancerAddresses": []
+                }
+            ],
+            "SecurityGroups": [
+                "sg-04745bee209f43d4e"
+            ],
+            "IpAddressType": "ipv4",
+            "EnablePrefixForIpv6SourceNat": "off"
+        }
+:...skipping...
+{
+    "LoadBalancers": [
+        {
+            "LoadBalancerArn": "arn:aws:elasticloadbalancing:ap-northeast-1:620812304994:loadbalancer/app/lew-alb01/5bacfef0e722326b",
+            "DNSName": "lew-alb01-604473024.ap-northeast-1.elb.amazonaws.com",
+            "CanonicalHostedZoneId": "Z14GRHDCWA56QT",
+            "CreatedTime": "2026-01-24T02:22:32.854000+00:00",
+            "LoadBalancerName": "lew-alb01",
+            "Scheme": "internet-facing",
+            "VpcId": "vpc-0e69c2a5e1fea450c",
+            "State": {
+                "Code": "active"
+            },
+            "Type": "application",
+            "AvailabilityZones": [
+                {
+                    "ZoneName": "ap-northeast-1a",
+                    "SubnetId": "subnet-009458617990398dc",
+                    "LoadBalancerAddresses": []
+                },
+                {
+                    "ZoneName": "ap-northeast-1c",
+                    "SubnetId": "subnet-0825f48986e3bb5df",
+                    "LoadBalancerAddresses": []
+                }
+            ],
+            "SecurityGroups": [
+                "sg-04745bee209f43d4e"
+            ],
+            "IpAddressType": "ipv4",
+            "EnablePrefixForIpv6SourceNat": "off"
+        }
+    ]
+:...skipping...
+{
+    "LoadBalancers": [
+        {
+            "LoadBalancerArn": "arn:aws:elasticloadbalancing:ap-northeast-1:620812304994:loadbalancer/app/lew-alb01/5bacfef0e722326b",
+            "DNSName": "lew-alb01-604473024.ap-northeast-1.elb.amazonaws.com",
+            "CanonicalHostedZoneId": "Z14GRHDCWA56QT",
+            "CreatedTime": "2026-01-24T02:22:32.854000+00:00",
+            "LoadBalancerName": "lew-alb01",
+            "Scheme": "internet-facing",
+            "VpcId": "vpc-0e69c2a5e1fea450c",
+            "State": {
+                "Code": "active"
+            },
+            "Type": "application",
+            "AvailabilityZones": [
+                {
+                    "ZoneName": "ap-northeast-1a",
+                    "SubnetId": "subnet-009458617990398dc",
+                    "LoadBalancerAddresses": []
+                },
+                {
+                    "ZoneName": "ap-northeast-1c",
+                    "SubnetId": "subnet-0825f48986e3bb5df",
+                    "LoadBalancerAddresses": []
+                }
+            ],
+            "SecurityGroups": [
+                "sg-04745bee209f43d4e"
+            ],
+            "IpAddressType": "ipv4",
+            "EnablePrefixForIpv6SourceNat": "off"
+        }
+    ]
+}
+:...skipping...
+{
+    "LoadBalancers": [
+        {
+            "LoadBalancerArn": "arn:aws:elasticloadbalancing:ap-northeast-1:620812304994:loadbalancer/app/lew-alb01/5bacfef0e722326b",
+            "DNSName": "lew-alb01-604473024.ap-northeast-1.elb.amazonaws.com",
+            "CanonicalHostedZoneId": "Z14GRHDCWA56QT",
+            "CreatedTime": "2026-01-24T02:22:32.854000+00:00",
+            "LoadBalancerName": "lew-alb01",
+            "Scheme": "internet-facing",
+            "VpcId": "vpc-0e69c2a5e1fea450c",
+            "State": {
+                "Code": "active"
+            },
+            "Type": "application",
+            "AvailabilityZones": [
+                {
+                    "ZoneName": "ap-northeast-1a",
+                    "SubnetId": "subnet-009458617990398dc",
+                    "LoadBalancerAddresses": []
+                },
+                {
+                    "ZoneName": "ap-northeast-1c",
+                    "SubnetId": "subnet-0825f48986e3bb5df",
+                    "LoadBalancerAddresses": []
+                }
+            ],
+            "SecurityGroups": [
+                "sg-04745bee209f43d4e"
+            ],
+            "IpAddressType": "ipv4",
+            "EnablePrefixForIpv6SourceNat": "off"
+        }
+    ]
+}
+
+HTTPS listener exists on 443
+
+aws elbv2 describe-listeners
+--load-balancer-arn <ALB_ARN>
+--query "Listeners[].Port"
+
+[
+    443,
+    80
+]
+
+Target is healthy
+
+aws elbv2 describe-target-health
+--target-group-arn <TG_ARN>
+
+{
+    "TargetHealthDescriptions": [
+        {
+            "Target": {
+                "Id": "i-07b29863a3989bb58",
+                "Port": 80
+            },
+            "HealthCheckPort": "80",
+            "TargetHealth": {
+                "State": "healthy"
+            },
+            "AdministrativeOverride": {
+                "State": "no_override",
+                "Reason": "AdministrativeOverride.NoOverride",
+                "Description": "No override is currently active on target"
+            }
+        }
+    ]
+}
+
+WAF attached
+
+aws wafv2 get-web-acl-for-resource
+--resource-arn "arn:aws:elasticloadbalancing:ap-northeast-1:620812304994:loadbalancer/app/lew-alb01/5bacfef0e722326b"
+
+{
+    "WebACL": {
+        "Name": "lew-waf01",
+        "Id": "bc4383ea-9bc9-4ed8-963f-ce2d8b7d454c",
+        "ARN": "arn:aws:wafv2:ap-northeast-1:620812304994:regional/webacl/lew-waf01/bc4383ea-9bc9-4ed8-963f-ce2d8b7d454c",
+        "DefaultAction": {
+            "Allow": {}
+        },
+        "Description": "",
+        "Rules": [
+            {
+                "Name": "AWSManagedRulesCommonRuleSet",
+                "Priority": 1,
+                "Statement": {
+                    "ManagedRuleGroupStatement": {
+                        "VendorName": "AWS",
+                        "Name": "AWSManagedRulesCommonRuleSet"
+                    }
+                },
+                "OverrideAction": {
+                    "None": {}
+                },
+                "VisibilityConfig": {
+                    "SampledRequestsEnabled": true,
+                    "CloudWatchMetricsEnabled": true,
+                    "MetricName": "lew-waf-common"
+                }
+            }
+        ],
+        "VisibilityConfig": {
+            "SampledRequestsEnabled": true,
+            "CloudWatchMetricsEnabled": true,
+            "MetricName": "lew-waf01"
+        },
+        "Capacity": 700,
+        "ManagedByFirewallManager": false,
+        "LabelNamespace": "awswaf:620812304994:webacl:lew-waf01:",
+        "RetrofittedByFirewallManager": false,
+        "OnSourceDDoSProtectionConfig": {
+            "ALBLowReputationMode": "ACTIVE_UNDER_DDOS"
+        }
+    }
+}
+
+Alarm created (ALB 5xx)
+
+aws cloudwatch describe-alarms
+--alarm-name-prefix chewbacca-alb-5xx
+
+{
+    "MetricAlarms": [
+        {
+            "AlarmName": "lew-alb-5xx-alarm01",
+            "AlarmArn": "arn:aws:cloudwatch:ap-northeast-1:620812304994:alarm:lew-alb-5xx-alarm01",
+            "AlarmConfigurationUpdatedTimestamp": "2026-01-24T02:25:17.053000+00:00",
+            "ActionsEnabled": true,
+            "OKActions": [],
+            "AlarmActions": [
+                "arn:aws:sns:ap-northeast-1:620812304994:lew-db-incidents"
+            ],
+            "InsufficientDataActions": [],
+            "StateValue": "INSUFFICIENT_DATA",
+            "StateReason": "Unchecked: Initial alarm creation",
+            "StateUpdatedTimestamp": "2026-01-24T02:25:17.053000+00:00",
+            "MetricName": "HTTPCode_ELB_5XX_Count",
+            "Namespace": "AWS/ApplicationELB",
+            "Statistic": "Sum",
+            "Dimensions": [
+                {
+                    "Name": "LoadBalancer",
+                    "Value": "app/lew-alb01/5bacfef0e722326b"
+                }
+            ],
+            "Period": 300,
+            "EvaluationPeriods": 1,
+            "Threshold": 10.0,
+            "ComparisonOperator": "GreaterThanOrEqualToThreshold",
+            "TreatMissingData": "missing",
+            "StateTransitionedTimestamp": "2026-01-24T02:25:17.053000+00:00"
+        },
+        {
+            "AlarmName": "lew-db-connection-failure",
+            "AlarmArn": "arn:aws:cloudwatch:ap-northeast-1:620812304994:alarm:lew-db-connection-failure",
+            "AlarmConfigurationUpdatedTimestamp": "2026-01-24T02:21:30.168000+00:00",
+            "ActionsEnabled": true,
+            "OKActions": [],
+            "AlarmActions": [
+                "arn:aws:sns:ap-northeast-1:620812304994:lew-db-incidents"
+            ],
+            "InsufficientDataActions": [],
+            "StateValue": "INSUFFICIENT_DATA",
+            "StateReason": "Unchecked: Initial alarm creation",
+            "StateUpdatedTimestamp": "2026-01-24T02:21:30.168000+00:00",
+            "MetricName": "DBConnectionErrors",
+            "Namespace": "Lab/RDSApp",
+            "Statistic": "Sum",
+            "Dimensions": [],
+            "Period": 300,
+            "EvaluationPeriods": 1,
+            "Threshold": 3.0,
+            "ComparisonOperator": "GreaterThanOrEqualToThreshold",
+            "TreatMissingData": "missing",
+            "StateTransitionedTimestamp": "2026-01-24T02:21:30.168000+00:00"
+        }
+    ],
+    "CompositeAlarms": []
+}
+
+
+Dashboard exists
+
+aws cloudwatch list-dashboards
+--dashboard-name-prefix chewbacca
+
+{
+    "DashboardEntries": [
+        {
+            "DashboardName": "lew-dashboard01",
+            "DashboardArn": "arn:aws:cloudwatch::620812304994:dashboard/lew-dashboard01",
+            "LastModified": "2026-01-24T02:25:18+00:00",
+            "Size": 649
+        }
+    ]
+}

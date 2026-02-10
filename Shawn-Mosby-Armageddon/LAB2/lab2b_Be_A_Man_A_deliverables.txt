@@ -1,0 +1,72 @@
+Student submission checklist (Honors)
+Students submit:
+1) Terraform diff showing:
+    use of UseOriginCacheControlHeaders managed cache policy 
+
+ordered_cache_behavior {
+  path_pattern           = "/api/*"
+  target_origin_id       = "chewbacca-alb-origin"
+  viewer_protocol_policy = "redirect-to-https"
+  allowed_methods        = ["GET", "HEAD", "OPTIONS"]
+  cached_methods         = ["GET", "HEAD"]
+  cache_policy_id = "658327ea-f89d-4fab-a63d-7e88639e58f6" 
+  origin_request_policy_id = aws_cloudfront_origin_request_policy.chewbacca_orp_api01.id
+}
+
+
+2) curl -i evidence showing:
+    Cache-Control present
+    x-cache transitions (Miss → Hit → Miss)
+
+lew2@Lew2s-MBP LAB2 % curl -i https://d1o11jf5mo8hfw.cloudfront.net/api/public-feed
+HTTP/2 200 
+content-type: application/json
+content-length: 136
+date: Mon, 09 Feb 2026 03:47:28 GMT
+cache-control: public, s-maxage=30
+server: Werkzeug/3.1.5 Python/3.9.25
+x-cache: Miss from cloudfront
+via: 1.1 48088443231f02aba5d546b981227ace.cloudfront.net (CloudFront)
+x-amz-cf-pop: DEN53-P5
+x-amz-cf-id: V3zoiq60ww-L6jBbRj0zReLOslrnmDoI3GjyF0Z4hLtwqtfD-4vmzw==
+
+{"account_id":"YOUR_ACCOUNT_ID","message":"Honors Lab 2B: Origin-Driven Caching Active","server_time_utc":"2026-02-09T03:47:28.409971"}
+lew2@Lew2s-MBP LAB2 % curl -i https://d1o11jf5mo8hfw.cloudfront.net/api/public-feed
+HTTP/2 200 
+content-type: application/json
+content-length: 136
+date: Mon, 09 Feb 2026 03:47:28 GMT
+cache-control: public, s-maxage=30
+server: Werkzeug/3.1.5 Python/3.9.25
+x-cache: Hit from cloudfront
+via: 1.1 3cf7ab833147270a70632e08b50803d6.cloudfront.net (CloudFront)
+x-amz-cf-pop: DEN53-P5
+x-amz-cf-id: a8_6VJTdPRIcstOnCOGQb68VGzAVmSr6P-5joPqeKJ9ffyf1BQhKNQ==
+age: 4
+
+{"account_id":"YOUR_ACCOUNT_ID","message":"Honors Lab 2B: Origin-Driven Caching Active","server_time_utc":"2026-02-09T03:47:28.409971"}
+lew2@Lew2s-MBP LAB2 % curl -i https://d1o11jf5mo8hfw.cloudfront.net/api/public-feed
+HTTP/2 200 
+content-type: application/json
+content-length: 136
+date: Mon, 09 Feb 2026 03:53:56 GMT
+cache-control: public, s-maxage=30
+server: Werkzeug/3.1.5 Python/3.9.25
+x-cache: Miss from cloudfront
+via: 1.1 ad507bcfe99c81948771b1a0e96a9ad0.cloudfront.net (CloudFront)
+x-amz-cf-pop: DEN53-P5
+x-amz-cf-id: mTZsc-Dzv4aSuNXDVHHeNHCNcBWJQCly8dmnf2FsoX67_ZlNpO9bSg==
+
+{"account_id":"YOUR_ACCOUNT_ID","message":"Honors Lab 2B: Origin-Driven Caching Active","server_time_utc":"2026-02-09T03:53:56.229338"}
+
+3) One paragraph answering:
+    Why origin-driven caching is safer for APIs
+    When you would still disable caching entirely
+
+Origin-driven caching is safer because the application developers (who best understand the data's sensitivity) maintain control over how long data lives in the "wild." 
+By using headers like s-maxage, the API can dynamically tell CloudFront to cache public data while simultaneously using private, no-store to prevent sensitive or user-specific data (like the /api/list results) from ever being stored on an edge server.
+
+When you would still disable caching entirely: 
+You would disable caching entirely for "Real-Time" or "Transaction-Critical" endpoints where a response must be 100% accurate at the millisecond it is requested. 
+Examples include stock trading platforms, inventory counts for flash sales, or multi-factor authentication (MFA) prompts. 
+In these cases, serving data even 1 second old could result in a failed transaction or a security risk.

@@ -1,0 +1,706 @@
+{
+  "tokyo": [
+    {
+      "region": "ap-northeast-1",
+      "time": "2026-02-09 01:00:28-06:00",
+      "event": "DescribeAlarms",
+      "user": "root",
+      "source": "monitoring.amazonaws.com"
+    },
+    {
+      "region": "ap-northeast-1",
+      "time": "2026-02-09 01:00:27-06:00",
+      "event": "DescribeAlarms",
+      "user": "root",
+      "source": "monitoring.amazonaws.com"
+    },
+    {
+      "region": "ap-northeast-1",
+      "time": "2026-02-09 01:00:27-06:00",
+      "event": "DescribeAlarms",
+      "user": "root",
+      "source": "monitoring.amazonaws.com"
+    },
+    {
+      "region": "ap-northeast-1",
+      "time": "2026-02-09 01:00:12-06:00",
+      "event": "AssumeRole",
+      "user": null,
+      "source": "sts.amazonaws.com"
+    },
+    {
+      "region": "ap-northeast-1",
+      "time": "2026-02-09 00:59:28-06:00",
+      "event": "DescribeAlarms",
+      "user": "root",
+      "source": "monitoring.amazonaws.com"
+    },
+    {
+      "region": "ap-northeast-1",
+      "time": "2026-02-09 00:59:28-06:00",
+      "event": "DescribeAlarms",
+      "user": "root",
+      "source": "monitoring.amazonaws.com"
+    },
+    {
+      "region": "ap-northeast-1",
+      "time": "2026-02-09 00:59:28-06:00",
+      "event": "DescribeAlarms",
+      "user": "root",
+      "source": "monitoring.amazonaws.com"
+    },
+    {
+      "region": "ap-northeast-1",
+      "time": "2026-02-09 00:59:28-06:00",
+      "event": "DescribeAlarms",
+      "user": "root",
+      "source": "monitoring.amazonaws.com"
+    },
+    {
+      "region": "ap-northeast-1",
+      "time": "2026-02-09 00:58:28-06:00",
+      "event": "DescribeAlarms",
+      "user": "root",
+      "source": "monitoring.amazonaws.com"
+    },
+    {
+      "region": "ap-northeast-1",
+      "time": "2026-02-09 00:58:27-06:00",
+      "event": "DescribeAlarms",
+      "user": "root",
+      "source": "monitoring.amazonaws.com"
+    },
+    {
+      "region": "ap-northeast-1",
+      "time": "2026-02-09 00:58:27-06:00",
+      "event": "DescribeAlarms",
+      "user": "root",
+      "source": "monitoring.amazonaws.com"
+    },
+    {
+      "region": "ap-northeast-1",
+      "time": "2026-02-09 00:57:28-06:00",
+      "event": "DescribeAlarms",
+      "user": "root",
+      "source": "monitoring.amazonaws.com"
+    },
+    {
+      "region": "ap-northeast-1",
+      "time": "2026-02-09 00:57:28-06:00",
+      "event": "DescribeAlarms",
+      "user": "root",
+      "source": "monitoring.amazonaws.com"
+    },
+    {
+      "region": "ap-northeast-1",
+      "time": "2026-02-09 00:57:28-06:00",
+      "event": "DescribeAlarms",
+      "user": "root",
+      "source": "monitoring.amazonaws.com"
+    },
+    {
+      "region": "ap-northeast-1",
+      "time": "2026-02-09 00:57:28-06:00",
+      "event": "DescribeAlarms",
+      "user": "root",
+      "source": "monitoring.amazonaws.com"
+    },
+    {
+      "region": "ap-northeast-1",
+      "time": "2026-02-09 00:56:44-06:00",
+      "event": "UpdateInstanceInformation",
+      "user": "i-06392cd088179570c",
+      "source": "ssm.amazonaws.com"
+    },
+    {
+      "region": "ap-northeast-1",
+      "time": "2026-02-09 00:56:41-06:00",
+      "event": "GenerateDataKey",
+      "user": null,
+      "source": "kms.amazonaws.com"
+    },
+    {
+      "region": "ap-northeast-1",
+      "time": "2026-02-09 00:56:28-06:00",
+      "event": "DescribeAlarms",
+      "user": "root",
+      "source": "monitoring.amazonaws.com"
+    },
+    {
+      "region": "ap-northeast-1",
+      "time": "2026-02-09 00:56:28-06:00",
+      "event": "DescribeAlarms",
+      "user": "root",
+      "source": "monitoring.amazonaws.com"
+    },
+    {
+      "region": "ap-northeast-1",
+      "time": "2026-02-09 00:56:28-06:00",
+      "event": "DescribeAlarms",
+      "user": "root",
+      "source": "monitoring.amazonaws.com"
+    },
+    {
+      "region": "ap-northeast-1",
+      "time": "2026-02-09 00:56:27-06:00",
+      "event": "DescribeAlarms",
+      "user": "root",
+      "source": "monitoring.amazonaws.com"
+    },
+    {
+      "region": "ap-northeast-1",
+      "time": "2026-02-09 00:56:05-06:00",
+      "event": "DescribeMetricFilters",
+      "user": "root",
+      "source": "logs.amazonaws.com"
+    },
+    {
+      "region": "ap-northeast-1",
+      "time": "2026-02-09 00:55:27-06:00",
+      "event": "DescribeAlarms",
+      "user": "root",
+      "source": "monitoring.amazonaws.com"
+    },
+    {
+      "region": "ap-northeast-1",
+      "time": "2026-02-09 00:55:27-06:00",
+      "event": "DescribeAlarms",
+      "user": "root",
+      "source": "monitoring.amazonaws.com"
+    },
+    {
+      "region": "ap-northeast-1",
+      "time": "2026-02-09 00:55:27-06:00",
+      "event": "DescribeAlarms",
+      "user": "root",
+      "source": "monitoring.amazonaws.com"
+    },
+    {
+      "region": "ap-northeast-1",
+      "time": "2026-02-09 00:54:28-06:00",
+      "event": "DescribeAlarms",
+      "user": "root",
+      "source": "monitoring.amazonaws.com"
+    },
+    {
+      "region": "ap-northeast-1",
+      "time": "2026-02-09 00:54:28-06:00",
+      "event": "DescribeAlarms",
+      "user": "root",
+      "source": "monitoring.amazonaws.com"
+    },
+    {
+      "region": "ap-northeast-1",
+      "time": "2026-02-09 00:54:27-06:00",
+      "event": "DescribeAlarms",
+      "user": "root",
+      "source": "monitoring.amazonaws.com"
+    },
+    {
+      "region": "ap-northeast-1",
+      "time": "2026-02-09 00:54:27-06:00",
+      "event": "DescribeAlarms",
+      "user": "root",
+      "source": "monitoring.amazonaws.com"
+    },
+    {
+      "region": "ap-northeast-1",
+      "time": "2026-02-09 00:54:05-06:00",
+      "event": "ListInstanceAssociations",
+      "user": "i-06392cd088179570c",
+      "source": "ssm.amazonaws.com"
+    },
+    {
+      "region": "ap-northeast-1",
+      "time": "2026-02-09 00:53:27-06:00",
+      "event": "DescribeAlarms",
+      "user": "root",
+      "source": "monitoring.amazonaws.com"
+    },
+    {
+      "region": "ap-northeast-1",
+      "time": "2026-02-09 00:53:27-06:00",
+      "event": "DescribeAlarms",
+      "user": "root",
+      "source": "monitoring.amazonaws.com"
+    },
+    {
+      "region": "ap-northeast-1",
+      "time": "2026-02-09 00:53:27-06:00",
+      "event": "DescribeAlarms",
+      "user": "root",
+      "source": "monitoring.amazonaws.com"
+    },
+    {
+      "region": "ap-northeast-1",
+      "time": "2026-02-09 00:52:28-06:00",
+      "event": "DescribeAlarms",
+      "user": "root",
+      "source": "monitoring.amazonaws.com"
+    },
+    {
+      "region": "ap-northeast-1",
+      "time": "2026-02-09 00:52:28-06:00",
+      "event": "DescribeAlarms",
+      "user": "root",
+      "source": "monitoring.amazonaws.com"
+    },
+    {
+      "region": "ap-northeast-1",
+      "time": "2026-02-09 00:52:28-06:00",
+      "event": "DescribeAlarms",
+      "user": "root",
+      "source": "monitoring.amazonaws.com"
+    },
+    {
+      "region": "ap-northeast-1",
+      "time": "2026-02-09 00:52:27-06:00",
+      "event": "DescribeAlarms",
+      "user": "root",
+      "source": "monitoring.amazonaws.com"
+    },
+    {
+      "region": "ap-northeast-1",
+      "time": "2026-02-09 00:52:01-06:00",
+      "event": "AssumeRole",
+      "user": null,
+      "source": "sts.amazonaws.com"
+    },
+    {
+      "region": "ap-northeast-1",
+      "time": "2026-02-09 00:52:01-06:00",
+      "event": "AssumeRole",
+      "user": null,
+      "source": "sts.amazonaws.com"
+    },
+    {
+      "region": "ap-northeast-1",
+      "time": "2026-02-09 00:51:44-06:00",
+      "event": "UpdateInstanceInformation",
+      "user": "i-06392cd088179570c",
+      "source": "ssm.amazonaws.com"
+    },
+    {
+      "region": "ap-northeast-1",
+      "time": "2026-02-09 00:51:28-06:00",
+      "event": "DescribeAlarms",
+      "user": "root",
+      "source": "monitoring.amazonaws.com"
+    },
+    {
+      "region": "ap-northeast-1",
+      "time": "2026-02-09 00:51:28-06:00",
+      "event": "DescribeAlarms",
+      "user": "root",
+      "source": "monitoring.amazonaws.com"
+    },
+    {
+      "region": "ap-northeast-1",
+      "time": "2026-02-09 00:51:27-06:00",
+      "event": "DescribeAlarms",
+      "user": "root",
+      "source": "monitoring.amazonaws.com"
+    },
+    {
+      "region": "ap-northeast-1",
+      "time": "2026-02-09 00:51:27-06:00",
+      "event": "DescribeAlarms",
+      "user": "root",
+      "source": "monitoring.amazonaws.com"
+    },
+    {
+      "region": "ap-northeast-1",
+      "time": "2026-02-09 00:51:05-06:00",
+      "event": "DescribeMetricFilters",
+      "user": "root",
+      "source": "logs.amazonaws.com"
+    },
+    {
+      "region": "ap-northeast-1",
+      "time": "2026-02-09 00:50:27-06:00",
+      "event": "DescribeAlarms",
+      "user": "root",
+      "source": "monitoring.amazonaws.com"
+    },
+    {
+      "region": "ap-northeast-1",
+      "time": "2026-02-09 00:50:27-06:00",
+      "event": "DescribeAlarms",
+      "user": "root",
+      "source": "monitoring.amazonaws.com"
+    },
+    {
+      "region": "ap-northeast-1",
+      "time": "2026-02-09 00:50:27-06:00",
+      "event": "DescribeAlarms",
+      "user": "root",
+      "source": "monitoring.amazonaws.com"
+    },
+    {
+      "region": "ap-northeast-1",
+      "time": "2026-02-09 00:49:28-06:00",
+      "event": "DescribeAlarms",
+      "user": "root",
+      "source": "monitoring.amazonaws.com"
+    },
+    {
+      "region": "ap-northeast-1",
+      "time": "2026-02-09 00:49:28-06:00",
+      "event": "DescribeAlarms",
+      "user": "root",
+      "source": "monitoring.amazonaws.com"
+    }
+  ],
+  "saopaulo": [
+    {
+      "region": "sa-east-1",
+      "time": "2026-02-09 00:59:43-06:00",
+      "event": "UpdateInstanceInformation",
+      "user": "i-00812f8c31d5bd061",
+      "source": "ssm.amazonaws.com"
+    },
+    {
+      "region": "sa-east-1",
+      "time": "2026-02-09 00:55:37-06:00",
+      "event": "DescribeParameterGroups",
+      "user": "resource-explorer-2",
+      "source": "memorydb.amazonaws.com"
+    },
+    {
+      "region": "sa-east-1",
+      "time": "2026-02-09 00:55:37-06:00",
+      "event": "AssumeRole",
+      "user": null,
+      "source": "sts.amazonaws.com"
+    },
+    {
+      "region": "sa-east-1",
+      "time": "2026-02-09 00:55:30-06:00",
+      "event": "ListInstanceAssociations",
+      "user": "i-00812f8c31d5bd061",
+      "source": "ssm.amazonaws.com"
+    },
+    {
+      "region": "sa-east-1",
+      "time": "2026-02-09 00:55:10-06:00",
+      "event": "UpdateInstanceInformation",
+      "user": "i-00812f8c31d5bd061",
+      "source": "ssm.amazonaws.com"
+    },
+    {
+      "region": "sa-east-1",
+      "time": "2026-02-09 00:54:43-06:00",
+      "event": "UpdateInstanceInformation",
+      "user": "i-00812f8c31d5bd061",
+      "source": "ssm.amazonaws.com"
+    },
+    {
+      "region": "sa-east-1",
+      "time": "2026-02-09 00:53:48-06:00",
+      "event": "AssumeRole",
+      "user": null,
+      "source": "sts.amazonaws.com"
+    },
+    {
+      "region": "sa-east-1",
+      "time": "2026-02-09 00:53:48-06:00",
+      "event": "ListAttributeGroups",
+      "user": "resource-explorer-2",
+      "source": "servicecatalog-appregistry.amazonaws.com"
+    },
+    {
+      "region": "sa-east-1",
+      "time": "2026-02-09 00:53:17-06:00",
+      "event": "AssumeRole",
+      "user": null,
+      "source": "sts.amazonaws.com"
+    },
+    {
+      "region": "sa-east-1",
+      "time": "2026-02-09 00:53:17-06:00",
+      "event": "DescribeApplicationVersions",
+      "user": "resource-explorer-2",
+      "source": "elasticbeanstalk.amazonaws.com"
+    },
+    {
+      "region": "sa-east-1",
+      "time": "2026-02-09 00:49:43-06:00",
+      "event": "UpdateInstanceInformation",
+      "user": "i-00812f8c31d5bd061",
+      "source": "ssm.amazonaws.com"
+    },
+    {
+      "region": "sa-east-1",
+      "time": "2026-02-09 00:47:15-06:00",
+      "event": "AssumeRole",
+      "user": null,
+      "source": "sts.amazonaws.com"
+    },
+    {
+      "region": "sa-east-1",
+      "time": "2026-02-09 00:47:15-06:00",
+      "event": "DescribeMaintenanceWindows",
+      "user": "resource-explorer-2",
+      "source": "ssm.amazonaws.com"
+    },
+    {
+      "region": "sa-east-1",
+      "time": "2026-02-09 00:45:30-06:00",
+      "event": "ListInstanceAssociations",
+      "user": "i-00812f8c31d5bd061",
+      "source": "ssm.amazonaws.com"
+    },
+    {
+      "region": "sa-east-1",
+      "time": "2026-02-09 00:44:43-06:00",
+      "event": "UpdateInstanceInformation",
+      "user": "i-00812f8c31d5bd061",
+      "source": "ssm.amazonaws.com"
+    },
+    {
+      "region": "sa-east-1",
+      "time": "2026-02-09 00:44:33-06:00",
+      "event": "ListContainerRecipes",
+      "user": "resource-explorer-2",
+      "source": "imagebuilder.amazonaws.com"
+    },
+    {
+      "region": "sa-east-1",
+      "time": "2026-02-09 00:44:33-06:00",
+      "event": "AssumeRole",
+      "user": null,
+      "source": "sts.amazonaws.com"
+    },
+    {
+      "region": "sa-east-1",
+      "time": "2026-02-09 00:39:43-06:00",
+      "event": "UpdateInstanceInformation",
+      "user": "i-00812f8c31d5bd061",
+      "source": "ssm.amazonaws.com"
+    },
+    {
+      "region": "sa-east-1",
+      "time": "2026-02-09 00:38:09-06:00",
+      "event": "AssumeRole",
+      "user": null,
+      "source": "sts.amazonaws.com"
+    },
+    {
+      "region": "sa-east-1",
+      "time": "2026-02-09 00:38:09-06:00",
+      "event": "DescribeComputeEnvironments",
+      "user": "resource-explorer-2",
+      "source": "batch.amazonaws.com"
+    },
+    {
+      "region": "sa-east-1",
+      "time": "2026-02-09 00:35:15-06:00",
+      "event": "ListInstanceAssociations",
+      "user": "i-00812f8c31d5bd061",
+      "source": "ssm.amazonaws.com"
+    },
+    {
+      "region": "sa-east-1",
+      "time": "2026-02-09 00:34:45-06:00",
+      "event": "AssumeRole",
+      "user": null,
+      "source": "sts.amazonaws.com"
+    },
+    {
+      "region": "sa-east-1",
+      "time": "2026-02-09 00:34:45-06:00",
+      "event": "ListNotebookInstanceLifecycleConfigs",
+      "user": "resource-explorer-2",
+      "source": "sagemaker.amazonaws.com"
+    },
+    {
+      "region": "sa-east-1",
+      "time": "2026-02-09 00:34:43-06:00",
+      "event": "UpdateInstanceInformation",
+      "user": "i-00812f8c31d5bd061",
+      "source": "ssm.amazonaws.com"
+    },
+    {
+      "region": "sa-east-1",
+      "time": "2026-02-09 00:30:53-06:00",
+      "event": "DescribeUserGroups",
+      "user": "resource-explorer-2",
+      "source": "elasticache.amazonaws.com"
+    },
+    {
+      "region": "sa-east-1",
+      "time": "2026-02-09 00:30:53-06:00",
+      "event": "AssumeRole",
+      "user": null,
+      "source": "sts.amazonaws.com"
+    },
+    {
+      "region": "sa-east-1",
+      "time": "2026-02-09 00:29:43-06:00",
+      "event": "UpdateInstanceInformation",
+      "user": "i-00812f8c31d5bd061",
+      "source": "ssm.amazonaws.com"
+    },
+    {
+      "region": "sa-east-1",
+      "time": "2026-02-09 00:25:27-06:00",
+      "event": "ListInstanceAssociations",
+      "user": "i-00812f8c31d5bd061",
+      "source": "ssm.amazonaws.com"
+    },
+    {
+      "region": "sa-east-1",
+      "time": "2026-02-09 00:25:10-06:00",
+      "event": "UpdateInstanceInformation",
+      "user": "i-00812f8c31d5bd061",
+      "source": "ssm.amazonaws.com"
+    },
+    {
+      "region": "sa-east-1",
+      "time": "2026-02-09 00:24:43-06:00",
+      "event": "UpdateInstanceInformation",
+      "user": "i-00812f8c31d5bd061",
+      "source": "ssm.amazonaws.com"
+    },
+    {
+      "region": "sa-east-1",
+      "time": "2026-02-09 00:21:12-06:00",
+      "event": "ListUserProfiles",
+      "user": "resource-explorer-2",
+      "source": "sagemaker.amazonaws.com"
+    },
+    {
+      "region": "sa-east-1",
+      "time": "2026-02-09 00:21:12-06:00",
+      "event": "ListResources",
+      "user": "resource-explorer-2",
+      "source": "cloudcontrolapi.amazonaws.com"
+    },
+    {
+      "region": "sa-east-1",
+      "time": "2026-02-09 00:21:11-06:00",
+      "event": "AssumeRole",
+      "user": null,
+      "source": "sts.amazonaws.com"
+    },
+    {
+      "region": "sa-east-1",
+      "time": "2026-02-09 00:19:43-06:00",
+      "event": "UpdateInstanceInformation",
+      "user": "i-00812f8c31d5bd061",
+      "source": "ssm.amazonaws.com"
+    },
+    {
+      "region": "sa-east-1",
+      "time": "2026-02-09 00:19:26-06:00",
+      "event": "ListApps",
+      "user": "resource-explorer-2",
+      "source": "amplify.amazonaws.com"
+    },
+    {
+      "region": "sa-east-1",
+      "time": "2026-02-09 00:19:26-06:00",
+      "event": "AssumeRole",
+      "user": null,
+      "source": "sts.amazonaws.com"
+    },
+    {
+      "region": "sa-east-1",
+      "time": "2026-02-09 00:17:51-06:00",
+      "event": "ListApiDestinations",
+      "user": "resource-explorer-2",
+      "source": "events.amazonaws.com"
+    },
+    {
+      "region": "sa-east-1",
+      "time": "2026-02-09 00:17:50-06:00",
+      "event": "AssumeRole",
+      "user": null,
+      "source": "sts.amazonaws.com"
+    },
+    {
+      "region": "sa-east-1",
+      "time": "2026-02-09 00:16:52-06:00",
+      "event": "AssumeRole",
+      "user": null,
+      "source": "sts.amazonaws.com"
+    },
+    {
+      "region": "sa-east-1",
+      "time": "2026-02-09 00:16:52-06:00",
+      "event": "AssumeRole",
+      "user": null,
+      "source": "sts.amazonaws.com"
+    },
+    {
+      "region": "sa-east-1",
+      "time": "2026-02-09 00:15:22-06:00",
+      "event": "ListInstanceAssociations",
+      "user": "i-00812f8c31d5bd061",
+      "source": "ssm.amazonaws.com"
+    },
+    {
+      "region": "sa-east-1",
+      "time": "2026-02-09 00:14:43-06:00",
+      "event": "UpdateInstanceInformation",
+      "user": "i-00812f8c31d5bd061",
+      "source": "ssm.amazonaws.com"
+    },
+    {
+      "region": "sa-east-1",
+      "time": "2026-02-09 00:10:53-06:00",
+      "event": "AssumeRole",
+      "user": null,
+      "source": "sts.amazonaws.com"
+    },
+    {
+      "region": "sa-east-1",
+      "time": "2026-02-09 00:10:53-06:00",
+      "event": "ListFleetMetrics",
+      "user": "resource-explorer-2",
+      "source": "iot.amazonaws.com"
+    },
+    {
+      "region": "sa-east-1",
+      "time": "2026-02-09 00:09:51-06:00",
+      "event": "DescribeMaintenanceWindows",
+      "user": "resource-explorer-2",
+      "source": "ssm.amazonaws.com"
+    },
+    {
+      "region": "sa-east-1",
+      "time": "2026-02-09 00:09:51-06:00",
+      "event": "AssumeRole",
+      "user": null,
+      "source": "sts.amazonaws.com"
+    },
+    {
+      "region": "sa-east-1",
+      "time": "2026-02-09 00:09:43-06:00",
+      "event": "UpdateInstanceInformation",
+      "user": "i-00812f8c31d5bd061",
+      "source": "ssm.amazonaws.com"
+    },
+    {
+      "region": "sa-east-1",
+      "time": "2026-02-09 00:05:24-06:00",
+      "event": "ListInstanceAssociations",
+      "user": "i-00812f8c31d5bd061",
+      "source": "ssm.amazonaws.com"
+    },
+    {
+      "region": "sa-east-1",
+      "time": "2026-02-09 00:04:43-06:00",
+      "event": "UpdateInstanceInformation",
+      "user": "i-00812f8c31d5bd061",
+      "source": "ssm.amazonaws.com"
+    },
+    {
+      "region": "sa-east-1",
+      "time": "2026-02-08 23:59:43-06:00",
+      "event": "UpdateInstanceInformation",
+      "user": "i-00812f8c31d5bd061",
+      "source": "ssm.amazonaws.com"
+    }
+  ]
+}

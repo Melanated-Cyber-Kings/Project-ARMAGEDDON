@@ -1,0 +1,97 @@
+Student verification (CLI) for Bonus-A
+1) Prove EC2 is private (no public IP)
+  aws ec2 describe-instances \
+  --instance-ids i-0e01ee8398c6cdfa4 \
+  --query "Reservations[].Instances[].PublicIpAddress"
+
+[]
+
+2) Prove VPC endpoints exist
+  aws ec2 describe-vpc-endpoints \
+  --filters "Name=vpc-id,Values=vpc-01af218bd40a343b5" \
+  --query "VpcEndpoints[].ServiceName"
+
+[
+    "com.amazonaws.ap-northeast-1.s3",
+    "com.amazonaws.ap-northeast-1.secretsmanager",
+    "com.amazonaws.ap-northeast-1.ssm",
+    "com.amazonaws.ap-northeast-1.kms",
+    "com.amazonaws.ap-northeast-1.ec2messages",
+    "com.amazonaws.ap-northeast-1.ssmmessages",
+    "com.amazonaws.ap-northeast-1.logs"
+]
+
+3) Prove Session Manager path works (no SSH)
+aws ssm describe-instance-information \
+  --query "InstanceInformationList[].InstanceId"
+
+  [
+    "i-0289307f72d1affd6",
+    "i-0e01ee8398c6cdfa4"
+]
+
+
+4) Prove the instance can read both config stores
+Run from SSM session:
+  aws ssm get-parameter --name /lab/db/endpoint
+  aws secretsmanager get-secret-value --secret-id lab-1a/rds/mysql
+
+{
+    "Parameter": {
+        "Name": "/lab/db/endpoint",
+        "Type": "String",
+        "Value": "lew-rds01.cvecsic0y331.ap-northeast-1.rds.amazonaws.com",
+        "Version": 2,
+        "LastModifiedDate": "2026-01-23T03:02:35.291000+00:00",
+        "ARN": "arn:aws:ssm:ap-northeast-1:620812304994:parameter/lab/db/endpoint",
+        "DataType": "text"
+    }
+}
+{
+    "ARN": "arn:aws:secretsmanager:ap-northeast-1:620812304994:secret:lab-1a/rds/mysql-Rxu8IA",
+    "Name": "lab-1a/rds/mysql",
+    "VersionId": "97cb7176-a484-49fd-b8de-9261650c45fd",
+    "SecretString": "{\"username\":\"admin\",\"password\":\"Bigpimpin6\",\"dbname\":\"labdb\",\"port\":\"3306\",\"host\":\"lew-rds01.cvecsic0y331.ap-northeast-1.rds.amazonaws.com\"}",
+    "VersionStages": [
+        "AWSCURRENT"
+    ],
+    "CreatedDate": "2026-01-22T06:07:59.621000+00:00"
+}
+
+aws logs describe-log-streams \
+    --log-group-name /aws/ec2/lab-rds-app
+{
+    "logStreams": [
+        {
+            "logStreamName": "i-0289307f72d1affd6",
+            "creationTime": 1769135639189,
+            "firstEventTimestamp": 1769135634084,
+            "lastEventTimestamp": 1769141987840,
+            "lastIngestionTime": 1769141988199,
+            "uploadSequenceToken": "49039859659301502700165185302703998828061024930780458059",
+            "arn": "arn:aws:logs:ap-northeast-1:620812304994:log-group:/aws/ec2/lab-rds-app:log-stream:i-0289307f72d1affd6",
+            "storedBytes": 0
+        },
+        {
+            "logStreamName": "i-0d1d34e18e9ef3ee8",
+            "creationTime": 1769059292632,
+            "firstEventTimestamp": 1769059287496,
+            "lastEventTimestamp": 1769062229496,
+            "lastIngestionTime": 1769062234519,
+            "uploadSequenceToken": "49039859659195491875942313773349509024052942213567261941",
+            "arn": "arn:aws:logs:ap-northeast-1:620812304994:log-group:/aws/ec2/lab-rds-app:log-stream:i-0d1d34e18e9ef3ee8",
+            "storedBytes": 0
+        },
+        {
+            "logStreamName": "i-0e01ee8398c6cdfa4",
+            "creationTime": 1769135717789,
+            "firstEventTimestamp": 1769135712665,
+            "lastEventTimestamp": 1769139391666,
+            "lastIngestionTime": 1769139396702,
+            "uploadSequenceToken": "49039859659298058009801792680574117727267842578340162774",
+            "arn": "arn:aws:logs:ap-northeast-1:620812304994:log-group:/aws/ec2/lab-rds-app:log-stream:i-0e01ee8398c6cdfa4",
+            "storedBytes": 0
+        }
+    ]
+}
+

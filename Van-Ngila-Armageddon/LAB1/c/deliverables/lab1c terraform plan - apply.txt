@@ -1,0 +1,1192 @@
+terraform plan:
+      + arn                            = (known after apply)
+      + description                    = "Database credentials for lab RDS instance"
+      + force_overwrite_replica_secret = true
+      + id                             = (known after apply)
+      + name                           = "lab/rds/mysql"
+      + name_prefix                    = (known after apply)
+      + policy                         = (known after apply)
+      + recovery_window_in_days        = 0
+      + region                         = "ap-northeast-1"
+      + tags                           = {
+          + "Environment" = "lab-1c"
+          + "ManagedBy"   = "Terraform"
+          + "Rotation"    = "manual"
+        }
+      + tags_all                       = {
+          + "Environment" = "lab-1c"
+          + "ManagedBy"   = "Terraform"
+          + "Rotation"    = "manual"
+        }
+
+      + replica (known after apply)
+    }
+
+  # module.config_store.aws_secretsmanager_secret_version.db_credentials_version will be created
+  + resource "aws_secretsmanager_secret_version" "db_credentials_version" {
+      + arn                  = (known after apply)
+      + has_secret_string_wo = (known after apply)
+      + id                   = (known after apply)
+      + region               = "ap-northeast-1"
+      + secret_id            = (known after apply)
+      + secret_string        = (sensitive value)
+      + secret_string_wo     = (write-only attribute)
+      + version_id           = (known after apply)
+      + version_stages       = (known after apply)
+    }
+
+  # module.config_store.aws_ssm_parameter.db_endpoint will be created
+  + resource "aws_ssm_parameter" "db_endpoint" {
+      + arn            = (known after apply)
+      + data_type      = (known after apply)
+      + description    = "RDS endpoint for lab application"
+      + has_value_wo   = (known after apply)
+      + id             = (known after apply)
+      + insecure_value = (known after apply)
+      + key_id         = (known after apply)
+      + name           = "/lab/db/endpoint"
+      + region         = "ap-northeast-1"
+      + tags           = {
+          + "Environment" = "lab-1c"
+          + "ManagedBy"   = "Terraform"
+        }
+      + tags_all       = {
+          + "Environment" = "lab-1c"
+          + "ManagedBy"   = "Terraform"
+        }
+      + tier           = (known after apply)
+      + type           = "String"
+      + value          = (sensitive value)
+      + value_wo       = (write-only attribute)
+      + version        = (known after apply)
+    }
+
+  # module.config_store.aws_ssm_parameter.db_name will be created
+  + resource "aws_ssm_parameter" "db_name" {
+      + arn            = (known after apply)
+      + data_type      = (known after apply)
+      + description    = "RDS database name for lab application"
+      + has_value_wo   = (known after apply)
+      + id             = (known after apply)
+      + insecure_value = (known after apply)
+      + key_id         = (known after apply)
+      + name           = "/lab/db/name"
+      + region         = "ap-northeast-1"
+      + tags           = {
+          + "Environment" = "lab-1c"
+          + "ManagedBy"   = "Terraform"
+        }
+      + tags_all       = {
+          + "Environment" = "lab-1c"
+          + "ManagedBy"   = "Terraform"
+        }
+      + tier           = (known after apply)
+      + type           = "String"
+      + value          = (sensitive value)
+      + value_wo       = (write-only attribute)
+      + version        = (known after apply)
+    }
+
+  # module.config_store.aws_ssm_parameter.db_port will be created
+  + resource "aws_ssm_parameter" "db_port" {
+      + arn            = (known after apply)
+      + data_type      = (known after apply)
+      + description    = "RDS port for lab application"
+      + has_value_wo   = (known after apply)
+      + id             = (known after apply)
+      + insecure_value = (known after apply)
+      + key_id         = (known after apply)
+      + name           = "/lab/db/port"
+      + region         = "ap-northeast-1"
+      + tags           = {
+          + "Environment" = "lab-1c"
+          + "ManagedBy"   = "Terraform"
+        }
+      + tags_all       = {
+          + "Environment" = "lab-1c"
+          + "ManagedBy"   = "Terraform"
+        }
+      + tier           = (known after apply)
+      + type           = "String"
+      + value          = (sensitive value)
+      + value_wo       = (write-only attribute)
+      + version        = (known after apply)
+    }
+
+  # module.ec2.aws_instance.ec2 will be created
+  + resource "aws_instance" "ec2" {
+      + ami                                  = "ami-03d1820163e6b9f5d"
+      + arn                                  = (known after apply)
+      + associate_public_ip_address          = true
+      + availability_zone                    = (known after apply)
+      + disable_api_stop                     = (known after apply)
+      + disable_api_termination              = (known after apply)
+      + ebs_optimized                        = (known after apply)
+      + enable_primary_ipv6                  = (known after apply)
+      + force_destroy                        = false
+      + get_password_data                    = false
+      + host_id                              = (known after apply)
+      + host_resource_group_arn              = (known after apply)
+      + iam_instance_profile                 = "armageddon-lab-1c-ec2-secrets-profile"
+      + id                                   = (known after apply)
+      + instance_initiated_shutdown_behavior = (known after apply)
+      + instance_lifecycle                   = (known after apply)
+      + instance_state                       = (known after apply)
+      + instance_type                        = "t3.micro"
+      + ipv6_address_count                   = (known after apply)
+      + ipv6_addresses                       = (known after apply)
+      + key_name                             = (known after apply)
+      + monitoring                           = (known after apply)
+      + outpost_arn                          = (known after apply)
+      + password_data                        = (known after apply)
+      + placement_group                      = (known after apply)
+      + placement_group_id                   = (known after apply)
+      + placement_partition_number           = (known after apply)
+      + primary_network_interface_id         = (known after apply)
+      + private_dns                          = (known after apply)
+      + private_ip                           = (known after apply)
+      + public_dns                           = (known after apply)
+      + public_ip                            = (known after apply)
+      + region                               = "ap-northeast-1"
+      + secondary_private_ips                = (known after apply)
+      + security_groups                      = (known after apply)
+      + source_dest_check                    = true
+      + spot_instance_request_id             = (known after apply)
+      + subnet_id                            = (known after apply)
+      + tags                                 = {
+          + "Name" = "armageddon-lab-1c-ec2-app"
+        }
+      + tags_all                             = {
+          + "Name" = "armageddon-lab-1c-ec2-app"
+        }
+      + tenancy                              = (known after apply)
+      + user_data                            = <<-EOT
+            #!/bin/bash
+            dnf update -y
+            dnf install -y python3-pip
+            pip3 install flask pymysql boto3
+
+            mkdir -p /opt/rdsapp
+            cat >/opt/rdsapp/app.py <<'PY'
+            import json
+            import os
+            import boto3
+            import pymysql
+            from flask import Flask, request
+
+            REGION = os.environ.get("AWS_REGION", "ap-northeast-1")
+            SECRET_ID = os.environ.get("SECRET_ID", "lab-1c/rds/mysql")
+
+            secrets = boto3.client("secretsmanager", region_name=REGION)
+
+            def get_db_creds():
+                resp = secrets.get_secret_value(SecretId=SECRET_ID)
+                s = json.loads(resp["SecretString"])
+                # When you use "Credentials for RDS database", AWS usually stores:
+                # username, password, host, port, dbname (sometimes)
+                return s
+
+            def get_conn():
+                c = get_db_creds()
+                host = c["host"]
+                user = c["username"]
+                password = c["password"]
+                port = int(c.get("port", 3306))
+                db = c.get("dbname", "labdb")  # we'll create this if it doesn't exist
+                return pymysql.connect(host=host, user=user, password=password, port=port, database=db, autocommit=True)
+
+            app = Flask(__name__)
+
+            @app.route("/")
+            def home():
+                return """
+                <h2>EC2 → RDS Notes App</h2>
+                <p>POST /add?note=hello</p>
+                <p>GET /list</p>
+                """
+
+            @app.route("/init")
+            def init_db():
+                c = get_db_creds()
+                host = c["host"]
+                user = c["username"]
+                password = c["password"]
+                port = int(c.get("port", 3306))
+
+                # connect without specifying a DB first
+                conn = pymysql.connect(host=host, user=user, password=password, port=port, autocommit=True)
+                cur = conn.cursor()
+                cur.execute("CREATE DATABASE IF NOT EXISTS labdb;")
+                cur.execute("USE labdb;")
+                cur.execute("""
+                    CREATE TABLE IF NOT EXISTS notes (
+                        id INT AUTO_INCREMENT PRIMARY KEY,
+                        note VARCHAR(255) NOT NULL
+                    );
+                """)
+                cur.close()
+                conn.close()
+                return "Initialized labdb + notes table."
+
+            @app.route("/add", methods=["POST", "GET"])
+            def add_note():
+                note = request.args.get("note", "").strip()
+                if not note:
+                    return "Missing note param. Try: /add?note=hello", 400
+                conn = get_conn()
+                cur = conn.cursor()
+                cur.execute("INSERT INTO notes(note) VALUES(%s);", (note,))
+                cur.close()
+                conn.close()
+                return f"Inserted note: {note}"
+
+            @app.route("/list")
+            def list_notes():
+                conn = get_conn()
+                cur = conn.cursor()
+                cur.execute("SELECT id, note FROM notes ORDER BY id DESC;")
+                rows = cur.fetchall()
+                cur.close()
+                conn.close()
+                out = "<h3>Notes</h3><ul>"
+                for r in rows:
+                    out += f"<li>{r[0]}: {r[1]}</li>"
+                out += "</ul>"
+                return out
+
+            if __name__ == "__main__":
+                app.run(host="0.0.0.0", port=80)
+            PY
+
+            cat >/etc/systemd/system/rdsapp.service <<'SERVICE'
+            [Unit]
+            Description=EC2 to RDS Notes App
+            After=network.target
+
+            [Service]
+            WorkingDirectory=/opt/rdsapp
+            Environment=SECRET_ID=lab-1c/rds/mysql
+            ExecStart=/usr/bin/python3 /opt/rdsapp/app.py
+            Restart=always
+
+            [Install]
+            WantedBy=multi-user.target
+            SERVICE
+
+            systemctl daemon-reload
+            systemctl enable rdsapp
+            systemctl start rdsapp
+        EOT
+      + user_data_base64                     = (known after apply)
+      + user_data_replace_on_change          = false
+      + vpc_security_group_ids               = (known after apply)
+
+      + capacity_reservation_specification (known after apply)
+
+      + cpu_options (known after apply)
+
+      + ebs_block_device (known after apply)
+
+      + enclave_options (known after apply)
+
+      + ephemeral_block_device (known after apply)
+
+      + instance_market_options (known after apply)
+
+      + maintenance_options (known after apply)
+
+      + metadata_options (known after apply)
+
+      + network_interface (known after apply)
+
+      + primary_network_interface (known after apply)
+
+      + private_dns_name_options (known after apply)
+
+      + root_block_device (known after apply)
+    }
+
+  # module.iam.aws_iam_instance_profile.ec2_profile will be created
+  + resource "aws_iam_instance_profile" "ec2_profile" {
+      + arn         = (known after apply)
+      + create_date = (known after apply)
+      + id          = (known after apply)
+      + name        = "armageddon-lab-1c-ec2-secrets-profile"
+      + name_prefix = (known after apply)
+      + path        = "/"
+      + role        = "armageddon-lab-1c-ec2-secrets-role"
+      + tags_all    = (known after apply)
+      + unique_id   = (known after apply)
+    }
+
+  # module.iam.aws_iam_policy.cloudwatch_logs will be created
+  + resource "aws_iam_policy" "cloudwatch_logs" {
+      + arn              = (known after apply)
+      + attachment_count = (known after apply)
+      + description      = "Write access to CloudWatch Logs"
+      + id               = (known after apply)
+      + name             = "armageddon-lab-1c-cloudwatch-logs-policy"
+      + name_prefix      = (known after apply)
+      + path             = "/"
+      + policy           = jsonencode(
+            {
+              + Statement = [
+                  + {
+                      + Action   = [
+                          + "logs:CreateLogGroup",
+                          + "logs:CreateLogStream",
+                          + "logs:PutLogEvents",
+                          + "logs:DescribeLogStreams",
+                        ]
+                      + Effect   = "Allow"
+                      + Resource = [
+                          + "arn:aws:logs:ap-northeast-1:031857855861:log-group:/aws/ec2/lab-rds-app:*",
+                          + "arn:aws:logs:ap-northeast-1:031857855861:log-group:/aws/ec2/lab-rds-app",
+                        ]
+                    },
+                ]
+              + Version   = "2012-10-17"
+            }
+        )
+      + policy_id        = (known after apply)
+      + tags_all         = (known after apply)
+    }
+
+  # module.iam.aws_iam_policy.ec2_secrets_policy will be created
+  + resource "aws_iam_policy" "ec2_secrets_policy" {
+      + arn              = (known after apply)
+      + attachment_count = (known after apply)
+      + description      = "Allow EC2 to read lab/rds/mysql secret"
+      + id               = (known after apply)
+      + name             = "armageddon-lab-1c-EC2ReadRDSSecret"
+      + name_prefix      = (known after apply)
+      + path             = "/"
+      + policy           = jsonencode(
+            {
+              + Statement = [
+                  + {
+                      + Action   = [
+                          + "secretsmanager:GetSecretValue",
+                          + "secretsmanager:DescribeSecret",
+                        ]
+                      + Effect   = "Allow"
+                      + Resource = "arn:aws:secretsmanager:ap-northeast-1:031857855861:secret:lab-1c/rds/mysql*"
+                      + Sid      = "ReadSpecificSecret"
+                    },
+                  + {
+                      + Action   = "kms:Decrypt"
+                      + Effect   = "Allow"
+                      + Resource = "arn:aws:kms:ap-northeast-1:031857855861:key/0987dcba-09fe-87dc-65ba-ab0987654321"
+                      + Sid      = "AllowKMSDecrypt"
+                    },
+                ]
+              + Version   = "2012-10-17"
+            }
+        )
+      + policy_id        = (known after apply)
+      + tags_all         = (known after apply)
+    }
+
+  # module.iam.aws_iam_policy.ssm_read will be created
+  + resource "aws_iam_policy" "ssm_read" {
+      + arn              = (known after apply)
+      + attachment_count = (known after apply)
+      + description      = "Read access to SSM Parameter Store"
+      + id               = (known after apply)
+      + name             = "armageddon-lab-1c-ssm-read-policy"
+      + name_prefix      = (known after apply)
+      + path             = "/"
+      + policy           = jsonencode(
+            {
+              + Statement = [
+                  + {
+                      + Action   = [
+                          + "ssm:GetParameter",
+                          + "ssm:GetParameters",
+                          + "ssm:GetParametersByPath",
+                        ]
+                      + Effect   = "Allow"
+                      + Resource = [
+                          + "arn:aws:ssm:ap-northeast-1:031857855861:parameter/lab/db/*",
+                          + "arn:aws:ssm:ap-northeast-1:031857855861:parameter/lab/*",
+                        ]
+                    },
+                ]
+              + Version   = "2012-10-17"
+            }
+        )
+      + policy_id        = (known after apply)
+      + tags_all         = (known after apply)
+    }
+
+  # module.iam.aws_iam_role.ec2_secrets_role will be created
+  + resource "aws_iam_role" "ec2_secrets_role" {
+      + arn                   = (known after apply)
+      + assume_role_policy    = jsonencode(
+            {
+              + Statement = [
+                  + {
+                      + Action    = "sts:AssumeRole"
+                      + Effect    = "Allow"
+                      + Principal = {
+                          + Service = "ec2.amazonaws.com"
+                        }
+                    },
+                ]
+              + Version   = "2012-10-17"
+            }
+        )
+      + create_date           = (known after apply)
+      + force_detach_policies = false
+      + id                    = (known after apply)
+      + managed_policy_arns   = (known after apply)
+      + max_session_duration  = 3600
+      + name                  = "armageddon-lab-1c-ec2-secrets-role"
+      + name_prefix           = (known after apply)
+      + path                  = "/"
+      + tags_all              = (known after apply)
+      + unique_id             = (known after apply)
+
+      + inline_policy (known after apply)
+    }
+
+  # module.iam.aws_iam_role_policy.ec2_policy will be created
+  + resource "aws_iam_role_policy" "ec2_policy" {
+      + id          = (known after apply)
+      + name        = "ec2_policy"
+      + name_prefix = (known after apply)
+      + policy      = jsonencode(
+            {
+              + Statement = [
+                  + {
+                      + Action   = [
+                          + "ec2:Describe*",
+                          + "logs:PutMetricFilter",
+                          + "logs:DescribeLogGroups",
+                          + "SNS:ListTopics",
+                          + "cloudwatch:PutMetricAlarm",
+                          + "cloudwatch:DescribeAlarms",
+                          + "rds:DescribeDBInstances",
+                          + "cloudwatch:PutMetricData",
+                        ]
+                      + Effect   = "Allow"
+                      + Resource = "*"
+                    },
+                ]
+              + Version   = "2012-10-17"
+            }
+        )
+      + role        = (known after apply)
+    }
+
+  # module.iam.aws_iam_role_policy_attachment.cloudwatch_logs will be created
+  + resource "aws_iam_role_policy_attachment" "cloudwatch_logs" {
+      + id         = (known after apply)
+      + policy_arn = (known after apply)
+      + role       = "armageddon-lab-1c-ec2-secrets-role"
+    }
+
+  # module.iam.aws_iam_role_policy_attachment.cw_agent will be created
+  + resource "aws_iam_role_policy_attachment" "cw_agent" {
+      + id         = (known after apply)
+      + policy_arn = "arn:aws:iam::aws:policy/CloudWatchLogsFullAccess"
+      + role       = "armageddon-lab-1c-ec2-secrets-role"
+    }
+
+  # module.iam.aws_iam_role_policy_attachment.secrets_attach will be created
+  + resource "aws_iam_role_policy_attachment" "secrets_attach" {
+      + id         = (known after apply)
+      + policy_arn = (known after apply)
+      + role       = "armageddon-lab-1c-ec2-secrets-role"
+    }
+
+  # module.iam.aws_iam_role_policy_attachment.ssm_read will be created
+  + resource "aws_iam_role_policy_attachment" "ssm_read" {
+      + id         = (known after apply)
+      + policy_arn = (known after apply)
+      + role       = "armageddon-lab-1c-ec2-secrets-role"
+    }
+
+  # module.rds.aws_db_instance.mysql will be created
+  + resource "aws_db_instance" "mysql" {
+      + address                               = (known after apply)
+      + allocated_storage                     = 20
+      + apply_immediately                     = false
+      + arn                                   = (known after apply)
+      + auto_minor_version_upgrade            = true
+      + availability_zone                     = (known after apply)
+      + backup_retention_period               = (known after apply)
+      + backup_target                         = (known after apply)
+      + backup_window                         = (known after apply)
+      + ca_cert_identifier                    = (known after apply)
+      + character_set_name                    = (known after apply)
+      + copy_tags_to_snapshot                 = false
+      + database_insights_mode                = (known after apply)
+      + db_name                               = (sensitive value)
+      + db_subnet_group_name                  = "armageddon-lab-1c-db-subnet-group"
+      + dedicated_log_volume                  = false
+      + delete_automated_backups              = true
+      + deletion_protection                   = false
+      + domain_fqdn                           = (known after apply)
+      + endpoint                              = (known after apply)
+      + engine                                = "mysql"
+      + engine_lifecycle_support              = (known after apply)
+      + engine_version                        = "8.0"
+      + engine_version_actual                 = (known after apply)
+      + hosted_zone_id                        = (known after apply)
+      + id                                    = (known after apply)
+      + identifier                            = "lab-mysql"
+      + identifier_prefix                     = (known after apply)
+      + instance_class                        = "db.t3.micro"
+      + iops                                  = (known after apply)
+      + kms_key_id                            = (known after apply)
+      + latest_restorable_time                = (known after apply)
+      + license_model                         = (known after apply)
+      + listener_endpoint                     = (known after apply)
+      + maintenance_window                    = (known after apply)
+      + master_user_secret                    = (known after apply)
+      + master_user_secret_kms_key_id         = (known after apply)
+      + monitoring_interval                   = 0
+      + monitoring_role_arn                   = (known after apply)
+      + multi_az                              = true
+      + nchar_character_set_name              = (known after apply)
+      + network_type                          = (known after apply)
+      + option_group_name                     = (known after apply)
+      + parameter_group_name                  = (known after apply)
+      + password                              = (sensitive value)
+      + password_wo                           = (write-only attribute)
+      + performance_insights_enabled          = false
+      + performance_insights_kms_key_id       = (known after apply)
+      + performance_insights_retention_period = (known after apply)
+      + port                                  = (known after apply)
+      + publicly_accessible                   = false
+      + region                                = "ap-northeast-1"
+      + replica_mode                          = (known after apply)
+      + replicas                              = (known after apply)
+      + resource_id                           = (known after apply)
+      + skip_final_snapshot                   = true
+      + snapshot_identifier                   = (known after apply)
+      + status                                = (known after apply)
+      + storage_throughput                    = (known after apply)
+      + storage_type                          = "gp2"
+      + tags_all                              = (known after apply)
+      + timezone                              = (known after apply)
+      + upgrade_rollout_order                 = (known after apply)
+      + username                              = (sensitive value)
+      + vpc_security_group_ids                = (known after apply)
+    }
+
+  # module.rds.aws_ssm_parameter.db_config["endpoint"] will be created
+  + resource "aws_ssm_parameter" "db_config" {
+      + arn            = (known after apply)
+      + data_type      = (known after apply)
+      + has_value_wo   = (known after apply)
+      + id             = (known after apply)
+      + insecure_value = (known after apply)
+      + key_id         = (known after apply)
+      + name           = "/lab-1c/db/endpoint"
+      + region         = "ap-northeast-1"
+      + tags           = {
+          + "Lab" = "incident-response"
+        }
+      + tags_all       = {
+          + "Lab" = "incident-response"
+        }
+      + tier           = (known after apply)
+      + type           = "String"
+      + value          = (sensitive value)
+      + value_wo       = (write-only attribute)
+      + version        = (known after apply)
+    }
+
+  # module.rds.aws_ssm_parameter.db_config["name"] will be created
+  + resource "aws_ssm_parameter" "db_config" {
+      + arn            = (known after apply)
+      + data_type      = (known after apply)
+      + has_value_wo   = (known after apply)
+      + id             = (known after apply)
+      + insecure_value = (known after apply)
+      + key_id         = (known after apply)
+      + name           = "/lab-1c/db/name"
+      + region         = "ap-northeast-1"
+      + tags           = {
+          + "Lab" = "incident-response"
+        }
+      + tags_all       = {
+          + "Lab" = "incident-response"
+        }
+      + tier           = (known after apply)
+      + type           = "String"
+      + value          = (sensitive value)
+      + value_wo       = (write-only attribute)
+      + version        = (known after apply)
+    }
+
+  # module.rds.aws_ssm_parameter.db_config["port"] will be created
+  + resource "aws_ssm_parameter" "db_config" {
+      + arn            = (known after apply)
+      + data_type      = (known after apply)
+      + has_value_wo   = (known after apply)
+      + id             = (known after apply)
+      + insecure_value = (known after apply)
+      + key_id         = (known after apply)
+      + name           = "/lab-1c/db/port"
+      + region         = "ap-northeast-1"
+      + tags           = {
+          + "Lab" = "incident-response"
+        }
+      + tags_all       = {
+          + "Lab" = "incident-response"
+        }
+      + tier           = (known after apply)
+      + type           = "String"
+      + value          = (sensitive value)
+      + value_wo       = (write-only attribute)
+      + version        = (known after apply)
+    }
+
+  # module.security.aws_security_group.ec2_sg will be created
+  + resource "aws_security_group" "ec2_sg" {
+      + arn                    = (known after apply)
+      + description            = "Security group for EC2"
+      + egress                 = (known after apply)
+      + id                     = (known after apply)
+      + ingress                = (known after apply)
+      + name                   = "ec2-armageddon-lab-1c"
+      + name_prefix            = (known after apply)
+      + owner_id               = (known after apply)
+      + region                 = "ap-northeast-1"
+      + revoke_rules_on_delete = false
+      + tags                   = {
+          + "Name" = "sg-ec2-armageddon-lab-1c"
+        }
+      + tags_all               = {
+          + "Name" = "sg-ec2-armageddon-lab-1c"
+        }
+      + vpc_id                 = (known after apply)
+    }
+
+  # module.security.aws_security_group.rds_sg will be created
+  + resource "aws_security_group" "rds_sg" {
+      + arn                    = (known after apply)
+      + description            = "Allow inbound traffic and all outbound traffic to the rds"
+      + egress                 = (known after apply)
+      + id                     = (known after apply)
+      + ingress                = (known after apply)
+      + name                   = "rds-lab-1c"
+      + name_prefix            = (known after apply)
+      + owner_id               = (known after apply)
+      + region                 = "ap-northeast-1"
+      + revoke_rules_on_delete = false
+      + tags                   = {
+          + "Name" = "armageddon-lab-1c-rds-sg"
+        }
+      + tags_all               = {
+          + "Name" = "armageddon-lab-1c-rds-sg"
+        }
+      + vpc_id                 = (known after apply)
+    }
+
+  # module.security.aws_vpc_security_group_egress_rule.ec2_all_outbound will be created
+  + resource "aws_vpc_security_group_egress_rule" "ec2_all_outbound" {
+      + arn                    = (known after apply)
+      + cidr_ipv4              = "0.0.0.0/0"
+      + id                     = (known after apply)
+      + ip_protocol            = "-1"
+      + region                 = "ap-northeast-1"
+      + security_group_id      = (known after apply)
+      + security_group_rule_id = (known after apply)
+      + tags_all               = {}
+    }
+
+  # module.security.aws_vpc_security_group_egress_rule.rds_all_outbound will be created
+  + resource "aws_vpc_security_group_egress_rule" "rds_all_outbound" {
+      + arn                    = (known after apply)
+      + cidr_ipv4              = "0.0.0.0/0"
+      + id                     = (known after apply)
+      + ip_protocol            = "-1"
+      + region                 = "ap-northeast-1"
+      + security_group_id      = (known after apply)
+      + security_group_rule_id = (known after apply)
+      + tags_all               = {}
+    }
+
+  # module.security.aws_vpc_security_group_ingress_rule.ec2_http will be created
+  + resource "aws_vpc_security_group_ingress_rule" "ec2_http" {
+      + arn                    = (known after apply)
+      + cidr_ipv4              = "0.0.0.0/0"
+      + description            = "Allow HTTP traffic"
+      + from_port              = 80
+      + id                     = (known after apply)
+      + ip_protocol            = "tcp"
+      + region                 = "ap-northeast-1"
+      + security_group_id      = (known after apply)
+      + security_group_rule_id = (known after apply)
+      + tags                   = {
+          + "Name" = "armageddon-lab-1c-http"
+        }
+      + tags_all               = {
+          + "Name" = "armageddon-lab-1c-http"
+        }
+      + to_port                = 80
+    }
+
+  # module.security.aws_vpc_security_group_ingress_rule.rds-http_ipv4 will be created
+  + resource "aws_vpc_security_group_ingress_rule" "rds-http_ipv4" {
+      + arn                          = (known after apply)
+      + description                  = "MySQL access from EC2"
+      + from_port                    = 3306
+      + id                           = (known after apply)
+      + ip_protocol                  = "tcp"
+      + referenced_security_group_id = (known after apply)
+      + region                       = "ap-northeast-1"
+      + security_group_id            = (known after apply)
+      + security_group_rule_id       = (known after apply)
+      + tags                         = {
+          + "Name" = "armageddon-lab-1c-tcp"
+        }
+      + tags_all                     = {
+          + "Name" = "armageddon-lab-1c-tcp"
+        }
+      + to_port                      = 3306
+    }
+
+  # module.vpc.aws_db_subnet_group.this will be created
+  + resource "aws_db_subnet_group" "this" {
+      + arn                     = (known after apply)
+      + description             = "Managed by Terraform"
+      + id                      = (known after apply)
+      + name                    = "armageddon-lab-1c-db-subnet-group"
+      + name_prefix             = (known after apply)
+      + region                  = "ap-northeast-1"
+      + subnet_ids              = (known after apply)
+      + supported_network_types = (known after apply)
+      + tags                    = {
+          + "Name" = "armageddon-lab-1c-db-subnet-group"
+        }
+      + tags_all                = {
+          + "Name" = "armageddon-lab-1c-db-subnet-group"
+        }
+      + vpc_id                  = (known after apply)
+    }
+
+  # module.vpc.aws_eip.nat will be created
+  + resource "aws_eip" "nat" {
+      + allocation_id        = (known after apply)
+      + arn                  = (known after apply)
+      + association_id       = (known after apply)
+      + carrier_ip           = (known after apply)
+      + customer_owned_ip    = (known after apply)
+      + domain               = "vpc"
+      + id                   = (known after apply)
+      + instance             = (known after apply)
+      + ipam_pool_id         = (known after apply)
+      + network_border_group = (known after apply)
+      + network_interface    = (known after apply)
+      + private_dns          = (known after apply)
+      + private_ip           = (known after apply)
+      + ptr_record           = (known after apply)
+      + public_dns           = (known after apply)
+      + public_ip            = (known after apply)
+      + public_ipv4_pool     = (known after apply)
+      + region               = "ap-northeast-1"
+      + tags                 = {
+          + "Name" = "armageddon-lab-1c-nat"
+        }
+      + tags_all             = {
+          + "Name" = "armageddon-lab-1c-nat"
+        }
+    }
+
+  # module.vpc.aws_internet_gateway.main will be created
+  + resource "aws_internet_gateway" "main" {
+      + arn      = (known after apply)
+      + id       = (known after apply)
+      + owner_id = (known after apply)
+      + region   = "ap-northeast-1"
+      + tags     = {
+          + "Name" = "armageddon-lab-1c-igw"
+        }
+      + tags_all = {
+          + "Name" = "armageddon-lab-1c-igw"
+        }
+      + vpc_id   = (known after apply)
+    }
+
+  # module.vpc.aws_nat_gateway.main will be created
+  + resource "aws_nat_gateway" "main" {
+      + allocation_id                      = (known after apply)
+      + association_id                     = (known after apply)
+      + auto_provision_zones               = (known after apply)
+      + auto_scaling_ips                   = (known after apply)
+      + availability_mode                  = (known after apply)
+      + connectivity_type                  = "public"
+      + id                                 = (known after apply)
+      + network_interface_id               = (known after apply)
+      + private_ip                         = (known after apply)
+      + public_ip                          = (known after apply)
+      + region                             = "ap-northeast-1"
+      + regional_nat_gateway_address       = (known after apply)
+      + regional_nat_gateway_auto_mode     = (known after apply)
+      + route_table_id                     = (known after apply)
+      + secondary_allocation_ids           = (known after apply)
+      + secondary_private_ip_address_count = (known after apply)
+      + secondary_private_ip_addresses     = (known after apply)
+      + subnet_id                          = (known after apply)
+      + tags                               = {
+          + "Name" = "armageddon-lab-1c-gw"
+        }
+      + tags_all                           = {
+          + "Name" = "armageddon-lab-1c-gw"
+        }
+      + vpc_id                             = (known after apply)
+    }
+
+  # module.vpc.aws_route_table.private will be created
+  + resource "aws_route_table" "private" {
+      + arn              = (known after apply)
+      + id               = (known after apply)
+      + owner_id         = (known after apply)
+      + propagating_vgws = (known after apply)
+      + region           = "ap-northeast-1"
+      + route            = (known after apply)
+      + tags             = {
+          + "Name" = "armageddon-lab-1c-private-rtb"
+        }
+      + tags_all         = {
+          + "Name" = "armageddon-lab-1c-private-rtb"
+        }
+      + vpc_id           = (known after apply)
+    }
+
+  # module.vpc.aws_route_table.public will be created
+  + resource "aws_route_table" "public" {
+      + arn              = (known after apply)
+      + id               = (known after apply)
+      + owner_id         = (known after apply)
+      + propagating_vgws = (known after apply)
+      + region           = "ap-northeast-1"
+      + route            = [
+          + {
+              + cidr_block                 = "0.0.0.0/0"
+              + gateway_id                 = (known after apply)
+                # (11 unchanged attributes hidden)
+            },
+        ]
+      + tags             = {
+          + "Name" = "armageddon-lab-1c-public-rtb"
+        }
+      + tags_all         = {
+          + "Name" = "armageddon-lab-1c-public-rtb"
+        }
+      + vpc_id           = (known after apply)
+    }
+
+  # module.vpc.aws_route_table_association.private_a will be created
+  + resource "aws_route_table_association" "private_a" {
+      + id             = (known after apply)
+      + region         = "ap-northeast-1"
+      + route_table_id = (known after apply)
+      + subnet_id      = (known after apply)
+    }
+
+  # module.vpc.aws_route_table_association.public_a will be created
+  + resource "aws_route_table_association" "public_a" {
+      + id             = (known after apply)
+      + region         = "ap-northeast-1"
+      + route_table_id = (known after apply)
+      + subnet_id      = (known after apply)
+    }
+
+  # module.vpc.aws_subnet.private_a will be created
+  + resource "aws_subnet" "private_a" {
+      + arn                                            = (known after apply)
+      + assign_ipv6_address_on_creation                = false
+      + availability_zone                              = "ap-northeast-1a"
+      + availability_zone_id                           = (known after apply)
+      + cidr_block                                     = "172.17.11.0/24"
+      + enable_dns64                                   = false
+      + enable_resource_name_dns_a_record_on_launch    = false
+      + enable_resource_name_dns_aaaa_record_on_launch = false
+      + id                                             = (known after apply)
+      + ipv6_cidr_block_association_id                 = (known after apply)
+      + ipv6_native                                    = false
+      + map_public_ip_on_launch                        = false
+      + owner_id                                       = (known after apply)
+      + private_dns_hostname_type_on_launch            = (known after apply)
+      + region                                         = "ap-northeast-1"
+      + tags                                           = {
+          + "Name" = "armageddon-lab-1c-private-subnet-1a"
+        }
+      + tags_all                                       = {
+          + "Name" = "armageddon-lab-1c-private-subnet-1a"
+        }
+      + vpc_id                                         = (known after apply)
+    }
+
+  # module.vpc.aws_subnet.private_b will be created
+  + resource "aws_subnet" "private_b" {
+      + arn                                            = (known after apply)
+      + assign_ipv6_address_on_creation                = false
+      + availability_zone                              = "ap-northeast-1c"
+      + availability_zone_id                           = (known after apply)
+      + cidr_block                                     = "172.17.12.0/24"
+      + enable_dns64                                   = false
+      + enable_resource_name_dns_a_record_on_launch    = false
+      + enable_resource_name_dns_aaaa_record_on_launch = false
+      + id                                             = (known after apply)
+      + ipv6_cidr_block_association_id                 = (known after apply)
+      + ipv6_native                                    = false
+      + map_public_ip_on_launch                        = false
+      + owner_id                                       = (known after apply)
+      + private_dns_hostname_type_on_launch            = (known after apply)
+      + region                                         = "ap-northeast-1"
+      + tags                                           = {
+          + "Name" = "armageddon-lab-1c-private-subnet-1b"
+        }
+      + tags_all                                       = {
+          + "Name" = "armageddon-lab-1c-private-subnet-1b"
+        }
+      + vpc_id                                         = (known after apply)
+    }
+
+  # module.vpc.aws_subnet.public_a will be created
+  + resource "aws_subnet" "public_a" {
+      + arn                                            = (known after apply)
+      + assign_ipv6_address_on_creation                = false
+      + availability_zone                              = "ap-northeast-1a"
+      + availability_zone_id                           = (known after apply)
+      + cidr_block                                     = "172.17.1.0/24"
+      + enable_dns64                                   = false
+      + enable_resource_name_dns_a_record_on_launch    = false
+      + enable_resource_name_dns_aaaa_record_on_launch = false
+      + id                                             = (known after apply)
+      + ipv6_cidr_block_association_id                 = (known after apply)
+      + ipv6_native                                    = false
+      + map_public_ip_on_launch                        = true
+      + owner_id                                       = (known after apply)
+      + private_dns_hostname_type_on_launch            = (known after apply)
+      + region                                         = "ap-northeast-1"
+      + tags                                           = {
+          + "Name" = "armageddon-lab-1c-public-subnet-1a"
+        }
+      + tags_all                                       = {
+          + "Name" = "armageddon-lab-1c-public-subnet-1a"
+        }
+      + vpc_id                                         = (known after apply)
+    }
+
+  # module.vpc.aws_vpc.main will be created
+  + resource "aws_vpc" "main" {
+      + arn                                  = (known after apply)
+      + cidr_block                           = "172.17.0.0/16"
+      + default_network_acl_id               = (known after apply)
+      + default_route_table_id               = (known after apply)
+      + default_security_group_id            = (known after apply)
+      + dhcp_options_id                      = (known after apply)
+      + enable_dns_hostnames                 = true
+      + enable_dns_support                   = true
+      + enable_network_address_usage_metrics = (known after apply)
+      + id                                   = (known after apply)
+      + instance_tenancy                     = "default"
+      + ipv6_association_id                  = (known after apply)
+      + ipv6_cidr_block                      = (known after apply)
+      + ipv6_cidr_block_network_border_group = (known after apply)
+      + main_route_table_id                  = (known after apply)
+      + owner_id                             = (known after apply)
+      + region                               = "ap-northeast-1"
+      + tags                                 = {
+          + "Name" = "armageddon-lab-1c-vpc"
+        }
+      + tags_all                             = {
+          + "Name" = "armageddon-lab-1c-vpc"
+        }
+    }
+
+Plan: 43 to add, 0 to change, 0 to destroy.
+
+terraform apply:
+module.vpc.aws_vpc.main: Creating...
+module.iam.aws_iam_policy.ssm_read: Creating...
+module.config_store.aws_ssm_parameter.db_name: Creating...
+module.iam.aws_iam_policy.cloudwatch_logs: Creating...
+module.config_store.aws_secretsmanager_secret.db_credentials: Creating...
+module.iam.aws_iam_policy.ec2_secrets_policy: Creating...
+module.iam.aws_iam_role.ec2_secrets_role: Creating...
+module.cloudwatch.aws_sns_topic.db_incidents: Creating...
+module.config_store.aws_ssm_parameter.db_port: Creating...
+module.cloudwatch.aws_cloudwatch_log_group.app_logs: Creating...
+module.iam.aws_iam_policy.ssm_read: Creation complete after 1s [id=arn:aws:iam::031857855861:policy/armageddon-lab-1c-ssm-read-policy]
+module.iam.aws_iam_policy.cloudwatch_logs: Creation complete after 1s [id=arn:aws:iam::031857855861:policy/armageddon-lab-1c-cloudwatch-logs-policy]
+module.iam.aws_iam_policy.ec2_secrets_policy: Creation complete after 1s [id=arn:aws:iam::031857855861:policy/armageddon-lab-1c-EC2ReadRDSSecret]
+module.config_store.aws_ssm_parameter.db_endpoint: Creating...
+module.iam.aws_iam_role.ec2_secrets_role: Creation complete after 1s [id=armageddon-lab-1c-ec2-secrets-role]
+module.iam.aws_iam_role_policy_attachment.cw_agent: Creating...
+module.iam.aws_iam_role_policy_attachment.ssm_read: Creating...
+module.iam.aws_iam_instance_profile.ec2_profile: Creating...
+module.iam.aws_iam_role_policy_attachment.ssm_read: Creation complete after 0s [id=armageddon-lab-1c-ec2-secrets-role/arn:aws:iam::031857855861:policy/armageddon-lab-1c-ssm-read-policy]
+module.iam.aws_iam_role_policy_attachment.cw_agent: Creation complete after 0s [id=armageddon-lab-1c-ec2-secrets-role/arn:aws:iam::aws:policy/CloudWatchLogsFullAccess]
+module.iam.aws_iam_role_policy_attachment.cloudwatch_logs: Creating...
+module.iam.aws_iam_role_policy.ec2_policy: Creating...
+module.config_store.aws_secretsmanager_secret.db_credentials: Creation complete after 2s [id=arn:aws:secretsmanager:ap-northeast-1:031857855861:secret:lab/rds/mysql-SQnsdX]
+module.iam.aws_iam_role_policy_attachment.secrets_attach: Creating...
+module.iam.aws_iam_role_policy_attachment.cloudwatch_logs: Creation complete after 1s [id=armageddon-lab-1c-ec2-secrets-role/arn:aws:iam::031857855861:policy/armageddon-lab-1c-cloudwatch-logs-policy]
+module.config_store.aws_secretsmanager_secret_version.db_credentials_version: Creating...
+module.iam.aws_iam_role_policy.ec2_policy: Creation complete after 1s [id=armageddon-lab-1c-ec2-secrets-role:ec2_policy]
+module.cloudwatch.aws_cloudwatch_log_group.app_logs: Creation complete after 2s [id=/aws/ec2/lab-rds-app]
+module.cloudwatch.aws_cloudwatch_log_metric_filter.db_errors: Creating...
+module.iam.aws_iam_role_policy_attachment.secrets_attach: Creation complete after 0s [id=armageddon-lab-1c-ec2-secrets-role/arn:aws:iam::031857855861:policy/armageddon-lab-1c-EC2ReadRDSSecret]
+module.config_store.aws_ssm_parameter.db_name: Creation complete after 2s [id=/lab/db/name]
+module.config_store.aws_ssm_parameter.db_port: Creation complete after 2s [id=/lab/db/port]
+module.cloudwatch.aws_cloudwatch_log_metric_filter.db_errors: Creation complete after 1s [id=DBConnectionErrors]
+module.config_store.aws_secretsmanager_secret_version.db_credentials_version: Creation complete after 1s [id=arn:aws:secretsmanager:ap-northeast-1:031857855861:secret:lab/rds/mysql-SQnsdX|terraform-20260119173341756000000002]
+module.config_store.aws_ssm_parameter.db_endpoint: Creation complete after 2s [id=/lab/db/endpoint]
+module.cloudwatch.aws_sns_topic.db_incidents: Creation complete after 3s [id=arn:aws:sns:ap-northeast-1:031857855861:lab-db-incidents]
+module.cloudwatch.aws_sns_topic_subscription.email: Creating...
+module.cloudwatch.aws_cloudwatch_metric_alarm.db_failure: Creating...
+module.cloudwatch.aws_sns_topic_subscription.email: Creation complete after 1s [id=arn:aws:sns:ap-northeast-1:031857855861:lab-db-incidents:9c49fc89-bd84-48eb-813c-5013dcccd2a8]
+module.cloudwatch.aws_cloudwatch_metric_alarm.db_failure: Creation complete after 2s [id=lab-db-connection-failure]
+module.iam.aws_iam_instance_profile.ec2_profile: Creation complete after 6s [id=armageddon-lab-1c-ec2-secrets-profile]
+module.vpc.aws_vpc.main: Still creating... [00m10s elapsed]
+module.vpc.aws_vpc.main: Creation complete after 16s [id=vpc-02384a36084855975]
+module.security.aws_security_group.ec2_sg: Creating...
+module.vpc.aws_subnet.private_a: Creating...
+module.vpc.aws_subnet.public_a: Creating...
+module.vpc.aws_route_table.private: Creating...
+module.vpc.aws_subnet.private_b: Creating...
+module.vpc.aws_internet_gateway.main: Creating...
+module.security.aws_security_group.rds_sg: Creating...
+module.vpc.aws_route_table.private: Creation complete after 2s [id=rtb-0b1a1c0963955a701]
+module.vpc.aws_internet_gateway.main: Creation complete after 2s [id=igw-07b692b7e9b1450e2]
+module.vpc.aws_eip.nat: Creating...
+module.vpc.aws_route_table.public: Creating...
+module.vpc.aws_subnet.private_b: Creation complete after 3s [id=subnet-0723049476658f6bc]
+module.vpc.aws_subnet.private_a: Creation complete after 5s [id=subnet-08da0ae7c50dae200]
+module.vpc.aws_eip.nat: Creation complete after 3s [id=eipalloc-03517e4309d80c399]
+module.vpc.aws_route_table_association.private_a: Creating...
+module.security.aws_security_group.ec2_sg: Creation complete after 5s [id=sg-027ff2d7974b65170]
+module.vpc.aws_db_subnet_group.this: Creating...
+module.security.aws_vpc_security_group_egress_rule.ec2_all_outbound: Creating...
+module.security.aws_vpc_security_group_ingress_rule.ec2_http: Creating...
+module.security.aws_security_group.rds_sg: Creation complete after 5s [id=sg-0ef1f94f115a194e2]
+module.security.aws_vpc_security_group_egress_rule.rds_all_outbound: Creating...
+module.security.aws_vpc_security_group_ingress_rule.rds-http_ipv4: Creating...
+module.vpc.aws_route_table.public: Creation complete after 3s [id=rtb-01e6d0885d384513d]
+module.security.aws_vpc_security_group_egress_rule.ec2_all_outbound: Creation complete after 0s [id=sgr-0e37796f6c4ce7470]
+module.security.aws_vpc_security_group_egress_rule.rds_all_outbound: Creation complete after 0s [id=sgr-0c0cff58a28246041]
+module.security.aws_vpc_security_group_ingress_rule.ec2_http: Creation complete after 0s [id=sgr-0e9b1b2c0166f135a]
+module.security.aws_vpc_security_group_ingress_rule.rds-http_ipv4: Creation complete after 1s [id=sgr-0f1aac762c5a84c45]
+module.vpc.aws_route_table_association.private_a: Creation complete after 1s [id=rtbassoc-0612915ac96ab61e3]
+module.vpc.aws_db_subnet_group.this: Creation complete after 3s [id=armageddon-lab-1c-db-subnet-group]
+module.rds.aws_db_instance.mysql: Creating...
+module.vpc.aws_subnet.public_a: Still creating... [00m10s elapsed]
+module.vpc.aws_subnet.public_a: Creation complete after 13s [id=subnet-0feede0670ef869e8]
+module.vpc.aws_route_table_association.public_a: Creating...
+module.vpc.aws_nat_gateway.main: Creating...
+module.ec2.aws_instance.ec2: Creating...
+module.vpc.aws_route_table_association.public_a: Creation complete after 1s [id=rtbassoc-0e444eefce5397559]
+module.vpc.aws_nat_gateway.main: Still creating... [00m10s elapsed]
+module.ec2.aws_instance.ec2: Still creating... [00m10s elapsed]
+module.ec2.aws_instance.ec2: Creation complete after 17s [id=i-05f740a6401a1b866]
+module.vpc.aws_nat_gateway.main: Still creating... [00m20s elapsed]
+module.vpc.aws_nat_gateway.main: Still creating... [00m30s elapsed]
+module.vpc.aws_nat_gateway.main: Still creating... [00m40s elapsed]
+module.vpc.aws_nat_gateway.main: Still creating... [00m50s elapsed]
+module.vpc.aws_nat_gateway.main: Still creating... [01m00s elapsed]
+module.vpc.aws_nat_gateway.main: Still creating... [01m10s elapsed]
+module.vpc.aws_nat_gateway.main: Still creating... [01m20s elapsed]
+module.vpc.aws_nat_gateway.main: Still creating... [01m30s elapsed]
+module.vpc.aws_nat_gateway.main: Creation complete after 1m38s [id=nat-010ee46349913c3e5]
+module.rds.aws_db_instance.mysql: Creating...
+module.config_store.aws_secretsmanager_secret_version.db_credentials_version: Destruction complete after 1s
+module.config_store.aws_secretsmanager_secret_version.db_credentials_version: Creating...
+module.config_store.aws_secretsmanager_secret_version.db_credentials_version: Creation complete after 1s [id=arn:aws:secretsmanager:ap-northeast-1:031857855861:secret:lab/rds/mysql-SQnsdX|terraform-20260119173933781200000001]
+module.rds.aws_db_instance.mysql: Still creating... [00m10s elapsed]
+module.rds.aws_db_instance.mysql: Still creating... [00m20s elapsed]
+module.rds.aws_db_instance.mysql: Still creating... [00m30s elapsed]
+module.rds.aws_db_instance.mysql: Still creating... [00m40s elapsed]
+module.rds.aws_db_instance.mysql: Still creating... [00m50s elapsed]
+module.rds.aws_db_instance.mysql: Still creating... [01m00s elapsed]
+module.rds.aws_db_instance.mysql: Still creating... [01m10s elapsed]
+module.rds.aws_db_instance.mysql: Still creating... [01m20s elapsed]
+module.rds.aws_db_instance.mysql: Still creating... [01m30s elapsed]
+module.rds.aws_db_instance.mysql: Still creating... [01m40s elapsed]
+module.rds.aws_db_instance.mysql: Still creating... [01m50s elapsed]
+module.rds.aws_db_instance.mysql: Still creating... [02m00s elapsed]
+module.rds.aws_db_instance.mysql: Still creating... [02m10s elapsed]
+module.rds.aws_db_instance.mysql: Still creating... [02m20s elapsed]
+module.rds.aws_db_instance.mysql: Still creating... [02m30s elapsed]
+module.rds.aws_db_instance.mysql: Still creating... [02m40s elapsed]
+module.rds.aws_db_instance.mysql: Still creating... [02m50s elapsed]
+module.rds.aws_db_instance.mysql: Still creating... [03m00s elapsed]
+module.rds.aws_db_instance.mysql: Still creating... [03m10s elapsed]
+module.rds.aws_db_instance.mysql: Still creating... [03m20s elapsed]
+module.rds.aws_db_instance.mysql: Still creating... [03m30s elapsed]
+module.rds.aws_db_instance.mysql: Still creating... [03m40s elapsed]
+module.rds.aws_db_instance.mysql: Still creating... [03m50s elapsed]
+module.rds.aws_db_instance.mysql: Still creating... [04m00s elapsed]
+module.rds.aws_db_instance.mysql: Still creating... [04m10s elapsed]
+module.rds.aws_db_instance.mysql: Still creating... [04m20s elapsed]
+module.rds.aws_db_instance.mysql: Still creating... [04m30s elapsed]
+module.rds.aws_db_instance.mysql: Still creating... [04m40s elapsed]
+module.rds.aws_db_instance.mysql: Still creating... [04m50s elapsed]
+module.rds.aws_db_instance.mysql: Still creating... [05m00s elapsed]
+module.rds.aws_db_instance.mysql: Still creating... [05m10s elapsed]
+module.rds.aws_db_instance.mysql: Still creating... [05m20s elapsed]
+module.rds.aws_db_instance.mysql: Still creating... [05m30s elapsed]
+module.rds.aws_db_instance.mysql: Still creating... [05m40s elapsed]
+module.rds.aws_db_instance.mysql: Still creating... [05m50s elapsed]
+module.rds.aws_db_instance.mysql: Still creating... [06m00s elapsed]
+module.rds.aws_db_instance.mysql: Still creating... [06m10s elapsed]
+module.rds.aws_db_instance.mysql: Still creating... [06m20s elapsed]
+module.rds.aws_db_instance.mysql: Still creating... [06m31s elapsed]
+module.rds.aws_db_instance.mysql: Still creating... [06m41s elapsed]
+module.rds.aws_db_instance.mysql: Still creating... [06m51s elapsed]
+module.rds.aws_db_instance.mysql: Still creating... [07m01s elapsed]
+module.rds.aws_db_instance.mysql: Still creating... [07m11s elapsed]
+module.rds.aws_db_instance.mysql: Still creating... [07m21s elapsed]
+module.rds.aws_db_instance.mysql: Still creating... [07m31s elapsed]
+module.rds.aws_db_instance.mysql: Still creating... [07m41s elapsed]
+module.rds.aws_db_instance.mysql: Still creating... [07m51s elapsed]
+module.rds.aws_db_instance.mysql: Still creating... [08m01s elapsed]
+module.rds.aws_db_instance.mysql: Still creating... [08m11s elapsed]
+module.rds.aws_db_instance.mysql: Still creating... [08m21s elapsed]
+module.rds.aws_db_instance.mysql: Still creating... [08m31s elapsed]
+module.rds.aws_db_instance.mysql: Still creating... [08m41s elapsed]
+module.rds.aws_db_instance.mysql: Still creating... [08m51s elapsed]
+module.rds.aws_db_instance.mysql: Still creating... [09m01s elapsed]
+module.rds.aws_db_instance.mysql: Still creating... [09m11s elapsed]
+module.rds.aws_db_instance.mysql: Still creating... [09m21s elapsed]
+module.rds.aws_db_instance.mysql: Still creating... [09m31s elapsed]
+module.rds.aws_db_instance.mysql: Still creating... [09m41s elapsed]
+module.rds.aws_db_instance.mysql: Still creating... [09m51s elapsed]
+module.rds.aws_db_instance.mysql: Still creating... [10m01s elapsed]
+module.rds.aws_db_instance.mysql: Still creating... [10m11s elapsed]
+module.rds.aws_db_instance.mysql: Still creating... [10m21s elapsed]
+module.rds.aws_db_instance.mysql: Still creating... [10m31s elapsed]
+module.rds.aws_db_instance.mysql: Still creating... [10m41s elapsed]
+module.rds.aws_db_instance.mysql: Still creating... [10m51s elapsed]
+module.rds.aws_db_instance.mysql: Still creating... [11m01s elapsed]
+module.rds.aws_db_instance.mysql: Still creating... [11m11s elapsed]
+module.rds.aws_db_instance.mysql: Still creating... [11m21s elapsed]
+module.rds.aws_db_instance.mysql: Still creating... [11m31s elapsed]
+module.rds.aws_db_instance.mysql: Creation complete after 11m36s [id=db-OLAR37F3DBAVKZBLXQSQJ2QNVA]
+module.rds.aws_ssm_parameter.db_config["endpoint"]: Creating...
+module.rds.aws_ssm_parameter.db_config["port"]: Creating...
+module.rds.aws_ssm_parameter.db_config["name"]: Creating...
+module.rds.aws_ssm_parameter.db_config["endpoint"]: Creation complete after 1s [id=/lab-1c/db/endpoint]
+module.rds.aws_ssm_parameter.db_config["name"]: Creation complete after 1s [id=/lab-1c/db/name]
+module.rds.aws_ssm_parameter.db_config["port"]: Creation complete after 1s [id=/lab-1c/db/port]
+
+Apply complete! Resources: 5 added, 0 changed, 1 destroyed.
+
+Outputs:
+
+address = "lab-mysql.cxm8o4cwoftn.ap-northeast-1.rds.amazonaws.com"
+iam_instance_profile_name = "armageddon-lab-1c-ec2-secrets-profile"
+iam_role_name = "armageddon-lab-1c-ec2-secrets-role"
+private_route_table_id = "rtb-0b1a1c0963955a701"
+private_subnet_id = "subnet-08da0ae7c50dae200"
+public_route_table_id = "rtb-01e6d0885d384513d"
+public_subnet_id = "subnet-0feede0670ef869e8"
+vpc_id = "vpc-02384a36084855975"

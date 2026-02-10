@@ -1,0 +1,158 @@
+# Verify Parameter Store Values
+aws ssm get-parameters \
+  --names /lab/db/endpoint /lab/db/port /lab/db/name \
+  --with-decryption
+{
+    "Parameters": [
+        {
+            "Name": "/lab/db/endpoint",
+            "Type": "String",
+            "Value": "lab-mysql.cxm8o4cwoftn.ap-northeast-1.rds.amazonaws.com",
+            "Version": 1,
+            "LastModifiedDate": "2026-01-18T21:51:29.238000+00:00",
+            "ARN": "arn:aws:ssm:ap-northeast-1:031857855861:parameter/lab/db/endpoint",
+            "DataType": "text"
+        },
+        {
+            "Name": "/lab/db/name",
+            "Type": "String",
+            "Value": "labdb",
+            "Version": 1,
+            "LastModifiedDate": "2026-01-18T21:51:29.384000+00:00",
+            "ARN": "arn:aws:ssm:ap-northeast-1:031857855861:parameter/lab/db/name",
+            "DataType": "text"
+        },
+        {
+            "Name": "/lab/db/port",
+            "Type": "String",
+            "Value": "3306",
+            "Version": 1,
+            "LastModifiedDate": "2026-01-18T21:51:29.239000+00:00",
+            "ARN": "arn:aws:ssm:ap-northeast-1:031857855861:parameter/lab/db/port",
+            "DataType": "text"
+        }
+    ],
+    "InvalidParameters": []
+}
+
+# Verify Secrets Manager Value
+aws secretsmanager get-secret-value \
+  --secret-id lab-1a/rds/mysql
+{
+    "ARN": "arn:aws:secretsmanager:ap-northeast-1:031857855861:secret:lab-1a/rds/mysql-tXEJQh",
+    "Name": "lab-1a/rds/mysql",
+    "VersionId": "0cb0ce1f-ee82-4f4c-b9c2-6525e90f8ab4",
+    "SecretString": "{\"username\":\"Van\",\"password\":\"Admin0891\",\"dbname\":\"labdb\",\"port\":\"3306\",\"host\":\"lab-mysql.cxm8o4cwoftn.ap-northeast-1.rds.amazonaws.com\"}",
+    "VersionStages": [
+        "AWSCURRENT"
+    ],
+    "CreatedDate": "2026-01-19T02:01:54.488000+00:00"
+}
+
+# Verify EC2 Can Read Both Systems From EC2:
+aws ssm get-parameter --name /lab/db/endpoint
+{
+    "Parameter": {
+        "Name": "/lab/db/endpoint",
+        "Type": "String",
+        "Value": "lab-mysql.cxm8o4cwoftn.ap-northeast-1.rds.amazonaws.com",
+        "Version": 1,
+        "LastModifiedDate": "2026-01-18T21:51:29.238000+00:00",
+        "ARN": "arn:aws:ssm:ap-northeast-1:031857855861:parameter/lab/db/endpoint",
+        "DataType": "text"
+    }
+}
+
+aws secretsmanager get-secret-value --secret-id lab-1a/rds/mysql
+{
+    "ARN": "arn:aws:secretsmanager:ap-northeast-1:031857855861:secret:lab-1a/rds/mysql-tXEJQh",
+    "Name": "lab-1a/rds/mysql",
+    "VersionId": "0cb0ce1f-ee82-4f4c-b9c2-6525e90f8ab4",
+    "SecretString": "{\"username\":\"Van\",\"password\":\"Admin0891\",\"dbname\":\"labdb\",\"port\":\"3306\",\"host\":\"lab-mysql.cxm8o4cwoftn.ap-northeast-1.rds.amazonaws.com\"}",
+    "VersionStages": [
+        "AWSCURRENT"
+    ],
+    "CreatedDate": "2026-01-19T02:01:54.488000+00:00"
+}
+
+# Verify CloudWatch Log Group Exists
+aws logs describe-log-groups \
+  --log-group-name-prefix /aws/ec2/lab-rds-app
+{
+    "logGroups": [
+        {
+            "logGroupName": "/aws/ec2/lab-rds-app",
+            "creationTime": 1768764787030,
+            "retentionInDays": 7,
+            "metricFilterCount": 1,
+            "arn": "arn:aws:logs:ap-northeast-1:031857855861:log-group:/aws/ec2/lab-rds-app:*",
+            "storedBytes": 0,
+            "logGroupClass": "STANDARD",
+            "logGroupArn": "arn:aws:logs:ap-northeast-1:031857855861:log-group:/aws/ec2/lab-rds-app",
+            "deletionProtectionEnabled": false
+        }
+    ]
+}
+
+# Verify DB Failure Logs Appear Simulate failure (examples): Stop RDS Change DB password in Secrets Manager without updating DB Block SG temporarily
+aws logs filter-log-events \
+  --log-group-name /aws/ec2/lab-rds-app \
+  --filter-pattern "ERROR"
+{
+    "events": [],
+    "searchedLogStreams": []
+}
+
+# Verify CloudWatch Alarm
+aws cloudwatch describe-alarms \
+  --alarm-name-prefix lab-db-connection-failure
+{
+    "MetricAlarms": [
+        {
+            "AlarmName": "lab-db-connection-failure",
+            "AlarmArn": "arn:aws:cloudwatch:ap-northeast-1:031857855861:alarm:lab-db-connection-failure",
+            "AlarmConfigurationUpdatedTimestamp": "2026-01-18T22:40:48.274000+00:00",
+            "ActionsEnabled": true,
+            "OKActions": [
+                "arn:aws:sns:ap-northeast-1:031857855861:lab-db-incidents"
+            ],
+            "AlarmActions": [
+                "arn:aws:sns:ap-northeast-1:031857855861:lab-db-incidents"
+            ],
+            "InsufficientDataActions": [],
+            "StateValue": "ALARM",
+            "StateReason": "Threshold Crossed: 1 datapoint [5.0 (19/01/26 16:26:00)] was greater than or equal to the threshold (3.0).",
+            "StateReasonData": "{\"version\":\"1.0\",\"queryDate\":\"2026-01-19T16:31:45.046+0000\",\"startDate\":\"2026-01-19T16:26:00.000+0000\",\"statistic\":\"Sum\",\"period\":300,\"recentDatapoints\":[5.0],\"threshold\":3.0,\"evaluatedDatapoints\":[{\"timestamp\":\"2026-01-19T16:26:00.000+0000\",\"sampleCount\":1.0,\"value\":5.0}]}",
+            "StateUpdatedTimestamp": "2026-01-19T16:31:45.052000+00:00",
+            "MetricName": "DBConnectionErrors",
+            "Namespace": "Lab/RDSApp",
+            "Statistic": "Sum",
+            "Dimensions": [
+                {
+                    "Name": "LogGroupName",
+                    "Value": "/aws/ec2/lab-rds-app"
+                }
+            ],
+            "Period": 300,
+            "EvaluationPeriods": 1,
+            "Threshold": 3.0,
+            "ComparisonOperator": "GreaterThanOrEqualToThreshold",
+            "TreatMissingData": "missing",
+            "StateTransitionedTimestamp": "2026-01-19T16:31:45.052000+00:00"
+        }
+    ],
+    "CompositeAlarms": []
+}
+
+# Incident Recovery Verification After restoring correct credentials or connectivity
+curl http://54.199.38.235/list
+<h3>Notes</h3><ul><li>1: first_note</li></ul>
+
+aws logs filter-log-events \
+  --log-group-name "/aws/ec2/lab-rds-app" \
+  --filter-pattern "connection refused|timeout|Access denied"
+
+aws logs filter-log-events \
+  --log-group-name "/aws/ec2/lab-rds-app" \
+  --start-time $START_TIME \
+  --region ap-northeast-1

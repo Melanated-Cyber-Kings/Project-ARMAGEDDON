@@ -1,0 +1,57 @@
+#improved to cover:
+
+#1. Terraform local directories
+
+#2. backup files
+
+#3. crash logs
+
+#4. plan output
+
+#5. variable override files
+
+#6. lock files (optional but recommended)
+
+
+
+# -------------------------------------------------------------------
+# Terraform directories
+# -------------------------------------------------------------------
+.terraform/
+.terraform/providers/
+
+# -------------------------------------------------------------------
+# Local Terraform state
+# -------------------------------------------------------------------
+*.tfstate
+*.tfstate.*
+
+# -------------------------------------------------------------------
+# Sensitive variable files
+# -------------------------------------------------------------------
+*.tfvars
+*.tfvars.json
+
+# Ignore override files as they are often personal/dev only
+*_override.tf
+*_override.tf.json
+
+# -------------------------------------------------------------------
+# Terraform plan & crash files
+# -------------------------------------------------------------------
+crash.log
+crash.*.log
+terraform.tfplan
+
+# -------------------------------------------------------------------
+# Editor & OS junk
+# -------------------------------------------------------------------
+.DS_Store
+Thumbs.db
+
+# -------------------------------------------------------------------
+# Terraform lock file
+# -------------------------------------------------------------------
+# Optional: ignore this if you don't want to commit the lock file
+# (Most teams DO commit it, like with npm/yarn lockfiles)
+#.terraform.lock.hcl

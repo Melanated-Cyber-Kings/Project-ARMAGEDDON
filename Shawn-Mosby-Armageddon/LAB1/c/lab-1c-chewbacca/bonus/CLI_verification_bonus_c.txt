@@ -1,0 +1,70 @@
+Confirm hosted zone exists (if managed)
+
+aws route53 list-hosted-zones-by-name
+--dns-name lewsdomain.com
+--query "HostedZones[].Id"
+
+{
+    "HostedZones": [
+        {
+            "Id": "/hostedzone/Z0031551HXI0QF6FCLFC",
+            "Name": "lewsdomain.com.",
+            "CallerReference": "terraform-20260124022127096800000002",
+            "Config": {
+                "Comment": "Managed by Terraform",
+                "PrivateZone": false
+            },
+            "ResourceRecordSetCount": 4
+        }
+    ],
+    "IsTruncated": false,
+    "MaxItems": "100"
+}
+
+Confirm app record exists
+
+aws route53 list-resource-record-sets
+--hosted-zone-id Z0031551HXI0QF6FCLFC
+--query "ResourceRecordSets[?Name=='app.lewsdomain.com.']"
+
+[
+    {
+        "Name": "app.lewsdomain.com.",
+        "Type": "A",
+        "AliasTarget": {
+            "HostedZoneId": "Z14GRHDCWA56QT",
+            "DNSName": "lew-alb01-604473024.ap-northeast-1.elb.amazonaws.com.",
+            "EvaluateTargetHealth": true
+        }
+    },
+    {
+        "Name": "_8cbca3bc449fa10f96140568325d37ce.app.lewsdomain.com.",
+        "Type": "CNAME",
+        "TTL": 60,
+        "ResourceRecords": [
+            {
+                "Value": "_0e5b2d1b11f18b3b0f8a46db179df9e1.jkddzztszm.acm-validations.aws."
+            }
+        ]
+    }
+]
+
+Confirm certificate issued
+
+aws acm describe-certificate \
+  --certificate-arn "arn:aws:acm:ap-northeast-1:620812304994:certificate/bf09fcc7-c028-40ba-9363-33d43c982141" \
+  --region ap-northeast-1 \
+  --query "Certificate.Status" 
+
+  "ISSUED"
+
+  Confirm HTTPS works
+
+  curl -I https://app.lewsdomain.com
+
+  HTTP/2 200 
+date: Sat, 24 Jan 2026 05:04:48 GMT
+content-type: text/html; charset=utf-8
+content-length: 126
+server: Werkzeug/3.1.5 Python/3.9.25
+

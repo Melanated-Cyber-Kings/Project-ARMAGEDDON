@@ -1,0 +1,29 @@
+# Terraform
+**/.terraform/
+*.tfstate
+*.tfstate.*
+*.tfvars
+terraform.tfvars
+
+# AWS/Sensitive files
+**/*.pem
+**/*.key
+**/lambda_function.zip
+cloudwatch_logs.json
+
+# Python
+**/__pycache__/
+*.pyc
+*.pyo
+
+# OS files
+.DS_Store
+Thumbs.db
+
+# Logs/Outputs
+console_output.txt
+ec2_console.txt
+deliverables-cli-output.txt
+.lab1b-secrets-backup.txt
+*.backup.txt
+secrets*.txt

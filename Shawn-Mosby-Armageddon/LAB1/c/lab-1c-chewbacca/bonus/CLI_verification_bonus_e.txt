@@ -1,0 +1,86 @@
+Student verification (CLI)
+
+Confirm WAF logging is enabled (authoritative)
+
+aws wafv2 get-logging-configuration \
+--resource-arn arn:aws:wafv2:ap-northeast-1:620812304994:regional/webacl/lew-waf01/bc4383ea-9bc9-4ed8-963f-ce2d8b7d454c
+
+{
+    "LoggingConfiguration": {
+        "ResourceArn": "arn:aws:wafv2:ap-northeast-1:620812304994:regional/webacl/lew-waf01/bc4383ea-9bc9-4ed8-963f-ce2d8b7d454c",
+        "LogDestinationConfigs": [
+            "arn:aws:logs:ap-northeast-1:620812304994:log-group:aws-waf-logs-lew-webacl01"
+        ],
+        "ManagedByFirewallManager": false,
+        "LogType": "WAF_LOGS",
+        "LogScope": "CUSTOMER"
+    }
+}
+
+aws logs describe-log-streams \  
+--log-group-name aws-waf-logs-lew-webacl01 \
+--order-by LastEventTime --descending
+
+{
+    "logStreams": [
+        {
+            "logStreamName": "ap-northeast-1_lew-waf01_0",
+            "creationTime": 1769238220039,
+            "firstEventTimestamp": 1769238212276,
+            "lastEventTimestamp": 1769238212276,
+            "lastIngestionTime": 1769238220097,
+            "uploadSequenceToken": "49039859659429416833074309966234041005408497499262783242",
+            "arn": "arn:aws:logs:ap-northeast-1:620812304994:log-group:aws-waf-logs-lew-webacl01:log-stream:ap-northeast-1_lew-waf01_0",
+            "storedBytes": 0
+        },
+        {
+            "logStreamName": "log_stream_created_by_aws_to_validate_log_delivery_subscriptions",
+            "creationTime": 1769237927894,
+            "firstEventTimestamp": 1769237927900,
+            "lastEventTimestamp": 1769237927900,
+            "lastIngestionTime": 1769237927904,
+            "uploadSequenceToken": "49039859659429028441958537584310391144520000739236745064",
+            "arn": "arn:aws:logs:ap-northeast-1:620812304994:log-group:aws-waf-logs-lew-webacl01:log-stream:log_stream_created_by_aws_to_validate_log_delivery_subscriptions",
+            "storedBytes": 0
+        }
+    ]
+}
+
+
+aws logs filter-log-events \
+--log-group-name aws-waf-logs-lew-webacl01 \
+--max-items 20
+
+{
+    "events": [
+        {
+            "logStreamName": "log_stream_created_by_aws_to_validate_log_delivery_subscriptions",
+            "timestamp": 1769237927900,
+            "message": "Permissions are set correctly to allow AWS CloudWatch Logs to write into your logs while creating a subscription.",
+            "ingestionTime": 1769237927904,
+            "eventId": "39455324225674193813765320032623533354804151627287232512"
+        },
+        {
+            "logStreamName": "ap-northeast-1_lew-waf01_0",
+            "timestamp": 1769238212276,
+            "message": "{\"timestamp\":1769238212276,\"formatVersion\":1,\"webaclId\":\"arn:aws:wafv2:ap-northeast-1:620812304994:regional/webacl/lew-waf01/bc4383ea-9bc9-4ed8-963f-ce2d8b7d454c\",\"terminatingRuleId\":\"Default_Action\",\"terminatingRuleType\":\"REGULAR\",\"action\":\"ALLOW\",\"terminatingRuleMatchDetails\":[],\"httpSourceName\":\"ALB\",\"httpSourceId\":\"620812304994-app/lew-alb01/5bacfef0e722326b\",\"ruleGroupList\":[{\"ruleGroupId\":\"AWS#AWSManagedRulesCommonRuleSet\",\"terminatingRule\":null,\"nonTerminatingMatchingRules\":[],\"excludedRules\":null,\"customerConfig\":null}],\"rateBasedRuleList\":[],\"nonTerminatingMatchingRules\":[],\"requestHeadersInserted\":null,\"responseCodeSent\":null,\"httpRequest\":{\"clientIp\":\"185.16.39.146\",\"country\":\"PL\",\"headers\":[{\"name\":\"Host\",\"value\":\"52.198.161.100\"},{\"name\":\"User-Agent\",\"value\":\"Wget\"},{\"name\":\"Connection\",\"value\":\"close\"}],\"uri\":\"/\",\"args\":\"\",\"httpVersion\":\"HTTP/1.1\",\"httpMethod\":\"GET\",\"requestId\":\"1-69746ec4-7b0eef70224e730645eaec27\",\"fragment\":\"\",\"scheme\":\"http\",\"host\":\"52.198.161.100\"}}",
+            "ingestionTime": 1769238220097,
+            "eventId": "39455330567470910391109806883224392019716664602662141952"
+        },
+        {
+            "logStreamName": "ap-northeast-1_lew-waf01_0",
+            "timestamp": 1769238219648,
+            "message": "{\"timestamp\":1769238219648,\"formatVersion\":1,\"webaclId\":\"arn:aws:wafv2:ap-northeast-1:620812304994:regional/webacl/lew-waf01/bc4383ea-9bc9-4ed8-963f-ce2d8b7d454c\",\"terminatingRuleId\":\"Default_Action\",\"terminatingRuleType\":\"REGULAR\",\"action\":\"ALLOW\",\"terminatingRuleMatchDetails\":[],\"httpSourceName\":\"ALB\",\"httpSourceId\":\"620812304994-app/lew-alb01/5bacfef0e722326b\",\"ruleGroupList\":[{\"ruleGroupId\":\"AWS#AWSManagedRulesCommonRuleSet\",\"terminatingRule\":null,\"nonTerminatingMatchingRules\":[],\"excludedRules\":null,\"customerConfig\":null}],\"rateBasedRuleList\":[],\"nonTerminatingMatchingRules\":[],\"requestHeadersInserted\":null,\"responseCodeSent\":null,\"httpRequest\":{\"clientIp\":\"24.128.118.148\",\"country\":\"US\",\"headers\":[{\"name\":\"host\",\"value\":\"app.lewsdomain.com\"},{\"name\":\"user-agent\",\"value\":\"curl/8.7.1\"},{\"name\":\"accept\",\"value\":\"*/*\"}],\"uri\":\"/\",\"args\":\"\",\"httpVersion\":\"HTTP/2.0\",\"httpMethod\":\"HEAD\",\"requestId\":\"1-69746ecb-70511f2f0a302e186b688d0d\",\"fragment\":\"\",\"scheme\":\"https\",\"host\":\"app.lewsdomain.com\"},\"ja3Fingerprint\":\"2bab0327a296230f9f6427341e716ea0\",\"ja4Fingerprint\":\"t13d4907h2_0d8feac7bc37_7395dae3b2f3\"}",
+            "ingestionTime": 1769238229854,
+            "eventId": "39455330731872003994677560694421140553885207554407727104"
+        },
+        {
+            "logStreamName": "ap-northeast-1_lew-waf01_0",
+            "timestamp": 1769238270386,
+            "message": "{\"timestamp\":1769238270386,\"formatVersion\":1,\"webaclId\":\"arn:aws:wafv2:ap-northeast-1:620812304994:regional/webacl/lew-waf01/bc4383ea-9bc9-4ed8-963f-ce2d8b7d454c\",\"terminatingRuleId\":\"Default_Action\",\"terminatingRuleType\":\"REGULAR\",\"action\":\"ALLOW\",\"terminatingRuleMatchDetails\":[],\"httpSourceName\":\"ALB\",\"httpSourceId\":\"620812304994-app/lew-alb01/5bacfef0e722326b\",\"ruleGroupList\":[{\"ruleGroupId\":\"AWS#AWSManagedRulesCommonRuleSet\",\"terminatingRule\":null,\"nonTerminatingMatchingRules\":[],\"excludedRules\":null,\"customerConfig\":null}],\"rateBasedRuleList\":[],\"nonTerminatingMatchingRules\":[],\"requestHeadersInserted\":null,\"responseCodeSent\":null,\"httpRequest\":{\"clientIp\":\"24.128.118.148\",\"country\":\"US\",\"headers\":[{\"name\":\"host\",\"value\":\"app.lewsdomain.com\"},{\"name\":\"user-agent\",\"value\":\"curl/8.7.1\"},{\"name\":\"accept\",\"value\":\"*/*\"}],\"uri\":\"/\",\"args\":\"\",\"httpVersion\":\"HTTP/2.0\",\"httpMethod\":\"HEAD\",\"requestId\":\"1-69746efe-5571665c2a6b3ab830739727\",\"fragment\":\"\",\"scheme\":\"https\",\"host\":\"app.lewsdomain.com\"},\"ja3Fingerprint\":\"2bab0327a296230f9f6427341e716ea0\",\"ja4Fingerprint\":\"t13d4907h2_0d8feac7bc37_7395dae3b2f3\"}",
+            "ingestionTime": 1769238284074,
+            "eventId": "39455331863367213877724317715208728482502313747961282560"
+        }
+    ],
+    "searchedLogStreams": []
+}

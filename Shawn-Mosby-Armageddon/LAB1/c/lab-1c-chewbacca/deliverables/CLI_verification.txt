@@ -1,0 +1,304 @@
+# Verify Parameter Store Values
+
+aws ssm get-parameters \
+  --names /lab/db/endpoint /lab/db/port /lab/db/name \
+  --with-decryption
+{
+    "Parameters": [
+        {
+            "Name": "/lab/db/endpoint",
+            "Type": "String",
+            "Value": "lew-rds01.cvecsic0y331.ap-northeast-1.rds.amazonaws.com",
+            "Version": 1,
+            "LastModifiedDate": "2026-01-21T18:59:08.965000-07:00",
+            "ARN": "arn:aws:ssm:ap-northeast-1:620812304994:parameter/lab/db/endpoint",
+            "DataType": "text"
+        },
+        {
+            "Name": "/lab/db/name",
+            "Type": "String",
+            "Value": "labdb",
+            "Version": 1,
+            "LastModifiedDate": "2026-01-21T18:39:52.809000-07:00",
+            "ARN": "arn:aws:ssm:ap-northeast-1:620812304994:parameter/lab/db/name",
+            "DataType": "text"
+        },
+        {
+:...skipping...
+{
+    "Parameters": [
+        {
+            "Name": "/lab/db/endpoint",
+            "Type": "String",
+            "Value": "lew-rds01.cvecsic0y331.ap-northeast-1.rds.amazonaws.com",
+            "Version": 1,
+            "LastModifiedDate": "2026-01-21T18:59:08.965000-07:00",
+            "ARN": "arn:aws:ssm:ap-northeast-1:620812304994:parameter/lab/db/endpoint",
+            "DataType": "text"
+        },
+        {
+            "Name": "/lab/db/name",
+            "Type": "String",
+            "Value": "labdb",
+            "Version": 1,
+            "LastModifiedDate": "2026-01-21T18:39:52.809000-07:00",
+            "ARN": "arn:aws:ssm:ap-northeast-1:620812304994:parameter/lab/db/name",
+            "DataType": "text"
+        },
+        {
+            "Name": "/lab/db/port",
+            "Type": "String",
+:...skipping...
+{
+    "Parameters": [
+        {
+            "Name": "/lab/db/endpoint",
+            "Type": "String",
+            "Value": "lew-rds01.cvecsic0y331.ap-northeast-1.rds.amazonaws.com",
+            "Version": 1,
+            "LastModifiedDate": "2026-01-21T18:59:08.965000-07:00",
+            "ARN": "arn:aws:ssm:ap-northeast-1:620812304994:parameter/lab/db/endpoint",
+            "DataType": "text"
+        },
+        {
+            "Name": "/lab/db/name",
+            "Type": "String",
+            "Value": "labdb",
+            "Version": 1,
+            "LastModifiedDate": "2026-01-21T18:39:52.809000-07:00",
+            "ARN": "arn:aws:ssm:ap-northeast-1:620812304994:parameter/lab/db/name",
+            "DataType": "text"
+        },
+        {
+            "Name": "/lab/db/port",
+            "Type": "String",
+            "Value": "3306",
+            "Version": 1,
+            "LastModifiedDate": "2026-01-21T18:59:08.966000-07:00",
+            "ARN": "arn:aws:ssm:ap-northeast-1:620812304994:parameter/lab/db/port",
+            "DataType": "text"
+        }
+    ],
+    "InvalidParameters": []
+}
+
+# Verify Secrets Manager Value
+
+aws secretsmanager get-secret-value \
+  --secret-id lab-1a/rds/mysql
+
+{
+    "ARN": "arn:aws:secretsmanager:ap-northeast-1:620812304994:secret:lab-1a/rds/mysql-Rxu8IA",
+    "Name": "lab-1a/rds/mysql",
+    "VersionId": "bac93a5f-c5da-4ae4-b5b8-1de2fd1b4f1b",
+    "SecretString": "{\"username\":\"admin\",\"password\":\"lew\",\"dbname\":\"labdb\",\"port\":\"3306\",\"host\":\"lab-mysql.czokoi6ocbw7.ap-northeast-1.rds.amazonaws.com\"}",
+    "VersionStages": [
+        "AWSCURRENT"
+    ],
+    "CreatedDate": "2026-01-20T16:59:34.826000-07:00"
+}
+
+# Verify EC2 Can Read Both Systems From EC2:
+
+aws ssm get-parameter --name /lab/db/endpoint
+
+{
+    "Parameter": {
+        "Name": "/lab/db/endpoint",
+        "Type": "String",
+        "Value": "lew-rds01.cvecsic0y331.ap-northeast-1.rds.amazonaws.com",
+        "Version": 1,
+        "LastModifiedDate": "2026-01-21T18:59:08.965000-07:00",
+        "ARN": "arn:aws:ssm:ap-northeast-1:620812304994:parameter/lab/db/endpoint",
+        "DataType": "text"
+    }
+}
+
+aws secretsmanager get-secret-value --secret-id lab-1a/rds/mysql
+
+{
+    "ARN": "arn:aws:secretsmanager:ap-northeast-1:620812304994:secret:lab-1a/rds/mysql-Rxu8IA",
+    "Name": "lab-1a/rds/mysql",
+    "VersionId": "bac93a5f-c5da-4ae4-b5b8-1de2fd1b4f1b",
+    "SecretString": "{\"username\":\"admin\",\"password\":\"lew\",\"dbname\":\"labdb\",\"port\":\"3306\",\"host\":\"lab-mysql.czokoi6ocbw7.ap-northeast-1.rds.amazonaws.com\"}",
+    "VersionStages": [
+        "AWSCURRENT"
+    ],
+    "CreatedDate": "2026-01-20T16:59:34.826000-07:00"
+}
+
+# Verify CloudWatch Log Group Exists
+
+aws logs describe-log-groups \
+  --log-group-name-prefix /aws/ec2/lew-rds-app
+
+{
+    "logGroups": [
+        {
+            "logGroupName": "/aws/ec2/lew-rds-app",
+            "creationTime": 1769045992786,
+            "retentionInDays": 7,
+            "metricFilterCount": 0,
+            "arn": "arn:aws:logs:ap-northeast-1:620812304994:log-group:/aws/ec2/lew-rds-app:*",
+            "storedBytes": 0,
+            "logGroupClass": "STANDARD",
+            "logGroupArn": "arn:aws:logs:ap-northeast-1:620812304994:log-group:/aws/ec2/lew-rds-app"
+        }
+    ]
+}
+
+aws logs filter-log-events \
+  --log-group-name /aws/ec2/lew-rds-app \
+  --filter-pattern "ERROR"
+
+  {
+    "events": [
+        {
+            "logStreamName": "i-0d1d34e18e9ef3ee8",
+            "timestamp": 1769059287496,
+            "message": "2026-01-22 05:21:27,478 ERROR: \u001b[31m\u001b[1mWARNING: This is a development server. Do not use it in a production deployment. Use a production WSGI server instead.\u001b[0m\n * Running on all addresses (0.0.0.0)\n * Running on http://127.0.0.1:80\n * Running on http://10.17.1.41:80",
+            "ingestionTime": 1769059292749,
+            "eventId": "39451340411542427243040728386079854028494006275274964992"
+        },
+        {
+            "logStreamName": "i-0d1d34e18e9ef3ee8",
+            "timestamp": 1769059292779,
+            "message": "2026-01-22 05:21:27,479 ERROR: \u001b[33mPress CTRL+C to quit\u001b[0m",
+            "ingestionTime": 1769059297785,
+            "eventId": "39451340529357264126878010448901182286949582537926311936"
+        },
+        {
+:...skipping...
+{
+    "events": [
+        {
+            "logStreamName": "i-0d1d34e18e9ef3ee8",
+            "timestamp": 1769059287496,
+            "message": "2026-01-22 05:21:27,478 ERROR: \u001b[31m\u001b[1mWARNING: This is a development server. Do not use it in a production deployment. Use a production WSGI server instead.\u001b[0m\n * Running on all addresses (0.0.0.0)\n * Running on http://127.0.0.1:80\n * Running on http://10.17.1.41:80",
+            "ingestionTime": 1769059292749,
+            "eventId": "39451340411542427243040728386079854028494006275274964992"
+        },
+        {
+            "logStreamName": "i-0d1d34e18e9ef3ee8",
+            "timestamp": 1769059292779,
+            "message": "2026-01-22 05:21:27,479 ERROR: \u001b[33mPress CTRL+C to quit\u001b[0m",
+            "ingestionTime": 1769059297785,
+            "eventId": "39451340529357264126878010448901182286949582537926311936"
+        },
+        {
+            "logStreamName": "i-0d1d34e18e9ef3ee8",
+            "timestamp": 1769059441964,
+:...skipping...
+{
+    "events": [
+        {
+            "logStreamName": "i-0d1d34e18e9ef3ee8",
+            "timestamp": 1769059287496,
+            "message": "2026-01-22 05:21:27,478 ERROR: \u001b[31m\u001b[1mWARNING: This is a development server. Do not use it in a production deployment. Use a production WSGI server instead.\u001b[0m\n * Running on all addresses (0.0.0.0)\n * Running on http://127.0.0.1:80\n * Running on http://10.17.1.41:80",
+            "ingestionTime": 1769059292749,
+            "eventId": "39451340411542427243040728386079854028494006275274964992"
+        },
+        {
+            "logStreamName": "i-0d1d34e18e9ef3ee8",
+            "timestamp": 1769059292779,
+            "message": "2026-01-22 05:21:27,479 ERROR: \u001b[33mPress CTRL+C to quit\u001b[0m",
+            "ingestionTime": 1769059297785,
+            "eventId": "39451340529357264126878010448901182286949582537926311936"
+        },
+        {
+            "logStreamName": "i-0d1d34e18e9ef3ee8",
+            "timestamp": 1769059441964,
+            "message": "2026-01-22 05:24:01,901 ERROR: Exception on /init [GET]",
+            "ingestionTime": 1769059446989,
+            "eventId": "39451343856293936569669023999283575090243556177846206464"
+        },
+        {
+            "logStreamName": "i-0d1d34e18e9ef3ee8",
+            "timestamp": 1769059442466,
+            "message": "2026-01-22 05:24:01,904 ERROR: 24.128.118.148 - - [22/Jan/2026 05:24:01] \"\u001b[35m\u001b[1mGET /init HTTP/1.1\u001b[0m\" 500 -",
+            "ingestionTime": 1769059446989,
+            "eventId": "39451343867488910659331396816334505663113033653848375302"
+        },
+        {
+            "logStreamName": "i-0d1d34e18e9ef3ee8",
+            "timestamp": 1769059445975,
+            "message": "2026-01-22 05:24:02,285 ERROR: 24.128.118.148 - - [22/Jan/2026 05:24:02] \"\u001b[33mGET /favicon.ico HTTP/1.1\u001b[0m\" 404 -",
+            "ingestionTime": 1769059446989,
+            "eventId": "39451343945742225560975353419983341081836134178333655047"
+        },
+        {
+            "logStreamName": "i-0d1d34e18e9ef3ee8",
+            "timestamp": 1769059445975,
+            "message": "2026-01-22 05:24:05,760 ERROR: Exception on /init [GET]",
+            "ingestionTime": 1769059446989,
+            "eventId": "39451343945742225560975353419983341081836134178333655048"
+        },
+        {
+            "logStreamName": "i-0d1d34e18e9ef3ee8",
+            "timestamp": 1769059450496,
+            "message": "2026-01-22 05:24:05,761 ERROR: 24.128.118.148 - - [22/Jan/2026 05:24:05] \"\u001b[35m\u001b[1mGET /init HTTP/1.1\u001b[0m\" 500 -",
+            "ingestionTime": 1769059455519,
+            "eventId": "39451344046563894603532300653178698706423085238658596864"
+        },
+        {
+            "logStreamName": "i-0d1d34e18e9ef3ee8",
+            "timestamp": 1769059496497,
+            "message": "2026-01-22 05:24:51,738 ERROR: 24.128.118.148 - - [22/Jan/2026 05:24:51] \"GET / HTTP/1.1\" 200 -",
+            "ingestionTime": 1769059501517,
+            "eventId": "39451345072420474481139495842571411946238385445060018176"
+        },
+        {
+            "logStreamName": "i-0d1d34e18e9ef3ee8",
+            "timestamp": 1769059499382,
+            "message": "2026-01-22 05:24:59,284 ERROR: Exception on /init [GET]",
+            "ingestionTime": 1769059501517,
+            "eventId": "39451345136758124378900343605901959162828908389813518337"
+        },
+        {
+            "logStreamName": "i-0d1d34e18e9ef3ee8",
+            "timestamp": 1769059503496,
+            "message": "2026-01-22 05:24:59,284 ERROR: 24.128.118.148 - - [22/Jan/2026 05:24:59] \"\u001b[35m\u001b[1mGET /init HTTP/1.1\u001b[0m\" 500 -",
+            "ingestionTime": 1769059508518,
+            "eventId": "39451345228503390125655327218643519425039342590788960256"
+        },
+
+
+# Verify CloudWatch Alarm
+
+aws cloudwatch describe-alarms \
+  --alarm-name-prefix lab-db-connection-failure
+
+{
+    "MetricAlarms": [
+        {
+            "AlarmName": "lew-db-connection-failure",
+            "AlarmArn": "arn:aws:cloudwatch:ap-northeast-1:620812304994:alarm:lew-db-connection-failure",
+            "AlarmConfigurationUpdatedTimestamp": "2026-01-22T03:13:03.351000+00:00",
+            "ActionsEnabled": true,
+            "OKActions": [],
+            "AlarmActions": [
+                "arn:aws:sns:ap-northeast-1:620812304994:lew-db-incidents"
+            ],
+            "InsufficientDataActions": [],
+            "StateValue": "ALARM",
+            "StateReason": "Threshold Crossed: 1 datapoint [13.0 (22/01/26 03:27:00)] was greater than or equal to the threshold (3.0).",
+            "StateReasonData": "{\"version\":\"1.0\",\"queryDate\":\"2026-01-22T03:32:07.034+0000\",\"startDate\":\"2026-01-22T03:27:00.000+0000\",\"statistic\":\"Sum\",\"period\":300,\"recentDatapoints\":[13.0],\"threshold\":3.0,\"evaluatedDatapoints\":[{\"timestamp\":\"2026-01-22T03:27:00.000+0000\",\"sampleCount\":13.0,\"value\":13.0}]}",
+            "StateUpdatedTimestamp": "2026-01-22T03:32:07.035000+00:00",
+            "MetricName": "DBConnectionErrors",
+            "Namespace": "Lab/RDSApp",
+            "Statistic": "Sum",
+            "Dimensions": [],
+            "Period": 300,
+            "EvaluationPeriods": 1,
+            "Threshold": 3.0,
+            "ComparisonOperator": "GreaterThanOrEqualToThreshold",
+            "TreatMissingData": "missing",
+            "StateTransitionedTimestamp": "2026-01-22T03:32:07.035000+00:00"
+        }
+    ],
+    "CompositeAlarms": []
+}
+
+curl http://176.34.2.209/list
+<h3>Notes</h3><ul></ul>%                                                        lew2@Lew2s-MBP lab-1c-chewbacca % 
+

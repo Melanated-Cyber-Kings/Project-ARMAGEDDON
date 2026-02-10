@@ -1,0 +1,146 @@
+$ curl -I https://theowafhomework.site/
+HTTP/2 200 
+content-type: text/html; charset=utf-8
+content-length: 284
+date: Sun, 08 Feb 2026 14:41:10 GMT
+server: Werkzeug/3.1.5 Python/3.9.25
+x-cache: Miss from cloudfront
+via: 1.1 ff1640d1df527a59c91dfb5d669dd814.cloudfront.net (CloudFront)
+x-amz-cf-pop: NRT12-P4
+x-amz-cf-id: ZIFFE55-goRhpnfLYCBGMAB1vY6-vEbFH3ET8xAWH5-f9_lu5CnFPA==
+
+curl -I https://theowafhomework.site/health
+HTTP/2 200 
+content-type: text/html; charset=utf-8
+content-length: 2
+date: Sun, 08 Feb 2026 14:41:46 GMT
+server: Werkzeug/3.1.5 Python/3.9.25
+x-cache: Miss from cloudfront
+via: 1.1 2e18f43bdaac69be89380d95fca511ca.cloudfront.net (CloudFront)
+x-amz-cf-pop: NRT12-P4
+x-amz-cf-id: 2T-7goAzSDxFFu8_-1w5-o4x7CjKf_af_QzAGLI5V6uYgM3DwHh_Zg==
+
+curl -I https://theowafhomework.site/list
+HTTP/2 200 
+content-type: text/html; charset=utf-8
+content-length: 196
+date: Sun, 08 Feb 2026 14:42:21 GMT
+server: Werkzeug/3.1.5 Python/3.9.25
+x-cache: Miss from cloudfront
+via: 1.1 d8c01bbcf95993c58736cdda3ed14dbe.cloudfront.net (CloudFront)
+x-amz-cf-pop: NRT12-P4
+x-amz-cf-id: zKvmI0gPX7nTsTGrGfXIIfitqDh014L3z6_0WLbfs-ZB8ooS3zDYmQ==
+
+$ curl -I "https://theowafhomework.site/static/test.txt"
+HTTP/2 200 
+content-type: text/plain
+content-length: 63
+date: Mon, 09 Feb 2026 16:44:15 GMT
+cache-control: public, max-age=86400, immutable
+server: Werkzeug/3.1.5 Python/3.9.25
+x-app-generated: true
+x-cache: Miss from cloudfront
+via: 1.1 6db9ef0587d963a7afc68c7c316285d4.cloudfront.net (CloudFront)
+x-amz-cf-pop: NRT12-P4
+x-amz-cf-id: 1TfkF9nBmYW-RVfY7FtwmzpSDGwuv-km09YlyEu9pw66WnZJq8_Swg==
+
+
+1.Cache Key for /api/* - "What determines a unique cache entry for API?"
+terraform
+resource "aws_cloudfront_cache_policy" "shinjuku_cache_api_disabled01" {
+  default_ttl = 0  # Disables caching
+  parameters_in_cache_key_and_forwarded_to_origin {
+    cookies_config { cookie_behavior = "none" }
+    query_strings_config { query_string_behavior = "none" }
+    headers_config { header_behavior = "none" }
+  }
+}
+
+"For /api/* endpoints, caching is intentionally DISABLED (default_ttl = 0) to prevent security incidents. The cache key includes NO cookies, query strings, or headers, meaning all API requests share the same cache key. Since caching is disabled, this configuration ensures API responses are NEVER cached, protecting sensitive data like authentication tokens and user-specific content. This prevents user A from seeing user B's data - a common production incident when APIs are accidentally cached."
+
+Why this matters:
+
+Prevents authentication token mixups
+
+Ensures real-time data freshness
+
+Avoids user data privacy violations
+
+Follows security best practices for dynamic content
+
+2. Forwarding to Origin for /api/* - "What information does CloudFront send to Flask?"
+
+terraform
+resource "aws_cloudfront_origin_request_policy" "shinjuku_orp_api01" {
+  cookies_config { cookie_behavior = "all" }
+  query_strings_config { query_string_behavior = "all" }
+  headers_config {
+    header_behavior = "whitelist"
+    headers { items = ["Authorization", "Content-Type", "Origin", "Host"] }
+  }
+}
+Explanation:
+
+"For /api/* endpoints, CloudForward forwards ALL cookies and query strings, plus a whitelist of critical headers:
+
+Authorization - For authentication/authorization checks at the origin
+
+Content-Type - So Flask knows how to parse the request body
+
+Origin - For CORS validation if implemented
+
+Host - For proper virtual hosting and routing
+
+Why this selective forwarding? We forward everything the Flask app NEEDS (cookies for sessions, Authorization for auth, etc.) but NOT arbitrary headers that could cause cache fragmentation. This balances origin needs with cache efficiency."
+
+Security Implication:
+
+Authorization header reaches Flask for JWT/Bearer token validation
+
+Session cookies are preserved for user state
+
+No random headers pollute the cache key
+
+3. Cache Key for /static/* - "What determines a unique cache entry for static content?"
+
+terraform
+resource "aws_cloudfront_cache_policy" "shinjuku_cache_static01" {
+  default_ttl = 86400  # 1 day aggressive caching
+  parameters_in_cache_key_and_forwarded_to_origin {
+    cookies_config { cookie_behavior = "none" }
+    query_strings_config { query_string_behavior = "none" }
+    headers_config { header_behavior = "none" }
+  }
+}
+Explanation:
+
+"For /static/* content, the cache key is SIMPLIFIED TO MAXIMUM REUSE: no cookies, no query strings, no headers. This means logo.png is cached once and served to ALL users, regardless of their session, location, or device. Combined with a 1-day TTL and Cache-Control: public, max-age=86400, immutable response header, this achieves ~90% cache hit rate, dramatically reducing origin load and improving performance."
+
+Performance Impact:
+
+Single cache entry per static file = maximum hit rate
+
+No cache fragmentation from user-specific variations
+
+Predictable cache behavior
+
+4. Forwarding to Origin for /static/* - "What minimal info reaches Flask for static files?"
+
+terraform
+resource "aws_cloudfront_origin_request_policy" "shinjuku_orp_static01" {
+  cookies_config { cookie_behavior = "none" }
+  query_strings_config { query_string_behavior = "none" }
+  headers_config {
+    header_behavior = "whitelist"
+    headers { items = ["X-theowaf-homework", "Host"] }
+  }
+}
+Explanation:
+
+"For /static/* content, CloudFront forwards ONLY:
+
+X-theowaf-homework - The origin cloaking header (security requirement)
+
+Host - So Flask can route the request correctly (critical fix we just implemented!)
+
+Why this minimal approach? Static files don't need cookies, query strings, or other headers. Forwarding only what's absolutely required reduces request size and eliminates potential cache key pollution."

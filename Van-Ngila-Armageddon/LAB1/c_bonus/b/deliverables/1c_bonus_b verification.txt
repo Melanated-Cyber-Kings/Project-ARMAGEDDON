@@ -1,0 +1,135 @@
+Verification commands (CLI) for Bonus-B
+1) ALB exists and is active
+   
+      aws elbv2 describe-load-balancers \
+        --names Armageddon-alb-public \
+        --query "LoadBalancers[0].State.Code"
+"active"
+
+2) HTTPS listener exists on 443
+   
+      aws elbv2 describe-listeners \
+        --load-balancer-arn arn:aws:elasticloadbalancing:ap-northeast-1:031857855861:loadbalancer/app/Armageddon-alb-public/8cfb420b0865629b \
+        --query "Listeners[].Port"
+[
+    80
+]
+3) Target is healthy
+   
+      aws elbv2 describe-target-health \
+        --target-group-arn arn:aws:elasticloadbalancing:ap-northeast-1:031857855861:targetgroup/Armageddon-alb-private-targets/6af7658363b17f9f
+{
+    "TargetHealthDescriptions": [
+        {
+            "Target": {
+                "Id": "i-0925973263cf4ce55",
+                "Port": 80
+            },
+            "HealthCheckPort": "80",
+            "TargetHealth": {
+                "State": "unused",
+                "Reason": "Target.NotInUse",
+                "Description": "Target group is not configured to receive traffic from the load balancer"
+            }
+        }
+    ]
+}
+4) WAF attached
+   
+      aws wafv2 get-web-acl-for-resource \
+        --resource-arn arn:aws:elasticloadbalancing:ap-northeast-1:031857855861:loadbalancer/app/Armageddon-alb-public/8cfb420b0865629b
+{
+    "WebACL": {
+        "Name": "lab-1c-waf01",
+        "Id": "82d2055a-5b83-43ff-8881-cd2786827494",
+        "ARN": "arn:aws:wafv2:ap-northeast-1:031857855861:regional/webacl/lab-1c-waf01/82d2055a-5b83-43ff-8881-cd2786827494",
+        "DefaultAction": {
+            "Allow": {}
+        },
+        "Description": "",
+        "Rules": [
+            {
+                "Name": "AWSManagedRulesCommonRuleSet",
+                "Priority": 1,
+                "Statement": {
+                    "ManagedRuleGroupStatement": {
+                        "VendorName": "AWS",
+                        "Name": "AWSManagedRulesCommonRuleSet"
+                    }
+                },
+                "OverrideAction": {
+                    "None": {}
+                },
+                "VisibilityConfig": {
+                    "SampledRequestsEnabled": true,
+                    "CloudWatchMetricsEnabled": true,
+                    "MetricName": "lab-1c-waf-common"
+                }
+            }
+        ],
+        "VisibilityConfig": {
+            "SampledRequestsEnabled": true,
+            "CloudWatchMetricsEnabled": true,
+            "MetricName": "lab-1c-waf01"
+        },
+        "Capacity": 700,
+        "ManagedByFirewallManager": false,
+        "LabelNamespace": "awswaf:031857855861:webacl:lab-1c-waf01:",
+        "RetrofittedByFirewallManager": false,
+        "OnSourceDDoSProtectionConfig": {
+            "ALBLowReputationMode": "ACTIVE_UNDER_DDOS"
+        }
+    }
+}
+5) Alarm created (ALB 5xx)
+   
+      aws cloudwatch describe-alarms \
+        --alarm-name-prefix lab-1c-alb-5xx-alarm01
+{
+    "MetricAlarms": [
+        {
+            "AlarmName": "lab-1c-alb-5xx-alarm01",
+            "AlarmArn": "arn:aws:cloudwatch:ap-northeast-1:031857855861:alarm:lab-1c-alb-5xx-alarm01",
+            "AlarmConfigurationUpdatedTimestamp": "2026-01-21T23:25:20.502000+00:00",
+            "ActionsEnabled": true,
+            "OKActions": [],
+            "AlarmActions": [
+                "arn:aws:sns:ap-northeast-1:031857855861:lab-db-incidents"
+            ],
+            "InsufficientDataActions": [],
+            "StateValue": "INSUFFICIENT_DATA",
+            "StateReason": "Unchecked: Initial alarm creation",
+            "StateUpdatedTimestamp": "2026-01-21T23:25:20.502000+00:00",
+            "MetricName": "HTTPCode_ELB_5XX_Count",
+            "Namespace": "AWS/ApplicationELB",
+            "Statistic": "Sum",
+            "Dimensions": [
+                {
+                    "Name": "LoadBalancer",
+                    "Value": "app/Armageddon-alb-public/8cfb420b0865629b"
+                }
+            ],
+            "Period": 300,
+            "EvaluationPeriods": 1,
+            "Threshold": 10.0,
+            "ComparisonOperator": "GreaterThanOrEqualToThreshold",
+            "TreatMissingData": "missing",
+            "StateTransitionedTimestamp": "2026-01-21T23:25:20.502000+00:00"
+        }
+    ],
+    "CompositeAlarms": []
+}
+6) Dashboard exists
+    
+      aws cloudwatch list-dashboards \
+        --dashboard-name-prefix lab-1c-dashboard01
+{
+    "DashboardEntries": [
+        {
+            "DashboardName": "lab-1c-dashboard01",
+            "DashboardArn": "arn:aws:cloudwatch::031857855861:dashboard/lab-1c-dashboard01",
+            "LastModified": "2026-01-21T23:25:21+00:00",
+            "Size": 685
+        }
+    ]
+}

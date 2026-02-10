@@ -1,0 +1,100 @@
+Verification CLI (students must prove all 3 requirements)
+1) “VPC is only reachable via CloudFront”
+A) Direct ALB access should fail (403)
+  curl -I https://lew-alb01-1038980021.ap-northeast-1.elb.amazonaws.com
+
+  curl: (28) Connection timed out after 10006 milliseconds
+
+  B) CloudFront access should succeed
+  curl -I https://lewsdomain.com
+  curl -I https://app.lewsdomain.com
+
+  HTTP/2 502 
+content-type: text/html
+content-length: 937
+date: Tue, 27 Jan 2026 06:45:31 GMT
+x-cache: Error from cloudfront
+via: 1.1 0911b37543b22b4af9ed71e4983b7116.cloudfront.net (CloudFront)
+x-amz-cf-pop: DEN53-P5
+x-amz-cf-id: rimcXgqq8BgeonMCiNngEMto3BIb2jiEN8zOSj2ErVAZiBlYS3givg==
+
+HTTP/2 200 
+content-type: text/html; charset=utf-8
+content-length: 126
+date: Tue, 27 Jan 2026 06:45:32 GMT
+server: Werkzeug/3.1.5 Python/3.9.25
+x-cache: Miss from cloudfront
+via: 1.1 43af5bae23b24344744d88dc431041a0.cloudfront.net (CloudFront)
+x-amz-cf-pop: DEN53-P5
+x-amz-cf-id: 68jopInpTybo9Kr81bvI94AZiZCA0taj9AXJUbosEVHsWI7w7PAIWg==
+
+2) WAF moved to CloudFront
+  aws wafv2 get-web-acl \
+  --name chewbacca-cf-waf01 \
+  --scope CLOUDFRONT \
+  --id 2d02f757-5f2d-4224-a169-1ae9d7d94d9b
+
+  {
+    "WebACL": {
+        "Name": "chewbacca-cf-waf01",
+        "Id": "2d02f757-5f2d-4224-a169-1ae9d7d94d9b",
+        "ARN": "arn:aws:wafv2:us-east-1:620812304994:global/webacl/chewbacca-cf-waf01/2d02f757-5f2d-4224-a169-1ae9d7d94d9b",
+        "DefaultAction": {
+            "Allow": {}
+        },
+        "Description": "",
+        "Rules": [
+            {
+                "Name": "AWS-AWSManagedRulesCommonRuleSet",
+                "Priority": 1,
+                "Statement": {
+                    "ManagedRuleGroupStatement": {
+                        "VendorName": "AWS",
+                        "Name": "AWSManagedRulesCommonRuleSet"
+                    }
+                },
+                "OverrideAction": {
+                    "None": {}
+                },
+                "VisibilityConfig": {
+                    "SampledRequestsEnabled": true,
+                    "CloudWatchMetricsEnabled": true,
+                    "MetricName": "AWSManagedRulesCommonRuleSetMetric"
+                }
+            }
+        ],
+        "VisibilityConfig": {
+            "SampledRequestsEnabled": true,
+            "CloudWatchMetricsEnabled": true,
+            "MetricName": "chewbacca-cf-waf-main-metric"
+        },
+        "Capacity": 700,
+        "ManagedByFirewallManager": false,
+        "LabelNamespace": "awswaf:620812304994:webacl:chewbacca-cf-waf01:",
+        "RetrofittedByFirewallManager": false,
+        "OnSourceDDoSProtectionConfig": {
+            "ALBLowReputationMode": "ACTIVE_UNDER_DDOS"
+        }
+    },
+    "LockToken": "79f33c88-ef57-48de-a2a0-3b8ed36bdba5"
+}
+
+And confirm distribution references it:
+  aws cloudfront get-distribution \
+  --id EHSBBR4C0ARN5 \
+  --query "Distribution.DistributionConfig.WebACLId"
+
+  "arn:aws:wafv2:us-east-1:620812304994:global/webacl/chewbacca-cf-waf01/2d02f757-5f2d-4224-a169-1ae9d7d94d9b"
+
+  3) lewsdomain.com points to CloudFront
+   dig lewsdomain.com A +short
+  dig app.lewsdomain.com A +short
+
+  99.84.118.62
+99.84.118.47
+99.84.118.46
+99.84.118.118
+99.84.118.118
+99.84.118.62
+99.84.118.46
+99.84.118.47

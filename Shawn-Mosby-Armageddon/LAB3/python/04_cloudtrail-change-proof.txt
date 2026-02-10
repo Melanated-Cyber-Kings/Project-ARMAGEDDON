@@ -1,0 +1,104 @@
+{
+  "trail_status": "ACTIVE",
+  "recent_management_events": [
+    {
+      "EventId": "1899e74b-cfab-3405-8167-8dada81d219a",
+      "EventName": "AssumeRole",
+      "EventTime": "2026-02-05 20:57:07-07:00",
+      "User": "AWS Service/System",
+      "Resources": [
+        "ASIAZBC2MAJROFWPWXNY",
+        "AROAZBC2MAJREKN4OS4HU:AutoScaling",
+        "arn:aws:sts::620812304994:assumed-role/AWSServiceRoleForAutoScaling/AutoScaling",
+        "AutoScaling",
+        "arn:aws:iam::620812304994:role/aws-service-role/autoscaling.amazonaws.com/AWSServiceRoleForAutoScaling"
+      ]
+    },
+    {
+      "EventId": "0d00c454-2118-4a0f-947d-5643ef501cd0",
+      "EventName": "DescribeInstanceStatus",
+      "EventTime": "2026-02-05 20:57:06-07:00",
+      "User": "AutoScaling",
+      "Resources": []
+    },
+    {
+      "EventId": "68764b6a-40f7-43df-8a4b-ac6ec54740dc",
+      "EventName": "DescribeInstances",
+      "EventTime": "2026-02-05 20:57:06-07:00",
+      "User": "AutoScaling",
+      "Resources": []
+    },
+    {
+      "EventId": "b1210b45-7d1d-3145-a26b-4ef33707b6e8",
+      "EventName": "AssumeRole",
+      "EventTime": "2026-02-05 20:57:06-07:00",
+      "User": "AWS Service/System",
+      "Resources": [
+        "ASIAZBC2MAJRBIBCRE7Q",
+        "AROAZBC2MAJREKN4OS4HU:AutoScaling",
+        "arn:aws:sts::620812304994:assumed-role/AWSServiceRoleForAutoScaling/AutoScaling",
+        "AutoScaling",
+        "arn:aws:iam::620812304994:role/aws-service-role/autoscaling.amazonaws.com/AWSServiceRoleForAutoScaling"
+      ]
+    },
+    {
+      "EventId": "cdc4df8c-12ca-4227-8953-7cf2ec785213",
+      "EventName": "RegisterTargets",
+      "EventTime": "2026-02-05 20:57:06-07:00",
+      "User": "AutoScaling",
+      "Resources": [
+        "i-0cba24bcc9609667d",
+        "arn:aws:elasticloadbalancing:ap-northeast-1:620812304994:targetgroup/shinjuku-tg/dda211fd2667bacd"
+      ]
+    },
+    {
+      "EventId": "26cbc243-e432-3da9-906c-097b97832388",
+      "EventName": "SharedSnapshotVolumeCreated",
+      "EventTime": "2026-02-05 20:57:04-07:00",
+      "User": "AWS Service/System",
+      "Resources": []
+    },
+    {
+      "EventId": "14a5a64f-b309-4fb8-9d77-04103ebd0190",
+      "EventName": "RunInstances",
+      "EventTime": "2026-02-05 20:57:02-07:00",
+      "User": "AutoScaling",
+      "Resources": [
+        "vpc-0f0dca33e7496e482",
+        "ami-0d52744d6551d851e",
+        "eni-09c6da866a9c1451d",
+        "i-0cba24bcc9609667d",
+        "shinjuku-ec2-sg",
+        "sg-02c38bf21c16055a8",
+        "subnet-0737fef22abf09f1f"
+      ]
+    },
+    {
+      "EventId": "06c44201-08c1-4afd-b31a-36a3f185a10d",
+      "EventName": "DescribeTargetGroupAttributes",
+      "EventTime": "2026-02-05 20:57:01-07:00",
+      "User": "AutoScaling",
+      "Resources": []
+    },
+    {
+      "EventId": "118bc87f-604c-4fb1-82a4-837e006ad33b",
+      "EventName": "DeregisterTargets",
+      "EventTime": "2026-02-05 20:57:00-07:00",
+      "User": "AutoScaling",
+      "Resources": [
+        "i-087220015e981602b",
+        "arn:aws:elasticloadbalancing:ap-northeast-1:620812304994:targetgroup/shinjuku-tg/dda211fd2667bacd"
+      ]
+    },
+    {
+      "EventId": "1a4bfb22-5c64-498a-8af5-bb237f4fb3dc",
+      "EventName": "DescribeLaunchTemplateVersions",
+      "EventTime": "2026-02-05 20:57:00-07:00",
+      "User": "AutoScaling",
+      "Resources": [
+        "lt-012d69ac52f612787"
+      ]
+    }
+  ],
+  "assertion": "PASS"
+}

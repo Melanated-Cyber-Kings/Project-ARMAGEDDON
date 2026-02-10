@@ -1,0 +1,27 @@
+# Terraform
+**/.terraform/
+**/.terraform.lock.hcl
+**/*.tfstate
+**/*.tfstate.*
+**/terraform.tfvars
+**/terraform.tfvars.json
+
+# Provider binaries
+**/providers/
+
+# Backup files
+**/*.backup
+**/*.bak
+
+# JSON configs (if they contain sensitive data)
+**/*.json
+
+# Executables
+**/*.exe
+**/*.dll
+
+# Local IDE files
+**/.vscode/
+**/.idea/
+**/*.swp
+**/*.swo

@@ -1,0 +1,3 @@
+#db_username  = "admin"
+#db_password  = "YourSecurePassword123!"
+# sao_paulo_vpc_cidr = "10.103.0.0/16" # Uncomment and modify as needed

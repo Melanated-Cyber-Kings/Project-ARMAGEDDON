@@ -1,0 +1,79 @@
+1) CLI Command & Invalidation ID
+Command Used:
+
+aws cloudfront create-invalidation --distribution-id EQALOD2REVPSI --paths "/static/example.txt"
+
+{
+    "Location": "https://cloudfront.amazonaws.com/2020-05-31/distribution/EQALOD2REVPSI/invalidation/I9DU4S0ISBP4YOVYEZ15T4DUQF",
+    "Invalidation": {
+        "Id": "I9DU4S0ISBP4YOVYEZ15T4DUQF",
+        "Status": "InProgress",
+        "CreateTime": "2026-02-09T04:18:48.885000+00:00",
+        "InvalidationBatch": {
+            "Paths": {
+                "Quantity": 1,
+                "Items": [
+                    "/static/example.txt"
+                ]
+            },
+            "CallerReference": "cli-1770610728-988196"
+        }
+    }
+
+
+"Invalidation": "Id": "I9DU4S0ISBP4YOVYEZ15T4DUQF"
+
+2) Proof of Cache (Before vs. After)
+    B1: Before Invalidation (Stale Content)
+    Evidence showing the object was cached even after you updated the EC2.
+
+    B1 Last-Modified: 02:48:13 GMT
+
+    HTTP/2 200 
+content-type: text/plain; charset=utf-8
+content-length: 20
+server: Werkzeug/3.1.5 Python/3.9.25
+content-disposition: inline; filename=example.txt
+last-modified: Mon, 09 Feb 2026 02:48:13 GMT
+date: Mon, 09 Feb 2026 04:01:32 GMT
+cache-control: public, max-age=86400, immutable
+etag: "1770605293.487326-20-2962164636"
+x-cache: RefreshHit from cloudfront
+via: 1.1 da92b92fa64883e21c6bcf07d52fa890.cloudfront.net (CloudFront)
+x-amz-cf-pop: DEN53-P5
+x-amz-cf-id: OXXXijp-1Jctqo_uoNabwoWulNjvLvRdcsVYpy-BDfjNzkwG-ZCxmw==
+
+Chewbacca was here!
+
+B3: After Invalidation (Fresh Content)
+Evidence showing CloudFront was forced to fetch your "Version 2.0" update.
+
+B3 Last-Modified: 04:05:35 GMT
+
+HTTP/2 200 
+content-type: text/plain; charset=utf-8
+content-length: 44
+date: Mon, 09 Feb 2026 04:11:42 GMT
+etag: "1770609935.1152973-44-2962164636"
+server: Werkzeug/3.1.5 Python/3.9.25
+content-disposition: inline; filename=example.txt
+last-modified: Mon, 09 Feb 2026 04:05:35 GMT
+cache-control: public, max-age=86400, immutable
+x-cache: Miss from cloudfront
+via: 1.1 de2820d8070dfec0ed6e781246ebefbe.cloudfront.net (CloudFront)
+x-amz-cf-pop: DEN53-P5
+x-amz-cf-id: Mjq6n-m_xH3SQ01DztjwexljGxbZYiCYTyP_TMMiMlk18ryMjNyWKQ==
+
+Chewbacca Version 2.0 - Honors Plus Update!
+
+3) Operational Policy Paragraph
+When do we invalidate? 
+We use invalidations as a "break glass" operation for static entrypoints, such as index.html or manifest.json, that do not have versioned filenames but must reflect changes immediately to point users to new assets.
+
+When do we version instead? 
+We use versioning (e.g., app.8f2d31.js) for all application logic, styles, and media. 
+Versioning is preferred because it allows for instantaneous updates across the CDN without manual intervention, supports easy rollbacks, and prevents the risk of users receiving mismatched assets during a deployment.
+
+Why is /* restricted? 
+A global wildcard invalidation is restricted because it wipes the entire cache across all 600+ edge locations simultaneously. 
+This creates a "Thundering Herd" effect where every subsequent request must be forwarded to our ALB and EC2 origin, potentially overwhelming the servers and increasing operational costs.

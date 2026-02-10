@@ -1,0 +1,494 @@
+#List all security groups in a region
+----------------------------------------------------------------------------
+|                          DescribeSecurityGroups                          |
++----------------------+-------------------------+-------------------------+
+|        GroupId       |          Name           |          VpcId          |
++----------------------+-------------------------+-------------------------+
+|  sg-0a917dbff4a70ffdd|  rds-lab-1a             |  vpc-086096e4803d2bc89  |
+|  sg-0e6822d557178b340|  ec2-armageddon-lab-1a  |  vpc-086096e4803d2bc89  |
+|  sg-0657954ab56fe76f8|  default                |  vpc-048fe41785a83ac1c  |
+|  sg-02bc2a73613280776|  default                |  vpc-086096e4803d2bc89  |
++----------------------+-------------------------+-------------------------+
+
+#Inspect ec2 security group (inbound & outbound rules)
+aws ec2 describe-security-groups \
+  --group-ids sg-0e6822d557178b340 \
+  --region ap-northeast-1 \
+  --output json
+  
+{
+    "SecurityGroups": [
+        {
+            "GroupId": "sg-0e6822d557178b340",
+            "IpPermissionsEgress": [
+                {
+                    "IpProtocol": "-1",
+                    "UserIdGroupPairs": [],
+                    "IpRanges": [
+                        {
+                            "CidrIp": "0.0.0.0/0"
+                        }
+                    ],
+                    "Ipv6Ranges": [],
+                    "PrefixListIds": []
+                }
+            ],
+            "Tags": [
+                {
+                    "Key": "Name",
+                    "Value": "sg-ec2-armageddon-lab-1a"
+                }
+            ],
+            "VpcId": "vpc-086096e4803d2bc89",
+            "SecurityGroupArn": "arn:aws:ec2:ap-northeast-1:031857855861:security-group/sg-0e6822d557178b340",
+            "OwnerId": "031857855861",
+            "GroupName": "ec2-armageddon-lab-1a",
+            "Description": "Security group for EC2",
+            "IpPermissions": [
+                {
+                    "IpProtocol": "tcp",
+                    "FromPort": 80,
+                    "ToPort": 80,
+                    "UserIdGroupPairs": [],
+                    "IpRanges": [
+                        {
+                            "Description": "Allow HTTP traffic",
+                            "CidrIp": "0.0.0.0/0"
+                        }
+                    ],
+                    "Ipv6Ranges": [],
+                    "PrefixListIds": []
+                },
+                {
+                    "IpProtocol": "tcp",
+                    "FromPort": 22,
+                    "ToPort": 22,
+                    "UserIdGroupPairs": [],
+                    "IpRanges": [
+                        {
+                            "CidrIp": "0.0.0.0/0"
+                        }
+                    ],
+                    "Ipv6Ranges": [],
+                    "PrefixListIds": []
+                }
+            ]
+        }
+    ]
+}
+
+#Inspect rds security group (inbound & outbound rules)
+aws rds describe-security-groups \
+  --group-ids sg-0a917dbff4a70ffdd \
+  --region ap-northeast-1 \
+  --output json
+
+{
+    "SecurityGroups": [
+        {
+            "GroupId": "sg-0a917dbff4a70ffdd",
+            "IpPermissionsEgress": [
+                {
+                    "IpProtocol": "-1",
+                    "UserIdGroupPairs": [],
+                    "IpRanges": [
+                        {
+                            "CidrIp": "0.0.0.0/0"
+                        }
+                    ],
+                    "Ipv6Ranges": [],
+                    "PrefixListIds": []
+                }
+            ],
+            "Tags": [
+                {
+                    "Key": "Name",
+                    "Value": "armageddon-lab-1a-rds-sg"
+                }
+            ],
+            "VpcId": "vpc-086096e4803d2bc89",
+            "SecurityGroupArn": "arn:aws:ec2:ap-northeast-1:031857855861:security-group/sg-0a917dbff4a70ffdd",
+            "OwnerId": "031857855861",
+            "GroupName": "rds-lab-1a",
+            "Description": "Allow inbound traffic and all outbound traffic to the rds",
+            "IpPermissions": [
+                {
+                    "IpProtocol": "tcp",
+                    "FromPort": 3306,
+                    "ToPort": 3306,
+                    "UserIdGroupPairs": [
+                        {
+                            "Description": "MySQL access from EC2",
+                            "UserId": "031857855861",
+                            "GroupId": "sg-0e6822d557178b340"
+                        }
+                    ],
+                    "IpRanges": [],
+                    "Ipv6Ranges": [],
+                    "PrefixListIds": []
+                }
+            ]
+        }
+    ]
+}
+
+#Verify which resources are using the security group EC2 instances
+aws ec2 describe-instances \
+  --filters Name=instance.group-id,Values=sg-0e6822d557178b340 \
+  --region ap-northeast-1 \
+  --query "Reservations[].Instances[].InstanceId" \
+  --output table
+-------------------------
+|   DescribeInstances   |
++-----------------------+
+|  i-038c0094823165402  |
++-----------------------+
+
+#RDS instances
+aws rds describe-db-instances \
+  --region ap-northeast-1 \
+  --query "DBInstances[?contains(VpcSecurityGroups[].VpcSecurityGroupId, 'sg-0a917dbff4a70ffdd')].DBInstanceIdentifier" \
+  --output table
+---------------------
+|DescribeDBInstances|
++-------------------+
+|  lab-mysql        |
++-------------------+
+
+#List all RDS instances
+aws rds describe-db-instances \
+  --region ap-northeast-1 \
+  --query "DBInstances[].{DB:DBInstanceIdentifier,Engine:Engine,Public:PubliclyAccessible,Vpc:DBSubnetGroup.VpcId}" \
+  --output table
+------------------------------------------------------------
+|                    DescribeDBInstances                   |
++-----------+---------+---------+--------------------------+
+|    DB     | Engine  | Public  |           Vpc            |
++-----------+---------+---------+--------------------------+
+|  lab-mysql|  mysql  |  False  |  vpc-086096e4803d2bc89   |
++-----------+---------+---------+--------------------------+
+
+#Inspect a specific RDS instance
+aws rds describe-db-instances \
+>   --db-instance-identifier lab-mysql \
+>   --region ap-northeast-1 \
+>   --output json
+{
+    "DBInstances": [
+        {
+            "DBInstanceIdentifier": "lab-mysql",
+            "DBInstanceClass": "db.t3.micro",
+            "Engine": "mysql",
+            "DBInstanceStatus": "available",
+            "MasterUsername": "Van",
+            "DBName": "labdb",
+            "Endpoint": {
+                "Address": "lab-mysql.cxm8o4cwoftn.ap-northeast-1.rds.amazonaws.com",
+                "Port": 3306,
+                "HostedZoneId": "Z24O6O9L7SGTNB"
+            },
+            "AllocatedStorage": 20,
+            "InstanceCreateTime": "2026-01-17T10:23:35.408000+00:00",
+            "PreferredBackupWindow": "17:47-18:17",
+            "BackupRetentionPeriod": 0,
+            "DBSecurityGroups": [],
+            "VpcSecurityGroups": [
+                {
+                    "VpcSecurityGroupId": "sg-0a917dbff4a70ffdd",
+                    "Status": "active"
+                }
+            ],
+            "DBParameterGroups": [
+                {
+                    "DBParameterGroupName": "default.mysql8.0",
+                    "ParameterApplyStatus": "in-sync"
+                }
+            ],
+            "AvailabilityZone": "ap-northeast-1c",
+            "DBSubnetGroup": {
+                "DBSubnetGroupName": "armageddon-lab-1a-db-subnet-group",
+                "DBSubnetGroupDescription": "Managed by Terraform",
+                "VpcId": "vpc-086096e4803d2bc89",
+                "SubnetGroupStatus": "Complete",
+                "Subnets": [
+                    {
+                        "SubnetIdentifier": "subnet-04dceee5137819993",
+                        "SubnetAvailabilityZone": {
+                            "Name": "ap-northeast-1c"
+                        },
+                        "SubnetOutpost": {},
+                        "SubnetStatus": "Active"
+                    },
+                    {
+                        "SubnetIdentifier": "subnet-01f09e1ec9f31b691",
+                        "SubnetAvailabilityZone": {
+                            "Name": "ap-northeast-1a"
+                        },
+                        "SubnetOutpost": {},
+                        "SubnetStatus": "Active"
+                    }
+                ]
+            },
+            "PreferredMaintenanceWindow": "thu:15:51-thu:16:21",
+            "UpgradeRolloutOrder": "second",
+            "PendingModifiedValues": {},
+            "MultiAZ": true,
+            "EngineVersion": "8.0.43",
+            "AutoMinorVersionUpgrade": true,
+            "ReadReplicaDBInstanceIdentifiers": [],
+            "LicenseModel": "general-public-license",
+            "StorageThroughput": 0,
+            "OptionGroupMemberships": [
+                {
+                    "OptionGroupName": "default:mysql-8-0",
+                    "Status": "in-sync"
+                }
+            ],
+            "SecondaryAvailabilityZone": "ap-northeast-1a",
+            "PubliclyAccessible": false,
+            "StorageType": "gp2",
+            "DbInstancePort": 0,
+            "StorageEncrypted": false,
+            "DbiResourceId": "db-UEBVML3EHOTINGDLVCH7YEBCQ4",
+            "CACertificateIdentifier": "rds-ca-rsa2048-g1",
+            "DomainMemberships": [],
+            "CopyTagsToSnapshot": false,
+            "MonitoringInterval": 0,
+            "DBInstanceArn": "arn:aws:rds:ap-northeast-1:031857855861:db:lab-mysql",
+            "IAMDatabaseAuthenticationEnabled": false,
+            "DatabaseInsightsMode": "standard",
+            "PerformanceInsightsEnabled": false,
+            "DeletionProtection": false,
+            "AssociatedRoles": [],
+            "TagList": [],
+            "CustomerOwnedIpEnabled": false,
+            "NetworkType": "IPV4",
+            "ActivityStreamStatus": "stopped",
+            "BackupTarget": "region",
+            "CertificateDetails": {
+                "CAIdentifier": "rds-ca-rsa2048-g1",
+                "ValidTill": "2027-01-17T10:22:10+00:00"
+            },
+            "DedicatedLogVolume": false,
+            "IsStorageConfigUpgradeAvailable": false,
+            "EngineLifecycleSupport": "open-source-rds-extended-support"
+        }
+    ]
+}
+
+#Verify RDS security groups explicitly
+aws rds describe-db-instances \
+  --db-instance-identifier lab-mysql \
+  --region ap-northeast-1 \
+  --query "DBInstances[].VpcSecurityGroups[].VpcSecurityGroupId" \
+  --output table
+--------------------------
+|   DescribeDBInstances  |
++------------------------+
+|  sg-0a917dbff4a70ffdd  |
++------------------------+
+
+#Verify RDS subnet placement
+aws rds describe-db-subnet-groups \
+  --region ap-northeast-1 \
+  --query "DBSubnetGroups[].{Name:DBSubnetGroupName,Vpc:VpcId,Subnets:Subnets[].SubnetIdentifier}" \
+  --output table
+----------------------------------------------------------------
+|                    DescribeDBSubnetGroups                    |
++------------------------------------+-------------------------+
+|                Name                |           Vpc           |
++------------------------------------+-------------------------+
+|  armageddon-lab-1a-db-subnet-group |  vpc-086096e4803d2bc89  |
++------------------------------------+-------------------------+
+||                           Subnets                          ||
+|+------------------------------------------------------------+|
+||  subnet-04dceee5137819993                                  ||
+||  subnet-01f09e1ec9f31b691                                  ||
+|+------------------------------------------------------------+|
+
+#Verify Network Exposure (Fast Sanity Checks) Check if RDS is publicly reachable (quick flag)
+aws rds describe-db-instances \
+  --db-instance-identifier lab-mysql \
+  --region ap-northeast-1 \
+  --query "DBInstances[].PubliclyAccessible" \
+  --output text
+False
+
+#Verify Secrets Manager (Existence, Metadata, Access)
+aws secretsmanager list-secrets \
+  --region ap-northeast-1 \
+  --query "SecretList[].{Name:Name,ARN:ARN,Rotation:RotationEnabled}" \
+  --output table
+-----------------------------------------------------------------------------------------------------------------------
+|                                                     ListSecrets                                                     |
++------------------------------------------------------------------------------------+-------------------+------------+
+|                                         ARN                                        |       Name        | Rotation   |
++------------------------------------------------------------------------------------+-------------------+------------+
+|  arn:aws:secretsmanager:ap-northeast-1:031857855861:secret:lab-1a/rds/mysql-tXEJQh |  lab-1a/rds/mysql |  True      |
++------------------------------------------------------------------------------------+-------------------+------------+
+
+#Describe a specific secret (NO value exposure)
+aws secretsmanager describe-secret \
+  --secret-id lab-1a/rds/mysql \
+  --region ap-northeast-1 \
+  --output json
+{
+    "ARN": "arn:aws:secretsmanager:ap-northeast-1:031857855861:secret:lab-1a/rds/mysql-tXEJQh",
+    "Name": "lab-1a/rds/mysql",
+    "LastChangedDate": "2026-01-16T22:10:17.116000+00:00",
+    "LastAccessedDate": "2026-01-17T00:00:00+00:00",
+    "VersionIdsToStages": {
+        "2b33f8c4-8f83-467e-b616-228bef5392a5": [
+            "AWSCURRENT"
+        ],
+        "818178cc-6a8b-4aed-87d1-e593c9d779e6": [
+            "AWSPREVIOUS"
+        ]
+    },
+    "CreatedDate": "2026-01-13T21:24:01.384000+00:00"
+}
+
+#Verify which IAM principals can access the secret
+aws secretsmanager get-resource-policy \
+>   --secret-id lab-1a/rds/mysql \
+>   --region ap-northeast-1 \
+>   --output json
+{
+    "ARN": "arn:aws:secretsmanager:ap-northeast-1:031857855861:secret:lab-1a/rds/mysql-tXEJQh",
+    "Name": "lab-1a/rds/mysql"
+}
+
+#Verify IAM Role Attached to an EC2 Instance Step 1: Identify the EC2 instance
+aws ec2 describe-instances \
+  --filters Name=tag:Name,Values=armageddon-lab-1a-ec2-app \
+  --region ap-northeast-1 \
+  --query "Reservations[].Instances[].InstanceId" \
+  --output text
+
+i-038c0094823165402
+
+#Step 2: Check the IAM role attached to the instance
+aws ec2 describe-instances \
+  --instance-ids i-038c0094823165402 \
+  --region ap-northeast-1 \
+  --query "Reservations[].Instances[].IamInstanceProfile.Arn" \
+  --output text
+arn:aws:iam::031857855861:instance-profile/armageddon-lab-1a-ec2-secrets-profile
+
+#Step 3: Resolve instance profile → role name
+aws iam get-instance-profile \
+  --instance-profile-name armageddon-lab-1a-ec2-secrets-profile \
+  --query "InstanceProfile.Roles[].RoleName" \
+  --output text
+armageddon-lab-1a-ec2-secrets-role
+
+#Verify IAM Role Permissions (Critical) List policies attached to the role
+aws iam list-attached-role-policies \
+  --role-name armageddon-lab-1a-ec2-secrets-role \
+  --output table
+-----------------------------------------------------------------------------------------------------------------
+|                                           ListAttachedRolePolicies                                            |
++---------------------------------------------------------------------------------------------------------------+
+||                                              AttachedPolicies                                               ||
+|+----------------------------------------------------------------------+--------------------------------------+|
+||                               PolicyArn                              |             PolicyName               ||
+|+----------------------------------------------------------------------+--------------------------------------+|
+||  arn:aws:iam::031857855861:policy/armageddon-lab-1a-EC2ReadRDSSecret |  armageddon-lab-1a-EC2ReadRDSSecret  ||
+|+----------------------------------------------------------------------+--------------------------------------+|
+#List inline policies (often forgotten)
+aws iam list-role-policies \
+  --role-name armageddon-lab-1a-ec2-secrets-role \
+  --output table
+
+------------------
+|ListRolePolicies|
++----------------+
+||  PolicyNames ||
+|+--------------+|
+||  ec2_policy  ||
+|+--------------+|
+
+#Inspect a specific managed policy
+aws iam get-policy-version \
+  --policy-arn arn:aws:iam::031857855861:policy/armageddon-lab-1a-EC2ReadRDSSecret \
+  --version-id v1 \
+  --output json
+{
+    "PolicyVersion": {
+        "Document": {
+            "Statement": [
+                {
+                    "Action": [
+                        "secretsmanager:GetSecretValue",
+                        "secretsmanager:DescribeSecret"
+                    ],
+                    "Effect": "Allow",
+                    "Resource": "arn:aws:secretsmanager:ap-northeast-1:031857855861:secret:lab-1a/rds/mysql*",
+                    "Sid": "ReadSpecificSecret"
+                },
+                {
+                    "Action": "kms:Decrypt",
+                    "Effect": "Allow",
+                    "Resource": "arn:aws:kms:ap-northeast-1:031857855861:key/0987dcba-09fe-87dc-65ba-ab0987654321",
+                    "Sid": "AllowKMSDecrypt"
+                }
+            ],
+            "Version": "2012-10-17"
+        },
+        "VersionId": "v1",
+        "IsDefaultVersion": true,
+        "CreateDate": "2026-01-17T10:19:37+00:00"
+    }
+}
+
+#Verify EC2 → RDS access path (security-group–to–security-group)
+aws ec2 describe-security-groups \
+  --group-ids sg-0a917dbff4a70ffdd \
+  --region ap-northeast-1 \
+  --query "SecurityGroups[].IpPermissions"
+[
+    [
+        {
+            "IpProtocol": "tcp",
+            "FromPort": 3306,
+            "ToPort": 3306,
+            "UserIdGroupPairs": [
+                {
+                    "Description": "MySQL access from EC2",
+                    "UserId": "031857855861",
+                    "GroupId": "sg-0e6822d557178b340"
+                }
+            ],
+            "IpRanges": [],
+            "Ipv6Ranges": [],
+            "PrefixListIds": []
+        }
+    ]
+]
+#Verify That EC2 Can Actually Read the Secret (From the Instance) From inside the EC2 instance:
+{
+    "UserId": "AROAQO2XAJV27MSINDASC:i-038c0094823165402",
+    "Account": "031857855861",
+    "Arn": "arn:aws:sts::031857855861:assumed-role/armageddon-lab-1a-ec2-secrets-role/i-038c0094823165402"
+}
+
+#Then test access:
+aws secretsmanager describe-secret \
+  --secret-id lab-1a/rds/mysql \
+  --region ap-northeast-1
+{
+    "ARN": "arn:aws:secretsmanager:ap-northeast-1:031857855861:secret:lab-1a/rds/mysql-tXEJQh",
+    "Name": "lab-1a/rds/mysql",
+    "LastChangedDate": "2026-01-16T22:10:17.116000+00:00",
+    "LastAccessedDate": "2026-01-17T00:00:00+00:00",
+    "VersionIdsToStages": {
+        "2b33f8c4-8f83-467e-b616-228bef5392a5": [
+            "AWSCURRENT"
+        ],
+        "818178cc-6a8b-4aed-87d1-e593c9d779e6": [
+            "AWSPREVIOUS"
+        ]
+    },
+    "CreatedDate": "2026-01-13T21:24:01.384000+00:00"
+}
+#

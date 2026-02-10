@@ -1,0 +1,210 @@
+Student verification (CLI)
+A) Confirm WAF logging is enabled (authoritative)
+  aws wafv2 get-logging-configuration \
+    --resource-arn arn:aws:wafv2:ap-northeast-1:031857855861:regional/webacl/lab-1c-waf01/82d2055a-5b83-43ff-8881-cd2786827494
+{
+    "LoggingConfiguration": {
+        "ResourceArn": "arn:aws:wafv2:ap-northeast-1:031857855861:regional/webacl/lab-1c-waf01/82d2055a-5b83-43ff-8881-cd2786827494",
+        "LogDestinationConfigs": [
+            "arn:aws:logs:ap-northeast-1:031857855861:log-group:aws-waf-logs-lab-1c-webacl01"
+        ],
+        "RedactedFields": [
+            {
+                "SingleHeader": {
+                    "Name": "user-agent"
+                }
+            }
+        ],
+        "ManagedByFirewallManager": false,
+        "LogType": "WAF_LOGS",
+        "LogScope": "CUSTOMER"
+    }
+}
+
+B) Generate traffic (hits + blocks)
+  curl -I https://theowafhomework.site
+  curl -I https://app.theowafhomework.site
+
+curl -I https://theowafhomework.site
+HTTP/2 200 
+date: Sat, 24 Jan 2026 15:04:34 GMT
+content-type: text/html; charset=utf-8
+content-length: 143
+server: Werkzeug/3.1.5 Python/3.9.25
+
+curl -I https://app.theowafhomework.site
+HTTP/2 200 
+date: Sat, 24 Jan 2026 15:04:44 GMT
+content-type: text/html; charset=utf-8
+content-length: 143
+server: Werkzeug/3.1.5 Python/3.9.25
+
+C1) If CloudWatch Logs destination
+  aws logs describe-log-streams \
+  --log-group-name aws-waf-logs-lab-1c-webacl01 \
+  --order-by LastEventTime --descending
+{
+    "logStreams": [
+        {
+            "logStreamName": "ap-northeast-1_lab-1c-waf01_0",
+            "creationTime": 1769266655904,
+            "firstEventTimestamp": 1769266645179,
+            "lastEventTimestamp": 1769266645179,
+            "lastIngestionTime": 1769266655927,
+            "uploadSequenceToken": "49039859659467214534393665187154079312501427283475386908",
+            "arn": "arn:aws:logs:ap-northeast-1:031857855861:log-group:aws-waf-logs-lab-1c-webacl01:log-stream:ap-northeast-1_lab-1c-waf01_0",
+            "storedBytes": 0
+        }
+    ]
+}
+
+Then pull recent events:
+  aws logs filter-log-events \
+  --log-group-name aws-waf-logs-lab-1c-webacl01 \
+  --max-items 20
+{
+    "events": [
+        {
+            "logStreamName": "ap-northeast-1_lab-1c-waf01_0",
+            "timestamp": 1769266645179,
+            "message": "{\"timestamp\":1769266645179,\"formatVersion\":1,\"webaclId\":\"arn:aws:wafv2:ap-northeast-1:031857855861:regional/webacl/lab-1c-waf01/82d2055a-5b83-43ff-8881-cd2786827494\",\"terminatingRuleId\":\"Default_Action\",\"terminatingRuleType\":\"REGULAR\",\"action\":\"ALLOW\",\"terminatingRuleMatchDetails\":[],\"httpSourceName\":\"ALB\",\"httpSourceId\":\"031857855861-app/armageddon-lab-1c-alb-public/e138f50e2c89d1aa\",\"ruleGroupList\":[{\"ruleGroupId\":\"AWS#AWSManagedRulesCommonRuleSet\",\"terminatingRule\":null,\"nonTerminatingMatchingRules\":[],\"excludedRules\":null,\"customerConfig\":null}],\"rateBasedRuleList\":[],\"nonTerminatingMatchingRules\":[],\"requestHeadersInserted\":null,\"responseCodeSent\":null,\"httpRequest\":{\"clientIp\":\"104.23.217.76\",\"country\":\"SE\",\"headers\":[{\"name\":\"cf-ray\",\"value\":\"9c306211403b8de0-ARN\"},{\"name\":\"x-forwarded-for\",\"value\":\"2a06:98c0:3600::103\"},{\"name\":\"Host\",\"value\":\"theowafhomework.site\"},{\"name\":\"cf-worker\",\"value\":\"arzlz91948.workers.dev\"},{\"name\":\"accept-encoding\",\"value\":\"gzip\"},{\"name\":\"X-Forwarded-Proto\",\"value\":\"http\"},{\"name\":\"Pragma\",\"value\":\"no-cache\"},{\"name\":\"CF-Visitor\",\"value\":\"{\\\"scheme\\\":\\\"http\\\"}\"},{\"name\":\"User-Agent\",\"value\":\"REDACTED\"},{\"name\":\"Cache-Control\",\"value\":\"no-cache\"},{\"name\":\"CF-Connecting-IP\",\"value\":\"2a06:98c0:3600::103\"},{\"name\":\"Accept\",\"value\":\"text/html,application/xhtml+xml,application/xml;q=0.9,image/webp,*/*;q=0.8\"},{\"name\":\"Accept-Language\",\"value\":\"en-us,en;q=0.8,fr;q=0.5,fr-ca;q=0.3\"},{\"name\":\"Connection\",\"value\":\"Keep-Alive\"},{\"name\":\"CF-EW-Via\",\"value\":\"15\"},{\"name\":\"CDN-Loop\",\"value\":\"cloudflare; loops=1; subreqs=1\"}],\"uri\":\"/wp-admin/setup-config.php\",\"args\":\"\",\"httpVersion\":\"HTTP/1.1\",\"httpMethod\":\"GET\",\"requestId\":\"1-6974ddd5-7250741e0d9ab2133f3faf94\",\"fragment\":\"\",\"scheme\":\"http\",\"host\":\"theowafhomework.site\"}}",
+            "ingestionTime": 1769266655927,
+            "eventId": "39455964642395967928060154100382485931771559229247193088"
+        },
+        {
+            "logStreamName": "ap-northeast-1_lab-1c-waf01_0",
+            "timestamp": 1769266649333,
+            "message": "{\"timestamp\":1769266649333,\"formatVersion\":1,\"webaclId\":\"arn:aws:wafv2:ap-northeast-1:031857855861:regional/webacl/lab-1c-waf01/82d2055a-5b83-43ff-8881-cd2786827494\",\"terminatingRuleId\":\"Default_Action\",\"terminatingRuleType\":\"REGULAR\",\"action\":\"ALLOW\",\"terminatingRuleMatchDetails\":[],\"httpSourceName\":\"ALB\",\"httpSourceId\":\"031857855861-app/armageddon-lab-1c-alb-public/e138f50e2c89d1aa\",\"ruleGroupList\":[{\"ruleGroupId\":\"AWS#AWSManagedRulesCommonRuleSet\",\"terminatingRule\":null,\"nonTerminatingMatchingRules\":[],\"excludedRules\":null,\"customerConfig\":null}],\"rateBasedRuleList\":[],\"nonTerminatingMatchingRules\":[],\"requestHeadersInserted\":null,\"responseCodeSent\":null,\"httpRequest\":{\"clientIp\":\"104.23.217.76\",\"country\":\"SE\",\"headers\":[{\"name\":\"host\",\"value\":\"theowafhomework.site\"},{\"name\":\"cf-ray\",\"value\":\"9c30621531368de0-ARN\"},{\"name\":\"x-forwarded-for\",\"value\":\"2a06:98c0:3600::103\"},{\"name\":\"cf-ew-via\",\"value\":\"15\"},{\"name\":\"pragma\",\"value\":\"no-cache\"},{\"name\":\"accept-encoding\",\"value\":\"gzip, br\"},{\"name\":\"x-forwarded-proto\",\"value\":\"https\"},{\"name\":\"user-agent\",\"value\":\"REDACTED\"},{\"name\":\"cf-visitor\",\"value\":\"{\\\"scheme\\\":\\\"https\\\"}\"},{\"name\":\"cache-control\",\"value\":\"no-cache\"},{\"name\":\"accept\",\"value\":\"text/html,application/xhtml+xml,application/xml;q=0.9,image/webp,*/*;q=0.8\"},{\"name\":\"cf-connecting-ip\",\"value\":\"2a06:98c0:3600::103\"},{\"name\":\"accept-language\",\"value\":\"en-us,en;q=0.8,fr;q=0.5,fr-ca;q=0.3\"},{\"name\":\"cdn-loop\",\"value\":\"cloudflare; loops=1; subreqs=1\"},{\"name\":\"cf-worker\",\"value\":\"arzlz91948.workers.dev\"}],\"uri\":\"/wp-admin/setup-config.php\",\"args\":\"\",\"httpVersion\":\"HTTP/2.0\",\"httpMethod\":\"GET\",\"requestId\":\"1-6974ddd9-51ce03b47de0d78034b64f9a\",\"fragment\":\"\",\"scheme\":\"https\",\"host\":\"theowafhomework.site\"},\"ja3Fingerprint\":\"1449472ba4c4ddb602762f628f080be4\",\"ja4Fingerprint\":\"t13d1412h2_e33ad33b3d25_6b314db333b6\"}",
+            "ingestionTime": 1769266662157,
+            "eventId": "39455964735033263482756362637853489181275113112975966208"
+        },
+        {
+            "logStreamName": "ap-northeast-1_lab-1c-waf01_0",
+            "timestamp": 1769266701530,
+            "message": "{\"timestamp\":1769266701530,\"formatVersion\":1,\"webaclId\":\"arn:aws:wafv2:ap-northeast-1:031857855861:regional/webacl/lab-1c-waf01/82d2055a-5b83-43ff-8881-cd2786827494\",\"terminatingRuleId\":\"Default_Action\",\"terminatingRuleType\":\"REGULAR\",\"action\":\"ALLOW\",\"terminatingRuleMatchDetails\":[],\"httpSourceName\":\"ALB\",\"httpSourceId\":\"031857855861-app/armageddon-lab-1c-alb-public/e138f50e2c89d1aa\",\"ruleGroupList\":[{\"ruleGroupId\":\"AWS#AWSManagedRulesCommonRuleSet\",\"terminatingRule\":null,\"nonTerminatingMatchingRules\":[],\"excludedRules\":null,\"customerConfig\":null}],\"rateBasedRuleList\":[],\"nonTerminatingMatchingRules\":[],\"requestHeadersInserted\":null,\"responseCodeSent\":null,\"httpRequest\":{\"clientIp\":\"104.23.217.76\",\"country\":\"SE\",\"headers\":[{\"name\":\"host\",\"value\":\"theowafhomework.site\"},{\"name\":\"cf-ray\",\"value\":\"9c30637081282687-ARN\"},{\"name\":\"x-forwarded-for\",\"value\":\"2a06:98c0:3600::103\"},{\"name\":\"cf-ew-via\",\"value\":\"15\"},{\"name\":\"pragma\",\"value\":\"no-cache\"},{\"name\":\"accept-encoding\",\"value\":\"gzip, br\"},{\"name\":\"x-forwarded-proto\",\"value\":\"https\"},{\"name\":\"user-agent\",\"value\":\"REDACTED\"},{\"name\":\"cf-visitor\",\"value\":\"{\\\"scheme\\\":\\\"https\\\"}\"},{\"name\":\"cache-control\",\"value\":\"no-cache\"},{\"name\":\"accept\",\"value\":\"text/html,application/xhtml+xml,application/xml;q=0.9,image/webp,*/*;q=0.8\"},{\"name\":\"cf-connecting-ip\",\"value\":\"2a06:98c0:3600::103\"},{\"name\":\"accept-language\",\"value\":\"en-us,en;q=0.8,fr;q=0.5,fr-ca;q=0.3\"},{\"name\":\"cdn-loop\",\"value\":\"cloudflare; loops=1; subreqs=1\"},{\"name\":\"cf-worker\",\"value\":\"bronzealiza.workers.dev\"}],\"uri\":\"/wordpress/wp-admin/setup-config.php\",\"args\":\"\",\"httpVersion\":\"HTTP/2.0\",\"httpMethod\":\"GET\",\"requestId\":\"1-6974de0d-65e958ab665fe88328c13bd2\",\"fragment\":\"\",\"scheme\":\"https\",\"host\":\"theowafhomework.site\"},\"ja3Fingerprint\":\"1449472ba4c4ddb602762f628f080be4\",\"ja4Fingerprint\":\"t13d1412h2_e33ad33b3d25_6b314db333b6\"}",
+            "ingestionTime": 1769266708685,
+            "eventId": "39455965899065260610459298812842048757644566897227464704"
+        },
+        {
+            "logStreamName": "ap-northeast-1_lab-1c-waf01_0",
+            "timestamp": 1769266701989,
+            "message": "{\"timestamp\":1769266701989,\"formatVersion\":1,\"webaclId\":\"arn:aws:wafv2:ap-northeast-1:031857855861:regional/webacl/lab-1c-waf01/82d2055a-5b83-43ff-8881-cd2786827494\",\"terminatingRuleId\":\"Default_Action\",\"terminatingRuleType\":\"REGULAR\",\"action\":\"ALLOW\",\"terminatingRuleMatchDetails\":[],\"httpSourceName\":\"ALB\",\"httpSourceId\":\"031857855861-app/armageddon-lab-1c-alb-public/e138f50e2c89d1aa\",\"ruleGroupList\":[{\"ruleGroupId\":\"AWS#AWSManagedRulesCommonRuleSet\",\"terminatingRule\":null,\"nonTerminatingMatchingRules\":[],\"excludedRules\":null,\"customerConfig\":null}],\"rateBasedRuleList\":[],\"nonTerminatingMatchingRules\":[],\"requestHeadersInserted\":null,\"responseCodeSent\":null,\"httpRequest\":{\"clientIp\":\"157.230.106.232\",\"country\":\"DE\",\"headers\":[{\"name\":\"Host\",\"value\":\"35.73.182.139\"},{\"name\":\"User-Agent\",\"value\":\"REDACTED\"},{\"name\":\"Connection\",\"value\":\"close\"},{\"name\":\"Referer\",\"value\":\"http://35.73.182.139:443/\"}],\"uri\":\"/\",\"args\":\"\",\"httpVersion\":\"HTTP/1.1\",\"httpMethod\":\"PROPFIND\",\"requestId\":\"1-6974de0d-5a2e0fa04107176d4014656e\",\"fragment\":\"\",\"scheme\":\"https\",\"host\":\"35.73.182.139\"},\"ja3Fingerprint\":\"19e29534fd49dd27d09234e639c4057e\",\"ja4Fingerprint\":\"t13i190800_9dc949149365_97f8aa674fd9\"}",
+            "ingestionTime": 1769266711845,
+            "eventId": "39455965909301302656584854838627340302921573826231861248"
+        },
+        {
+            "logStreamName": "ap-northeast-1_lab-1c-waf01_0",
+            "timestamp": 1769266819782,
+            "message": "{\"timestamp\":1769266819782,\"formatVersion\":1,\"webaclId\":\"arn:aws:wafv2:ap-northeast-1:031857855861:regional/webacl/lab-1c-waf01/82d2055a-5b83-43ff-8881-cd2786827494\",\"terminatingRuleId\":\"AWSManagedRulesCommonRuleSet\",\"terminatingRuleType\":\"MANAGED_RULE_GROUP\",\"action\":\"BLOCK\",\"terminatingRuleMatchDetails\":[{\"conditionType\":\"REGEX\",\"location\":\"HEADER\",\"matchedData\":null,\"matchedFieldName\":\"\"}],\"httpSourceName\":\"ALB\",\"httpSourceId\":\"031857855861-app/armageddon-lab-1c-alb-public/e138f50e2c89d1aa\",\"ruleGroupList\":[{\"ruleGroupId\":\"AWS#AWSManagedRulesCommonRuleSet\",\"terminatingRule\":{\"ruleId\":\"UserAgent_BadBots_HEADER\",\"action\":\"BLOCK\",\"ruleMatchDetails\":null},\"nonTerminatingMatchingRules\":[],\"excludedRules\":null,\"customerConfig\":null}],\"rateBasedRuleList\":[],\"nonTerminatingMatchingRules\":[],\"requestHeadersInserted\":null,\"responseCodeSent\":null,\"httpRequest\":{\"clientIp\":\"20.121.123.108\",\"country\":\"US\",\"headers\":[{\"name\":\"Host\",\"value\":\"35.73.182.139\"},{\"name\":\"User-Agent\",\"value\":\"REDACTED\"},{\"name\":\"Accept\",\"value\":\"*/*\"},{\"name\":\"Accept-Encoding\",\"value\":\"gzip\"}],\"uri\":\"/\",\"args\":\"\",\"httpVersion\":\"HTTP/1.1\",\"httpMethod\":\"GET\",\"requestId\":\"1-6974de83-50857caf1969c88a1c5fb82c\",\"fragment\":\"\",\"scheme\":\"https\",\"host\":\"35.73.182.139\"},\"labels\":[{\"name\":\"awswaf:managed:aws:core-rule-set:BadBots_Header\"}],\"ja3Fingerprint\":\"cba7f34191ef2379c1325641f6c6c4f4\",\"ja4Fingerprint\":\"t12i130500_2d7513195f68_e51b7354d87f\"}",
+            "ingestionTime": 1769266829858,
+            "eventId": "39455968536172981827102546692212757356602668364172099584"
+        },
+        {
+            "logStreamName": "ap-northeast-1_lab-1c-waf01_0",
+            "timestamp": 1769266863221,
+            "message": "{\"timestamp\":1769266863221,\"formatVersion\":1,\"webaclId\":\"arn:aws:wafv2:ap-northeast-1:031857855861:regional/webacl/lab-1c-waf01/82d2055a-5b83-43ff-8881-cd2786827494\",\"terminatingRuleId\":\"Default_Action\",\"terminatingRuleType\":\"REGULAR\",\"action\":\"ALLOW\",\"terminatingRuleMatchDetails\":[],\"httpSourceName\":\"ALB\",\"httpSourceId\":\"031857855861-app/armageddon-lab-1c-alb-public/e138f50e2c89d1aa\",\"ruleGroupList\":[{\"ruleGroupId\":\"AWS#AWSManagedRulesCommonRuleSet\",\"terminatingRule\":null,\"nonTerminatingMatchingRules\":[],\"excludedRules\":null,\"customerConfig\":null}],\"rateBasedRuleList\":[],\"nonTerminatingMatchingRules\":[],\"requestHeadersInserted\":null,\"responseCodeSent\":null,\"httpRequest\":{\"clientIp\":\"87.236.176.157\",\"country\":\"GB\",\"headers\":[{\"name\":\"Host\",\"value\":\"18.176.99.44\"},{\"name\":\"User-Agent\",\"value\":\"REDACTED\"},{\"name\":\"Connection\",\"value\":\"close\"},{\"name\":\"Accept\",\"value\":\"*/*\"},{\"name\":\"Accept-Encoding\",\"value\":\"gzip\"}],\"uri\":\"/\",\"args\":\"\",\"httpVersion\":\"HTTP/1.1\",\"httpMethod\":\"GET\",\"requestId\":\"1-6974deaf-773b888172e8ea19555bec53\",\"fragment\":\"\",\"scheme\":\"https\",\"host\":\"18.176.99.44\"},\"ja3Fingerprint\":\"7024ed8c0d80542d17159473f564b551\",\"ja4Fingerprint\":\"t13i300900_3c43a67630b3_e7c285222651\"}",
+            "ingestionTime": 1769266874371,
+            "eventId": "39455969504895052506074285391196201673513354295650156544"
+        },
+        {
+            "logStreamName": "ap-northeast-1_lab-1c-waf01_0",
+            "timestamp": 1769266883755,
+            "message": "{\"timestamp\":1769266883755,\"formatVersion\":1,\"webaclId\":\"arn:aws:wafv2:ap-northeast-1:031857855861:regional/webacl/lab-1c-waf01/82d2055a-5b83-43ff-8881-cd2786827494\",\"terminatingRuleId\":\"Default_Action\",\"terminatingRuleType\":\"REGULAR\",\"action\":\"ALLOW\",\"terminatingRuleMatchDetails\":[],\"httpSourceName\":\"ALB\",\"httpSourceId\":\"031857855861-app/armageddon-lab-1c-alb-public/e138f50e2c89d1aa\",\"ruleGroupList\":[{\"ruleGroupId\":\"AWS#AWSManagedRulesCommonRuleSet\",\"terminatingRule\":null,\"nonTerminatingMatchingRules\":[],\"excludedRules\":null,\"customerConfig\":null}],\"rateBasedRuleList\":[],\"nonTerminatingMatchingRules\":[],\"requestHeadersInserted\":null,\"responseCodeSent\":null,\"httpRequest\":{\"clientIp\":\"45.156.128.116\",\"country\":\"PT\",\"headers\":[{\"name\":\"Host\",\"value\":\"18.176.99.44\"},{\"name\":\"User-Agent\",\"value\":\"REDACTED\"},{\"name\":\"Accept\",\"value\":\"*/*\"},{\"name\":\"Accept-Encoding\",\"value\":\"gzip\"}],\"uri\":\"/\",\"args\":\"\",\"httpVersion\":\"HTTP/1.1\",\"httpMethod\":\"GET\",\"requestId\":\"1-6974dec3-669809926bf3a3320c6ab7c5\",\"fragment\":\"\",\"scheme\":\"http\",\"host\":\"18.176.99.44\"}}",
+            "ingestionTime": 1769266902466,
+            "eventId": "39455969962818554412702101013455343778115389754241056768"
+        },
+        {
+            "logStreamName": "ap-northeast-1_lab-1c-waf01_0",
+            "timestamp": 1769266884673,
+            "message": "{\"timestamp\":1769266884673,\"formatVersion\":1,\"webaclId\":\"arn:aws:wafv2:ap-northeast-1:031857855861:regional/webacl/lab-1c-waf01/82d2055a-5b83-43ff-8881-cd2786827494\",\"terminatingRuleId\":\"Default_Action\",\"terminatingRuleType\":\"REGULAR\",\"action\":\"ALLOW\",\"terminatingRuleMatchDetails\":[],\"httpSourceName\":\"ALB\",\"httpSourceId\":\"031857855861-app/armageddon-lab-1c-alb-public/e138f50e2c89d1aa\",\"ruleGroupList\":[{\"ruleGroupId\":\"AWS#AWSManagedRulesCommonRuleSet\",\"terminatingRule\":null,\"nonTerminatingMatchingRules\":[],\"excludedRules\":null,\"customerConfig\":null}],\"rateBasedRuleList\":[],\"nonTerminatingMatchingRules\":[],\"requestHeadersInserted\":null,\"responseCodeSent\":null,\"httpRequest\":{\"clientIp\":\"45.156.128.116\",\"country\":\"PT\",\"headers\":[{\"name\":\"Host\",\"value\":\"18.176.99.44\"},{\"name\":\"User-Agent\",\"value\":\"REDACTED\"},{\"name\":\"Accept\",\"value\":\"*/*\"},{\"name\":\"Referer\",\"value\":\"http://18.176.99.44/\"},{\"name\":\"Accept-Encoding\",\"value\":\"gzip\"}],\"uri\":\"/\",\"args\":\"\",\"httpVersion\":\"HTTP/1.1\",\"httpMethod\":\"GET\",\"requestId\":\"1-6974dec4-0af7b8ad2de28e20257eef99\",\"fragment\":\"\",\"scheme\":\"https\",\"host\":\"18.176.99.44\"},\"ja3Fingerprint\":\"cba7f34191ef2379c1325641f6c6c4f4\",\"ja4Fingerprint\":\"t12i130500_2d7513195f68_021165082e1c\"}",
+            "ingestionTime": 1769266897704,
+            "eventId": "39455969983290638504953213051628118230157162274883567616"
+        },
+        {
+            "logStreamName": "ap-northeast-1_lab-1c-waf01_0",
+            "timestamp": 1769266917115,
+            "message": "{\"timestamp\":1769266917115,\"formatVersion\":1,\"webaclId\":\"arn:aws:wafv2:ap-northeast-1:031857855861:regional/webacl/lab-1c-waf01/82d2055a-5b83-43ff-8881-cd2786827494\",\"terminatingRuleId\":\"Default_Action\",\"terminatingRuleType\":\"REGULAR\",\"action\":\"ALLOW\",\"terminatingRuleMatchDetails\":[],\"httpSourceName\":\"ALB\",\"httpSourceId\":\"031857855861-app/armageddon-lab-1c-alb-public/e138f50e2c89d1aa\",\"ruleGroupList\":[{\"ruleGroupId\":\"AWS#AWSManagedRulesCommonRuleSet\",\"terminatingRule\":null,\"nonTerminatingMatchingRules\":[],\"excludedRules\":null,\"customerConfig\":null}],\"rateBasedRuleList\":[],\"nonTerminatingMatchingRules\":[],\"requestHeadersInserted\":null,\"responseCodeSent\":null,\"httpRequest\":{\"clientIp\":\"45.156.128.116\",\"country\":\"PT\",\"headers\":[{\"name\":\"Host\",\"value\":\"18.176.99.44\"},{\"name\":\"User-Agent\",\"value\":\"REDACTED\"},{\"name\":\"Accept\",\"value\":\"*/*\"},{\"name\":\"Accept-Encoding\",\"value\":\"gzip\"}],\"uri\":\"/admin/\",\"args\":\"\",\"httpVersion\":\"HTTP/1.1\",\"httpMethod\":\"GET\",\"requestId\":\"1-6974dee5-1c01c41750527bd734aeb5dc\",\"fragment\":\"\",\"scheme\":\"http\",\"host\":\"18.176.99.44\"}}",
+            "ingestionTime": 1769266929345,
+            "eventId": "39455970706771414235683689047581305764009032419566813184"
+        },
+        {
+            "logStreamName": "ap-northeast-1_lab-1c-waf01_0",
+            "timestamp": 1769266917654,
+            "message": "{\"timestamp\":1769266917654,\"formatVersion\":1,\"webaclId\":\"arn:aws:wafv2:ap-northeast-1:031857855861:regional/webacl/lab-1c-waf01/82d2055a-5b83-43ff-8881-cd2786827494\",\"terminatingRuleId\":\"Default_Action\",\"terminatingRuleType\":\"REGULAR\",\"action\":\"ALLOW\",\"terminatingRuleMatchDetails\":[],\"httpSourceName\":\"ALB\",\"httpSourceId\":\"031857855861-app/armageddon-lab-1c-alb-public/e138f50e2c89d1aa\",\"ruleGroupList\":[{\"ruleGroupId\":\"AWS#AWSManagedRulesCommonRuleSet\",\"terminatingRule\":null,\"nonTerminatingMatchingRules\":[],\"excludedRules\":null,\"customerConfig\":null}],\"rateBasedRuleList\":[],\"nonTerminatingMatchingRules\":[],\"requestHeadersInserted\":null,\"responseCodeSent\":null,\"httpRequest\":{\"clientIp\":\"45.156.128.117\",\"country\":\"PT\",\"headers\":[{\"name\":\"Host\",\"value\":\"18.176.99.44\"},{\"name\":\"User-Agent\",\"value\":\"REDACTED\"},{\"name\":\"Accept\",\"value\":\"*/*\"},{\"name\":\"Accept-Encoding\",\"value\":\"gzip\"}],\"uri\":\"/OA_HTML/AppsLocalLogin.jsp\",\"args\":\"\",\"httpVersion\":\"HTTP/1.1\",\"httpMethod\":\"GET\",\"requestId\":\"1-6974dee5-4bdfbc7613c720f110af6857\",\"fragment\":\"\",\"scheme\":\"http\",\"host\":\"18.176.99.44\"}}",
+            "ingestionTime": 1769266926806,
+            "eventId": "39455970718791515897691694917799551478758504086230532096"
+        },
+        {
+            "logStreamName": "ap-northeast-1_lab-1c-waf01_0",
+            "timestamp": 1769266918555,
+            "message": "{\"timestamp\":1769266918555,\"formatVersion\":1,\"webaclId\":\"arn:aws:wafv2:ap-northeast-1:031857855861:regional/webacl/lab-1c-waf01/82d2055a-5b83-43ff-8881-cd2786827494\",\"terminatingRuleId\":\"Default_Action\",\"terminatingRuleType\":\"REGULAR\",\"action\":\"ALLOW\",\"terminatingRuleMatchDetails\":[],\"httpSourceName\":\"ALB\",\"httpSourceId\":\"031857855861-app/armageddon-lab-1c-alb-public/e138f50e2c89d1aa\",\"ruleGroupList\":[{\"ruleGroupId\":\"AWS#AWSManagedRulesCommonRuleSet\",\"terminatingRule\":null,\"nonTerminatingMatchingRules\":[],\"excludedRules\":null,\"customerConfig\":null}],\"rateBasedRuleList\":[],\"nonTerminatingMatchingRules\":[],\"requestHeadersInserted\":null,\"responseCodeSent\":null,\"httpRequest\":{\"clientIp\":\"45.156.128.116\",\"country\":\"PT\",\"headers\":[{\"name\":\"Host\",\"value\":\"18.176.99.44\"},{\"name\":\"User-Agent\",\"value\":\"REDACTED\"},{\"name\":\"Accept\",\"value\":\"*/*\"},{\"name\":\"Referer\",\"value\":\"http://18.176.99.44/OA_HTML/AppsLocalLogin.jsp\"},{\"name\":\"Accept-Encoding\",\"value\":\"gzip\"}],\"uri\":\"/OA_HTML/AppsLocalLogin.jsp\",\"args\":\"\",\"httpVersion\":\"HTTP/1.1\",\"httpMethod\":\"GET\",\"requestId\":\"1-6974dee6-6a1e472f35ffb968069b2a24\",\"fragment\":\"\",\"scheme\":\"https\",\"host\":\"18.176.99.44\"},\"ja3Fingerprint\":\"cba7f34191ef2379c1325641f6c6c4f4\",\"ja4Fingerprint\":\"t12i130500_2d7513195f68_021165082e1c\"}",
+            "ingestionTime": 1769266933376,
+            "eventId": "39455970738884487321567786376265982274925854253879984128"
+        },
+        {
+            "logStreamName": "ap-northeast-1_lab-1c-waf01_0",
+            "timestamp": 1769266961793,
+            "message": "{\"timestamp\":1769266961793,\"formatVersion\":1,\"webaclId\":\"arn:aws:wafv2:ap-northeast-1:031857855861:regional/webacl/lab-1c-waf01/82d2055a-5b83-43ff-8881-cd2786827494\",\"terminatingRuleId\":\"Default_Action\",\"terminatingRuleType\":\"REGULAR\",\"action\":\"ALLOW\",\"terminatingRuleMatchDetails\":[],\"httpSourceName\":\"ALB\",\"httpSourceId\":\"031857855861-app/armageddon-lab-1c-alb-public/e138f50e2c89d1aa\",\"ruleGroupList\":[{\"ruleGroupId\":\"AWS#AWSManagedRulesCommonRuleSet\",\"terminatingRule\":null,\"nonTerminatingMatchingRules\":[],\"excludedRules\":null,\"customerConfig\":null}],\"rateBasedRuleList\":[],\"nonTerminatingMatchingRules\":[],\"requestHeadersInserted\":null,\"responseCodeSent\":null,\"httpRequest\":{\"clientIp\":\"45.156.128.119\",\"country\":\"PT\",\"headers\":[{\"name\":\"Host\",\"value\":\"18.176.99.44\"},{\"name\":\"User-Agent\",\"value\":\"REDACTED\"},{\"name\":\"Accept\",\"value\":\"*/*\"},{\"name\":\"Accept-Encoding\",\"value\":\"gzip\"}],\"uri\":\"/internal_forms_authentication\",\"args\":\"\",\"httpVersion\":\"HTTP/1.1\",\"httpMethod\":\"GET\",\"requestId\":\"1-6974df11-5d2fa5ca339e1dae79449a59\",\"fragment\":\"\",\"scheme\":\"http\",\"host\":\"18.176.99.44\"}}",
+            "ingestionTime": 1769266972998,
+            "eventId": "39455971703124108215634869817887367325490905288232140800"
+        },
+        {
+            "logStreamName": "ap-northeast-1_lab-1c-waf01_0",
+            "timestamp": 1769266972217,
+            "message": "{\"timestamp\":1769266972217,\"formatVersion\":1,\"webaclId\":\"arn:aws:wafv2:ap-northeast-1:031857855861:regional/webacl/lab-1c-waf01/82d2055a-5b83-43ff-8881-cd2786827494\",\"terminatingRuleId\":\"Default_Action\",\"terminatingRuleType\":\"REGULAR\",\"action\":\"ALLOW\",\"terminatingRuleMatchDetails\":[],\"httpSourceName\":\"ALB\",\"httpSourceId\":\"031857855861-app/armageddon-lab-1c-alb-public/e138f50e2c89d1aa\",\"ruleGroupList\":[{\"ruleGroupId\":\"AWS#AWSManagedRulesCommonRuleSet\",\"terminatingRule\":null,\"nonTerminatingMatchingRules\":[],\"excludedRules\":null,\"customerConfig\":null}],\"rateBasedRuleList\":[],\"nonTerminatingMatchingRules\":[],\"requestHeadersInserted\":null,\"responseCodeSent\":null,\"httpRequest\":{\"clientIp\":\"165.227.98.5\",\"country\":\"US\",\"headers\":[{\"name\":\"Host\",\"value\":\"35.73.182.139\"},{\"name\":\"User-Agent\",\"value\":\"REDACTED\"},{\"name\":\"Connection\",\"value\":\"close\"},{\"name\":\"Referer\",\"value\":\"http://35.73.182.139:443/\"}],\"uri\":\"/\",\"args\":\"\",\"httpVersion\":\"HTTP/1.1\",\"httpMethod\":\"PROPFIND\",\"requestId\":\"1-6974df1c-15ca203e78ff6b5566d1d9c3\",\"fragment\":\"\",\"scheme\":\"https\",\"host\":\"35.73.182.139\"},\"ja3Fingerprint\":\"19e29534fd49dd27d09234e639c4057e\",\"ja4Fingerprint\":\"t13i190800_9dc949149365_97f8aa674fd9\"}",
+            "ingestionTime": 1769266982577,
+            "eventId": "39455971935587076165118085456836249871601225410166521856"
+        },
+        {
+            "logStreamName": "ap-northeast-1_lab-1c-waf01_0",
+            "timestamp": 1769266996188,
+            "message": "{\"timestamp\":1769266996188,\"formatVersion\":1,\"webaclId\":\"arn:aws:wafv2:ap-northeast-1:031857855861:regional/webacl/lab-1c-waf01/82d2055a-5b83-43ff-8881-cd2786827494\",\"terminatingRuleId\":\"Default_Action\",\"terminatingRuleType\":\"REGULAR\",\"action\":\"ALLOW\",\"terminatingRuleMatchDetails\":[],\"httpSourceName\":\"ALB\",\"httpSourceId\":\"031857855861-app/armageddon-lab-1c-alb-public/e138f50e2c89d1aa\",\"ruleGroupList\":[{\"ruleGroupId\":\"AWS#AWSManagedRulesCommonRuleSet\",\"terminatingRule\":null,\"nonTerminatingMatchingRules\":[],\"excludedRules\":null,\"customerConfig\":null}],\"rateBasedRuleList\":[],\"nonTerminatingMatchingRules\":[],\"requestHeadersInserted\":null,\"responseCodeSent\":null,\"httpRequest\":{\"clientIp\":\"45.156.128.116\",\"country\":\"PT\",\"headers\":[{\"name\":\"Host\",\"value\":\"18.176.99.44\"},{\"name\":\"User-Agent\",\"value\":\"REDACTED\"},{\"name\":\"Accept\",\"value\":\"*/*\"},{\"name\":\"Accept-Encoding\",\"value\":\"gzip\"}],\"uri\":\"/\",\"args\":\"\",\"httpVersion\":\"HTTP/1.1\",\"httpMethod\":\"GET\",\"requestId\":\"1-6974df34-14bae5a11338b18b6e10d6f2\",\"fragment\":\"\",\"scheme\":\"http\",\"host\":\"18.176.99.44\"}}",
+            "ingestionTime": 1769267003988,
+            "eventId": "39455972470158239319095652808472928373713790755422863360"
+        },
+        {
+            "logStreamName": "ap-northeast-1_lab-1c-waf01_0",
+            "timestamp": 1769266996669,
+            "message": "{\"timestamp\":1769266996669,\"formatVersion\":1,\"webaclId\":\"arn:aws:wafv2:ap-northeast-1:031857855861:regional/webacl/lab-1c-waf01/82d2055a-5b83-43ff-8881-cd2786827494\",\"terminatingRuleId\":\"Default_Action\",\"terminatingRuleType\":\"REGULAR\",\"action\":\"ALLOW\",\"terminatingRuleMatchDetails\":[],\"httpSourceName\":\"ALB\",\"httpSourceId\":\"031857855861-app/armageddon-lab-1c-alb-public/e138f50e2c89d1aa\",\"ruleGroupList\":[{\"ruleGroupId\":\"AWS#AWSManagedRulesCommonRuleSet\",\"terminatingRule\":null,\"nonTerminatingMatchingRules\":[],\"excludedRules\":null,\"customerConfig\":null}],\"rateBasedRuleList\":[],\"nonTerminatingMatchingRules\":[],\"requestHeadersInserted\":null,\"responseCodeSent\":null,\"httpRequest\":{\"clientIp\":\"45.156.128.119\",\"country\":\"PT\",\"headers\":[{\"name\":\"Host\",\"value\":\"18.176.99.44\"},{\"name\":\"User-Agent\",\"value\":\"REDACTED\"},{\"name\":\"Accept\",\"value\":\"*/*\"},{\"name\":\"Accept-Encoding\",\"value\":\"gzip\"}],\"uri\":\"/favicon-32x32.png\",\"args\":\"\",\"httpVersion\":\"HTTP/1.1\",\"httpMethod\":\"GET\",\"requestId\":\"1-6974df34-420c26055d0427483f82e69f\",\"fragment\":\"\",\"scheme\":\"http\",\"host\":\"18.176.99.44\"}}",
+            "ingestionTime": 1769267009366,
+            "eventId": "39455972480884897759588882546053201462017674909723394048"
+        },
+        {
+            "logStreamName": "ap-northeast-1_lab-1c-waf01_0",
+            "timestamp": 1769266997588,
+            "message": "{\"timestamp\":1769266997588,\"formatVersion\":1,\"webaclId\":\"arn:aws:wafv2:ap-northeast-1:031857855861:regional/webacl/lab-1c-waf01/82d2055a-5b83-43ff-8881-cd2786827494\",\"terminatingRuleId\":\"Default_Action\",\"terminatingRuleType\":\"REGULAR\",\"action\":\"ALLOW\",\"terminatingRuleMatchDetails\":[],\"httpSourceName\":\"ALB\",\"httpSourceId\":\"031857855861-app/armageddon-lab-1c-alb-public/e138f50e2c89d1aa\",\"ruleGroupList\":[{\"ruleGroupId\":\"AWS#AWSManagedRulesCommonRuleSet\",\"terminatingRule\":null,\"nonTerminatingMatchingRules\":[],\"excludedRules\":null,\"customerConfig\":null}],\"rateBasedRuleList\":[],\"nonTerminatingMatchingRules\":[],\"requestHeadersInserted\":null,\"responseCodeSent\":null,\"httpRequest\":{\"clientIp\":\"45.156.128.119\",\"country\":\"PT\",\"headers\":[{\"name\":\"Host\",\"value\":\"18.176.99.44\"},{\"name\":\"User-Agent\",\"value\":\"REDACTED\"},{\"name\":\"Accept\",\"value\":\"*/*\"},{\"name\":\"Referer\",\"value\":\"http://18.176.99.44/favicon-32x32.png\"},{\"name\":\"Accept-Encoding\",\"value\":\"gzip\"}],\"uri\":\"/favicon-32x32.png\",\"args\":\"\",\"httpVersion\":\"HTTP/1.1\",\"httpMethod\":\"GET\",\"requestId\":\"1-6974df35-4eb70468655c1b611d7048ad\",\"fragment\":\"\",\"scheme\":\"https\",\"host\":\"18.176.99.44\"},\"ja3Fingerprint\":\"cba7f34191ef2379c1325641f6c6c4f4\",\"ja4Fingerprint\":\"t12i130500_2d7513195f68_021165082e1c\"}",
+            "ingestionTime": 1769267009270,
+            "eventId": "39455972501379282597038525213008774674057879406034288640"
+        },
+        {
+            "logStreamName": "ap-northeast-1_lab-1c-waf01_0",
+            "timestamp": 1769266998151,
+            "message": "{\"timestamp\":1769266998151,\"formatVersion\":1,\"webaclId\":\"arn:aws:wafv2:ap-northeast-1:031857855861:regional/webacl/lab-1c-waf01/82d2055a-5b83-43ff-8881-cd2786827494\",\"terminatingRuleId\":\"Default_Action\",\"terminatingRuleType\":\"REGULAR\",\"action\":\"ALLOW\",\"terminatingRuleMatchDetails\":[],\"httpSourceName\":\"ALB\",\"httpSourceId\":\"031857855861-app/armageddon-lab-1c-alb-public/e138f50e2c89d1aa\",\"ruleGroupList\":[{\"ruleGroupId\":\"AWS#AWSManagedRulesCommonRuleSet\",\"terminatingRule\":null,\"nonTerminatingMatchingRules\":[],\"excludedRules\":null,\"customerConfig\":null}],\"rateBasedRuleList\":[],\"nonTerminatingMatchingRules\":[],\"requestHeadersInserted\":null,\"responseCodeSent\":null,\"httpRequest\":{\"clientIp\":\"45.156.128.117\",\"country\":\"PT\",\"headers\":[{\"name\":\"Host\",\"value\":\"18.176.99.44\"},{\"name\":\"User-Agent\",\"value\":\"REDACTED\"},{\"name\":\"Accept\",\"value\":\"*/*\"},{\"name\":\"Accept-Encoding\",\"value\":\"gzip\"}],\"uri\":\"/login.html\",\"args\":\"\",\"httpVersion\":\"HTTP/1.1\",\"httpMethod\":\"GET\",\"requestId\":\"1-6974df36-52946c13465014715b276e9b\",\"fragment\":\"\",\"scheme\":\"http\",\"host\":\"18.176.99.44\"}}",
+            "ingestionTime": 1769267012642,
+            "eventId": "39455972513934602143811266045770028248181007015657340928"
+        },
+        {
+            "logStreamName": "ap-northeast-1_lab-1c-waf01_0",
+            "timestamp": 1769266999061,
+            "message": "{\"timestamp\":1769266999061,\"formatVersion\":1,\"webaclId\":\"arn:aws:wafv2:ap-northeast-1:031857855861:regional/webacl/lab-1c-waf01/82d2055a-5b83-43ff-8881-cd2786827494\",\"terminatingRuleId\":\"Default_Action\",\"terminatingRuleType\":\"REGULAR\",\"action\":\"ALLOW\",\"terminatingRuleMatchDetails\":[],\"httpSourceName\":\"ALB\",\"httpSourceId\":\"031857855861-app/armageddon-lab-1c-alb-public/e138f50e2c89d1aa\",\"ruleGroupList\":[{\"ruleGroupId\":\"AWS#AWSManagedRulesCommonRuleSet\",\"terminatingRule\":null,\"nonTerminatingMatchingRules\":[],\"excludedRules\":null,\"customerConfig\":null}],\"rateBasedRuleList\":[],\"nonTerminatingMatchingRules\":[],\"requestHeadersInserted\":null,\"responseCodeSent\":null,\"httpRequest\":{\"clientIp\":\"45.156.128.117\",\"country\":\"PT\",\"headers\":[{\"name\":\"Host\",\"value\":\"18.176.99.44\"},{\"name\":\"User-Agent\",\"value\":\"REDACTED\"},{\"name\":\"Accept\",\"value\":\"*/*\"},{\"name\":\"Referer\",\"value\":\"http://18.176.99.44/login.html\"},{\"name\":\"Accept-Encoding\",\"value\":\"gzip\"}],\"uri\":\"/login.html\",\"args\":\"\",\"httpVersion\":\"HTTP/1.1\",\"httpMethod\":\"GET\",\"requestId\":\"1-6974df37-6c277fd5605e50f04d89c775\",\"fragment\":\"\",\"scheme\":\"https\",\"host\":\"18.176.99.44\"},\"ja3Fingerprint\":\"cba7f34191ef2379c1325641f6c6c4f4\",\"ja4Fingerprint\":\"t12i130500_2d7513195f68_021165082e1c\"}",
+            "ingestionTime": 1769267011270,
+            "eventId": "39455972534228280274474133102908504260427928294282297344"
+        },
+        {
+            "logStreamName": "ap-northeast-1_lab-1c-waf01_0",
+            "timestamp": 1769267022864,
+            "message": "{\"timestamp\":1769267022864,\"formatVersion\":1,\"webaclId\":\"arn:aws:wafv2:ap-northeast-1:031857855861:regional/webacl/lab-1c-waf01/82d2055a-5b83-43ff-8881-cd2786827494\",\"terminatingRuleId\":\"Default_Action\",\"terminatingRuleType\":\"REGULAR\",\"action\":\"ALLOW\",\"terminatingRuleMatchDetails\":[],\"httpSourceName\":\"ALB\",\"httpSourceId\":\"031857855861-app/armageddon-lab-1c-alb-public/e138f50e2c89d1aa\",\"ruleGroupList\":[{\"ruleGroupId\":\"AWS#AWSManagedRulesCommonRuleSet\",\"terminatingRule\":null,\"nonTerminatingMatchingRules\":[],\"excludedRules\":null,\"customerConfig\":null}],\"rateBasedRuleList\":[],\"nonTerminatingMatchingRules\":[],\"requestHeadersInserted\":null,\"responseCodeSent\":null,\"httpRequest\":{\"clientIp\":\"45.156.128.116\",\"country\":\"PT\",\"headers\":[{\"name\":\"Host\",\"value\":\"18.176.99.44\"},{\"name\":\"User-Agent\",\"value\":\"REDACTED\"},{\"name\":\"Accept\",\"value\":\"*/*\"},{\"name\":\"Accept-Encoding\",\"value\":\"gzip\"}],\"uri\":\"/jasperserver/login.html\",\"args\":\"\",\"httpVersion\":\"HTTP/1.1\",\"httpMethod\":\"GET\",\"requestId\":\"1-6974df4e-7ab6d32873eaf22939315887\",\"fragment\":\"\",\"scheme\":\"http\",\"host\":\"18.176.99.44\"}}",
+            "ingestionTime": 1769267036447,
+            "eventId": "39455973065052918235098555771320259985323531191182360576"
+        },
+        {
+            "logStreamName": "ap-northeast-1_lab-1c-waf01_0",
+            "timestamp": 1769267023779,
+            "message": "{\"timestamp\":1769267023779,\"formatVersion\":1,\"webaclId\":\"arn:aws:wafv2:ap-northeast-1:031857855861:regional/webacl/lab-1c-waf01/82d2055a-5b83-43ff-8881-cd2786827494\",\"terminatingRuleId\":\"Default_Action\",\"terminatingRuleType\":\"REGULAR\",\"action\":\"ALLOW\",\"terminatingRuleMatchDetails\":[],\"httpSourceName\":\"ALB\",\"httpSourceId\":\"031857855861-app/armageddon-lab-1c-alb-public/e138f50e2c89d1aa\",\"ruleGroupList\":[{\"ruleGroupId\":\"AWS#AWSManagedRulesCommonRuleSet\",\"terminatingRule\":null,\"nonTerminatingMatchingRules\":[],\"excludedRules\":null,\"customerConfig\":null}],\"rateBasedRuleList\":[],\"nonTerminatingMatchingRules\":[],\"requestHeadersInserted\":null,\"responseCodeSent\":null,\"httpRequest\":{\"clientIp\":\"45.156.128.116\",\"country\":\"PT\",\"headers\":[{\"name\":\"Host\",\"value\":\"18.176.99.44\"},{\"name\":\"User-Agent\",\"value\":\"REDACTED\"},{\"name\":\"Accept\",\"value\":\"*/*\"},{\"name\":\"Referer\",\"value\":\"http://18.176.99.44/jasperserver/login.html\"},{\"name\":\"Accept-Encoding\",\"value\":\"gzip\"}],\"uri\":\"/jasperserver/login.html\",\"args\":\"\",\"httpVersion\":\"HTTP/1.1\",\"httpMethod\":\"GET\",\"requestId\":\"1-6974df4f-7cfa5a9325d6bd3866bb2fe4\",\"fragment\":\"\",\"scheme\":\"https\",\"host\":\"18.176.99.44\"},\"ja3Fingerprint\":\"cba7f34191ef2379c1325641f6c6c4f4\",\"ja4Fingerprint\":\"t12i130500_2d7513195f68_021165082e1c\"}",
+            "ingestionTime": 1769267041660,
+            "eventId": "39455973085458100091754075952127689603708011344822599680"
+        }
+    ],
+    "searchedLogStreams": [],
+    "NextToken": "eyJuZXh0VG9rZW4iOiBudWxsLCAiYm90b190cnVuY2F0ZV9hbW91bnQiOiAyMH0="
+}

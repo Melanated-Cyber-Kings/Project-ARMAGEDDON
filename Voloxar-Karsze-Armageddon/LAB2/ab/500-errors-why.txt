@@ -1,0 +1,70 @@
+Armageddon-tg01
+
+
+
+aws elbv2 describe-target-health --target-group-arn $(aws elbv2 describe-target-groups --query "TargetGroups[?TargetGroupName=='Armageddon-tg01'].TargetGroupArn" --output text)
+
+
+export HANDSHAKE=$(terraform output -raw origin_handshake_secret)
+export ALB_DNS=$(terraform output -raw lb_dns_name)
+
+
+
+export HANDSHAKE=$(terraform output -raw origin_handshake_secret)
+export ALB_DNS=$(terraform output -raw load_balancer_address)
+
+
+curl -iv -k -H "X-Chewbacca-Growl: $HANDSHAKE" https://$ALB_DNS/
+
+aws ec2 describe-security-groups --group-ids $RDS_SG_ID --query "SecurityGroups[0].IpPermissions[?ToPort==\`3306\`].UserIdGroupPairs[?GroupId=='$EC2_SG_ID']" --region ap-northeast-1
+
+
+
+arn:aws:acm:us-east-1:323890959615:certificate/a04a6fc4-4261-45ec-9fff-24a7c7f3ebdc
+
+
+Armageddon-primary_cert (ap-northeast-1 alb)
+arn:aws:acm:ap-northeast-1:323890959615:certificate/256b932b-eb37-40ee-9fe7-a49da5aa29c3
+
+
+
+
+
+curl -iv https://theswordptdemo.site/list
+
+
+export DB_HOST=$(aws ssm get-parameter --name "/lab/db/endpoint" --query "Parameter.Value" --output text --region ap-northeast-1)
+echo "Testing connection to: $DB_HOST"
+
+CLEAN_HOST=$(echo $DB_HOST | cut -d':' -f1)
+echo "Clean Hostname: $CLEAN_HOST"
+
+nc -zv $CLEAN_HOST 3306
+
+stopped service, ran it manually, localhost curls showed db authentication issues.
+matched passwd in secrets manager with database (changed master password to be the same), no more 500 errors.
+
+TLDR: after terraform apply, run aws secretsmanager rotate-secret --secret-id lab/rds/mysql to ensure password matches
+otherwise you get 500 ISE
+
+now to figure out 504
+[solved]
+resource "aws_route_table_association" "public_b" {
+  subnet_id      = aws_subnet.public_b.id  # Add this if it exists
+  route_table_id = aws_route_table.public.id
+}
+missing routing for other public subnet
+
+
+-------------------------------------------------
+
+#on sever diagnostics
+sudo systemctl stop rdsapp
+
+# -u forces Python to flush logs to the screen immediately
+export SECRET_ID="lab/rds/mysql"
+export AWS_REGION="ap-northeast-1"
+sudo /usr/bin/python3 -u /opt/rdsapp/app.py
+
+
+

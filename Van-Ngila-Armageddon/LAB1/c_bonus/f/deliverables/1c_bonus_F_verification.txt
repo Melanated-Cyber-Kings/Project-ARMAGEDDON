@@ -1,0 +1,670 @@
+A) WAF Queries (CloudWatch Logs Insights)
+A1) “What’s happening right now?” (Top actions: ALLOW/BLOCK)
+  fields @timestamp, action
+  | stats count() as hits by action
+  | sort hits desc
+[
+    {
+        "action": "",
+        "hits": "224"
+    },
+    {
+        "action": "ALLOW",
+        "hits": "13"
+    },
+    {
+        "action": "BLOCK",
+        "hits": "1"
+    }
+]
+
+A2) Top client IPs (who is hitting us the most?)
+  fields @timestamp, httpRequest.clientIp as clientIp
+| stats count() as hits by clientIp
+| sort hits desc
+| limit 25
+[
+    {
+        "clientIp": "",
+        "hits": "214"
+    },
+    {
+        "clientIp": "101.32.192.203",
+        "hits": "2"
+    },
+    {
+        "clientIp": "104.23.217.76",
+        "hits": "2"
+    },
+    {
+        "clientIp": "172.68.10.229",
+        "hits": "2"
+    },
+    {
+        "clientIp": "43.206.201.131",
+        "hits": "1"
+    },
+    {
+        "clientIp": "51.89.23.223",
+        "hits": "1"
+    },
+    {
+        "clientIp": "104.23.217.77",
+        "hits": "1"
+    },
+    {
+        "clientIp": "172.68.10.228",
+        "hits": "1"
+    },
+    {
+        "clientIp": "185.16.39.146",
+        "hits": "1"
+    },
+    {
+        "clientIp": "54.249.119.10",
+        "hits": "1"
+    }
+]
+
+A3) Top requested URIs (what are they trying to reach?)
+  fields @timestamp, httpRequest.uri as uri
+| stats count() as hits by uri
+| sort hits desc
+| limit 25
+[
+    {
+        "uri": "",
+        "hits": "220"
+    },
+    {
+        "uri": "/wp-admin/setup-config.php",
+        "hits": "3"
+    },
+    {
+        "uri": "/",
+        "hits": "2"
+    },
+    {
+        "uri": "/ws/btcusdt@bestBidAsk",
+        "hits": "1"
+    },
+    {
+        "uri": "/ws-api/v3",
+        "hits": "1"
+    },
+    {
+        "uri": "/wordpress/wp-admin/setup-config.php",
+        "hits": "1"
+    }
+]
+
+A4) Blocked requests only (who/what is being blocked?)
+  fields @timestamp, action, httpRequest.clientIp as clientIp, httpRequest.uri as uri
+| filter action = "BLOCK"
+| stats count() as blocks by clientIp, uri
+| sort blocks desc
+| limit 25
+[
+    {
+        "clientIp": "54.249.119.10",
+        "uri": "/ws/btcusdt@bestBidAsk",
+        "blocks": "1"
+    },
+    {
+        "clientIp": "43.206.201.131",
+        "uri": "/ws-api/v3",
+        "blocks": "1"
+    }
+]
+
+A5) Which WAF rule is doing the blocking?
+  fields @timestamp, action, terminatingRuleId, terminatingRuleType
+| filter action = "BLOCK"
+| stats count() as blocks by terminatingRuleId, terminatingRuleType
+| sort blocks desc
+| limit 25
+[
+    {
+        "terminatingRuleId": "AWSManagedRulesCommonRuleSet",
+        "terminatingRuleType": "MANAGED_RULE_GROUP",
+        "blocks": "2"
+    }
+]
+
+A6) Rate of blocks over time (did it spike?)
+  fields @timestamp, httpRequest.clientIp as clientIp, httpRequest.uri as uri
+| filter uri =~ /wp-login|xmlrpc|\.env|admin|phpmyadmin|\.git|\/login/
+| stats count() as hits by clientIp, uri
+| sort hits desc
+| limit 50
+[
+    {
+        "clientIp": "104.23.221.188",
+        "uri": "/wp-admin/setup-config.php",
+        "hits": "2"
+    },
+    {
+        "clientIp": "104.23.217.76",
+        "uri": "/wordpress/wp-admin/setup-config.php",
+        "hits": "2"
+    },
+    {
+        "clientIp": "172.71.164.93",
+        "uri": "/wordpress/wp-admin/setup-config.php",
+        "hits": "2"
+    },
+    {
+        "clientIp": "104.23.221.188",
+        "uri": "/wordpress/wp-admin/setup-config.php",
+        "hits": "2"
+    },
+    {
+        "clientIp": "104.23.217.76",
+        "uri": "/wp-admin/setup-config.php",
+        "hits": "2"
+    },
+    {
+        "clientIp": "104.23.221.189",
+        "uri": "/wp-admin/setup-config.php",
+        "hits": "1"
+    },
+    {
+        "clientIp": "213.209.159.181",
+        "uri": "/.git/config",
+        "hits": "1"
+    },
+    {
+        "clientIp": "172.71.148.21",
+        "uri": "/wp-admin/setup-config.php",
+        "hits": "1"
+    },
+    {
+        "clientIp": "172.71.148.20",
+        "uri": "/wp-admin/setup-config.php",
+        "hits": "1"
+    },
+    {
+        "clientIp": "77.83.39.162",
+        "uri": "/.git/config",
+        "hits": "1"
+    },
+    {
+        "clientIp": "104.23.223.32",
+        "uri": "/wordpress/wp-admin/setup-config.php",
+        "hits": "1"
+    },
+    {
+        "clientIp": "162.158.216.200",
+        "uri": "/wordpress/wp-admin/setup-config.php",
+        "hits": "1"
+    },
+    {
+        "clientIp": "172.68.10.228",
+        "uri": "/wordpress/wp-admin/setup-config.php",
+        "hits": "1"
+    },
+    {
+        "clientIp": "172.68.10.229",
+        "uri": "/wp-admin/setup-config.php",
+        "hits": "1"
+    },
+    {
+        "clientIp": "82.27.247.16",
+        "uri": "/.env",
+        "hits": "1"
+    },
+    {
+        "clientIp": "104.23.223.33",
+        "uri": "/wordpress/wp-admin/setup-config.php",
+        "hits": "1"
+    }
+]
+
+A7) Suspicious scanners (common patterns: admin paths, wp-login, etc.)
+  fields @timestamp, httpRequest.clientIp as clientIp, httpRequest.uri as uri
+| filter uri like /wp-login|xmlrpc|\.env|admin|phpmyadmin|\.git|\/login/i
+| stats count() as hits by clientIp, uri
+| sort hits desc
+| limit 50
+[
+    {
+        "clientIp": "104.23.221.188",
+        "uri": "/wp-admin/setup-config.php",
+        "hits": "2"
+    },
+    {
+        "clientIp": "104.23.217.76",
+        "uri": "/wordpress/wp-admin/setup-config.php",
+        "hits": "2"
+    },
+    {
+        "clientIp": "172.71.164.93",
+        "uri": "/wordpress/wp-admin/setup-config.php",
+        "hits": "2"
+    },
+    {
+        "clientIp": "104.23.221.188",
+        "uri": "/wordpress/wp-admin/setup-config.php",
+        "hits": "2"
+    },
+    {
+        "clientIp": "172.71.148.20",
+        "uri": "/wp-admin/setup-config.php",
+        "hits": "1"
+    },
+    {
+        "clientIp": "213.209.159.181",
+        "uri": "/.git/config",
+        "hits": "1"
+    },
+    {
+        "clientIp": "104.23.221.189",
+        "uri": "/wp-admin/setup-config.php",
+        "hits": "1"
+    },
+    {
+        "clientIp": "172.71.148.21",
+        "uri": "/wp-admin/setup-config.php",
+        "hits": "1"
+    },
+    {
+        "clientIp": "172.70.250.38",
+        "uri": "/wordpress/wp-admin/setup-config.php",
+        "hits": "1"
+    },
+    {
+        "clientIp": "82.27.247.16",
+        "uri": "/.env",
+        "hits": "1"
+    },
+    {
+        "clientIp": "162.158.216.200",
+        "uri": "/wordpress/wp-admin/setup-config.php",
+        "hits": "1"
+    },
+    {
+        "clientIp": "172.70.248.38",
+        "uri": "/wp-admin/setup-config.php",
+        "hits": "1"
+    },
+    {
+        "clientIp": "172.68.10.228",
+        "uri": "/wordpress/wp-admin/setup-config.php",
+        "hits": "1"
+    },
+    {
+        "clientIp": "172.68.10.229",
+        "uri": "/wp-admin/setup-config.php",
+        "hits": "1"
+    }
+]
+
+A8) Country/geo (if present in your WAF logs)
+Some WAF log formats include httpRequest.country. If yours does:
+  fields @timestamp, httpRequest.country as country
+| stats count() as hits by country
+| sort hits desc
+| limit 25
+[
+    {
+        "country": "",
+        "hits": "234"
+    },
+    {
+        "country": "FR",
+        "hits": "4"
+    },
+    {
+        "country": "SE",
+        "hits": "4"
+    },
+    {
+        "country": "CA",
+        "hits": "2"
+    },
+    {
+        "country": "DE",
+        "hits": "2"
+    },
+    {
+        "country": "BR",
+        "hits": "2"
+    },
+    {
+        "country": "US",
+        "hits": "1"
+    },
+    {
+        "country": "PL",
+        "hits": "1"
+    },
+    {
+        "country": "JP",
+        "hits": "1"
+    }
+]
+
+B) App Queries (EC2 app log group)
+These assume your app logs include meaningful strings like ERROR, DBConnectionErrors, timeout, etc
+(You should enforce this.)
+
+B1) Count errors over time (this should line up with the alarm window)
+  fields @timestamp, @message
+| filter @message =~ /(ERROR|Exception|Traceback|DB|timeout|refused)/
+| stats count() as errors by bin(1m)
+| sort asc
+[
+    {
+        "bin(1m)": "2026-01-24 16:36:00.000",
+        "errors": "3"
+    },
+    {
+        "bin(1m)": "2026-01-24 16:34:00.000",
+        "errors": "1"
+    },
+    {
+        "bin(1m)": "2026-01-24 16:33:00.000",
+        "errors": "1"
+    }
+]
+B2) Show the most recent DB failures (triage view)
+  fields @timestamp, @message
+| filter @message =~ /(DB|mysql|timeout|refused|Access denied|could not connect)/
+| sort @timestamp desc
+| limit 50
+[
+    {
+        "@timestamp": "2026-01-24 16:48:33.690",
+        "@message": "2026-01-24 16:48:33,624 - __main__ - INFO - Successfully retrieved secret for lab-1c/rds/mysql"
+    },
+    {
+        "@timestamp": "2026-01-24 16:48:33.690",
+        "@message": "2026-01-24 16:48:33,632 - __main__ - INFO - Connected to database at lab-mysql.cxm8o4cwoftn.ap-northeast-1.rds.amazonaws.com:3306"
+    },
+    {
+        "@timestamp": "2026-01-24 16:48:33.439",
+        "@message": "2026-01-24 16:48:33,346 - __main__ - INFO - Successfully retrieved secret for lab-1c/rds/mysql"
+    },
+    {
+        "@timestamp": "2026-01-24 16:48:33.439",
+        "@message": "2026-01-24 16:48:33,355 - __main__ - INFO - Connected to database at lab-mysql.cxm8o4cwoftn.ap-northeast-1.rds.amazonaws.com:3306"
+    },
+    {
+        "@timestamp": "2026-01-24 16:48:03.865",
+        "@message": "2026-01-24 16:48:03,657 - __main__ - INFO - Successfully retrieved secret for lab-1c/rds/mysql"
+    },
+    {
+        "@timestamp": "2026-01-24 16:48:03.865",
+        "@message": "2026-01-24 16:48:03,666 - __main__ - INFO - Connected to database at lab-mysql.cxm8o4cwoftn.ap-northeast-1.rds.amazonaws.com:3306"
+    },
+    {
+        "@timestamp": "2026-01-24 16:48:03.364",
+        "@message": "2026-01-24 16:48:03,334 - __main__ - INFO - Connected to database at lab-mysql.cxm8o4cwoftn.ap-northeast-1.rds.amazonaws.com:3306"
+    },
+    {
+        "@timestamp": "2026-01-24 16:48:03.364",
+        "@message": "2026-01-24 16:48:03,324 - __main__ - INFO - Successfully retrieved secret for lab-1c/rds/mysql"
+    },
+    {
+        "@timestamp": "2026-01-24 16:47:33.791",
+        "@message": "2026-01-24 16:47:33,607 - __main__ - INFO - Connected to database at lab-mysql.cxm8o4cwoftn.ap-northeast-1.rds.amazonaws.com:3306"
+    },
+    {
+        "@timestamp": "2026-01-24 16:47:33.791",
+        "@message": "2026-01-24 16:47:33,599 - __main__ - INFO - Successfully retrieved secret for lab-1c/rds/mysql"
+    },
+    {
+        "@timestamp": "2026-01-24 16:47:33.541",
+        "@message": "2026-01-24 16:47:33,319 - __main__ - INFO - Connected to database at lab-mysql.cxm8o4cwoftn.ap-northeast-1.rds.amazonaws.com:3306"
+    },
+    {
+        "@timestamp": "2026-01-24 16:47:33.541",
+        "@message": "2026-01-24 16:47:33,309 - __main__ - INFO - Successfully retrieved secret for lab-1c/rds/mysql"
+    },
+    {
+        "@timestamp": "2026-01-24 16:47:03.719",
+        "@message": "2026-01-24 16:47:03,592 - __main__ - INFO - Connected to database at lab-mysql.cxm8o4cwoftn.ap-northeast-1.rds.amazonaws.com:3306"
+    },
+    {
+        "@timestamp": "2026-01-24 16:47:03.719",
+        "@message": "2026-01-24 16:47:03,584 - __main__ - INFO - Successfully retrieved secret for lab-1c/rds/mysql"
+    },
+    {
+        "@timestamp": "2026-01-24 16:47:03.469",
+        "@message": "2026-01-24 16:47:03,273 - __main__ - INFO - Successfully retrieved secret for lab-1c/rds/mysql"
+    },
+    {
+        "@timestamp": "2026-01-24 16:47:03.469",
+        "@message": "2026-01-24 16:47:03,282 - __main__ - INFO - Connected to database at lab-mysql.cxm8o4cwoftn.ap-northeast-1.rds.amazonaws.com:3306"
+    },
+    {
+        "@timestamp": "2026-01-24 16:46:33.654",
+        "@message": "2026-01-24 16:46:33,585 - __main__ - INFO - Successfully retrieved secret for lab-1c/rds/mysql"
+    },
+    {
+        "@timestamp": "2026-01-24 16:46:33.654",
+        "@message": "2026-01-24 16:46:33,593 - __main__ - INFO - Connected to database at lab-mysql.cxm8o4cwoftn.ap-northeast-1.rds.amazonaws.com:3306"
+    },
+    {
+        "@timestamp": "2026-01-24 16:46:33.404",
+        "@message": "2026-01-24 16:46:33,244 - __main__ - INFO - Successfully retrieved secret for lab-1c/rds/mysql"
+    },
+    {
+        "@timestamp": "2026-01-24 16:46:33.404",
+        "@message": "2026-01-24 16:46:33,253 - __main__ - INFO - Connected to database at lab-mysql.cxm8o4cwoftn.ap-northeast-1.rds.amazonaws.com:3306"
+    },
+    {
+        "@timestamp": "2026-01-24 16:46:03.587",
+        "@message": "2026-01-24 16:46:03,552 - __main__ - INFO - Successfully retrieved secret for lab-1c/rds/mysql"
+    },
+    {
+        "@timestamp": "2026-01-24 16:46:03.587",
+        "@message": "2026-01-24 16:46:03,560 - __main__ - INFO - Connected to database at lab-mysql.cxm8o4cwoftn.ap-northeast-1.rds.amazonaws.com:3306"
+    },
+    {
+        "@timestamp": "2026-01-24 16:46:03.336",
+        "@message": "2026-01-24 16:46:03,249 - __main__ - INFO - Connected to database at lab-mysql.cxm8o4cwoftn.ap-northeast-1.rds.amazonaws.com:3306"
+    },
+    {
+        "@timestamp": "2026-01-24 16:46:03.336",
+        "@message": "2026-01-24 16:46:03,239 - __main__ - INFO - Successfully retrieved secret for lab-1c/rds/mysql"
+    },
+    {
+        "@timestamp": "2026-01-24 16:45:33.764",
+        "@message": "2026-01-24 16:45:33,526 - __main__ - INFO - Successfully retrieved secret for lab-1c/rds/mysql"
+    },
+    {
+        "@timestamp": "2026-01-24 16:45:33.764",
+        "@message": "2026-01-24 16:45:33,534 - __main__ - INFO - Connected to database at lab-mysql.cxm8o4cwoftn.ap-northeast-1.rds.amazonaws.com:3306"
+    },
+    {
+        "@timestamp": "2026-01-24 16:45:33.264",
+        "@message": "2026-01-24 16:45:33,217 - __main__ - INFO - Successfully retrieved secret for lab-1c/rds/mysql"
+    },
+    {
+        "@timestamp": "2026-01-24 16:45:33.264",
+        "@message": "2026-01-24 16:45:33,226 - __main__ - INFO - Connected to database at lab-mysql.cxm8o4cwoftn.ap-northeast-1.rds.amazonaws.com:3306"
+    },
+    {
+        "@timestamp": "2026-01-24 16:45:03.699",
+        "@message": "2026-01-24 16:45:03,510 - __main__ - INFO - Connected to database at lab-mysql.cxm8o4cwoftn.ap-northeast-1.rds.amazonaws.com:3306"
+    },
+    {
+        "@timestamp": "2026-01-24 16:45:03.699",
+        "@message": "2026-01-24 16:45:03,501 - __main__ - INFO - Successfully retrieved secret for lab-1c/rds/mysql"
+    },
+    {
+        "@timestamp": "2026-01-24 16:45:03.449",
+        "@message": "2026-01-24 16:45:03,201 - __main__ - INFO - Connected to database at lab-mysql.cxm8o4cwoftn.ap-northeast-1.rds.amazonaws.com:3306"
+    },
+    {
+        "@timestamp": "2026-01-24 16:45:03.449",
+        "@message": "2026-01-24 16:45:03,191 - __main__ - INFO - Successfully retrieved secret for lab-1c/rds/mysql"
+    },
+    {
+        "@timestamp": "2026-01-24 16:44:33.625",
+        "@message": "2026-01-24 16:44:33,480 - __main__ - INFO - Connected to database at lab-mysql.cxm8o4cwoftn.ap-northeast-1.rds.amazonaws.com:3306"
+    },
+    {
+        "@timestamp": "2026-01-24 16:44:33.625",
+        "@message": "2026-01-24 16:44:33,470 - __main__ - INFO - Successfully retrieved secret for lab-1c/rds/mysql"
+    },
+    {
+        "@timestamp": "2026-01-24 16:44:33.374",
+        "@message": "2026-01-24 16:44:33,169 - __main__ - INFO - Connected to database at lab-mysql.cxm8o4cwoftn.ap-northeast-1.rds.amazonaws.com:3306"
+    },
+    {
+        "@timestamp": "2026-01-24 16:44:33.374",
+        "@message": "2026-01-24 16:44:33,160 - __main__ - INFO - Successfully retrieved secret for lab-1c/rds/mysql"
+    },
+    {
+        "@timestamp": "2026-01-24 16:44:03.551",
+        "@message": "2026-01-24 16:44:03,490 - __main__ - INFO - Connected to database at lab-mysql.cxm8o4cwoftn.ap-northeast-1.rds.amazonaws.com:3306"
+    },
+    {
+        "@timestamp": "2026-01-24 16:44:03.551",
+        "@message": "2026-01-24 16:44:03,482 - __main__ - INFO - Successfully retrieved secret for lab-1c/rds/mysql"
+    },
+    {
+        "@timestamp": "2026-01-24 16:44:03.301",
+        "@message": "2026-01-24 16:44:03,141 - __main__ - INFO - Connected to database at lab-mysql.cxm8o4cwoftn.ap-northeast-1.rds.amazonaws.com:3306"
+    },
+    {
+        "@timestamp": "2026-01-24 16:44:03.301",
+        "@message": "2026-01-24 16:44:03,132 - __main__ - INFO - Successfully retrieved secret for lab-1c/rds/mysql"
+    },
+    {
+        "@timestamp": "2026-01-24 16:43:33.481",
+        "@message": "2026-01-24 16:43:33,416 - __main__ - INFO - Connected to database at lab-mysql.cxm8o4cwoftn.ap-northeast-1.rds.amazonaws.com:3306"
+    },
+    {
+        "@timestamp": "2026-01-24 16:43:33.481",
+        "@message": "2026-01-24 16:43:33,408 - __main__ - INFO - Successfully retrieved secret for lab-1c/rds/mysql"
+    },
+    {
+        "@timestamp": "2026-01-24 16:43:33.231",
+        "@message": "2026-01-24 16:43:33,104 - __main__ - INFO - Successfully retrieved secret for lab-1c/rds/mysql"
+    },
+    {
+        "@timestamp": "2026-01-24 16:43:33.231",
+        "@message": "2026-01-24 16:43:33,113 - __main__ - INFO - Connected to database at lab-mysql.cxm8o4cwoftn.ap-northeast-1.rds.amazonaws.com:3306"
+    },
+    {
+        "@timestamp": "2026-01-24 16:43:03.413",
+        "@message": "2026-01-24 16:43:03,385 - __main__ - INFO - Connected to database at lab-mysql.cxm8o4cwoftn.ap-northeast-1.rds.amazonaws.com:3306"
+    },
+    {
+        "@timestamp": "2026-01-24 16:43:03.413",
+        "@message": "2026-01-24 16:43:03,376 - __main__ - INFO - Successfully retrieved secret for lab-1c/rds/mysql"
+    },
+    {
+        "@timestamp": "2026-01-24 16:43:03.163",
+        "@message": "2026-01-24 16:43:03,075 - __main__ - INFO - Connected to database at lab-mysql.cxm8o4cwoftn.ap-northeast-1.rds.amazonaws.com:3306"
+    },
+    {
+        "@timestamp": "2026-01-24 16:43:03.162",
+        "@message": "2026-01-24 16:43:03,065 - __main__ - INFO - Successfully retrieved secret for lab-1c/rds/mysql"
+    },
+    {
+        "@timestamp": "2026-01-24 16:42:33.590",
+        "@message": "2026-01-24 16:42:33,354 - __main__ - INFO - Successfully retrieved secret for lab-1c/rds/mysql"
+    },
+    {
+        "@timestamp": "2026-01-24 16:42:33.590",
+        "@message": "2026-01-24 16:42:33,364 - __main__ - INFO - Connected to database at lab-mysql.cxm8o4cwoftn.ap-northeast-1.rds.amazonaws.com:3306"
+    }
+]
+B3) “Is it creds or network?” classifier hints
+### Command not working
+  Credentials drift often shows: Access denied, authentication failures
+  Network/SecurityGroup often shows: timeout, refused, “no route”, hang
+  fields @timestamp, @message
+| filter @message like /Access denied|authentication failed|timeout|refused|no route|could not connect/i
+| stats count() as hits by
+  case(
+    @message like /Access denied|authentication failed/i, "Creds/Auth",
+    @message like /timeout|no route/i, "Network/Route",
+    @message like /refused/i, "Port/SG/ServiceRefused",
+    "Other"
+  )
+| sort hits desc
+
+fields @timestamp, @message
+| parse @message '* - * - * - *' as timestamp, logger, level, error_message
+| filter error_message =~ /(?i)(access.denied|authentication.failed|timeout|refused|no.route|could.not.connect)/
+| stats count() as hits by error_message
+| sort hits desc
+[
+    {
+        "error_message": "Database connection error: (1045, \"Access denied for user 'van'@'172.17.11.92' (using password: YES)\")",
+        "hits": "58"
+    },
+    {
+        "error_message": "Health check failed: (1045, \"Access denied for user 'van'@'172.17.11.92' (using password: YES)\")",
+        "hits": "58"
+    }
+]
+
+B4) Extract structured fields (Requires log JSON)
+### Command not working
+If you log JSON like: {"level":"ERROR","event":"db_connect_fail","reason":"timeout"}:
+  fields @timestamp, level, event, reason
+| filter level="ERROR"
+| stats count() as n by event, reason
+| sort n desc
+
+
+fields @timestamp, @message
+| parse @message '* - * - * - *' as timestamp, logger, level, error_message
+| filter level = "ERROR"
+| stats count() as n by logger, error_message
+| sort n desc
+[
+    {
+        "logger": "__main__",
+        "error_message": "Health check failed: (1045, \"Access denied for user 'van'@'172.17.11.92' (using password: YES)\")",
+        "n": "58"
+    },
+    {
+        "logger": "__main__",
+        "error_message": "Database connection error: (1045, \"Access denied for user 'van'@'172.17.11.92' (using password: YES)\")",
+        "n": "58"
+    },
+    {
+        "logger": "__main__",
+        "error_message": "Error listing notes: (1146, \"Table 'labdb.notes' doesn't exist\")",
+        "n": "2"
+    },
+    {
+        "logger": "werkzeug",
+        "error_message": "127.0.0.1 - - [23/Jan/2026 22:10:16] code 400, message Bad request version (\"<¨\\x8a¨\\x93þXàt\\x00H\\x13\\x02\\x13\\x03\\x13\\x01\\x13\\x04À,À0Ì©Ì¨À\\xadÀ+À/À¬À#À'À\")",
+        "n": "1"
+    }
+]
+(Thou Shalt need to emit JSON logs for this one.)
+
+C) Correlation “Enterprise-style” mini-workflow (Runbook Section)
+Add this to the incident runbook:
+
+Step 1 — Confirm signal timing
+  CloudWatch alarm time window: last 5–15 minutes
+  Run App B1 to see error spike time bins
+
+Step 2 — Decide: Attack vs Backend Failure
+  Run WAF A1 + A6:
+    If BLOCK spikes align with incident time → likely external pressure/scanning
+    If WAF is quiet but app errors spike → likely backend (RDS/SG/creds)
+
+Step 3 — If backend failure suspected
+  Run App B2 and classify:
+    Access denied → secrets drift / wrong password
+    timeout → SG/routing/RDS down
+  Then retrieve known-good values:
+    Parameter Store /lab/db/*
+    Secrets Manager /<prefix>/rds/mysql
+
+Step 4 — Verify recovery
+  App errors return to baseline (B1)
+  WAF blocks stabilize (A6)
+  Alarm returns to OK
+  curl https://app.theowafhomework.site/list works

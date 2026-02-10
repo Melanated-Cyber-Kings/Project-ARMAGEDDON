@@ -1,0 +1,47 @@
+=== Running Gate 1/2: secrets_and_role ===
+
+=== SEIR Gate: Secrets + EC2 Role Verification ===
+Timestamp (UTC): 2026-02-09T07:38:29Z
+Region:          ap-northeast-1
+Instance ID:     i-0ee4ab7361dc2f1c8
+Secret ID:       lew/rds/mysql
+Resolved Role:   lew-ec2-role01
+Caller ARN:      arn:aws:iam::620812304994:user/User101-GlueCourse
+-----------------------------------------------
+PASS: aws sts get-caller-identity succeeded (credentials OK).
+PASS: secret exists and is describable (lew/rds/mysql).
+INFO: rotation requirement disabled (REQUIRE_ROTATION=false).
+PASS: no resource policy found (OK) or not applicable (lew/rds/mysql).
+PASS: instance has IAM instance profile attached (i-0ee4ab7361dc2f1c8).
+PASS: resolved instance profile -> role (lew-instance-profile01 -> lew-ec2-role01).
+INFO: EXPECTED_ROLE_NAME not set; using resolved role (lew-ec2-role01).
+INFO: on-instance checks skipped (not running as expected role on EC2).
+
+Warnings:
+  - WARN: current caller ARN is not assumed-role/lew-ec2-role01 (you may be running off-instance).
+
+RESULT: PASS
+===============================================
+
+=== Running Gate 2/2: network_db ===
+
+=== SEIR Gate: Network + RDS Verification ===
+Timestamp (UTC): 2026-02-09T07:38:48Z
+Region:          ap-northeast-1
+EC2 Instance:    i-0ee4ab7361dc2f1c8
+RDS Instance:    lew-rds01
+Engine:          mysql
+DB Port:         3306
+Caller ARN:      arn:aws:iam::620812304994:user/User101-GlueCourse
+-------------------------------------------
+PASS: aws sts get-caller-identity succeeded (credentials OK).
+PASS: RDS instance exists (lew-rds01).
+PASS: RDS is not publicly accessible (PubliclyAccessible=False).
+PASS: discovered DB port = 3306 (engine=mysql).
+PASS: EC2 security groups resolved (i-0ee4ab7361dc2f1c8): sg-03f4aba799ec651a0
+PASS: RDS security groups resolved (lew-rds01): sg-041f924a7e053e392
+PASS: RDS SG allows DB port 3306 from EC2 SG (SG-to-SG ingress present).
+INFO: private subnet check disabled (CHECK_PRIVATE_SUBNETS=false).
+
+RESULT: PASS
+===========================================

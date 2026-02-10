@@ -1,0 +1,142 @@
+🔴 === INCIDENT RESPONSE - DEBUG MODE ===
+
+📊 1. ALARM DETAILED STATUS
+--------------------------
+----------------------------------------------------------------------------------------------------------------
+|                                                DescribeAlarms                                                |
++--------------------------------------------------------------------------------------------------------------+
+|  lab-db-connection-failure                                                                                   |
+|  ALARM                                                                                                       |
+|  2026-01-19T00:08:45.047000+00:00                                                                            |
+|  Threshold Crossed: 1 datapoint [5.0 (19/01/26 00:03:00)] was greater than or equal to the threshold (3.0).  |
++--------------------------------------------------------------------------------------------------------------+
+
+Alarm Configuration:
+-----------------------------------
+|         DescribeAlarms          |
++---------------------------------+
+|  DBConnectionErrors             |
+|  Lab/RDSApp                     |
+|  300                            |
+|  1                              |
+|  3.0                            |
+|  GreaterThanOrEqualToThreshold  |
++---------------------------------+
+
+📈 2. METRICS AVAILABILITY
+-------------------------
+Checking for DBConnectionErrors metrics:
+------------------------------------------
+|               ListMetrics              |
++---------------+------------------------+
+|     Name      |         Value          |
++---------------+------------------------+
+|  Test         |  manual                |
+|  LogGroupName |  /aws/ec2/lab-rds-app  |
+|  LogGroupName |  /aws/ec2/lab-rds-app  |
++---------------+------------------------+
+
+Manually pushing test metric...
+Waiting 60 seconds for metric to register...
+Checking alarm state again:
+ALARM
+
+📱 3. APPLICATION STATUS
+----------------------
+Testing http://54.199.38.235/list
+
+❌ Application 500 Error - App is broken
+
+🔧 IMMEDIATE FIX NEEDED:
+1. SSH to EC2 and check logs:
+   ssh -i your-key.pem ec2-user@54.199.38.235
+2. Check: sudo tail -f /var/log/web-app/app.log
+3. Common issues: Missing Python packages, DB config errors
+
+🎯 4. LAB WORKAROUND
+------------------
+If metrics still not flowing, you can:
+
+OPTION A: Simulate alarm by setting threshold to 1 and pushing metric:
+  aws cloudwatch put-metric-data \
+    --namespace 'Lab/RDSApp' \
+    --metric-name 'DBConnectionErrors' \
+    --value 1 \
+    --dimensions LogGroupName=/aws/ec2/lab-rds-app
+
+OPTION B: Temporarily lower alarm threshold:
+  aws cloudwatch set-alarm-state \
+    --alarm-name lab-db-connection-failure \
+    --state-value ALARM \
+    --state-reason 'Manual override for lab testing'
+
+OPTION C: Check CloudWatch Agent is running on EC2:
+  ssh -i your-key.pem ec2-user@54.199.38.235
+  sudo systemctl status amazon-cloudwatch-agent
+
+🤖 5. CLOUDWATCH AGENT CHECK
+--------------------------
+Quick test - check if logs are being collected:
+
+📝 2. CHECKING ERROR LOGS
+------------------------
+
+🔧 3. VERIFYING CONFIGURATION
+----------------------------
+SSM Parameters:
+---------------------------------------------------------------------------------
+|                                 GetParameters                                 |
++-------------------+-----------------------------------------------------------+
+|  /lab/db/endpoint |  lab-mysql.cxm8o4cwoftn.ap-northeast-1.rds.amazonaws.com  |
+|  /lab/db/name     |  labdb                                                    |
+|  /lab/db/port     |  3306                                                     |
++-------------------+-----------------------------------------------------------+
+
+Secrets Manager:
+{
+  "username": "Van",
+  "password": "Admin0892",
+  "dbname": "labdb",
+  "port": "3306",
+  "host": "lab-mysql.cxm8o4cwoftn.ap-northeast-1.rds.amazonaws.com"
+}
+
+🏗️  4. CHECKING INFRASTRUCTURE STATUS
+-----------------------------------
+RDS Status:
+-------------------------------------------------------------
+|                    DescribeDBInstances                    |
++-----------------------------------------------------------+
+|  available                                                |
+|  lab-mysql.cxm8o4cwoftn.ap-northeast-1.rds.amazonaws.com  |
++-----------------------------------------------------------+
+
+EC2 Status:
+-------------------
+|DescribeInstances|
++-----------------+
+|  running        |
+|  54.199.38.235  |
++-----------------+
+
+🧪 5. TESTING RECOVERY
+---------------------
+Testing application at http://54.199.38.235/list
+
+Response:
+<!doctype html>
+<html lang=en>
+<title>500 Internal Server Error</title>
+<h1>Internal Server Error</h1>
+<p>The server encountered an internal error and was unable to complete your request. Either the server is overloaded or there is an error in the application.</p>
+✅ === DEBUG COMPLETE ===
+
+🎯 SUMMARY:
+1. Alarm: INSUFFICIENT_DATA = No metrics from app
+2. App: 500 Error = App is broken
+
+🔧 ACTION PLAN:
+1. Fix application 500 error first
+2. Ensure app emits CloudWatch metrics on DB failure
+3. Wait 5+ minutes for metrics to aggregate
+4. Alarm should transition to ALARM

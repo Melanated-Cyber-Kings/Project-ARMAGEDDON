@@ -1,0 +1,51 @@
+1. Header Evidence (Investigation)
+Command: curl -i https://d1o11jf5mo8hfw.cloudfront.net/static/example.txt
+
+Observed Sequence:
+
+First Request: x-cache: Miss from cloudfront (Initial fetch)
+
+Subsequent Request: x-cache: RefreshHit from cloudfront (Revalidation)
+
+HTTP/2 200 
+date: Mon, 09 Feb 2026 04:26:13 GMT
+last-modified: Mon, 09 Feb 2026 04:05:35 GMT
+etag: "1770609935.1152973-44-2962164636"
+cache-control: public, max-age=86400, immutable
+x-cache: RefreshHit from cloudfront
+via: 1.1 de2820d8070dfec0ed6e781246ebefbe.cloudfront.net (CloudFront)
+
+Chewbacca Version 2.0 - Honors Plus Update!
+
+2. Validator Identification
+In the headers above, the following validators were identified which allow CloudFront to perform conditional requests:
+
+ETag: "1770609935.1152973-44-2962164636"
+
+Last-Modified: Mon, 09 Feb 2026 04:05:35 GMT
+
+3. Explanation of RefreshHit
+CloudFront had a cached copy of the object, but the TTL expired (or revalidation was triggered). 
+Instead of a full refetch (Miss), CloudFront sent a conditional request to the origin using the If-None-Match (ETag) validator. 
+The origin responded with a 304 Not Modified, signaling that the content hasn't changed. 
+CloudFront then reused the existing cached body, saving bandwidth and reducing origin load.
+
+4. Injection B: Analysis & Resolution
+Scenario: Content is changed at the origin, but the ETag/Validator remains the same. 
+Observed Result: CloudFront continues to receive a 304 Not Modified and serves stale content to users (perpetual RefreshHit).
+
+Chosen Fix: Update the ETag. 
+Justification: Updating the ETag is the correct architectural fix. 
+    It maintains the "Origin as Source of Truth" and allows the HTTP protocol to handle cache freshness naturally. 
+    While an invalidation (Honors+) works, it is an emergency manual operation. 
+    Updating validators is a programmatic, scalable solution that ensures zero-downtime consistency.
+
+5. Final One-Paragraph Takeaway
+What does RefreshHit mean, and why is it often better than a Miss? 
+    A RefreshHit indicates that the CDN successfully confirmed with the origin that its cached version is still valid using a conditional GET request. 
+    It is superior to a Miss because it drastically reduces egress bandwidth—the origin only sends a small header response rather than the entire file payload. 
+    This reduces the "thundering herd" effect on the origin and lowers latency compared to a full refetch, while still providing a guarantee that the user is not seeing stale content.
+
+The Thundering Herd Effect: 
+    This occurs when a popular cached object is invalidated globally or expires simultaneously across all edge locations. 
+    This forces every edge location to send a request back to the origin at once, potentially overwhelming the ALB and EC2 servers with a massive spike in traffic that can lead to increased latency or system failure.

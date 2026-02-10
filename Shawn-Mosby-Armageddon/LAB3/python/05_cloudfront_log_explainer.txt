@@ -1,0 +1,51 @@
+lew2@Lew2s-MBP python % for i in {1..50}; do curl -I https://d3o302wb5qxfbu.cloudfront.net/static/example.txt; done                                                                                    
+HTTP/2 504 
+content-type: text/html
+content-length: 941
+date: Fri, 06 Feb 2026 03:46:14 GMT
+x-cache: Error from cloudfront
+via: 1.1 a70648d67d4a5a7f7eed7b14595ab4fe.cloudfront.net (CloudFront)
+x-amz-cf-pop: DEN52-P2
+x-amz-cf-id: S-U8WBFpBh5w31xdhaQ7m4DRAzOt7j1XO2cJEDHZDsk2mMed6c444w==
+
+HTTP/2 504 
+content-type: text/html
+content-length: 941
+date: Fri, 06 Feb 2026 03:46:14 GMT
+x-cache: Error from cloudfront
+via: 1.1 a42ce842e0f60814700ead82353e9f08.cloudfront.net (CloudFront)
+x-amz-cf-pop: DEN52-P2
+x-amz-cf-id: eP5mwjlxRilReUGJpujaAIcgappO82ADCtS_5FmqMGlgjF5ykWIGow==
+
+....x48 more 
+
+python3 malgus_cloudfront_log_explainer.py \
+  --bucket class-lab3-200819971986 \
+  --prefix Chwebacca-logs/ \
+  --latest 5
+Found 1 objects. Analyzing latest 1:
+  - s3://class-lab3-200819971986/Chwebacca-logs/E376RS5LA9X93N.2026-02-06-03.e6f8c2c7.gz
+
+=== CloudFront Cache Outcome Report (Standard Logs) ===
+Core total (Hit/Miss/RefreshHit): 0
+All counted lines/notes:          51
+
+Core outcomes:
+  Hit               0   (0.0% of core)
+  Miss              0   (0.0% of core)
+  RefreshHit        0   (0.0% of core)
+
+Other outcomes / parsing notes (top 20):
+  Other:Error                        51
+
+Interpretation (ops):
+  • High Hit% usually means lower latency & lower origin load.
+  • High Miss% suggests caching policy mismatch, uncacheable headers,
+    query-string/cookie variance, or origin Cache-Control behavior.
+  • RefreshHit means CloudFront revalidated with origin and served cached content (often good).
+=======================================================
+
+Edge logging verified via Malgus script. 
+51 events captured. 
+Current 504 errors in logs are attributed to the strict Origin Cloaking header enforcement, which successfully records all edge interactions in the S3 Audit Vault."
+

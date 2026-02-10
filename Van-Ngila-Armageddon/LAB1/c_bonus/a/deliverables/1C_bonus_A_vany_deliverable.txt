@@ -1,0 +1,74 @@
+aws ssm describe-instance-information --query "InstanceInformationList[].{Id:InstanceId, Status:PingStatus, AgentVersion:AgentVersion}"
+[
+    {
+        "Id": "i-09c49ba0794b979d3",
+        "Status": "Online",
+        "AgentVersion": "3.3.3572.0"
+    }
+]
+
+Student verification (CLI) for Bonus-A
+1) Prove EC2 is private (no public IP)
+  aws ec2 describe-instances \
+  --instance-ids i-09c49ba0794b979d3 \
+  --query "Reservations[].Instances[].PublicIpAddress"
+
+Result:
+[]
+
+2) Prove VPC endpoints exist
+  aws ec2 describe-vpc-endpoints \
+  --filters "Name=vpc-id,Values=vpc-07d941f8b5a5ad8de" \
+  --query "VpcEndpoints[].ServiceName"
+
+[
+    "com.amazonaws.ap-northeast-1.s3",
+    "com.amazonaws.ap-northeast-1.ssmmessages",
+    "com.amazonaws.ap-northeast-1.logs",
+    "com.amazonaws.ap-northeast-1.ec2messages",
+    "com.amazonaws.ap-northeast-1.ssm",
+    "com.amazonaws.ap-northeast-1.secretsmanager",
+    "com.amazonaws.ap-northeast-1.ec2"
+]
+
+3) Prove Session Manager path works (no SSH)
+  aws ssm describe-instance-information \
+  --query "InstanceInformationList[].InstanceId"
+[
+    "i-09c49ba0794b979d3"
+]
+
+4) Prove the instance can read both config stores
+Run from SSM session:
+  aws ssm get-parameter --name /lab/db/endpoint
+{
+    "Parameter": {
+        "Name": "/lab/db/endpoint",
+        "Type": "String",
+        "Value": "lab-mysql.cxm8o4cwoftn.ap-northeast-1.rds.amazonaws.com",
+        "Version": 1,
+        "LastModifiedDate": "2026-01-20T01:32:54.853000+00:00",
+        "ARN": "arn:aws:ssm:ap-northeast-1:031857855861:parameter/lab/db/endpoint",
+        "DataType": "text"
+    }
+}
+
+  aws secretsmanager get-secret-value --secret-id lab-1c/rds/mysql
+{
+    "ARN": "arn:aws:secretsmanager:ap-northeast-1:031857855861:secret:lab-1c/rds/mysql-yNaubw",
+    "Name": "lab-1c/rds/mysql",
+    "VersionId": "c2673bdb-c0f3-4e1f-b7f0-90bd076c722b",
+    "SecretString": "{\"db_name\":\"labdb\",\"host\":\"lab-mysql.cxm8o4cwoftn.ap-northeast-1.rds.amazonaws.com\",\"password\":\"Admin0891\",\"port\":3306,\"username\":\"van\"}",
+    "VersionStages": [
+        "AWSCURRENT"
+    ],
+    "CreatedDate": "2026-01-19T17:57:01.271000+00:00"
+}
+
+5) Prove CloudWatch logs delivery path is available via endpoint
+  aws logs describe-log-streams \
+    --log-group-name /aws/ec2/lab-rds-app
+{
+    "logStreams": []
+}
+

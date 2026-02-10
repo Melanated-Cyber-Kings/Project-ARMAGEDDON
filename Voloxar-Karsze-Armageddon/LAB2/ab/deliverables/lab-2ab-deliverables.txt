@@ -1,0 +1,334 @@
+curl -I https://Armageddon-alb01-1445332960.ap-northeast-1.elb.amazonaws.com
+curl: (60) SSL: no alternative certificate subject name matches target hostname 'Armageddon-alb01-1445332960.ap-northeast-1.elb.amazonaws.com'
+More details here: https://curl.se/docs/sslcerts.html
+
+curl failed to verify the legitimacy of the server and therefore could not
+establish a secure connection to it. To learn more about this situation and
+how to fix it, please visit the webpage mentioned above.
+
+
+curl -kI https://Armageddon-alb01-1445332960.ap-northeast-1.elb.amazonaws.com
+HTTP/2 403 
+server: awselb/2.0
+date: Tue, 10 Feb 2026 00:55:35 GMT
+content-type: text/plain; charset=utf-8
+content-length: 9
+
+
+
+curl -I https://theswordptdemo.site
+HTTP/2 200 
+content-type: text/html; charset=utf-8
+content-length: 93
+date: Tue, 10 Feb 2026 00:57:19 GMT
+server: Werkzeug/2.2.3 Python/3.7.16
+x-cache: Miss from cloudfront
+via: 1.1 ddb54065776b6034dded842bf3f01118.cloudfront.net (CloudFront)
+x-amz-cf-pop: ORD58-P2
+x-amz-cf-id: zE8EReEfSmFWkqJoytB0WHmw4oMepFV4-nDzg8v0GUXHKOMNzDyNcg==
+
+
+
+curl -I https://app.theswordptdemo.site
+HTTP/2 200 
+content-type: text/html; charset=utf-8
+content-length: 93
+date: Tue, 10 Feb 2026 00:57:56 GMT
+server: Werkzeug/2.2.3 Python/3.7.16
+x-cache: Miss from cloudfront
+via: 1.1 b508a0e8744edb82beb1add8f2f035d4.cloudfront.net (CloudFront)
+x-amz-cf-pop: ORD58-P2
+x-amz-cf-id: 8512rN-Tp9N1KhvJp4-0OUTKPBdqlZPyNLgrmtzF0dn8DUlTJ5DDgA==
+
+
+
+
+aws wafv2 list-web-acls --scope CLOUDFRONT --region us-east-1
+{
+    "NextMarker": "Armageddon_cf_waf01_0eoo7",
+    "WebACLs": [
+        {
+            "Name": "Armageddon-cf-waf01",
+            "Id": "d099ba32-36a3-4000-8670-afe1ca3e1aa7",
+            "Description": "",
+            "LockToken": "6ae12946-4a7c-49cb-a8cf-da7c7f8a7053",
+            "ARN": "arn:aws:wafv2:us-east-1:323890959615:global/webacl/Armageddon-cf-waf01/d099ba32-36a3-4000-8670-afe1ca3e1aa7"
+        },
+        {
+            "Name": "Armageddon_cf_waf01_0eoo7",
+            "Id": "ca65d080-7048-4d17-ba60-e14325ffc2bc",
+            "Description": "",
+            "LockToken": "ff6f062b-851a-400e-bc49-559c048a63ba",
+            "ARN": "arn:aws:wafv2:us-east-1:323890959615:global/webacl/Armageddon_cf_waf01_0eoo7/ca65d080-7048-4d17-ba60-e14325ffc2bc"
+        }
+    ]
+}
+
+
+
+
+aws wafv2 get-web-acl \
+  --name Armageddon_cf_waf01_0eoo7 --scope CLOUDFRONT --id ca65d080-7048-4d17-ba60-e14325ffc2bc  --region us-east-1
+{
+    "WebACL": {
+        "Name": "Armageddon_cf_waf01_0eoo7",
+        "Id": "ca65d080-7048-4d17-ba60-e14325ffc2bc",
+        "ARN": "arn:aws:wafv2:us-east-1:323890959615:global/webacl/Armageddon_cf_waf01_0eoo7/ca65d080-7048-4d17-ba60-e14325ffc2bc",
+        "DefaultAction": {
+            "Allow": {}
+        },
+        "Description": "",
+        "Rules": [
+            {
+                "Name": "AWSManagedRulesCommonRuleSet",
+                "Priority": 1,
+                "Statement": {
+                    "ManagedRuleGroupStatement": {
+                        "VendorName": "AWS",
+                        "Name": "AWSManagedRulesCommonRuleSet"
+                    }
+                },
+                "OverrideAction": {
+                    "None": {}
+                },
+                "VisibilityConfig": {
+                    "SampledRequestsEnabled": true,
+                    "CloudWatchMetricsEnabled": true,
+                    "MetricName": "Armageddon-cf-waf-common"
+                }
+            }
+        ],
+        "VisibilityConfig": {
+            "SampledRequestsEnabled": true,
+            "CloudWatchMetricsEnabled": true,
+            "MetricName": "Armageddon-cf-waf01"
+        },
+        "Capacity": 700,
+        "ManagedByFirewallManager": false,
+        "LabelNamespace": "awswaf:323890959615:webacl:Armageddon_cf_waf01_0eoo7:",
+        "RetrofittedByFirewallManager": false,
+        "OnSourceDDoSProtectionConfig": {
+            "ALBLowReputationMode": "ACTIVE_UNDER_DDOS"
+        }
+    },
+    "LockToken": "ff6f062b-851a-400e-bc49-559c048a63ba"
+}
+
+aws cloudfront get-distribution \
+  --id E2NA3OO2W2HWA1 \
+  --query "Distribution.DistributionConfig.WebACLId"
+"arn:aws:wafv2:us-east-1:323890959615:global/webacl/Armageddon_cf_waf01_0eoo7/ca65d080-7048-4d17-ba60-e14325ffc2bc"
+
+
+
+dig theswordptdemo.site A +short
+18.64.183.59
+18.64.183.90
+18.64.183.28
+18.64.183.99
+
+
+dig app.theswordptdemo.site A +short
+18.64.183.59
+18.64.183.28
+18.64.183.99
+18.64.183.90
+
+
+curl -i https://theswordptdemo.site/api/public-feed | sed -n '1,20p'
+  % Total    % Received % Xferd  Average Speed   Time    Time     Time  Current
+                                 Dload  Upload   Total   Spent    Left  Speed
+100   101  100   101    0     0    132      0 --:--:-- --:--:-- --:--:--   132
+HTTP/2 200 
+content-type: application/json
+content-length: 101
+date: Tue, 10 Feb 2026 01:23:02 GMT
+cache-control: public, s-maxage=30, max-age=0
+server: Werkzeug/2.2.3 Python/3.7.16
+x-cache: Miss from cloudfront
+via: 1.1 7b4f4d0815aab86f9f1429fa39615564.cloudfront.net (CloudFront)
+x-amz-cf-pop: ORD58-P2
+x-amz-cf-id: lWWq0V-2Gyn6HlWW3WztcE7xpprX-Ej-OlfH2ZHZpAciaYqBsfOeZA==
+
+{"message_of_the_minute":"May the Force be with you","server_time_utc":"2026-02-10T01:23:02.502600"
+
+
+curl -i https://theswordptdemo.site/api/public-feed | sed -n '1,20p'
+  % Total    % Received % Xferd  Average Speed   Time    Time     Time  Current
+                                 Dload  Upload   Total   Spent    Left  Speed
+100   101  100   101    0     0    242      0 --:--:-- --:--:-- --:--:--   242
+HTTP/2 200 
+content-type: application/json
+content-length: 101
+date: Tue, 10 Feb 2026 01:23:02 GMT
+cache-control: public, s-maxage=30, max-age=0
+server: Werkzeug/2.2.3 Python/3.7.16
+x-cache: Hit from cloudfront
+via: 1.1 05ecb79dbd3bc8a5c99fa616e7de5b48.cloudfront.net (CloudFront)
+x-amz-cf-pop: ORD58-P2
+x-amz-cf-id: cEAMLMaLsF6m6M5t54r9GFZaZY4I81Bs1-FvksiqVh4v6qk0mr_h_g==
+age: 19
+
+{"message_of_the_minute":"May the Force be with you","server_time_utc":"2026-02-10T01:23:02.502600"}
+
+
+curl -i https://theswordptdemo.site/api/public-feed | sed -n '1,20p'
+  % Total    % Received % Xferd  Average Speed   Time    Time     Time  Current
+                                 Dload  Upload   Total   Spent    Left  Speed
+100    91  100    91    0     0    117      0 --:--:-- --:--:-- --:--:--   117
+HTTP/2 200 
+content-type: application/json
+content-length: 91
+date: Tue, 10 Feb 2026 01:25:12 GMT
+cache-control: public, s-maxage=30, max-age=0
+server: Werkzeug/2.2.3 Python/3.7.16
+x-cache: Miss from cloudfront
+via: 1.1 ddb54065776b6034dded842bf3f01118.cloudfront.net (CloudFront)
+x-amz-cf-pop: ORD58-P2
+x-amz-cf-id: QH4sjFZeI43v02_6DZUwNyKul_9Wm9FSAdfGXUKKYX9bcENOud4iow==
+
+{"message_of_the_minute":"RRRAARRWHHGWWR!","server_time_utc":"2026-02-10T01:25:12.070621"}
+
+
+
+
+
+
+
+Before Invalidation:
+
+
+curl -I https://theswordptdemo.site/static/example.txt
+HTTP/2 200 
+content-type: text/plain; charset=utf-8
+content-length: 23
+date: Tue, 10 Feb 2026 01:37:56 GMT
+etag: "1770674237.6369538-23-2962164636"
+server: Werkzeug/2.2.3 Python/3.7.16
+content-disposition: inline; filename=example.txt
+last-modified: Mon, 09 Feb 2026 21:57:17 GMT
+cache-control: public, max-age=3600
+expires: Tue, 10 Feb 2026 02:37:56 GMT
+x-cache: Miss from cloudfront
+via: 1.1 b7756f48d3d5f1537121b99b0fc85424.cloudfront.net (CloudFront)
+x-amz-cf-pop: ORD58-P2
+x-amz-cf-id: FTYRKGd4KCXBxRBP3KmR4VQRsWTmWfFQ_6HxBOVcWewLT6MF3S7AvA==
+
+curl -I https://theswordptdemo.site/static/example.txt
+HTTP/2 200 
+content-type: text/plain; charset=utf-8
+content-length: 23
+date: Tue, 10 Feb 2026 01:37:56 GMT
+etag: "1770674237.6369538-23-2962164636"
+server: Werkzeug/2.2.3 Python/3.7.16
+content-disposition: inline; filename=example.txt
+last-modified: Mon, 09 Feb 2026 21:57:17 GMT
+cache-control: public, max-age=3600
+expires: Tue, 10 Feb 2026 02:37:56 GMT
+x-cache: Hit from cloudfront
+via: 1.1 b7756f48d3d5f1537121b99b0fc85424.cloudfront.net (CloudFront)
+x-amz-cf-pop: ORD58-P2
+x-amz-cf-id: xmRp4lX9jDWJKPJtZaB7xFKVEdSgxitm4NKfMnBZCOloO7wxX8E2ow==
+age: 34
+
+
+
+Invalidation:
+aws cloudfront create-invalidation \
+  --distribution-id E2NA3OO2W2HWA1  --paths "/static/*"
+{
+    "Location": "https://cloudfront.amazonaws.com/2020-05-31/distribution/E2NA3OO2W2HWA1/invalidation/IA08VEYI7T1EEDU0DSECPNB6FL",
+    "Invalidation": {
+        "Id": "IA08VEYI7T1EEDU0DSECPNB6FL",
+        "Status": "InProgress",
+        "CreateTime": "2026-02-10T01:40:05.677000+00:00",
+        "InvalidationBatch": {
+            "Paths": {
+                "Quantity": 1,
+                "Items": [
+                    "/static/*"
+                ]
+            },
+            "CallerReference": "cli-1770687605-958142"
+        }
+    }
+}
+
+Tracked Progress:
+aws cloudfront get-invalidation \
+  --distribution-id  E2NA3OO2W2HWA1 --id IA08VEYI7T1EEDU0DSECPNB6FL
+{
+    "Invalidation": {
+        "Id": "IA08VEYI7T1EEDU0DSECPNB6FL",
+        "Status": "Completed",
+        "CreateTime": "2026-02-10T01:40:05.677000+00:00",
+        "InvalidationBatch": {
+            "Paths": {
+                "Quantity": 1,
+                "Items": [
+                    "/static/*"
+                ]
+            },
+            "CallerReference": "cli-1770687605-958142"
+        }
+    }
+}
+
+On server before invalidation:
+sh-4.2$   cd /opt/rdsapp/static/
+sh-4.2$   cat example.txt
+Chewbacca wasn't here!
+sh-4.2$
+
+
+After Invalidation:
+curl -I https://theswordptdemo.site/static/example.txt
+HTTP/2 200 
+content-type: text/plain; charset=utf-8
+content-length: 38
+date: Tue, 10 Feb 2026 01:46:31 GMT
+etag: "1770687966.9884248-38-2962164636"
+server: Werkzeug/2.2.3 Python/3.7.16
+content-disposition: inline; filename=example.txt
+last-modified: Tue, 10 Feb 2026 01:46:06 GMT
+cache-control: public, max-age=3600
+expires: Tue, 10 Feb 2026 02:46:31 GMT
+x-cache: Miss from cloudfront
+via: 1.1 ec4201b8e964711b0e2a48ca543b0cc8.cloudfront.net (CloudFront)
+x-amz-cf-pop: ORD58-P2
+x-amz-cf-id: CpALCFpIz0xzHCLJJ0rnO6VLXl0Jx5orKM0p7E0mPsmAD6fLVos3bA==
+
+curl -I https://theswordptdemo.site/static/example.txt
+HTTP/2 200 
+content-type: text/plain; charset=utf-8
+content-length: 38
+date: Tue, 10 Feb 2026 01:46:31 GMT
+etag: "1770687966.9884248-38-2962164636"
+server: Werkzeug/2.2.3 Python/3.7.16
+content-disposition: inline; filename=example.txt
+last-modified: Tue, 10 Feb 2026 01:46:06 GMT
+cache-control: public, max-age=3600
+expires: Tue, 10 Feb 2026 02:46:31 GMT
+x-cache: Hit from cloudfront
+via: 1.1 5989d29cca6db1e89c2f49eb9e4dbdfc.cloudfront.net (CloudFront)
+x-amz-cf-pop: ORD58-P2
+x-amz-cf-id: 8Iq-fwVNckEi51UqmoHECQZDX2SE1FQhY0WJt-5VAVjyspuPyBURCQ==
+age: 4
+
+sh-4.2$   cat example.txt
+Chewbacca and Han Solo were not here!
+sh-4.2$
+
+
+
+
+
+
+
+
+
+
+
+
+
+
