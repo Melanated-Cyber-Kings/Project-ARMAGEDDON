@@ -19,7 +19,7 @@ The repository follows a modular, split-state approach to simulate enterprise en
 *   `env/saopaulo`: Secondary state. Manages TGW Acceptance and Stateless Compute.
 *   `modules/`: Reusable Terraform modules (TGW, ALB, WAF, etc.).
 
-## 3. Deployment Guide (The "Triple Tap" Protocol)
+## 3. Deployment Guide
 Due to the circular dependency between TGW Peering (Requester/Accepter) and Cross-Region Routing, deployment follows a strict staged sequence.
 
 ### Prerequisites

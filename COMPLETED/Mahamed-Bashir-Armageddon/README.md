@@ -8,7 +8,7 @@ The project is divided into three distinct phases, each documented within its re
 
 ### [Lab 1: Foundations & Identity](./LAB1/README.md)
 *   **Focus:** Secure VPC architecture, Private RDS integration, and IAM Instance Profiles.
-*   **Key Achievement:** Eliminated static credentials; implemented application-level telemetry ("Panic Button" custom metrics).
+*   **Key Achievement:** Eliminated static credentials; implemented application-level telemetry.
 
 ### [Lab 2: Edge Security & Origin Cloaking](./LAB2/README.md)
 *   **Focus:** Global traffic management and origin protection.
