@@ -1,0 +1,193 @@
+# ============================================================
+# Terraform / AWS Labs — .gitignore
+# ============================================================
+# Goals:
+# - Do NOT commit Terraform state, plans, or sensitive tfvars
+# - DO commit example files for students
+# - Do NOT commit Terraform lock files
+# - Use single student.env per lab
+# - Prevent credential / key leaks
+# ============================================================
+
+# ------------------------------------------------------------
+# Terraform working directories (ALL levels)
+# ------------------------------------------------------------
+**/.terraform/
+
+# ------------------------------------------------------------
+# Terraform state (NEVER commit)
+# ------------------------------------------------------------
+**/*.tfstate
+**/*.tfstate.*
+
+# ------------------------------------------------------------
+# Terraform variable files (real values never committed)
+# ------------------------------------------------------------
+**/*.tfvars
+**/*.tfvars.json
+
+# Allow examples for students
+!**/*.tfvars.example
+!**/*.auto.tfvars.example
+
+# Student single-config file
+**/student.env
+
+# ------------------------------------------------------------
+# Terraform override files
+# ------------------------------------------------------------
+*_override.tf
+*_override.tf.json
+override.tf
+override.tf.json
+
+# ------------------------------------------------------------
+# Terraform plan files
+# ------------------------------------------------------------
+**/*.tfplan
+terraform.tfplan
+tfplan
+
+# ------------------------------------------------------------
+# Terraform provider lock files (DO NOT COMMIT)
+# ------------------------------------------------------------
+**/.terraform.lock.hcl
+*.terraform.lock.hcl
+
+# ------------------------------------------------------------
+# SSH keys / certificates (never commit)
+# ------------------------------------------------------------
+*.pem
+*.key
+id_rsa*
+id_ed25519*
+
+# ------------------------------------------------------------
+# Crash logs / Terraform panic output
+# ------------------------------------------------------------
+crash.log
+crash.*.log
+
+# ------------------------------------------------------------
+# CLI output / logs
+# ------------------------------------------------------------
+*.log
+
+# ------------------------------------------------------------
+# OS / Editor junk
+# ------------------------------------------------------------
+.idea/
+.vscode/
+*.swp
+*.swo
+Thumbs.db
+
+# ------------------------------------------------------------
+# macOS Finder metadata / AppleDouble
+# ------------------------------------------------------------
+.DS_Store
+.AppleDouble
+.LSOverride
+._*
+
+# ------------------------------------------------------------
+# Python cache (EC2 bootstrap scripts sometimes generate)
+# ------------------------------------------------------------
+__pycache__/
+*.pyc
+
+# ------------------------------------------------------------
+# Zip / temp artifacts (exported lab bundles)
+# ------------------------------------------------------------
+*.zip
+*.tar.gz
+
+# ------------------------------------------------------------
+# Temporary files used during development
+# ------------------------------------------------------------
+*.orig
+*.old
+
+# ------------------------------------------------------------
+# Terraform backend config (S3 remote state)
+# ------------------------------------------------------------
+**/backend.hcl
+!**/backend.hcl.example
+
+# ------------------------------------------------------------
+# Lab deliverables / grader artifacts (LOCAL ONLY)
+# ------------------------------------------------------------
+# deliverables/
+# deliverables/**
+
+STATUS.md
+STATUS.local.md
+
+gate-*.log
+gate-*.txt
+gate-*.md
+*_gate_output.*
+*_gate_results.*
+
+screenshots/
+evidence/
+proof/
+
+# ------------------------------------------------------------
+# AWS CLI / SDK cache
+# ------------------------------------------------------------
+.aws/
+.aws-sso/
+
+# ------------------------------------------------------------
+# Environment variable files
+# ------------------------------------------------------------
+.env
+.env.*
+*.env
+
+# ------------------------------------------------------------
+# Terraform debug output
+# ------------------------------------------------------------
+TF_LOG
+TF_LOG.*
+terraform-debug.log
+
+# ------------------------------------------------------------
+# Shell history / temp
+# ------------------------------------------------------------
+.bash_history
+.zsh_history
+.history
+
+# ------------------------------------------------------------
+# macOS / Linux temp junk
+# ------------------------------------------------------------
+.Trashes
+.fseventsd
+
+# ------------------------------------------------------------
+# Deliverables policy (FLAT directory - applies repo wide)
+# - Files directly in any deliverables/ folder ARE tracked
+# - Subdirectories under deliverables/ are NOT tracked
+# ------------------------------------------------------------
+
+# Ignore subfolders under deliverables anywhere
+#**/deliverables/*/
+
+# Allow files directly inside deliverables
+# !**/deliverables/*
+
+
+# ------------------------------------------------------------
+# Local scratch / development folders (never commit)
+# ------------------------------------------------------------
+dev/
+working/
+**/dev/
+**/working/
+**/dev/
+**/DEV/
+**/working/
+**/WORKING/
+

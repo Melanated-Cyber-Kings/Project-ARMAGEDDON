@@ -1,0 +1,109 @@
+###############################################################################
+# ARMAGEDDON LABS — LAB 1C
+# Bonus D: Ingress / TLS / WAF / Observability
+#
+# COPY this file to:
+#   lab-1c.auto.tfvars
+# and update the values for YOUR AWS account and domain.
+###############################################################################
+
+#############################
+# Core AWS Settings
+#############################
+
+region     = "ap-northeast-1"
+account_id = "123456789012"
+
+project    = "armageddon"
+env_prefix = "lab-1c"
+
+#############################
+# Networking
+#############################
+
+vpc_cidr_block = "10.30.0.0/16"
+
+avail_zone_1 = "ap-northeast-1a"
+avail_zone_2 = "ap-northeast-1c"
+
+public_subnet_cidr   = "10.30.10.0/24"
+public_subnet_cidr_2 = "10.30.20.0/24"
+
+private_subnet_cidr_1 = "10.30.110.0/24"
+private_subnet_cidr_2 = "10.30.120.0/24"
+
+rtb_public_cidr = "0.0.0.0/0"
+
+#############################
+# EC2
+#############################
+
+instance_type = "t3.micro"
+
+#############################
+# RDS / Secrets (not set here)
+#
+# In this track, credentials are managed via Secrets Manager
+# and/or created by bootstrap/secrets stacks.
+#############################
+
+db_name     = null
+db_username = null
+db_password = null
+
+rds_multi_az = false
+
+#############################
+# Encryption / Alerting (SNS is mandatory)
+#############################
+
+# Only required if your stack/modules expect a KMS key ARN.
+kms_key_arn = "arn:aws:kms:ap-northeast-1:123456789012:key/EXAMPLE"
+
+# SNS subscription email for incident notifications (requires confirmation).
+alert_email = "student@example.com"
+
+#############################
+# Bonus D — DNS / TLS / WAF
+#############################
+
+# Base domain you own (example: devlab405.click)
+domain_name   = "example.com"
+app_subdomain = "app"
+
+# Port your EC2 application listens on (ALB target group forwards to this)
+app_port = 80
+
+#############################
+# DNS Mode (choose ONE)
+#
+# route53_managed  -> Terraform creates hosted zone + records
+# route53_existing -> Hosted zone already exists in Route53
+# external         -> DNS is in another provider; Terraform does not create Route53 records
+#############################
+
+dns_mode = "route53_existing"
+
+# REQUIRED when dns_mode = "route53_existing"
+route53_hosted_zone_id = "ZABCDEFGHIJKLMN"
+
+#############################
+# ALB Alarm Tuning
+#############################
+
+alb_5xx_threshold          = 10
+alb_5xx_period_seconds     = 300
+alb_5xx_evaluation_periods = 1
+
+#############################
+# WAF Logging
+#############################
+
+# cloudwatch | s3 | firehose
+waf_log_destination = "cloudwatch"
+
+# Days to retain CloudWatch WAF logs (when destination is cloudwatch)
+waf_log_retention_days = 14
+
+# If true, sampled requests only / redaction (implementation dependent)
+enable_waf_sampled_requests_only = false
