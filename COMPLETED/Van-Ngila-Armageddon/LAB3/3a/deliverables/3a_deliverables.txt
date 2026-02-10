@@ -1,0 +1,319 @@
+1) nc -zv lab-mysql.cxm8o4cwoftn.ap-northeast-1.rds.amazonaws.com 3306
+Ncat: Version 7.93 ( https://nmap.org/ncat )
+Ncat: Connected to 172.17.21.137:3306.
+Ncat: 0 bytes sent, 0 bytes received in 0.29 seconds.
+
+
+
+aws ec2 describe-transit-gateway-peering-attachments \
+   --transit-gateway-attachment-ids tgw-attach-041d5b46c2379aaf5 \
+   --region sa-east-1
+   --query 'TransitGatewayPeeringAttachments[0].{State:State,Status:Status}'
+{
+    "TransitGatewayPeeringAttachments": [
+        {
+            "TransitGatewayAttachmentId": "tgw-attach-041d5b46c2379aaf5",
+            "RequesterTgwInfo": {
+                "TransitGatewayId": "tgw-096edfbb6e6573dca",
+                "OwnerId": "031857855861",
+                "Region": "ap-northeast-1"
+            },
+            "AccepterTgwInfo": {
+                "TransitGatewayId": "tgw-056d27424ca3ef41f",
+                "OwnerId": "031857855861",
+                "Region": "sa-east-1"
+            },
+            "Status": {
+                "Code": "available",
+                "Message": "Available"
+            },
+            "State": "available",
+            "CreationTime": "2026-02-10T01:42:21+00:00",
+            "Tags": [
+                {
+                    "Key": "ManagedBy",
+                    "Value": "Terraform"
+                },
+                {
+                    "Key": "Connection",
+                    "Value": "tokyo-saopaulo"
+                },
+                {
+                    "Key": "CrossRegion",
+                    "Value": "true"
+                },
+                {
+                    "Key": "PeerRegion",
+                    "Value": "ap-northeast-1"
+                },
+                {
+                    "Key": "Lab",
+                    "Value": "3A"
+                },
+                {
+                    "Key": "Name",
+                    "Value": "liberdade-accept-peer01"
+                },
+                {
+                    "Key": "Side",
+                    "Value": "accepter"
+                },
+                {
+                    "Key": "Project",
+                    "Value": "armageddon"
+                },
+                {
+                    "Key": "PeerTGW",
+                    "Value": "tgw-096edfbb6e6573dca"
+                },
+                {
+                    "Key": "Terraform",
+                    "Value": "true"
+                },
+                {
+                    "Key": "Environment",
+                    "Value": "lab"
+                },
+                {
+                    "Key": "Region",
+                    "Value": "sa-east-1"
+                },
+                {
+                    "Key": "GeoTheme",
+                    "Value": "japanese-district"
+                },
+                {
+                    "Key": "Component",
+                    "Value": "tgw-peering"
+                }
+            ]
+        }
+    ]
+}
+~ $ aws ec2 describe-route-tables \
+   --filters "Name=vpc-id,Values=vpc-095115658ff6e12a5" \
+   --region sa-east-1 \
+   --query 'RouteTables[].Routes[?DestinationCidrBlock==`172.17.0.0/16`]'
+[
+    [
+        {
+            "DestinationCidrBlock": "172.17.0.0/16",
+            "TransitGatewayId": "tgw-056d27424ca3ef41f",
+            "Origin": "CreateRoute",
+            "State": "active"
+        }
+    ],
+    [],
+    [
+        {
+            "DestinationCidrBlock": "172.17.0.0/16",
+            "TransitGatewayId": "tgw-056d27424ca3ef41f",
+            "Origin": "CreateRoute",
+            "State": "active"
+        }
+    ],
+    [
+        {
+            "DestinationCidrBlock": "172.17.0.0/16",
+            "TransitGatewayId": "tgw-056d27424ca3ef41f",
+            "Origin": "CreateRoute",
+            "State": "active"
+        }
+    ]
+]
+
+aws ec2 describe-route-tables \
+  --filters "Name=vpc-id,Values=vpc-01c55ceb5a7baf36d" \
+  --region ap-northeast-1 \
+  --query 'RouteTables[].[RouteTableId, Routes[?DestinationCidrBlock==`172.18.0.0/16`]]'
+[
+    [
+        "rtb-055db9b55f951fe05",
+        [
+            {
+                "DestinationCidrBlock": "172.18.0.0/16",
+                "TransitGatewayId": "tgw-096edfbb6e6573dca",
+                "Origin": "CreateRoute",
+                "State": "active"
+            }
+        ]
+    ],
+    [
+        "rtb-0657f5c3a852dec47",
+        []
+    ],
+    [
+        "rtb-0541d8fe42bdf5eff",
+        []
+    ],
+    [
+        "rtb-0967cbe45c21bccdb",
+        [
+            {
+                "DestinationCidrBlock": "172.18.0.0/16",
+                "TransitGatewayId": "tgw-096edfbb6e6573dca",
+                "Origin": "CreateRoute",
+                "State": "active"
+            }
+        ]
+    ],
+    [
+        "rtb-052992287cdc7db03",
+        [
+            {
+                "DestinationCidrBlock": "172.18.0.0/16",
+                "TransitGatewayId": "tgw-096edfbb6e6573dca",
+                "Origin": "CreateRoute",
+                "State": "active"
+            }
+        ]
+    ]
+]
+
+aws ec2 describe-transit-gateway-vpc-attachments \
+  --filters "Name=vpc-id,Values=vpc-095115658ff6e12a5" \
+  --region sa-east-1
+{
+    "TransitGatewayVpcAttachments": [
+        {
+            "TransitGatewayAttachmentId": "tgw-attach-05058c6a5f0b05931",
+            "TransitGatewayId": "tgw-056d27424ca3ef41f",
+            "VpcId": "vpc-095115658ff6e12a5",
+            "VpcOwnerId": "031857855861",
+            "State": "available",
+            "SubnetIds": [
+                "subnet-00b2f565801bf2b5c",
+                "subnet-0cd4bac4a1058a1ff"
+            ],
+            "CreationTime": "2026-02-10T01:40:27+00:00",
+            "Options": {
+                "DnsSupport": "enable",
+                "SecurityGroupReferencingSupport": "enable",
+                "Ipv6Support": "disable",
+                "ApplianceModeSupport": "disable"
+            },
+            "Tags": [
+                {
+                    "Key": "Project",
+                    "Value": "armageddon"
+                },
+                {
+                    "Key": "ManagedBy",
+                    "Value": "Terraform"
+                },
+                {
+                    "Key": "Terraform",
+                    "Value": "true"
+                },
+                {
+                    "Key": "VPC",
+                    "Value": "vpc-095115658ff6e12a5"
+                },
+                {
+                    "Key": "Environment",
+                    "Value": "lab"
+                },
+                {
+                    "Key": "Region",
+                    "Value": "sa-east-1"
+                },
+                {
+                    "Key": "GeoTheme",
+                    "Value": "japanese-district"
+                },
+                {
+                    "Key": "Component",
+                    "Value": "tgw-attachment"
+                },
+                {
+                    "Key": "Lab",
+                    "Value": "3A"
+                },
+                {
+                    "Key": "Name",
+                    "Value": "liberdade-attach-sp-vpc01"
+                }
+            ]
+        }
+    ]
+}
+
+aws ec2 describe-transit-gateway-vpc-attachments \
+  --filters "Name=vpc-id,Values=vpc-01c55ceb5a7baf36d" \
+  --region ap-northeast-1
+{
+    "TransitGatewayVpcAttachments": [
+        {
+            "TransitGatewayAttachmentId": "tgw-attach-04d027e582edee9e8",
+            "TransitGatewayId": "tgw-096edfbb6e6573dca",
+            "VpcId": "vpc-01c55ceb5a7baf36d",
+            "VpcOwnerId": "031857855861",
+            "State": "available",
+            "SubnetIds": [
+                "subnet-0b7527ca1e6c06bfc",
+                "subnet-0aed60ae8124732c4",
+                "subnet-0ba7599c3669041f9"
+            ],
+            "CreationTime": "2026-02-09T20:58:59+00:00",
+            "Options": {
+                "DnsSupport": "enable",
+                "SecurityGroupReferencingSupport": "enable",
+                "Ipv6Support": "disable",
+                "ApplianceModeSupport": "disable"
+            },
+            "Tags": [
+                {
+                    "Key": "VPC",
+                    "Value": "vpc-01c55ceb5a7baf36d"
+                },
+                {
+                    "Key": "Component",
+                    "Value": "tgw-attachment"
+                },
+                {
+                    "Key": "Lab",
+                    "Value": "3"
+                },
+                {
+                    "Key": "Name",
+                    "Value": "shinjuku-attach-tokyo-vpc01"
+                }
+            ]
+        }
+    ]
+}
+
+aws ec2 describe-security-groups \
+   --group-ids sg-01e331528d55dfefa \
+   --region ap-northeast-1 \
+   --query 'SecurityGroups[0].IpPermissions[?FromPort==`3306`]'
+[
+    {
+        "IpProtocol": "tcp",
+        "FromPort": 3306,
+        "ToPort": 3306,
+        "UserIdGroupPairs": [
+            {
+                "Description": "MySQL access from EC2",
+                "UserId": "031857855861",
+                "GroupId": "sg-043c33e13020a8a85"
+            }
+        ],
+        "IpRanges": [
+            {
+                "Description": "Allow MySQL from Sao Paulo VPC via TGW",
+                "CidrIp": "172.18.0.0/16"
+            }
+        ],
+        "Ipv6Ranges": [],
+        "PrefixListIds": []
+    }
+]
+
+outputs.tf in Tokyo exports:
+      tokyo_vpc_cidr = "172.17.0.0/16"
+      tokyo_tgw_id = "tgw-096edfbb6e6573dca"
+      rds_endpoint_full = "lab-mysql.cxm8o4cwoftn.ap-northeast-1.rds.amazonaws.com:3306"
+
+
+

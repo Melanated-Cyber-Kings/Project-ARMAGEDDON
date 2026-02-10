@@ -1,0 +1,58 @@
+{
+  "ec2_instance_id": {
+    "sensitive": false,
+    "type": "string",
+    "value": "i-05abf025a3cda8800"
+  },
+  "ec2_private_ip": {
+    "sensitive": false,
+    "type": "string",
+    "value": "172.18.11.188"
+  },
+  "ec2_public_ip": {
+    "sensitive": false,
+    "type": "string",
+    "value": ""
+  },
+  "ec2_security_group_id": {
+    "sensitive": false,
+    "type": "string",
+    "value": "sg-02e1ee58c1afae7b6"
+  },
+  "iam_role_arn": {
+    "sensitive": false,
+    "type": "string",
+    "value": "arn:aws:iam::031857855861:role/liberdade-ec2-role"
+  },
+  "instance_profile_name": {
+    "sensitive": false,
+    "type": "string",
+    "value": "liberdade-ec2-profile"
+  },
+  "private_subnet_ids": {
+    "sensitive": false,
+    "type": [
+      "tuple",
+      [
+        "string",
+        "string",
+        "string"
+      ]
+    ],
+    "value": [
+      "subnet-0cd4bac4a1058a1ff",
+      "subnet-00b2f565801bf2b5c",
+      "subnet-05060b427dd6fe570"
+    ]
+  },
+  "vpc_cidr_block": {
+    "sensitive": false,
+    "type": "string",
+    "value": "172.18.0.0/16"
+  },
+  "vpc_id": {
+    "sensitive": false,
+    "type": "string",
+    "value": "vpc-095115658ff6e12a5"
+  }
+}
