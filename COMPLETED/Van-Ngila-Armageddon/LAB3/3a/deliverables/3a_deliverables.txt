@@ -5,6 +5,21 @@ Ncat: 0 bytes sent, 0 bytes received in 0.29 seconds.
 
 
 
+curl -I https://theowafhomework.site/add?note=External-Test
+HTTP/2 200
+content-type: text/html; charset=utf-8
+content-length: 28
+date: Tue, 10 Feb 2026 06:45:15 GMT
+server: Werkzeug/3.1.5 Python/3.9.25
+x-cache: Miss from cloudfront
+via: 1.1 171a32b8098e7d465e734daee0625254.cloudfront.net (CloudFront)
+x-amz-cf-pop: GRU3-P9
+x-amz-cf-id: nGEwryMAJ_U9w4bkeuiKnLjVhTtn0putCzaEuROginrkEZGhl-Ruzg==
+
+curl https://theowafhomework.site/list
+<h3>Latest Notes (max 100)</h3><table border='1'><tr><th>ID</th><th>Note</th><th>Created At</th></tr><tr><td>2</td><td>External-Test</td><td>2026-02-10 06:45:15</td></tr><tr><td>1</td><td>hello Melanated-Cyber-King Vany</td><td>2026-01-23 22:26:18</td></tr></table>sh
+
+
 aws ec2 describe-transit-gateway-peering-attachments \
    --transit-gateway-attachment-ids tgw-attach-041d5b46c2379aaf5 \
    --region sa-east-1
