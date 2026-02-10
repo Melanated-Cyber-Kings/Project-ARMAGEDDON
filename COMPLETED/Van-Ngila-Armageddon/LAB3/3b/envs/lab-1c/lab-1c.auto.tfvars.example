@@ -1,0 +1,57 @@
+# -----------------
+# TEST ENVIRONMENT (EXAMPLE)
+# -----------------
+# Copy this file to test.tfvars and update values as needed
+# cp environments/lab-1c.tfvars env/lab-1c.tfvars
+
+
+
+
+
+region = "ap-northeast-1"
+
+
+env_prefix = "lab-1c"
+
+
+project = "Armageddon"
+
+
+vpc_cidr_block = "172.17.0.0/16"
+
+public_subnet_cidr_1 = "172.17.1.0/24"
+
+public_subnet_cidr_2 = "172.17.2.0/24"
+
+rtb_public_cidr = "0.0.0.0/0"
+
+private_subnet_cidr_1 = "172.17.11.0/24" # EC2 - AZ A
+
+private_subnet_cidr_2 = "172.17.21.0/24" # RDS - AZ C
+
+private_subnet_cidr_3 = "172.17.13.0/24" # Failover - AZ D
+
+avail_zone_1 = "ap-northeast-1a" # Public + EC2                                                
+
+avail_zone_2 = "ap-northeast-1c" # RDS
+
+avail_zone_3 = "ap-northeast-1d" # Failover
+
+instance_type = "t3.micro"
+
+
+account_id = "031857855861"
+
+db_name= "labdb"
+
+
+db_username ="van"
+
+db_password = "Admin0891"
+
+kms_key_arn = "arn:aws:kms:ap-northeast-1:031857855861:key/0987dcba-09fe-87dc-65ba-ab0987654321"
+#WE WILL ALL MAKE 6 FIGURES
+
+alert_email = "waseeconsulting@gmail.com"
+
+saopaulo_vpc_cidr = "172.18.0.0/16"

@@ -1,0 +1,23 @@
+{
+  "tokyo_rds": [
+    {
+      "region": "ap-northeast-1",
+      "id": "lab-mysql",
+      "az": "ap-northeast-1c",
+      "endpoint": "lab-mysql.cxm8o4cwoftn.ap-northeast-1.rds.amazonaws.com"
+    }
+  ],
+  "saopaulo_rds": [],
+  "assertion": "PASS"
+}
+[
+    {
+        "DB": "lab-mysql",
+        "AZ": "ap-northeast-1c",
+        "Region": "ap-northeast-1",
+        "Endpoint": "lab-mysql.cxm8o4cwoftn.ap-northeast-1.rds.amazonaws.com"
+    }
+]
+
+--- São Paulo Region (Should be empty) ---
+[]

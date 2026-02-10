@@ -1,0 +1,407 @@
+{
+  "tokyo": {
+    "region": "ap-northeast-1",
+    "transit_gateways": [
+      {
+        "TransitGatewayId": "tgw-096edfbb6e6573dca",
+        "TransitGatewayArn": "arn:aws:ec2:ap-northeast-1:031857855861:transit-gateway/tgw-096edfbb6e6573dca",
+        "State": "available",
+        "OwnerId": "031857855861",
+        "Description": "Tokyo Transit Gateway hub (Shinjuku Station)",
+        "CreationTime": "2026-02-09 20:58:01+00:00",
+        "Options": {
+          "AmazonSideAsn": 64512,
+          "AutoAcceptSharedAttachments": "disable",
+          "DefaultRouteTableAssociation": "enable",
+          "AssociationDefaultRouteTableId": "tgw-rtb-043f74d11898c046d",
+          "DefaultRouteTablePropagation": "enable",
+          "PropagationDefaultRouteTableId": "tgw-rtb-043f74d11898c046d",
+          "VpnEcmpSupport": "enable",
+          "DnsSupport": "enable",
+          "SecurityGroupReferencingSupport": "disable",
+          "MulticastSupport": "disable",
+          "EncryptionSupport": {
+            "EncryptionState": "disabled"
+          }
+        },
+        "Tags": [
+          {
+            "Key": "GeoTheme",
+            "Value": "train-station"
+          },
+          {
+            "Key": "Component",
+            "Value": "transit-gateway"
+          },
+          {
+            "Key": "Lab",
+            "Value": "3"
+          },
+          {
+            "Key": "Name",
+            "Value": "shinjuku-tgw01"
+          }
+        ]
+      }
+    ],
+    "attachments": [
+      {
+        "TransitGatewayAttachmentId": "tgw-attach-041d5b46c2379aaf5",
+        "TransitGatewayId": "tgw-096edfbb6e6573dca",
+        "TransitGatewayOwnerId": "031857855861",
+        "ResourceOwnerId": "031857855861",
+        "ResourceType": "peering",
+        "ResourceId": "tgw-056d27424ca3ef41f",
+        "State": "available",
+        "Association": {
+          "TransitGatewayRouteTableId": "tgw-rtb-043f74d11898c046d",
+          "State": "associated"
+        },
+        "CreationTime": "2026-02-10 01:42:10+00:00",
+        "Tags": [
+          {
+            "Key": "Side",
+            "Value": "requester"
+          },
+          {
+            "Key": "Project",
+            "Value": "armageddon"
+          },
+          {
+            "Key": "ManagedBy",
+            "Value": "Terraform"
+          },
+          {
+            "Key": "Terraform",
+            "Value": "true"
+          },
+          {
+            "Key": "Connection",
+            "Value": "tokyo-saopaulo"
+          },
+          {
+            "Key": "CrossRegion",
+            "Value": "true"
+          },
+          {
+            "Key": "Environment",
+            "Value": "lab"
+          },
+          {
+            "Key": "Region",
+            "Value": "sa-east-1"
+          },
+          {
+            "Key": "GeoTheme",
+            "Value": "japanese-district"
+          },
+          {
+            "Key": "Component",
+            "Value": "tgw-peering"
+          },
+          {
+            "Key": "Lab",
+            "Value": "3A"
+          },
+          {
+            "Key": "Name",
+            "Value": "shinjuku-to-liberdade-peer01"
+          }
+        ]
+      },
+      {
+        "TransitGatewayAttachmentId": "tgw-attach-04d027e582edee9e8",
+        "TransitGatewayId": "tgw-096edfbb6e6573dca",
+        "TransitGatewayOwnerId": "031857855861",
+        "ResourceOwnerId": "031857855861",
+        "ResourceType": "vpc",
+        "ResourceId": "vpc-01c55ceb5a7baf36d",
+        "State": "available",
+        "Association": {
+          "TransitGatewayRouteTableId": "tgw-rtb-043f74d11898c046d",
+          "State": "associated"
+        },
+        "CreationTime": "2026-02-09 20:58:59+00:00",
+        "Tags": [
+          {
+            "Key": "VPC",
+            "Value": "vpc-01c55ceb5a7baf36d"
+          },
+          {
+            "Key": "Component",
+            "Value": "tgw-attachment"
+          },
+          {
+            "Key": "Lab",
+            "Value": "3"
+          },
+          {
+            "Key": "Name",
+            "Value": "shinjuku-attach-tokyo-vpc01"
+          }
+        ]
+      }
+    ]
+  },
+  "saopaulo": {
+    "region": "sa-east-1",
+    "transit_gateways": [
+      {
+        "TransitGatewayId": "tgw-056d27424ca3ef41f",
+        "TransitGatewayArn": "arn:aws:ec2:sa-east-1:031857855861:transit-gateway/tgw-056d27424ca3ef41f",
+        "State": "available",
+        "OwnerId": "031857855861",
+        "Description": "Sao Paulo Transit Gateway spoke (Liberdade)",
+        "CreationTime": "2026-02-10 01:39:40+00:00",
+        "Options": {
+          "AmazonSideAsn": 64513,
+          "AutoAcceptSharedAttachments": "disable",
+          "DefaultRouteTableAssociation": "enable",
+          "AssociationDefaultRouteTableId": "tgw-rtb-0e01645399c8f163b",
+          "DefaultRouteTablePropagation": "enable",
+          "PropagationDefaultRouteTableId": "tgw-rtb-0e01645399c8f163b",
+          "VpnEcmpSupport": "enable",
+          "DnsSupport": "enable",
+          "SecurityGroupReferencingSupport": "disable",
+          "MulticastSupport": "disable",
+          "EncryptionSupport": {
+            "EncryptionState": "disabled"
+          }
+        },
+        "Tags": [
+          {
+            "Key": "Role",
+            "Value": "spoke"
+          },
+          {
+            "Key": "Project",
+            "Value": "armageddon"
+          },
+          {
+            "Key": "ManagedBy",
+            "Value": "Terraform"
+          },
+          {
+            "Key": "Terraform",
+            "Value": "true"
+          },
+          {
+            "Key": "Environment",
+            "Value": "lab"
+          },
+          {
+            "Key": "Region",
+            "Value": "sa-east-1"
+          },
+          {
+            "Key": "GeoTheme",
+            "Value": "japanese-district"
+          },
+          {
+            "Key": "Component",
+            "Value": "transit-gateway"
+          },
+          {
+            "Key": "Lab",
+            "Value": "3A"
+          },
+          {
+            "Key": "Name",
+            "Value": "liberdade-tgw01"
+          }
+        ]
+      }
+    ],
+    "attachments": [
+      {
+        "TransitGatewayAttachmentId": "tgw-attach-041d5b46c2379aaf5",
+        "TransitGatewayId": "tgw-056d27424ca3ef41f",
+        "TransitGatewayOwnerId": "031857855861",
+        "ResourceOwnerId": "031857855861",
+        "ResourceType": "peering",
+        "ResourceId": "tgw-096edfbb6e6573dca",
+        "State": "available",
+        "Association": {
+          "TransitGatewayRouteTableId": "tgw-rtb-0e01645399c8f163b",
+          "State": "associated"
+        },
+        "CreationTime": "2026-02-10 01:42:21+00:00",
+        "Tags": [
+          {
+            "Key": "ManagedBy",
+            "Value": "Terraform"
+          },
+          {
+            "Key": "Connection",
+            "Value": "tokyo-saopaulo"
+          },
+          {
+            "Key": "CrossRegion",
+            "Value": "true"
+          },
+          {
+            "Key": "PeerRegion",
+            "Value": "ap-northeast-1"
+          },
+          {
+            "Key": "Lab",
+            "Value": "3A"
+          },
+          {
+            "Key": "Name",
+            "Value": "liberdade-accept-peer01"
+          },
+          {
+            "Key": "Side",
+            "Value": "accepter"
+          },
+          {
+            "Key": "Project",
+            "Value": "armageddon"
+          },
+          {
+            "Key": "PeerTGW",
+            "Value": "tgw-096edfbb6e6573dca"
+          },
+          {
+            "Key": "Terraform",
+            "Value": "true"
+          },
+          {
+            "Key": "Environment",
+            "Value": "lab"
+          },
+          {
+            "Key": "Region",
+            "Value": "sa-east-1"
+          },
+          {
+            "Key": "GeoTheme",
+            "Value": "japanese-district"
+          },
+          {
+            "Key": "Component",
+            "Value": "tgw-peering"
+          }
+        ]
+      },
+      {
+        "TransitGatewayAttachmentId": "tgw-attach-05058c6a5f0b05931",
+        "TransitGatewayId": "tgw-056d27424ca3ef41f",
+        "TransitGatewayOwnerId": "031857855861",
+        "ResourceOwnerId": "031857855861",
+        "ResourceType": "vpc",
+        "ResourceId": "vpc-095115658ff6e12a5",
+        "State": "available",
+        "Association": {
+          "TransitGatewayRouteTableId": "tgw-rtb-0e01645399c8f163b",
+          "State": "associated"
+        },
+        "CreationTime": "2026-02-10 01:40:27+00:00",
+        "Tags": [
+          {
+            "Key": "Project",
+            "Value": "armageddon"
+          },
+          {
+            "Key": "ManagedBy",
+            "Value": "Terraform"
+          },
+          {
+            "Key": "Terraform",
+            "Value": "true"
+          },
+          {
+            "Key": "VPC",
+            "Value": "vpc-095115658ff6e12a5"
+          },
+          {
+            "Key": "Environment",
+            "Value": "lab"
+          },
+          {
+            "Key": "Region",
+            "Value": "sa-east-1"
+          },
+          {
+            "Key": "GeoTheme",
+            "Value": "japanese-district"
+          },
+          {
+            "Key": "Component",
+            "Value": "tgw-attachment"
+          },
+          {
+            "Key": "Lab",
+            "Value": "3A"
+          },
+          {
+            "Key": "Name",
+            "Value": "liberdade-attach-sp-vpc01"
+          }
+        ]
+      }
+    ]
+  }
+}
+
+--- VPC Route Tables Verification ---
+Tokyo VPC routes to São Paulo:
+[
+    [
+        {
+            "DestinationCidrBlock": "172.18.0.0/16",
+            "TransitGatewayId": "tgw-096edfbb6e6573dca",
+            "Origin": "CreateRoute",
+            "State": "active"
+        }
+    ],
+    [],
+    [],
+    [
+        {
+            "DestinationCidrBlock": "172.18.0.0/16",
+            "TransitGatewayId": "tgw-096edfbb6e6573dca",
+            "Origin": "CreateRoute",
+            "State": "active"
+        }
+    ],
+    [
+        {
+            "DestinationCidrBlock": "172.18.0.0/16",
+            "TransitGatewayId": "tgw-096edfbb6e6573dca",
+            "Origin": "CreateRoute",
+            "State": "active"
+        }
+    ]
+]
+
+São Paulo VPC routes to Tokyo:
+[
+    [
+        {
+            "DestinationCidrBlock": "172.17.0.0/16",
+            "TransitGatewayId": "tgw-056d27424ca3ef41f",
+            "Origin": "CreateRoute",
+            "State": "active"
+        }
+    ],
+    [],
+    [],
+    [
+        {
+            "DestinationCidrBlock": "172.17.0.0/16",
+            "TransitGatewayId": "tgw-056d27424ca3ef41f",
+            "Origin": "CreateRoute",
+            "State": "active"
+        }
+    ],
+    [
+        {
+            "DestinationCidrBlock": "172.17.0.0/16",
+            "TransitGatewayId": "tgw-056d27424ca3ef41f",
+            "Origin": "CreateRoute",
+            "State": "active"
+        }
+    ]
+]

@@ -1,0 +1,26 @@
+
+--- LIVE TEST RESULTS Tue Feb 10 17:49:45     2026 ---
+
+Testing static content cache:
+HTTP/1.1 200 OK
+Cache-Control: public, max-age=86400, immutable
+X-Cache: Miss from cloudfront
+
+Testing API endpoint (no cache):
+HTTP/1.1 200 OK
+X-Cache: Miss from cloudfront
+
+--- CLOUDFRONT CONFIGURATION ---
+
+{
+    "Status": "Deployed",
+    "DomainName": "d2jo4qpdx2kww3.cloudfront.net",
+    "Origins": "armageddon-lab-1c-alb-public-1868416893.ap-northeast-1.elb.amazonaws.com",
+    "Logging": {
+        "Enabled": false,
+        "IncludeCookies": false,
+        "Bucket": "",
+        "Prefix": ""
+    }
+}
+

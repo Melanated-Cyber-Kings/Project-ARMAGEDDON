@@ -1,0 +1,158 @@
+{
+  "address": {
+    "sensitive": false,
+    "type": "string",
+    "value": "lab-mysql.cxm8o4cwoftn.ap-northeast-1.rds.amazonaws.com"
+  },
+  "alb_access_logs_enabled": {
+    "sensitive": false,
+    "type": "bool",
+    "value": true
+  },
+  "alb_logs_bucket_arn": {
+    "sensitive": false,
+    "type": "string",
+    "value": "arn:aws:s3:::lab-1c-alb-logs-031857855861"
+  },
+  "alb_logs_bucket_name": {
+    "sensitive": false,
+    "type": "string",
+    "value": "lab-1c-alb-logs-031857855861"
+  },
+  "apex_url_https": {
+    "sensitive": false,
+    "type": "string",
+    "value": "https://theowafhomework.site"
+  },
+  "cache_policy_api_id": {
+    "sensitive": false,
+    "type": "string",
+    "value": "eb8a030e-b871-4c68-b503-a03fb82cb86e"
+  },
+  "cache_policy_static_id": {
+    "sensitive": false,
+    "type": "string",
+    "value": "e8130e6a-0b5d-433b-9c88-b5f5ae5bf05c"
+  },
+  "iam_instance_profile_name": {
+    "sensitive": false,
+    "type": "string",
+    "value": "armageddon-lab-1c-ec2-secrets-profile"
+  },
+  "iam_role_name": {
+    "sensitive": false,
+    "type": "string",
+    "value": "armageddon-lab-1c-ec2-secrets-role"
+  },
+  "name_servers": {
+    "sensitive": false,
+    "type": [
+      "list",
+      "string"
+    ],
+    "value": [
+      "ns-1174.awsdns-18.org",
+      "ns-1586.awsdns-06.co.uk",
+      "ns-510.awsdns-63.com",
+      "ns-965.awsdns-56.net"
+    ]
+  },
+  "origin_request_policy_api_id": {
+    "sensitive": false,
+    "type": "string",
+    "value": "39742438-b178-42af-a337-6dfaa2f504db"
+  },
+  "origin_request_policy_static_id": {
+    "sensitive": false,
+    "type": "string",
+    "value": "2f36c333-f454-4d9a-b8d0-62ef4dae1c35"
+  },
+  "private_route_table_ids": {
+    "sensitive": false,
+    "type": [
+      "tuple",
+      [
+        "string",
+        "string",
+        "string"
+      ]
+    ],
+    "value": [
+      "rtb-0967cbe45c21bccdb",
+      "rtb-052992287cdc7db03",
+      "rtb-055db9b55f951fe05"
+    ]
+  },
+  "private_subnet_ids": {
+    "sensitive": false,
+    "type": [
+      "tuple",
+      [
+        "string",
+        "string",
+        "string"
+      ]
+    ],
+    "value": [
+      "subnet-0ba7599c3669041f9",
+      "subnet-0b7527ca1e6c06bfc",
+      "subnet-0aed60ae8124732c4"
+    ]
+  },
+  "rds_endpoint_full": {
+    "sensitive": false,
+    "type": "string",
+    "value": "lab-mysql.cxm8o4cwoftn.ap-northeast-1.rds.amazonaws.com:3306"
+  },
+  "rds_security_group_id": {
+    "sensitive": false,
+    "type": "string",
+    "value": "sg-01e331528d55dfefa"
+  },
+  "response_headers_policy_static_id": {
+    "sensitive": false,
+    "type": "string",
+    "value": "1b41d06f-a59d-4d28-8c56-3c0a35593061"
+  },
+  "tokyo_private_route_table_ids": {
+    "sensitive": false,
+    "type": [
+      "tuple",
+      [
+        "string",
+        "string",
+        "string"
+      ]
+    ],
+    "value": [
+      "rtb-0967cbe45c21bccdb",
+      "rtb-052992287cdc7db03",
+      "rtb-055db9b55f951fe05"
+    ]
+  },
+  "tokyo_tgw_arn": {
+    "sensitive": false,
+    "type": "string",
+    "value": "arn:aws:ec2:ap-northeast-1:031857855861:transit-gateway/tgw-096edfbb6e6573dca"
+  },
+  "tokyo_tgw_id": {
+    "sensitive": false,
+    "type": "string",
+    "value": "tgw-096edfbb6e6573dca"
+  },
+  "tokyo_vpc_cidr": {
+    "sensitive": false,
+    "type": "string",
+    "value": "172.17.0.0/16"
+  },
+  "vpc_id": {
+    "sensitive": false,
+    "type": "string",
+    "value": "vpc-01c55ceb5a7baf36d"
+  },
+  "website_url": {
+    "sensitive": false,
+    "type": "string",
+    "value": "https://app.theowafhomework.site"
+  }
+}

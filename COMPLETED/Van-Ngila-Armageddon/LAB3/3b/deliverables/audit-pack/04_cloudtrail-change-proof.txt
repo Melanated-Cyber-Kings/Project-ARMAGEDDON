@@ -1,0 +1,793 @@
+{
+  "tokyo": [
+    {
+      "region": "ap-northeast-1",
+      "time": "2026-02-10 16:49:29+01:00",
+      "event": "GetSecretValue",
+      "user": "i-0925973263cf4ce55",
+      "source": "secretsmanager.amazonaws.com"
+    },
+    {
+      "region": "ap-northeast-1",
+      "time": "2026-02-10 16:49:29+01:00",
+      "event": "Decrypt",
+      "user": "i-0925973263cf4ce55",
+      "source": "kms.amazonaws.com"
+    },
+    {
+      "region": "ap-northeast-1",
+      "time": "2026-02-10 16:49:01+01:00",
+      "event": "GetSecretValue",
+      "user": "i-0925973263cf4ce55",
+      "source": "secretsmanager.amazonaws.com"
+    },
+    {
+      "region": "ap-northeast-1",
+      "time": "2026-02-10 16:49:01+01:00",
+      "event": "Decrypt",
+      "user": "i-0925973263cf4ce55",
+      "source": "kms.amazonaws.com"
+    },
+    {
+      "region": "ap-northeast-1",
+      "time": "2026-02-10 16:48:59+01:00",
+      "event": "Decrypt",
+      "user": "i-0925973263cf4ce55",
+      "source": "kms.amazonaws.com"
+    },
+    {
+      "region": "ap-northeast-1",
+      "time": "2026-02-10 16:48:59+01:00",
+      "event": "GetSecretValue",
+      "user": "i-0925973263cf4ce55",
+      "source": "secretsmanager.amazonaws.com"
+    },
+    {
+      "region": "ap-northeast-1",
+      "time": "2026-02-10 16:48:31+01:00",
+      "event": "GetSecretValue",
+      "user": "i-0925973263cf4ce55",
+      "source": "secretsmanager.amazonaws.com"
+    },
+    {
+      "region": "ap-northeast-1",
+      "time": "2026-02-10 16:48:31+01:00",
+      "event": "Decrypt",
+      "user": "i-0925973263cf4ce55",
+      "source": "kms.amazonaws.com"
+    },
+    {
+      "region": "ap-northeast-1",
+      "time": "2026-02-10 16:48:29+01:00",
+      "event": "Decrypt",
+      "user": "i-0925973263cf4ce55",
+      "source": "kms.amazonaws.com"
+    },
+    {
+      "region": "ap-northeast-1",
+      "time": "2026-02-10 16:48:29+01:00",
+      "event": "GetSecretValue",
+      "user": "i-0925973263cf4ce55",
+      "source": "secretsmanager.amazonaws.com"
+    },
+    {
+      "region": "ap-northeast-1",
+      "time": "2026-02-10 16:48:01+01:00",
+      "event": "Decrypt",
+      "user": "i-0925973263cf4ce55",
+      "source": "kms.amazonaws.com"
+    },
+    {
+      "region": "ap-northeast-1",
+      "time": "2026-02-10 16:48:01+01:00",
+      "event": "GetSecretValue",
+      "user": "i-0925973263cf4ce55",
+      "source": "secretsmanager.amazonaws.com"
+    },
+    {
+      "region": "ap-northeast-1",
+      "time": "2026-02-10 16:47:59+01:00",
+      "event": "Decrypt",
+      "user": "i-0925973263cf4ce55",
+      "source": "kms.amazonaws.com"
+    },
+    {
+      "region": "ap-northeast-1",
+      "time": "2026-02-10 16:47:59+01:00",
+      "event": "GetSecretValue",
+      "user": "i-0925973263cf4ce55",
+      "source": "secretsmanager.amazonaws.com"
+    },
+    {
+      "region": "ap-northeast-1",
+      "time": "2026-02-10 16:47:47+01:00",
+      "event": "DescribeRouteTables",
+      "user": "AWSCLI",
+      "source": "ec2.amazonaws.com"
+    },
+    {
+      "region": "ap-northeast-1",
+      "time": "2026-02-10 16:47:31+01:00",
+      "event": "GetSecretValue",
+      "user": "i-0925973263cf4ce55",
+      "source": "secretsmanager.amazonaws.com"
+    },
+    {
+      "region": "ap-northeast-1",
+      "time": "2026-02-10 16:47:31+01:00",
+      "event": "UpdateInstanceInformation",
+      "user": "i-0925973263cf4ce55",
+      "source": "ssm.amazonaws.com"
+    },
+    {
+      "region": "ap-northeast-1",
+      "time": "2026-02-10 16:47:31+01:00",
+      "event": "Decrypt",
+      "user": "i-0925973263cf4ce55",
+      "source": "kms.amazonaws.com"
+    },
+    {
+      "region": "ap-northeast-1",
+      "time": "2026-02-10 16:47:29+01:00",
+      "event": "Decrypt",
+      "user": "i-0925973263cf4ce55",
+      "source": "kms.amazonaws.com"
+    },
+    {
+      "region": "ap-northeast-1",
+      "time": "2026-02-10 16:47:29+01:00",
+      "event": "GetSecretValue",
+      "user": "i-0925973263cf4ce55",
+      "source": "secretsmanager.amazonaws.com"
+    },
+    {
+      "region": "ap-northeast-1",
+      "time": "2026-02-10 16:47:01+01:00",
+      "event": "GetSecretValue",
+      "user": "i-0925973263cf4ce55",
+      "source": "secretsmanager.amazonaws.com"
+    },
+    {
+      "region": "ap-northeast-1",
+      "time": "2026-02-10 16:47:01+01:00",
+      "event": "Decrypt",
+      "user": "i-0925973263cf4ce55",
+      "source": "kms.amazonaws.com"
+    },
+    {
+      "region": "ap-northeast-1",
+      "time": "2026-02-10 16:46:59+01:00",
+      "event": "Decrypt",
+      "user": "i-0925973263cf4ce55",
+      "source": "kms.amazonaws.com"
+    },
+    {
+      "region": "ap-northeast-1",
+      "time": "2026-02-10 16:46:59+01:00",
+      "event": "GetSecretValue",
+      "user": "i-0925973263cf4ce55",
+      "source": "secretsmanager.amazonaws.com"
+    },
+    {
+      "region": "ap-northeast-1",
+      "time": "2026-02-10 16:46:31+01:00",
+      "event": "Decrypt",
+      "user": "i-0925973263cf4ce55",
+      "source": "kms.amazonaws.com"
+    },
+    {
+      "region": "ap-northeast-1",
+      "time": "2026-02-10 16:46:31+01:00",
+      "event": "GetSecretValue",
+      "user": "i-0925973263cf4ce55",
+      "source": "secretsmanager.amazonaws.com"
+    },
+    {
+      "region": "ap-northeast-1",
+      "time": "2026-02-10 16:46:29+01:00",
+      "event": "Decrypt",
+      "user": "i-0925973263cf4ce55",
+      "source": "kms.amazonaws.com"
+    },
+    {
+      "region": "ap-northeast-1",
+      "time": "2026-02-10 16:46:29+01:00",
+      "event": "GetSecretValue",
+      "user": "i-0925973263cf4ce55",
+      "source": "secretsmanager.amazonaws.com"
+    },
+    {
+      "region": "ap-northeast-1",
+      "time": "2026-02-10 16:46:27+01:00",
+      "event": "DescribeTransitGatewayAttachments",
+      "user": "AWSCLI",
+      "source": "ec2.amazonaws.com"
+    },
+    {
+      "region": "ap-northeast-1",
+      "time": "2026-02-10 16:46:26+01:00",
+      "event": "DescribeTransitGateways",
+      "user": "AWSCLI",
+      "source": "ec2.amazonaws.com"
+    },
+    {
+      "region": "ap-northeast-1",
+      "time": "2026-02-10 16:46:01+01:00",
+      "event": "GetSecretValue",
+      "user": "i-0925973263cf4ce55",
+      "source": "secretsmanager.amazonaws.com"
+    },
+    {
+      "region": "ap-northeast-1",
+      "time": "2026-02-10 16:46:01+01:00",
+      "event": "Decrypt",
+      "user": "i-0925973263cf4ce55",
+      "source": "kms.amazonaws.com"
+    },
+    {
+      "region": "ap-northeast-1",
+      "time": "2026-02-10 16:45:59+01:00",
+      "event": "Decrypt",
+      "user": "i-0925973263cf4ce55",
+      "source": "kms.amazonaws.com"
+    },
+    {
+      "region": "ap-northeast-1",
+      "time": "2026-02-10 16:45:59+01:00",
+      "event": "GetSecretValue",
+      "user": "i-0925973263cf4ce55",
+      "source": "secretsmanager.amazonaws.com"
+    },
+    {
+      "region": "ap-northeast-1",
+      "time": "2026-02-10 16:45:31+01:00",
+      "event": "GetSecretValue",
+      "user": "i-0925973263cf4ce55",
+      "source": "secretsmanager.amazonaws.com"
+    },
+    {
+      "region": "ap-northeast-1",
+      "time": "2026-02-10 16:45:31+01:00",
+      "event": "Decrypt",
+      "user": "i-0925973263cf4ce55",
+      "source": "kms.amazonaws.com"
+    },
+    {
+      "region": "ap-northeast-1",
+      "time": "2026-02-10 16:45:29+01:00",
+      "event": "GetSecretValue",
+      "user": "i-0925973263cf4ce55",
+      "source": "secretsmanager.amazonaws.com"
+    },
+    {
+      "region": "ap-northeast-1",
+      "time": "2026-02-10 16:45:29+01:00",
+      "event": "Decrypt",
+      "user": "i-0925973263cf4ce55",
+      "source": "kms.amazonaws.com"
+    },
+    {
+      "region": "ap-northeast-1",
+      "time": "2026-02-10 16:45:01+01:00",
+      "event": "GetSecretValue",
+      "user": "i-0925973263cf4ce55",
+      "source": "secretsmanager.amazonaws.com"
+    },
+    {
+      "region": "ap-northeast-1",
+      "time": "2026-02-10 16:45:01+01:00",
+      "event": "Decrypt",
+      "user": "i-0925973263cf4ce55",
+      "source": "kms.amazonaws.com"
+    },
+    {
+      "region": "ap-northeast-1",
+      "time": "2026-02-10 16:44:59+01:00",
+      "event": "Decrypt",
+      "user": "i-0925973263cf4ce55",
+      "source": "kms.amazonaws.com"
+    },
+    {
+      "region": "ap-northeast-1",
+      "time": "2026-02-10 16:44:59+01:00",
+      "event": "GetSecretValue",
+      "user": "i-0925973263cf4ce55",
+      "source": "secretsmanager.amazonaws.com"
+    },
+    {
+      "region": "ap-northeast-1",
+      "time": "2026-02-10 16:44:57+01:00",
+      "event": "DescribeDBInstances",
+      "user": "AWSCLI",
+      "source": "rds.amazonaws.com"
+    },
+    {
+      "region": "ap-northeast-1",
+      "time": "2026-02-10 16:44:31+01:00",
+      "event": "GetSecretValue",
+      "user": "i-0925973263cf4ce55",
+      "source": "secretsmanager.amazonaws.com"
+    },
+    {
+      "region": "ap-northeast-1",
+      "time": "2026-02-10 16:44:31+01:00",
+      "event": "Decrypt",
+      "user": "i-0925973263cf4ce55",
+      "source": "kms.amazonaws.com"
+    },
+    {
+      "region": "ap-northeast-1",
+      "time": "2026-02-10 16:44:29+01:00",
+      "event": "Decrypt",
+      "user": "i-0925973263cf4ce55",
+      "source": "kms.amazonaws.com"
+    },
+    {
+      "region": "ap-northeast-1",
+      "time": "2026-02-10 16:44:29+01:00",
+      "event": "GetSecretValue",
+      "user": "i-0925973263cf4ce55",
+      "source": "secretsmanager.amazonaws.com"
+    },
+    {
+      "region": "ap-northeast-1",
+      "time": "2026-02-10 16:44:01+01:00",
+      "event": "Decrypt",
+      "user": "i-0925973263cf4ce55",
+      "source": "kms.amazonaws.com"
+    },
+    {
+      "region": "ap-northeast-1",
+      "time": "2026-02-10 16:44:01+01:00",
+      "event": "GetSecretValue",
+      "user": "i-0925973263cf4ce55",
+      "source": "secretsmanager.amazonaws.com"
+    },
+    {
+      "region": "ap-northeast-1",
+      "time": "2026-02-10 16:43:59+01:00",
+      "event": "GetSecretValue",
+      "user": "i-0925973263cf4ce55",
+      "source": "secretsmanager.amazonaws.com"
+    }
+  ],
+  "saopaulo": [
+    {
+      "region": "sa-east-1",
+      "time": "2026-02-10 16:46:29+01:00",
+      "event": "UpdateInstanceInformation",
+      "user": "i-0ca2f98e00b43f2b5",
+      "source": "ssm.amazonaws.com"
+    },
+    {
+      "region": "sa-east-1",
+      "time": "2026-02-10 16:46:28+01:00",
+      "event": "DescribeTransitGatewayAttachments",
+      "user": "AWSCLI",
+      "source": "ec2.amazonaws.com"
+    },
+    {
+      "region": "sa-east-1",
+      "time": "2026-02-10 16:46:28+01:00",
+      "event": "DescribeTransitGateways",
+      "user": "AWSCLI",
+      "source": "ec2.amazonaws.com"
+    },
+    {
+      "region": "sa-east-1",
+      "time": "2026-02-10 16:45:52+01:00",
+      "event": "ListInstanceAssociations",
+      "user": "i-0ca2f98e00b43f2b5",
+      "source": "ssm.amazonaws.com"
+    },
+    {
+      "region": "sa-east-1",
+      "time": "2026-02-10 16:45:46+01:00",
+      "event": "DescribeDBInstances",
+      "user": "AWSCLI",
+      "source": "rds.amazonaws.com"
+    },
+    {
+      "region": "sa-east-1",
+      "time": "2026-02-10 16:43:35+01:00",
+      "event": "DescribeDBInstances",
+      "user": "AWSCLI",
+      "source": "rds.amazonaws.com"
+    },
+    {
+      "region": "sa-east-1",
+      "time": "2026-02-10 16:43:28+01:00",
+      "event": "UpdateInstanceInformation",
+      "user": "i-0ca2f98e00b43f2b5",
+      "source": "ssm.amazonaws.com"
+    },
+    {
+      "region": "sa-east-1",
+      "time": "2026-02-10 16:38:28+01:00",
+      "event": "UpdateInstanceInformation",
+      "user": "i-0ca2f98e00b43f2b5",
+      "source": "ssm.amazonaws.com"
+    },
+    {
+      "region": "sa-east-1",
+      "time": "2026-02-10 16:36:02+01:00",
+      "event": "ListInstanceAssociations",
+      "user": "i-0ca2f98e00b43f2b5",
+      "source": "ssm.amazonaws.com"
+    },
+    {
+      "region": "sa-east-1",
+      "time": "2026-02-10 16:33:28+01:00",
+      "event": "UpdateInstanceInformation",
+      "user": "i-0ca2f98e00b43f2b5",
+      "source": "ssm.amazonaws.com"
+    },
+    {
+      "region": "sa-east-1",
+      "time": "2026-02-10 16:31:10+01:00",
+      "event": "GetEnvironmentStatus",
+      "user": "AWSCLI",
+      "source": "cloudshell.amazonaws.com"
+    },
+    {
+      "region": "sa-east-1",
+      "time": "2026-02-10 16:30:03+01:00",
+      "event": "DeleteSession",
+      "user": "AWSCLI",
+      "source": "cloudshell.amazonaws.com"
+    },
+    {
+      "region": "sa-east-1",
+      "time": "2026-02-10 16:30:03+01:00",
+      "event": "GetEnvironmentStatus",
+      "user": "AWSCLI",
+      "source": "cloudshell.amazonaws.com"
+    },
+    {
+      "region": "sa-east-1",
+      "time": "2026-02-10 16:28:28+01:00",
+      "event": "UpdateInstanceInformation",
+      "user": "i-0ca2f98e00b43f2b5",
+      "source": "ssm.amazonaws.com"
+    },
+    {
+      "region": "sa-east-1",
+      "time": "2026-02-10 16:26:00+01:00",
+      "event": "ListInstanceAssociations",
+      "user": "i-0ca2f98e00b43f2b5",
+      "source": "ssm.amazonaws.com"
+    },
+    {
+      "region": "sa-east-1",
+      "time": "2026-02-10 16:24:11+01:00",
+      "event": "GetCallerIdentity",
+      "user": "AWSCLI",
+      "source": "sts.amazonaws.com"
+    },
+    {
+      "region": "sa-east-1",
+      "time": "2026-02-10 16:24:11+01:00",
+      "event": "PutCredentials",
+      "user": "AWSCLI",
+      "source": "cloudshell.amazonaws.com"
+    },
+    {
+      "region": "sa-east-1",
+      "time": "2026-02-10 16:24:10+01:00",
+      "event": "GetEnvironmentStatus",
+      "user": "AWSCLI",
+      "source": "cloudshell.amazonaws.com"
+    },
+    {
+      "region": "sa-east-1",
+      "time": "2026-02-10 16:23:28+01:00",
+      "event": "UpdateInstanceInformation",
+      "user": "i-0ca2f98e00b43f2b5",
+      "source": "ssm.amazonaws.com"
+    },
+    {
+      "region": "sa-east-1",
+      "time": "2026-02-10 16:18:28+01:00",
+      "event": "UpdateInstanceInformation",
+      "user": "i-0ca2f98e00b43f2b5",
+      "source": "ssm.amazonaws.com"
+    },
+    {
+      "region": "sa-east-1",
+      "time": "2026-02-10 16:17:10+01:00",
+      "event": "PutCredentials",
+      "user": "AWSCLI",
+      "source": "cloudshell.amazonaws.com"
+    },
+    {
+      "region": "sa-east-1",
+      "time": "2026-02-10 16:17:10+01:00",
+      "event": "GetCallerIdentity",
+      "user": "AWSCLI",
+      "source": "sts.amazonaws.com"
+    },
+    {
+      "region": "sa-east-1",
+      "time": "2026-02-10 16:17:09+01:00",
+      "event": "GetEnvironmentStatus",
+      "user": "AWSCLI",
+      "source": "cloudshell.amazonaws.com"
+    },
+    {
+      "region": "sa-east-1",
+      "time": "2026-02-10 16:16:28+01:00",
+      "event": "UpdateInstanceInformation",
+      "user": "i-0ca2f98e00b43f2b5",
+      "source": "ssm.amazonaws.com"
+    },
+    {
+      "region": "sa-east-1",
+      "time": "2026-02-10 16:15:38+01:00",
+      "event": "ListInstanceAssociations",
+      "user": "i-0ca2f98e00b43f2b5",
+      "source": "ssm.amazonaws.com"
+    },
+    {
+      "region": "sa-east-1",
+      "time": "2026-02-10 16:13:28+01:00",
+      "event": "UpdateInstanceInformation",
+      "user": "i-0ca2f98e00b43f2b5",
+      "source": "ssm.amazonaws.com"
+    },
+    {
+      "region": "sa-east-1",
+      "time": "2026-02-10 16:10:17+01:00",
+      "event": "GetCallerIdentity",
+      "user": "AWSCLI",
+      "source": "sts.amazonaws.com"
+    },
+    {
+      "region": "sa-east-1",
+      "time": "2026-02-10 16:10:17+01:00",
+      "event": "PutCredentials",
+      "user": "AWSCLI",
+      "source": "cloudshell.amazonaws.com"
+    },
+    {
+      "region": "sa-east-1",
+      "time": "2026-02-10 16:10:14+01:00",
+      "event": "RedeemCode",
+      "user": "AWSCLI",
+      "source": "cloudshell.amazonaws.com"
+    },
+    {
+      "region": "sa-east-1",
+      "time": "2026-02-10 16:10:09+01:00",
+      "event": "GetEnvironmentStatus",
+      "user": "AWSCLI",
+      "source": "cloudshell.amazonaws.com"
+    },
+    {
+      "region": "sa-east-1",
+      "time": "2026-02-10 16:10:09+01:00",
+      "event": "DeleteSession",
+      "user": "AWSCLI",
+      "source": "cloudshell.amazonaws.com"
+    },
+    {
+      "region": "sa-east-1",
+      "time": "2026-02-10 16:10:09+01:00",
+      "event": "CreateSession",
+      "user": "AWSCLI",
+      "source": "cloudshell.amazonaws.com"
+    },
+    {
+      "region": "sa-east-1",
+      "time": "2026-02-10 16:10:04+01:00",
+      "event": "GetEnvironmentStatus",
+      "user": "AWSCLI",
+      "source": "cloudshell.amazonaws.com"
+    },
+    {
+      "region": "sa-east-1",
+      "time": "2026-02-10 16:10:02+01:00",
+      "event": "GetEnvironmentStatus",
+      "user": "AWSCLI",
+      "source": "cloudshell.amazonaws.com"
+    },
+    {
+      "region": "sa-east-1",
+      "time": "2026-02-10 16:09:59+01:00",
+      "event": "GetEnvironmentStatus",
+      "user": "AWSCLI",
+      "source": "cloudshell.amazonaws.com"
+    },
+    {
+      "region": "sa-east-1",
+      "time": "2026-02-10 16:09:58+01:00",
+      "event": "GetEnvironmentStatus",
+      "user": "AWSCLI",
+      "source": "cloudshell.amazonaws.com"
+    },
+    {
+      "region": "sa-east-1",
+      "time": "2026-02-10 16:09:57+01:00",
+      "event": "StartEnvironment",
+      "user": "AWSCLI",
+      "source": "cloudshell.amazonaws.com"
+    },
+    {
+      "region": "sa-east-1",
+      "time": "2026-02-10 16:09:55+01:00",
+      "event": "GetEnvironmentStatus",
+      "user": "AWSCLI",
+      "source": "cloudshell.amazonaws.com"
+    },
+    {
+      "region": "sa-east-1",
+      "time": "2026-02-10 16:08:28+01:00",
+      "event": "UpdateInstanceInformation",
+      "user": "i-0ca2f98e00b43f2b5",
+      "source": "ssm.amazonaws.com"
+    },
+    {
+      "region": "sa-east-1",
+      "time": "2026-02-10 16:05:49+01:00",
+      "event": "ListInstanceAssociations",
+      "user": "i-0ca2f98e00b43f2b5",
+      "source": "ssm.amazonaws.com"
+    },
+    {
+      "region": "sa-east-1",
+      "time": "2026-02-10 16:03:28+01:00",
+      "event": "UpdateInstanceInformation",
+      "user": "i-0ca2f98e00b43f2b5",
+      "source": "ssm.amazonaws.com"
+    },
+    {
+      "region": "sa-east-1",
+      "time": "2026-02-10 15:58:28+01:00",
+      "event": "UpdateInstanceInformation",
+      "user": "i-0ca2f98e00b43f2b5",
+      "source": "ssm.amazonaws.com"
+    },
+    {
+      "region": "sa-east-1",
+      "time": "2026-02-10 15:56:04+01:00",
+      "event": "ListInstanceAssociations",
+      "user": "i-0ca2f98e00b43f2b5",
+      "source": "ssm.amazonaws.com"
+    },
+    {
+      "region": "sa-east-1",
+      "time": "2026-02-10 15:54:10+01:00",
+      "event": "AssumeRole",
+      "user": null,
+      "source": "sts.amazonaws.com"
+    },
+    {
+      "region": "sa-east-1",
+      "time": "2026-02-10 15:54:10+01:00",
+      "event": "AssumeRole",
+      "user": null,
+      "source": "sts.amazonaws.com"
+    },
+    {
+      "region": "sa-east-1",
+      "time": "2026-02-10 15:53:28+01:00",
+      "event": "UpdateInstanceInformation",
+      "user": "i-0ca2f98e00b43f2b5",
+      "source": "ssm.amazonaws.com"
+    },
+    {
+      "region": "sa-east-1",
+      "time": "2026-02-10 15:48:28+01:00",
+      "event": "UpdateInstanceInformation",
+      "user": "i-0ca2f98e00b43f2b5",
+      "source": "ssm.amazonaws.com"
+    },
+    {
+      "region": "sa-east-1",
+      "time": "2026-02-10 15:46:28+01:00",
+      "event": "UpdateInstanceInformation",
+      "user": "i-0ca2f98e00b43f2b5",
+      "source": "ssm.amazonaws.com"
+    },
+    {
+      "region": "sa-east-1",
+      "time": "2026-02-10 15:45:58+01:00",
+      "event": "ListInstanceAssociations",
+      "user": "i-0ca2f98e00b43f2b5",
+      "source": "ssm.amazonaws.com"
+    },
+    {
+      "region": "sa-east-1",
+      "time": "2026-02-10 15:43:28+01:00",
+      "event": "UpdateInstanceInformation",
+      "user": "i-0ca2f98e00b43f2b5",
+      "source": "ssm.amazonaws.com"
+    }
+  ]
+}
+
+--- Recent Security Group Changes ---
+{
+    "Events": [
+        {
+            "EventId": "fdb5e094-c845-409d-a842-f24c83fcc4e8",
+            "EventName": "AuthorizeSecurityGroupIngress",
+            "ReadOnly": "false",
+            "AccessKeyId": "AKIAQO2XAJV2WWAVRNH5",
+            "EventTime": "2026-02-10T04:38:14+01:00",
+            "EventSource": "ec2.amazonaws.com",
+            "Username": "AWSCLI",
+            "Resources": [
+                {
+                    "ResourceType": "AWS::EC2::SecurityGroup",
+                    "ResourceName": "sg-01e331528d55dfefa"
+                }
+            ],
+            "CloudTrailEvent": "{\"eventVersion\":\"1.11\",\"userIdentity\":{\"type\":\"IAMUser\",\"principalId\":\"AIDAQO2XAJV2T5Q6VNOJB\",\"arn\":\"arn:aws:iam::031857855861:user/AWSCLI\",\"accountId\":\"031857855861\",\"accessKeyId\":\"AKIAQO2XAJV2WWAVRNH5\",\"userName\":\"AWSCLI\"},\"eventTime\":\"2026-02-10T03:38:14Z\",\"eventSource\":\"ec2.amazonaws.com\",\"eventName\":\"AuthorizeSecurityGroupIngress\",\"awsRegion\":\"ap-northeast-1\",\"sourceIPAddress\":\"109.221.142.120\",\"userAgent\":\"APN/1.0 HashiCorp/1.0 Terraform/1.14.4 (+https://www.terraform.io) terraform-provider-aws/6.28.0 (+https://registry.terraform.io/providers/hashicorp/aws) aws-sdk-go-v2/1.41.0 ua/2.1 os/windows lang/go#1.25.5 md/GOOS#windows md/GOARCH#amd64 api/ec2#1.279.0 m/n\",\"requestParameters\":{\"groupId\":\"sg-01e331528d55dfefa\",\"ipPermissions\":{\"items\":[{\"ipProtocol\":\"tcp\",\"fromPort\":3306,\"toPort\":3306,\"groups\":{},\"ipRanges\":{\"items\":[{\"cidrIp\":\"172.18.0.0/16\",\"description\":\"Allow MySQL from Sao Paulo VPC via TGW\"}]},\"ipv6Ranges\":{},\"prefixListIds\":{}}]}},\"responseElements\":{\"requestId\":\"eb7ca4f9-7aa0-4cc5-91ee-508cf4a31461\",\"_return\":true,\"securityGroupRuleSet\":{\"items\":[{\"groupOwnerId\":\"031857855861\",\"groupId\":\"sg-01e331528d55dfefa\",\"securityGroupRuleId\":\"sgr-05bc4c60669962a89\",\"description\":\"Allow MySQL from Sao Paulo VPC via TGW\",\"isEgress\":false,\"ipProtocol\":\"tcp\",\"fromPort\":3306,\"toPort\":3306,\"cidrIpv4\":\"172.18.0.0/16\",\"securityGroupRuleArn\":\"arn:aws:ec2:ap-northeast-1:031857855861:security-group-rule/sgr-05bc4c60669962a89\"}]}},\"requestID\":\"eb7ca4f9-7aa0-4cc5-91ee-508cf4a31461\",\"eventID\":\"fdb5e094-c845-409d-a842-f24c83fcc4e8\",\"readOnly\":false,\"eventType\":\"AwsApiCall\",\"managementEvent\":true,\"recipientAccountId\":\"031857855861\",\"eventCategory\":\"Management\",\"tlsDetails\":{\"tlsVersion\":\"TLSv1.3\",\"cipherSuite\":\"TLS_AES_128_GCM_SHA256\",\"clientProvidedHostHeader\":\"ec2.ap-northeast-1.amazonaws.com\"}}"
+        },
+        {
+            "EventId": "e375f527-eeb3-4597-b261-181b879648f7",
+            "EventName": "AuthorizeSecurityGroupIngress",
+            "ReadOnly": "false",
+            "AccessKeyId": "ASIAQO2XAJV25DT22YAJ",
+            "EventTime": "2026-02-08T21:20:25+01:00",
+            "EventSource": "ec2.amazonaws.com",
+            "Username": "AWSCLI",
+            "Resources": [
+                {
+                    "ResourceType": "AWS::EC2::SecurityGroup",
+                    "ResourceName": "sg-078177392b98074f4"
+                }
+            ],
+            "CloudTrailEvent": "{\"eventVersion\":\"1.11\",\"userIdentity\":{\"type\":\"IAMUser\",\"principalId\":\"AIDAQO2XAJV2T5Q6VNOJB\",\"arn\":\"arn:aws:iam::031857855861:user/AWSCLI\",\"accountId\":\"031857855861\",\"accessKeyId\":\"ASIAQO2XAJV25DT22YAJ\",\"userName\":\"AWSCLI\",\"sessionContext\":{\"attributes\":{\"creationDate\":\"2026-02-08T10:13:59Z\",\"mfaAuthenticated\":\"false\"}}},\"eventTime\":\"2026-02-08T20:20:25Z\",\"eventSource\":\"ec2.amazonaws.com\",\"eventName\":\"AuthorizeSecurityGroupIngress\",\"awsRegion\":\"ap-northeast-1\",\"sourceIPAddress\":\"109.221.142.120\",\"userAgent\":\"Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:147.0) Gecko/20100101 Firefox/147.0\",\"requestParameters\":{\"groupId\":\"sg-078177392b98074f4\",\"ipPermissions\":{\"items\":[{\"ipProtocol\":\"tcp\",\"fromPort\":443,\"toPort\":443,\"groups\":{},\"ipRanges\":{\"items\":[{\"cidrIp\":\"0.0.0.0/0\"}]},\"ipv6Ranges\":{},\"prefixListIds\":{}}]}},\"responseElements\":{\"requestId\":\"79cb4500-f719-4df4-b9ba-c4007c98a2e4\",\"_return\":true,\"securityGroupRuleSet\":{\"items\":[{\"groupOwnerId\":\"031857855861\",\"groupId\":\"sg-078177392b98074f4\",\"securityGroupRuleId\":\"sgr-0d146e9d0e259b1c4\",\"isEgress\":false,\"ipProtocol\":\"tcp\",\"fromPort\":443,\"toPort\":443,\"cidrIpv4\":\"0.0.0.0/0\",\"securityGroupRuleArn\":\"arn:aws:ec2:ap-northeast-1:031857855861:security-group-rule/sgr-0d146e9d0e259b1c4\"}]}},\"requestID\":\"79cb4500-f719-4df4-b9ba-c4007c98a2e4\",\"eventID\":\"e375f527-eeb3-4597-b261-181b879648f7\",\"readOnly\":false,\"eventType\":\"AwsApiCall\",\"managementEvent\":true,\"recipientAccountId\":\"031857855861\",\"eventCategory\":\"Management\",\"tlsDetails\":{\"tlsVersion\":\"TLSv1.3\",\"cipherSuite\":\"TLS_AES_128_GCM_SHA256\",\"clientProvidedHostHeader\":\"ec2.ap-northeast-1.amazonaws.com\"},\"sessionCredentialFromConsole\":\"true\"}"
+        },
+        {
+            "EventId": "e42f2644-7ed4-4e63-8f9f-be532e6702ac",
+            "EventName": "AuthorizeSecurityGroupIngress",
+            "ReadOnly": "false",
+            "AccessKeyId": "ASIAQO2XAJV25DT22YAJ",
+            "EventTime": "2026-02-08T21:20:24+01:00",
+            "EventSource": "ec2.amazonaws.com",
+            "Username": "AWSCLI",
+            "Resources": [
+                {
+                    "ResourceType": "AWS::EC2::SecurityGroup",
+                    "ResourceName": "sg-078177392b98074f4"
+                }
+            ],
+            "CloudTrailEvent": "{\"eventVersion\":\"1.11\",\"userIdentity\":{\"type\":\"IAMUser\",\"principalId\":\"AIDAQO2XAJV2T5Q6VNOJB\",\"arn\":\"arn:aws:iam::031857855861:user/AWSCLI\",\"accountId\":\"031857855861\",\"accessKeyId\":\"ASIAQO2XAJV25DT22YAJ\",\"userName\":\"AWSCLI\",\"sessionContext\":{\"attributes\":{\"creationDate\":\"2026-02-08T10:13:59Z\",\"mfaAuthenticated\":\"false\"}}},\"eventTime\":\"2026-02-08T20:20:24Z\",\"eventSource\":\"ec2.amazonaws.com\",\"eventName\":\"AuthorizeSecurityGroupIngress\",\"awsRegion\":\"ap-northeast-1\",\"sourceIPAddress\":\"109.221.142.120\",\"userAgent\":\"Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:147.0) Gecko/20100101 Firefox/147.0\",\"errorCode\":\"Client.RulesPerSecurityGroupLimitExceeded\",\"errorMessage\":\"The maximum number of rules per security group has been reached.\",\"requestParameters\":{\"groupId\":\"sg-078177392b98074f4\",\"ipPermissions\":{\"items\":[{\"ipProtocol\":\"tcp\",\"fromPort\":80,\"toPort\":80,\"groups\":{},\"ipRanges\":{},\"ipv6Ranges\":{},\"prefixListIds\":{\"items\":[{\"prefixListId\":\"pl-58a04531\",\"description\":\"CloudFront HTTP/HTTPS ing\"}]}}]}},\"responseElements\":null,\"requestID\":\"0d21ab68-067b-4095-ab7a-ffbeae0e735d\",\"eventID\":\"e42f2644-7ed4-4e63-8f9f-be532e6702ac\",\"readOnly\":false,\"eventType\":\"AwsApiCall\",\"managementEvent\":true,\"recipientAccountId\":\"031857855861\",\"eventCategory\":\"Management\",\"tlsDetails\":{\"tlsVersion\":\"TLSv1.3\",\"cipherSuite\":\"TLS_AES_128_GCM_SHA256\",\"clientProvidedHostHeader\":\"ec2.ap-northeast-1.amazonaws.com\"},\"sessionCredentialFromConsole\":\"true\"}"
+        },
+        {
+            "EventId": "bd487f87-81ea-4543-8843-51c964061b37",
+            "EventName": "AuthorizeSecurityGroupIngress",
+            "ReadOnly": "false",
+            "AccessKeyId": "ASIAQO2XAJV2V3NL7Z4C",
+            "EventTime": "2026-02-08T20:23:48+01:00",
+            "EventSource": "ec2.amazonaws.com",
+            "Username": "AWSCLI",
+            "Resources": [
+                {
+                    "ResourceType": "AWS::EC2::SecurityGroup",
+                    "ResourceName": "sg-078177392b98074f4"
+                }
+            ],
+            "CloudTrailEvent": "{\"eventVersion\":\"1.11\",\"userIdentity\":{\"type\":\"IAMUser\",\"principalId\":\"AIDAQO2XAJV2T5Q6VNOJB\",\"arn\":\"arn:aws:iam::031857855861:user/AWSCLI\",\"accountId\":\"031857855861\",\"accessKeyId\":\"ASIAQO2XAJV2V3NL7Z4C\",\"userName\":\"AWSCLI\",\"sessionContext\":{\"attributes\":{\"creationDate\":\"2026-02-08T10:13:59Z\",\"mfaAuthenticated\":\"false\"}}},\"eventTime\":\"2026-02-08T19:23:48Z\",\"eventSource\":\"ec2.amazonaws.com\",\"eventName\":\"AuthorizeSecurityGroupIngress\",\"awsRegion\":\"ap-northeast-1\",\"sourceIPAddress\":\"109.221.142.120\",\"userAgent\":\"Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:147.0) Gecko/20100101 Firefox/147.0\",\"requestParameters\":{\"groupId\":\"sg-078177392b98074f4\",\"ipPermissions\":{\"items\":[{\"ipProtocol\":\"tcp\",\"fromPort\":443,\"toPort\":443,\"groups\":{},\"ipRanges\":{\"items\":[{\"cidrIp\":\"0.0.0.0/0\"}]},\"ipv6Ranges\":{},\"prefixListIds\":{}}]}},\"responseElements\":{\"requestId\":\"21bb5729-9655-4b12-aff1-425a9120c09b\",\"_return\":true,\"securityGroupRuleSet\":{\"items\":[{\"groupOwnerId\":\"031857855861\",\"groupId\":\"sg-078177392b98074f4\",\"securityGroupRuleId\":\"sgr-040fd397269c3d173\",\"isEgress\":false,\"ipProtocol\":\"tcp\",\"fromPort\":443,\"toPort\":443,\"cidrIpv4\":\"0.0.0.0/0\",\"securityGroupRuleArn\":\"arn:aws:ec2:ap-northeast-1:031857855861:security-group-rule/sgr-040fd397269c3d173\"}]}},\"requestID\":\"21bb5729-9655-4b12-aff1-425a9120c09b\",\"eventID\":\"bd487f87-81ea-4543-8843-51c964061b37\",\"readOnly\":false,\"eventType\":\"AwsApiCall\",\"managementEvent\":true,\"recipientAccountId\":\"031857855861\",\"eventCategory\":\"Management\",\"tlsDetails\":{\"tlsVersion\":\"TLSv1.3\",\"cipherSuite\":\"TLS_AES_128_GCM_SHA256\",\"clientProvidedHostHeader\":\"ec2.ap-northeast-1.amazonaws.com\"},\"sessionCredentialFromConsole\":\"true\"}"
+        },
+        {
+            "EventId": "e1e55fa2-c27f-4902-abbe-8223779d53e2",
+            "EventName": "AuthorizeSecurityGroupIngress",
+            "ReadOnly": "false",
+            "AccessKeyId": "ASIAQO2XAJV27J6SSQH2",
+            "EventTime": "2026-02-08T20:18:19+01:00",
+            "EventSource": "ec2.amazonaws.com",
+            "Username": "AWSCLI",
+            "Resources": [
+                {
+                    "ResourceType": "AWS::EC2::SecurityGroup",
+                    "ResourceName": "sg-078177392b98074f4"
+                }
+            ],
+            "CloudTrailEvent": "{\"eventVersion\":\"1.11\",\"userIdentity\":{\"type\":\"IAMUser\",\"principalId\":\"AIDAQO2XAJV2T5Q6VNOJB\",\"arn\":\"arn:aws:iam::031857855861:user/AWSCLI\",\"accountId\":\"031857855861\",\"accessKeyId\":\"ASIAQO2XAJV27J6SSQH2\",\"userName\":\"AWSCLI\",\"sessionContext\":{\"attributes\":{\"creationDate\":\"2026-02-08T10:13:59Z\",\"mfaAuthenticated\":\"false\"}}},\"eventTime\":\"2026-02-08T19:18:19Z\",\"eventSource\":\"ec2.amazonaws.com\",\"eventName\":\"AuthorizeSecurityGroupIngress\",\"awsRegion\":\"ap-northeast-1\",\"sourceIPAddress\":\"18.183.170.163\",\"userAgent\":\"aws-cli/2.33.6 md/awscrt#0.29.1 ua/2.1 os/linux#6.1.159-181.297.amzn2023.x86_64 md/arch#x86_64 lang/python#3.13.11 md/pyimpl#CPython exec-env/CloudShell m/b,Z,E,z cfg/retry-mode#standard md/installer#exe md/distrib#amzn.2023 md/prompt#off md/command#ec2.authorize-security-group-ingress\",\"errorCode\":\"Client.RulesPerSecurityGroupLimitExceeded\",\"errorMessage\":\"The maximum number of rules per security group has been reached.\",\"requestParameters\":{\"groupId\":\"sg-078177392b98074f4\",\"ipPermissions\":{\"items\":[{\"ipProtocol\":\"tcp\",\"fromPort\":443,\"toPort\":443,\"groups\":{},\"ipRanges\":{},\"ipv6Ranges\":{},\"prefixListIds\":{\"items\":[{\"prefixListId\":\"pl-58a04531\"}]}}]}},\"responseElements\":null,\"requestID\":\"f8490b7a-99f1-49f2-b387-a1f4fd3d77ec\",\"eventID\":\"e1e55fa2-c27f-4902-abbe-8223779d53e2\",\"readOnly\":false,\"eventType\":\"AwsApiCall\",\"managementEvent\":true,\"recipientAccountId\":\"031857855861\",\"eventCategory\":\"Management\",\"tlsDetails\":{\"tlsVersion\":\"TLSv1.3\",\"cipherSuite\":\"TLS_AES_128_GCM_SHA256\",\"clientProvidedHostHeader\":\"ec2.ap-northeast-1.amazonaws.com\"},\"sessionCredentialFromConsole\":\"true\"}"
+        }
+    ],
+    "NextToken": "/NrUfbvgDIMmVg7IEAK4ZJrNyQ+wHLkRkc3HxQJxeBls5+W6AArjiIbmLIBXJpcI"
+}

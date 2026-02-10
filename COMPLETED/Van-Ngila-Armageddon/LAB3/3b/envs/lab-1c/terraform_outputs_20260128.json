@@ -1,0 +1,92 @@
+{
+  "address": {
+    "sensitive": false,
+    "type": "string",
+    "value": "lab-mysql.cxm8o4cwoftn.ap-northeast-1.rds.amazonaws.com"
+  },
+  "alb_access_logs_enabled": {
+    "sensitive": false,
+    "type": "bool",
+    "value": true
+  },
+  "alb_logs_bucket_arn": {
+    "sensitive": false,
+    "type": "string",
+    "value": "arn:aws:s3:::lab-1c-alb-logs-031857855861"
+  },
+  "alb_logs_bucket_name": {
+    "sensitive": false,
+    "type": "string",
+    "value": "lab-1c-alb-logs-031857855861"
+  },
+  "apex_url_https": {
+    "sensitive": false,
+    "type": "string",
+    "value": "https://theowafhomework.site"
+  },
+  "iam_instance_profile_name": {
+    "sensitive": false,
+    "type": "string",
+    "value": "armageddon-lab-1c-ec2-secrets-profile"
+  },
+  "iam_role_name": {
+    "sensitive": false,
+    "type": "string",
+    "value": "armageddon-lab-1c-ec2-secrets-role"
+  },
+  "name_servers": {
+    "sensitive": false,
+    "type": [
+      "list",
+      "string"
+    ],
+    "value": [
+      "ns-1174.awsdns-18.org",
+      "ns-1586.awsdns-06.co.uk",
+      "ns-510.awsdns-63.com",
+      "ns-965.awsdns-56.net"
+    ]
+  },
+  "private_route_table_ids": {
+    "sensitive": false,
+    "type": [
+      "tuple",
+      [
+        "string",
+        "string",
+        "string"
+      ]
+    ],
+    "value": [
+      "rtb-0967cbe45c21bccdb",
+      "rtb-052992287cdc7db03",
+      "rtb-055db9b55f951fe05"
+    ]
+  },
+  "private_subnet_ids": {
+    "sensitive": false,
+    "type": [
+      "tuple",
+      [
+        "string",
+        "string",
+        "string"
+      ]
+    ],
+    "value": [
+      "subnet-0ba7599c3669041f9",
+      "subnet-0b7527ca1e6c06bfc",
+      "subnet-0aed60ae8124732c4"
+    ]
+  },
+  "vpc_id": {
+    "sensitive": false,
+    "type": "string",
+    "value": "vpc-01c55ceb5a7baf36d"
+  },
+  "website_url": {
+    "sensitive": false,
+    "type": "string",
+    "value": "https://app.theowafhomework.site"
+  }
+}

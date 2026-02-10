@@ -1,0 +1,101 @@
+Querying WAF logs in us-east-1 for log group: aws-waf-logs-shinjuku-logs
+Time range: Last 60 minutes
+
+=== WAF ACTION STATISTICS ===
+[
+  {
+    "action": "ALLOW",
+    "hits": "11"
+  }
+]
+
+=== TOP SOURCE IPs ===
+[
+  {
+    "httpRequest.clientIp": "202.1.31.69",
+    "hits": "4"
+  },
+  {
+    "httpRequest.clientIp": "45.125.12.183",
+    "hits": "4"
+  },
+  {
+    "httpRequest.clientIp": "18.230.227.127",
+    "hits": "2"
+  },
+  {
+    "httpRequest.clientIp": "198.235.24.161",
+    "hits": "1"
+  }
+]
+
+=== TERMINATING RULES (BLOCK/COUNT) ===
+[]
+
+=== TOP COUNTRIES ===
+[
+  {
+    "httpRequest.country": "SG",
+    "hits": "4"
+  },
+  {
+    "httpRequest.country": "HK",
+    "hits": "4"
+  },
+  {
+    "httpRequest.country": "BR",
+    "hits": "2"
+  },
+  {
+    "httpRequest.country": "US",
+    "hits": "1"
+  }
+]
+
+--- WAF Web ACL Configuration ---
+{
+    "WebACL": {
+        "Name": "lab-1c-031857855861-cf-waf01",
+        "Id": "763d021a-f959-4fc5-b5fc-d8cdef238432",
+        "ARN": "arn:aws:wafv2:us-east-1:031857855861:global/webacl/lab-1c-031857
+855861-cf-waf01/763d021a-f959-4fc5-b5fc-d8cdef238432",
+        "DefaultAction": {
+            "Allow": {}
+        },
+        "Description": "",
+        "Rules": [
+            {
+                "Name": "AWSManagedRulesCommonRuleSet",
+                "Priority": 1,
+                "Statement": {
+                    "ManagedRuleGroupStatement": {
+                        "VendorName": "AWS",
+                        "Name": "AWSManagedRulesCommonRuleSet"
+                    }
+                },
+                "OverrideAction": {
+                    "None": {}
+                },
+                "VisibilityConfig": {
+                    "SampledRequestsEnabled": true,
+                    "CloudWatchMetricsEnabled": true,
+                    "MetricName": "lab-1c-031857855861-cf-waf-common"
+                }
+            }
+        ],
+        "VisibilityConfig": {
+            "SampledRequestsEnabled": true,
+            "CloudWatchMetricsEnabled": true,
+            "MetricName": "lab-1c-031857855861-cf-waf01"
+        },
+        "Capacity": 700,
+        "ManagedByFirewallManager": false,
+        "LabelNamespace": "awswaf:031857855861:webacl:lab-1c-031857855861-cf-waf
+01:",
+        "RetrofittedByFirewallManager": false,
+        "OnSourceDDoSProtectionConfig": {
+            "ALBLowReputationMode": "ACTIVE_UNDER_DDOS"
+        }
+    },
+    "LockToken": "10e326e6-f80e-4a76-a740-5a296bc24fa8"
+}
