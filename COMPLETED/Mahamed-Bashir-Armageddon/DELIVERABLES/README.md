@@ -1,99 +1,91 @@
----
-# Project Armageddon: Multi-Region Medical Cloud Architecture
-
-![Build Status](https://img.shields.io/badge/Build-ARMAGEDDON_GRADE-success?style=for-the-badge&logo=github)
-![Terraform](https://img.shields.io/badge/IaC-Terraform_v1.5+-purple?style=for-the-badge&logo=terraform&logoColor=white)
-![AWS](https://img.shields.io/badge/Provider-AWS-orange?style=for-the-badge&logo=amazon-aws&logoColor=white)
-![Compliance](https://img.shields.io/badge/Compliance-APPI_Strict-blue?style=for-the-badge)
-
-## 1. Executive Summary
-**Project Armageddon** is a reference implementation of a medical-grade cloud infrastructure designed to satisfy strict **Data Residency (Japan APPI)** requirements while enabling global, low-latency access.
-
-The architecture evolves from a single-region foundation into a complex **Hub-and-Spoke topology**, enforcing a unidirectional data dependency where the Tokyo Hub acts as the immutable "Data Authority" and the São Paulo Spoke operates as a stateless compute extension.
-
-### 📂 [View Full Audit Evidence & Chain of Custody](./DELIVERABLES/README.md)
-
----
-
-## 2. High-Level Architecture
-The system leverages **Transit Gateway Peering** to create a private, encrypted backbone between regions, ensuring Protected Health Information (PHI) never traverses the public internet during cross-region writes.
-
-```mermaid
-graph TD
-    User((Global User)) -->|HTTPS| CF[CloudFront Edge + WAFv2]
-    
-    CF -->|Primary Origin| ALBT[Tokyo ALB]
-    CF -->|Failover Origin| ALBS[São Paulo ALB]
-    
-    subgraph "🇯🇵 Tokyo Hub (Data Authority)"
-        ALBT --> EC2T[App Tier]
-        EC2T --> RDST[(RDS MySQL)]
-        EC2T --> TGWT[TGW Hub]
-    end
-    
-    subgraph "🇧🇷 São Paulo Spoke (Stateless)"
-        ALBS --> EC2S[Compute Tier]
-        EC2S -.->|SSM Config Bridge| RDST
-        EC2S --> TGWS[TGW Spoke]
-    end
-    
-    TGWT <==>|Encrypted Peering| TGWS
-```
-
----
-
-## 3. Curriculum Roadmap & Delivery Modules
-
-This project was executed in three distinct phases, mirroring the evolution of a production environment.
-
-### 🏛️ [Phase 1: Foundations & Identity](./LAB1/README.md)
-**Objective:** Hardening the cloud perimeter and identity posture.
-*   **Zero-Trust Identity:** Eliminated long-lived credentials by implementing **IAM Instance Profiles** for all compute resources.
-*   **Secret Rotation:** Integrated **AWS Secrets Manager** for automated database credential rotation.
-*   **Observability:** Deployed custom CloudWatch metrics ("The Panic Button") to monitor application-to-database health.
-
-### 🛡️ [Phase 2: Edge Security & Cloaking](./LAB2/README.md)
-**Objective:** Establishing a "Double-Lock" perimeter defense.
-*   **Origin Cloaking:** Restricted Load Balancer ingress to the **CloudFront Managed Prefix List** (Layer 4) and enforced a custom **X-Origin-Secret** handshake (Layer 7).
-*   **Edge Defense:** Deployed **AWS WAFv2** with managed rule sets (SQLi, Common Threats) to scrub traffic before it hits the VPC.
-*   **Cache Strategy:** Implemented Origin-Driven Caching (`s-maxage`) to optimize content delivery while respecting data freshness.
-
-### 🌐 [Phase 3: Multi-Region Compliance](./LAB3/README.md)
-**Objective:** Enforcing Data Residency via Asymmetric Routing.
-*   **The "Legal Corridor":** Established a private **Transit Gateway (TGW) Peering** connection between `ap-northeast-1` and `sa-east-1`.
-*   **Stateless Enforcement:** Implemented conditional Terraform logic (`count = 0`) to physically prevent database creation in the Spoke region.
-*   **The "Triple Tap":** Executed a multi-stage deployment protocol to resolve circular dependencies between TGW Peering requests, acceptances, and route propagation.
-
----
-
-## 4. Repository Structure
-
-```text
-Project-ARMAGEDDON/
-├── DELIVERABLES/           # Verified Audit Artifacts & Screenshots
-│   ├── LAB1/               # IAM/Secrets JSON Proofs
-│   ├── LAB2/               # WAF/Cloaking/Cache Proofs
-│   └── LAB3/               # Residency/Corridor/Routing Proofs
-├── LAB1/                   # Phase 1 Source Code
-├── LAB2/                   # Phase 2 Source Code
-├── LAB3/                   # Phase 3 Source Code (Final State)
-│   ├── env/tokyo           # Hub State Configuration
-│   ├── env/saopaulo        # Spoke State Configuration
-│   └── modules/            # Reusable Terraform Modules
-└── README.md               # Master Documentation
-```
-
-## 5. Verification Status
-
-All compliance controls have been verified against the SEIR Foundations specifications.
-
-| Control | Mechanism | Status |
-| :--- | :--- | :--- |
-| **Data Residency** | Physical Isolation of RDS to Tokyo | ✅ **VERIFIED** |
-| **Network Integrity** | Private IP routing via TGW Corridor | ✅ **VERIFIED** |
-| **Edge Security** | WAF Attached & Origin Cloaked | ✅ **VERIFIED** |
-| **Global Access** | Active-Passive Origin Failover | ✅ **VERIFIED** |
-
----
+# Operation Armageddon: Deliverables Chain of Custody
 **Engineer:** Mahamed Bashir  
-**Submission Date:** February 11, 2026
+**Submission Date:** February 9, 2026  
+**Architecture:** Multi-Region Hub-and-Spoke (APPI Compliant)  
+**Status:** ✅ 100% Verified / Auditor Ready  
+
+## 1. Executive Compliance Summary
+This repository contains the validated Infrastructure as Code (IaC) for a medical-grade architecture. The system satisfies the **Japan APPI Data Residency Mandate** by enforcing a strictly unidirectional data dependency: the Tokyo Hub (`ap-northeast-1`) acts as the sole "Data Authority," while the São Paulo Spoke (`sa-east-1`) operates as a stateless compute extension.
+
+### 🛡️ Verification Dashboard
+| Compliance Domain | Control Mechanism | Evidence Artifact | Status |
+| :--- | :--- | :--- | :--- |
+| **Identity & Access** | IAM Instance Profiles (No Static Keys) | [`LAB1/01_iam_role_audit.json`](./LAB1/01_iam_role_audit.json) | **PASS** |
+| **Observability** | Custom Metrics ("Panic Button") | [`LAB1/03_custom_metrics.json`](./LAB1/03_custom_metrics.json) | **PASS** |
+| **Edge Security** | Global WAFv2 & Origin Cloaking | [`LAB2/01_waf_association.txt`](./LAB2/01_waf_association.txt) | **PASS** |
+| **Origin Cloaking** | ALB Ingress restricted to CloudFront | [`LAB2/02_origin_handshake.json`](./LAB2/02_origin_handshake.json) | **PASS** |
+| **Data Residency** | RDS prohibited in Spoke region | [`LAB3/01_data_residency_proof.json`](./LAB3/01_data_residency_proof.json) | **PASS** |
+| **Network Integrity** | Traffic traverses private TGW Corridor | [`LAB3/02_tgw_peering_state.json`](./LAB3/02_tgw_peering_state.json) | **PASS** |
+
+## 2. Technical Evidence & Visual Validation
+
+### 🟢 Lab 1: Foundations & Hardening
+**Objective:** Establish a secure VPC foundation and eliminate long-lived credentials.
+
+**Verification Logic:**
+The application tier must prove its identity to the AWS control plane using STS rather than environment variables. Additionally, the application must emit telemetry to CloudWatch to signal database connection health.
+
+**Visual Proof: Identity & Secrets Integration**
+*Click images to view high-resolution console evidence.*
+[![Identity Proof](./Screenshots/aws_sts_inside_ec2_ssm_lab1.png)](./Screenshots/aws_sts_inside_ec2_ssm_lab1.png)
+> **Exhibit 1.1:** *Successful `aws sts get-caller-identity` execution from within the private subnet, confirming the assumption of the `ec2-secrets-role`.*
+
+[![Secrets Rotation](./Screenshots/lab1_instances_and_secret.png)](./Screenshots/lab1_instances_and_secret.png)
+> **Exhibit 1.2:** *Secrets Manager configuration proving automated rotation policies are active for the RDS credentials.*
+
+### 🟢 Lab 2: Edge Security & Origin Cloaking
+**Objective:** Enforce traffic ingress via the Global Edge (CloudFront) and neutralize direct-to-origin attacks.
+
+**Verification Logic:**
+Security is enforced via a "Double-Lock" mechanism:
+1.  **Network Layer:** ALB Security Groups accept traffic *only* from the CloudFront Managed Prefix List.
+2.  **Application Layer:** The ALB Listener enforces an `X-Origin-Secret` header handshake.
+
+**Visual Proof: WAF Association**
+[![WAF Shield](./Screenshots/waf_association_handshake_proof_lab2.png)](./Screenshots/waf_association_handshake_proof_lab2.png)
+> **Exhibit 2.1:** *Confirmation of the WebACL (`arn:aws:wafv2:us-east-1...`) attached to the active CloudFront Distribution.*
+
+**Behavioral Evidence (CLI):**
+*   **Static Assets:** [`03_cache_behavior_static.txt`](./LAB2/03_cache_behavior_static.txt) showing `x-cache: Hit`.
+*   **Dynamic API:** [`04_cache_behavior_api.txt`](./LAB2/04_cache_behavior_api.txt) showing `x-cache: Miss` and `no-store`.
+
+### 🟢 Lab 3: The "Japan Medical" Corridor
+**Objective:** Connect the stateless São Paulo tier to the Tokyo Vault via a private, encrypted backbone.
+
+**Verification Logic:**
+This is the "Immaculate" test. The São Paulo EC2 instance—which has no local database—must successfully resolve the private DNS of the Tokyo RDS instance and establish a TCP connection over Port 3306 via the Transit Gateway.
+
+**Visual Proof: The Corridor Handshake**
+[![Corridor Success](./Screenshots/lab3_proofs_1.png)](./Screenshots/lab3_proofs_1.png)
+> **Exhibit 3.1:** *The "Smoking Gun." Output of `nc -vz` from the São Paulo terminal showing successful connection to the Tokyo private IP (`172.17.x.x`).*
+
+**Visual Proof: Secrets Replication**
+[![Secrets Sync](./Screenshots/sp_secrets_replication.png)](./Screenshots/sp_secrets_replication.png)
+> **Exhibit 3.2:** *Validation that the Tokyo "Master Secret" has successfully replicated to the `sa-east-1` region.*
+
+## 3. Regional Output Registry (State Verification)
+To ensure architectural integrity across the "Triple Tap" deployment, the following regional coordinates were established.
+
+#### **🇯🇵 Tokyo Hub (`ap-northeast-1`) — The Authoritative Root**
+```hcl
+alb_dns_name               = "armageddon-shinjuku-lab-3-alb-926071206.ap-northeast-1.elb.amazonaws.com"
+cloudfront_distribution_id = "E1YO9AOVYWJV94"
+cloudfront_url             = "https://lab3.couch2cloud.dev"
+peering_id                 = "tgw-attach-03c5cb529155b1bd5"
+rds_endpoint               = "lab-mysql.cx6qsskueoi7.ap-northeast-1.rds.amazonaws.com"
+tgw_id                     = "tgw-0f75d1c62300ad055"
+vpc_cidr                   = "172.17.0.0/16"
+```
+[![Tokyo Output Proof](./Screenshots/shinjuku_outputs_lab3.png)](./Screenshots/shinjuku_outputs_lab3.png)
+
+#### **🇧🇷 São Paulo Spoke (`sa-east-1`) — The Stateless Extension**
+```hcl
+alb_dns_name            = "armageddon-liberdade-lab-3-alb-1693326215.sa-east-1.elb.amazonaws.com"
+ec2_instance_id         = "asg-managed"
+tgw_id                  = "tgw-0b75a4e4c0ce80b41"
+vpc_cidr                = "172.18.0.0/16"
+```
+[![Sao Paulo Output Proof](./Screenshots/liberdade_outputs_lab3.png)](./Screenshots/liberdade_outputs_lab3.png)
+
+## 4. Final Note
+"This infrastructure architecture strictly adheres to the principle that **Global Access does not require Global Storage.** By leveraging AWS Transit Gateway Peering, we have established a deterministic data path that forces all write operations to traverse the private backbone to the Tokyo jurisdiction. The integration of SSM Parameter Store as a cross-region bridge allows the stateless application tier to discover resources dynamically, decoupling configuration from code and ensuring zero-touch provisioning for future regional expansions."

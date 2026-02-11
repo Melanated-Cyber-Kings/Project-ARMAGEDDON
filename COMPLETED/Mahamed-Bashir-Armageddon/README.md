@@ -1,7 +1,6 @@
----
 # Project Armageddon: Multi-Region Medical Cloud Architecture
 
-![Build Status](https://img.shields.io/badge/Build-ARMAGEDDON_GRADE-success?style=for-the-badge&logo=github)
+![Build Status](https://img.shields.io/badge/Build-Passing-success?style=for-the-badge&logo=github)
 ![Terraform](https://img.shields.io/badge/IaC-Terraform_v1.5+-purple?style=for-the-badge&logo=terraform&logoColor=white)
 ![AWS](https://img.shields.io/badge/Provider-AWS-orange?style=for-the-badge&logo=amazon-aws&logoColor=white)
 ![Compliance](https://img.shields.io/badge/Compliance-APPI_Strict-blue?style=for-the-badge)
@@ -13,8 +12,6 @@ The architecture evolves from a single-region foundation into a complex **Hub-an
 
 ### 📂 [View Full Audit Evidence & Chain of Custody](./DELIVERABLES/README.md)
 
----
-
 ## 2. High-Level Architecture
 The system leverages **Transit Gateway Peering** to create a private, encrypted backbone between regions, ensuring Protected Health Information (PHI) never traverses the public internet during cross-region writes.
 
@@ -25,13 +22,13 @@ graph TD
     CF -->|Primary Origin| ALBT[Tokyo ALB]
     CF -->|Failover Origin| ALBS[São Paulo ALB]
     
-    subgraph "🇯🇵 Tokyo Hub (Data Authority)"
+    subgraph "Tokyo Hub (Data Authority)"
         ALBT --> EC2T[App Tier]
         EC2T --> RDST[(RDS MySQL)]
         EC2T --> TGWT[TGW Hub]
     end
     
-    subgraph "🇧🇷 São Paulo Spoke (Stateless)"
+    subgraph "São Paulo Spoke (Stateless)"
         ALBS --> EC2S[Compute Tier]
         EC2S -.->|SSM Config Bridge| RDST
         EC2S --> TGWS[TGW Spoke]
@@ -39,8 +36,6 @@ graph TD
     
     TGWT <==>|Encrypted Peering| TGWS
 ```
-
----
 
 ## 3. Curriculum Roadmap & Delivery Modules
 
@@ -63,8 +58,6 @@ This project was executed in three distinct phases, mirroring the evolution of a
 *   **The "Legal Corridor":** Established a private **Transit Gateway (TGW) Peering** connection between `ap-northeast-1` and `sa-east-1`.
 *   **Stateless Enforcement:** Implemented conditional Terraform logic (`count = 0`) to physically prevent database creation in the Spoke region.
 *   **The "Triple Tap":** Executed a multi-stage deployment protocol to resolve circular dependencies between TGW Peering requests, acceptances, and route propagation.
-
----
 
 ## 4. Repository Structure
 
@@ -94,6 +87,5 @@ All compliance controls have been verified against the SEIR Foundations specific
 | **Edge Security** | WAF Attached & Origin Cloaked | ✅ **VERIFIED** |
 | **Global Access** | Active-Passive Origin Failover | ✅ **VERIFIED** |
 
----
 **Engineer:** Mahamed Bashir  
 **Submission Date:** February 9, 2026
