@@ -10,7 +10,6 @@ resource "aws_acm_certificate" "origin_cert" {
 }
 
 # --- EDGE CERTIFICATE (Virginia) ---
-# Mandatory for CloudFront
 resource "aws_acm_certificate" "edge_cert" {
   provider          = aws.us_east_1
   domain_name       = var.domain_name

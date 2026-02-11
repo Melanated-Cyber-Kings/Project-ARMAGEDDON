@@ -8,7 +8,7 @@ variable "account_id" {
   type        = string
 }
 
-variable "name_prefix" {  # <--- THIS IS THE KEY
+variable "name_prefix" {  
   description = "The naming prefix (e.g., armageddon-lab-1c)"
   type        = string
 }

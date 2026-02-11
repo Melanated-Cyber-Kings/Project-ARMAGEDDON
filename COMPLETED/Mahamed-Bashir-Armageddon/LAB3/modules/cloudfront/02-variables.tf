@@ -14,7 +14,7 @@ variable "acm_cert_arn" {
   type = string 
   }
 
-# HANDSHAKE NAMES (Must match the root call)
+# HANDSHAKE NAMES
 variable "secret_header_name"  { 
   type = string 
   }
@@ -30,5 +30,5 @@ variable "secret_header_value" {
 variable "secondary_alb_dns_name" {
   description = "Optional: The DNS name of the Secondary Region ALB (e.g., Sao Paulo)"
   type        = string
-  default     = null # Allows Lab 2 to keep working without breaking
+  default     = null 
 }

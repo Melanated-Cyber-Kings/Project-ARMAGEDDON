@@ -7,15 +7,6 @@ variable "env_prefix" {
   type = string
 }
 
-/*
-variable "tcp_ingress_rule" {
-  type = object({
-    port        = number
-    description = string
-  })
-}
-*/
-
 variable "tcp_ingress_rule" {
   description = "RDS MySQL access from EC2 security group"
   type = object({

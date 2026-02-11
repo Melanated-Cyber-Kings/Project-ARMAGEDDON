@@ -1,38 +1,99 @@
-# Project Armageddon: Multi-Cloud Foundations submission
+---
+# Project Armageddon: Multi-Region Medical Cloud Architecture
+
+![Build Status](https://img.shields.io/badge/Build-ARMAGEDDON_GRADE-success?style=for-the-badge&logo=github)
+![Terraform](https://img.shields.io/badge/IaC-Terraform_v1.5+-purple?style=for-the-badge&logo=terraform&logoColor=white)
+![AWS](https://img.shields.io/badge/Provider-AWS-orange?style=for-the-badge&logo=amazon-aws&logoColor=white)
+![Compliance](https://img.shields.io/badge/Compliance-APPI_Strict-blue?style=for-the-badge)
 
 ## 1. Executive Summary
-This repository contains the complete Infrastructure as Code (IaC) and audit artifacts for the SEIR Foundations curriculum. The project demonstrates the evolution from a single-tier cloud foundation to a globally distributed, compliant, and edge-secured medical architecture.
+**Project Armageddon** is a reference implementation of a medical-grade cloud infrastructure designed to satisfy strict **Data Residency (Japan APPI)** requirements while enabling global, low-latency access.
 
-## 2. Curriculum Roadmap & Navigation
-The project is divided into three distinct phases, each documented within its respective directory:
+The architecture evolves from a single-region foundation into a complex **Hub-and-Spoke topology**, enforcing a unidirectional data dependency where the Tokyo Hub acts as the immutable "Data Authority" and the São Paulo Spoke operates as a stateless compute extension.
 
-### [Lab 1: Foundations & Identity](./LAB1/README.md)
-*   **Focus:** Secure VPC architecture, Private RDS integration, and IAM Instance Profiles.
-*   **Key Achievement:** Eliminated static credentials; implemented application-level telemetry.
-
-### [Lab 2: Edge Security & Origin Cloaking](./LAB2/README.md)
-*   **Focus:** Global traffic management and origin protection.
-*   **Key Achievement:** Implemented Layer 7 Origin Cloaking using X-Origin-Secret handshakes and WAFv2 edge shielding.
-
-### [Lab 3: Japan Medical (Compliance Corridor)](./LAB3/README.md)
-*   **Focus:** Multi-region architecture and APPI data residency compliance.
-*   **Key Achievement:** Established a cross-region private data corridor via Transit Gateway (TGW) Peering between Tokyo (Hub) and São Paulo (Stateless Spoke).
-
-## 3. Tech Stack
-*   **Cloud Provider:** AWS (Primary: ap-northeast-1, Secondary: sa-east-1)
-*   **IaC:** Terraform (Split-state architecture with S3 Backends)
-*   **Security:** AWS WAFv2, Secrets Manager, ACM, IAM
-*   **Networking:** Transit Gateway (TGW), Application Load Balancer (ALB), CloudFront
-*   **App Tier:** Flask (Python), RDS MySQL
-
-## 4. Final Verification Status
-
-| Metric | Status |
-| :--- | :--- |
-| **Data Residency (APPI)** | Verified (0 DBs in sa-east-1) |
-| **Network Corridor** | Verified (TGW Peering Available) |
-| **Identity Management** | Verified (No Static Keys) |
-| **Edge Protection** | Verified (WAF Active & Cloaked) |
+### 📂 [View Full Audit Evidence & Chain of Custody](./DELIVERABLES/README.md)
 
 ---
-**Submission Timestamp:** February 9, 2026  
+
+## 2. High-Level Architecture
+The system leverages **Transit Gateway Peering** to create a private, encrypted backbone between regions, ensuring Protected Health Information (PHI) never traverses the public internet during cross-region writes.
+
+```mermaid
+graph TD
+    User((Global User)) -->|HTTPS| CF[CloudFront Edge + WAFv2]
+    
+    CF -->|Primary Origin| ALBT[Tokyo ALB]
+    CF -->|Failover Origin| ALBS[São Paulo ALB]
+    
+    subgraph "🇯🇵 Tokyo Hub (Data Authority)"
+        ALBT --> EC2T[App Tier]
+        EC2T --> RDST[(RDS MySQL)]
+        EC2T --> TGWT[TGW Hub]
+    end
+    
+    subgraph "🇧🇷 São Paulo Spoke (Stateless)"
+        ALBS --> EC2S[Compute Tier]
+        EC2S -.->|SSM Config Bridge| RDST
+        EC2S --> TGWS[TGW Spoke]
+    end
+    
+    TGWT <==>|Encrypted Peering| TGWS
+```
+
+---
+
+## 3. Curriculum Roadmap & Delivery Modules
+
+This project was executed in three distinct phases, mirroring the evolution of a production environment.
+
+### 🏛️ [Phase 1: Foundations & Identity](./LAB1/README.md)
+**Objective:** Hardening the cloud perimeter and identity posture.
+*   **Zero-Trust Identity:** Eliminated long-lived credentials by implementing **IAM Instance Profiles** for all compute resources.
+*   **Secret Rotation:** Integrated **AWS Secrets Manager** for automated database credential rotation.
+*   **Observability:** Deployed custom CloudWatch metrics ("The Panic Button") to monitor application-to-database health.
+
+### 🛡️ [Phase 2: Edge Security & Cloaking](./LAB2/README.md)
+**Objective:** Establishing a "Double-Lock" perimeter defense.
+*   **Origin Cloaking:** Restricted Load Balancer ingress to the **CloudFront Managed Prefix List** (Layer 4) and enforced a custom **X-Origin-Secret** handshake (Layer 7).
+*   **Edge Defense:** Deployed **AWS WAFv2** with managed rule sets (SQLi, Common Threats) to scrub traffic before it hits the VPC.
+*   **Cache Strategy:** Implemented Origin-Driven Caching (`s-maxage`) to optimize content delivery while respecting data freshness.
+
+### 🌐 [Phase 3: Multi-Region Compliance](./LAB3/README.md)
+**Objective:** Enforcing Data Residency via Asymmetric Routing.
+*   **The "Legal Corridor":** Established a private **Transit Gateway (TGW) Peering** connection between `ap-northeast-1` and `sa-east-1`.
+*   **Stateless Enforcement:** Implemented conditional Terraform logic (`count = 0`) to physically prevent database creation in the Spoke region.
+*   **The "Triple Tap":** Executed a multi-stage deployment protocol to resolve circular dependencies between TGW Peering requests, acceptances, and route propagation.
+
+---
+
+## 4. Repository Structure
+
+```text
+Project-ARMAGEDDON/
+├── DELIVERABLES/           # Verified Audit Artifacts & Screenshots
+│   ├── LAB1/               # IAM/Secrets JSON Proofs
+│   ├── LAB2/               # WAF/Cloaking/Cache Proofs
+│   └── LAB3/               # Residency/Corridor/Routing Proofs
+├── LAB1/                   # Phase 1 Source Code
+├── LAB2/                   # Phase 2 Source Code
+├── LAB3/                   # Phase 3 Source Code (Final State)
+│   ├── env/tokyo           # Hub State Configuration
+│   ├── env/saopaulo        # Spoke State Configuration
+│   └── modules/            # Reusable Terraform Modules
+└── README.md               # Master Documentation
+```
+
+## 5. Verification Status
+
+All compliance controls have been verified against the SEIR Foundations specifications.
+
+| Control | Mechanism | Status |
+| :--- | :--- | :--- |
+| **Data Residency** | Physical Isolation of RDS to Tokyo | ✅ **VERIFIED** |
+| **Network Integrity** | Private IP routing via TGW Corridor | ✅ **VERIFIED** |
+| **Edge Security** | WAF Attached & Origin Cloaked | ✅ **VERIFIED** |
+| **Global Access** | Active-Passive Origin Failover | ✅ **VERIFIED** |
+
+---
+**Engineer:** Mahamed Bashir  
+**Submission Date:** February 9, 2026

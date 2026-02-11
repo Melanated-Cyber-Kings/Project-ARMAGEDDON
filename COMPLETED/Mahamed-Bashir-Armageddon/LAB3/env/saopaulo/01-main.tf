@@ -102,10 +102,10 @@ module "ec2" {
   instance_profile_name      = module.iam.instance_profile_name
   public_ip                  = false
 
-  # INJECT TOKYO RDS ENDPOINT INTO BRAZIL APP
+  
   user_data = templatefile("user_data.sh", {
     region    = var.region
-    secret_id = var.db_secret_name # "lab-3/rds/mysql"
+    secret_id = var.db_secret_name 
   })
 }
 
@@ -138,7 +138,6 @@ module "alb" {
 # 6. CONFIGURATION BRIDGE
 # ----------------------------------------------------------------------------
 # Inject the Hub's RDS endpoint into the Spoke's SSM Parameter Store 
-# so the stateless application can locate the primary database.
 
 resource "aws_ssm_parameter" "db_endpoint" {
   name        = "/lab/db/endpoint"

@@ -5,20 +5,19 @@ resource "random_password" "origin_handshake" {
 }
 
 locals {
-  # Standardized Naming Convention
+
   name_prefix = lower("${var.project}-${var.env_prefix}")
 
-  # Origin Cloaking Handshake (Used in CF Origin and ALB Rules)
+  # Origin Cloaking Handshake
   header_name  = "X-Origin-Secret"
   header_value = random_password.origin_handshake.result
 
-  # Decode the JSON secret from the Secrets Manager Catalog
-  # NOTE: This assumes 'data.aws_secretsmanager_secret_version.rds' exists in 01-main.tf
+  
   rds_secret = jsondecode(
     data.aws_secretsmanager_secret_version.rds.secret_string
   )
 
-  # Standardized Tags for every resource
+  # Standardized Tags
   tags = {
     Project     = var.project
     Environment = var.env_prefix

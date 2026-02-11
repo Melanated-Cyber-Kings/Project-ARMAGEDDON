@@ -16,7 +16,7 @@ terraform {
 # 1. DATA SOURCES: IDENTITY & REMOTE STATE
 # ----------------------------------------------------------------------------
 
-# Retrieve Database Credentials from Secrets Manager
+
 data "aws_secretsmanager_secret" "rds" {
   name = var.db_secret_name 
 }
@@ -50,7 +50,7 @@ module "vpc" {
   
   # Route cross-region traffic to the local TGW
   tgw_route_config = {
-    destination_cidr = var.remote_spoke_cidr # 172.18.0.0/16
+    destination_cidr = var.remote_spoke_cidr 
     tgw_id           = module.tgw_hub.tgw_id
   }
 }

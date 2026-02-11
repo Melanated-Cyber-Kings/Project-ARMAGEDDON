@@ -1,7 +1,7 @@
 # RULE 1: AUTHORIZED - The Handshake matches
 resource "aws_lb_listener_rule" "allow_cloudfront" {
   listener_arn = aws_lb_listener.https.arn
-  priority     = 1 # Highest Priority
+  priority     = 1 
 
   action {
     type             = "forward"

@@ -46,7 +46,6 @@ resource "aws_cloudfront_cache_policy" "static_force" {
 # ----------------------------------------------------------------------------
 
 resource "aws_cloudfront_distribution" "main" {
-  # ... (keep enabled, aliases, web_acl_id, etc. the same) ...
   enabled             = true
   is_ipv6_enabled     = true
   comment             = "Armageddon Global Edge - Active/Passive"
@@ -72,7 +71,7 @@ resource "aws_cloudfront_distribution" "main" {
     }
   }
 
-  # 2. SECONDARY ORIGIN (São Paulo) - Conditional
+  # 2. SECONDARY ORIGIN (São Paulo)
   dynamic "origin" {
     for_each = var.secondary_alb_dns_name != null ? [1] : []
     content {
@@ -114,7 +113,7 @@ resource "aws_cloudfront_distribution" "main" {
     }
   }
 
-  # 4. DEFAULT BEHAVIOR (Uses the Group)
+  # 4. DEFAULT BEHAVIOR - Point to the Origin Group if it exists, otherwise Primary ALB
   default_cache_behavior {
     # CRITICAL: Point to the GROUP ID, not the specific Origin
     target_origin_id       = var.secondary_alb_dns_name != null ? "Global-Failover-Group" : "Primary-ALB"
@@ -127,7 +126,7 @@ resource "aws_cloudfront_distribution" "main" {
     origin_request_policy_id = data.aws_cloudfront_origin_request_policy.all_viewer.id
   }
 
-  # ... (Keep ordered_cache_behavior for /static/* pointing to Primary or Group as preferred) ...
+  
   ordered_cache_behavior {
     path_pattern           = "/static/*"
     target_origin_id       = var.secondary_alb_dns_name != null ? "Global-Failover-Group" : "Primary-ALB"
@@ -139,7 +138,7 @@ resource "aws_cloudfront_distribution" "main" {
     origin_request_policy_id = data.aws_cloudfront_origin_request_policy.all_viewer.id
   }
 
-  # ... (Keep viewer_certificate, restrictions, logging_config) ...
+  
   logging_config {
     bucket          = "${var.log_bucket_name}.s3.amazonaws.com"
     include_cookies = false

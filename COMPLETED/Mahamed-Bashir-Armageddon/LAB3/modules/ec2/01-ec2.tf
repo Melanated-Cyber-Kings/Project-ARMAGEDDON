@@ -1,18 +1,16 @@
 # ------------------------------------------------------------------
-# 1. DYNAMIC AMI LOOKUP (THE "IMMACULATE" METHOD)
-# Source Reference: [LAB1 | 1c_terrraform/variables.tf | Line 58]
+# 1. DYNAMIC AMI LOOKUP
 # ------------------------------------------------------------------
 data "aws_ssm_parameter" "latest_al2023" {
   name = "/aws/service/ami-amazon-linux-latest/al2023-ami-kernel-default-x86_64"
 }
 
 # ------------------------------------------------------------------
-# 2. THE LAUNCH TEMPLATE (NOW REGION-AGNOSTIC)
+# 2. THE LAUNCH TEMPLATE
 # ------------------------------------------------------------------
 resource "aws_launch_template" "armageddon_lt" {
   name = "${var.name_prefix}-lt"
   
-  # ATOMIC FIX: Use the dynamic lookup instead of a hardcoded ID
   image_id      = data.aws_ssm_parameter.latest_al2023.value
   instance_type = var.instance_type
   
@@ -21,7 +19,6 @@ resource "aws_launch_template" "armageddon_lt" {
   }
 
   network_interfaces {
-    # We remove associate_public_ip_address because it's controlled by the SUBNET now
     security_groups = var.security_group_ids
   }
   

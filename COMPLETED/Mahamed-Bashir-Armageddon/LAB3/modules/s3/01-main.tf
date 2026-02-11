@@ -16,7 +16,7 @@ resource "aws_s3_bucket" "this" {
   tags          = merge({ Name = var.bucket_name }, var.tags)
 }
 
-# 2. The Ownership Controls (REPLACES the line in your screenshot)
+# 2. The Ownership Controls
 resource "aws_s3_bucket_ownership_controls" "this" {
   bucket = aws_s3_bucket.this.id
   rule {
@@ -39,15 +39,14 @@ resource "aws_s3_bucket_acl" "log_delivery" {
   bucket = aws_s3_bucket.this.id
   acl    = "log-delivery-write"
 
-  # CRITICAL: This prevents the "AccessControlListNotSupported" error
+  
   depends_on = [
     aws_s3_bucket_ownership_controls.this,
     aws_s3_bucket_public_access_block.this,
   ]
 }
 
-# Find the ELB Account ID for your region (Tokyo: 582645695800)
-# This policy is REQUIRED for ALB to write logs.
+
 resource "aws_s3_bucket_policy" "alb_logging_policy" {
   bucket = aws_s3_bucket.this.id
   policy = jsonencode({
@@ -56,7 +55,7 @@ resource "aws_s3_bucket_policy" "alb_logging_policy" {
       {
         Effect = "Allow"
         Principal = {
-          AWS = data.aws_elb_service_account.main.arn # This is the specific ID for ap-northeast-1
+          AWS = data.aws_elb_service_account.main.arn 
         }
         Action   = "s3:PutObject"
         Resource = "${aws_s3_bucket.this.arn}/alb-logs/AWSLogs/${var.account_id}/*"

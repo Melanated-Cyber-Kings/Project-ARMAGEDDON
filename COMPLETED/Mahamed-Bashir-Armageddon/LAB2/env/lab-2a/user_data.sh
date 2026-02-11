@@ -1,7 +1,4 @@
 #!/bin/bash
-# ----------------------------------------------------------------
-# ARMAGEDDON: LAB 1 (BONUS B-F) - NAT-EGRESS PATTERN
-# ----------------------------------------------------------------
 
 # 1. System Dependencies
 # Note: mariadb105 is used for the mysql client binaries
@@ -33,7 +30,6 @@ EOF
 /opt/aws/amazon-cloudwatch-agent/bin/amazon-cloudwatch-agent-ctl -a fetch-config -m ec2 -c file:/opt/aws/amazon-cloudwatch-agent/bin/config.json -s
 
 # 3. Install Python Dependencies via NAT Gateway
-# No longer using --no-index; hitting PyPI directly
 pip3 install flask pymysql boto3
 
 # 4. Application Setup
@@ -191,7 +187,6 @@ def list_notes():
 @app.route("/static/<path:path>")
 def send_static(path):
     """Requirement: Demonstrate Edge-side TTL enforcement."""
-    # Source Reference: [LAB2 | 2b_deliverables.txt | Deliverable D]
     content = f"Immaculate Standard Verified: Static Delivery for {path}"
     resp = make_response(content, 200)
     # Note: Even if we send no-cache here, CloudFront Policy 'static_force' overrides it.

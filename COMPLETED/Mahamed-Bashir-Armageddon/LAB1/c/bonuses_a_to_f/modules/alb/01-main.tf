@@ -25,7 +25,7 @@ resource "aws_lb_target_group" "this" {
   target_type = "instance"
 
   health_check {
-    path                = "/" # Your flask app has a root route
+    path                = "/" 
     interval            = 30
     timeout             = 5
     healthy_threshold   = 2
@@ -41,7 +41,7 @@ resource "aws_lb_listener" "http" {
   protocol          = "HTTP"
 
   default_action {
-    type = "redirect" # This is correct for Port 80
+    type = "redirect" 
 
     redirect {
       port        = "443"
@@ -58,7 +58,7 @@ resource "aws_lb_target_group_attachment" "this" {
   port             = 80
 }
 
-# 5. The Listener (HTTPS) - THIS ENABLES BONUS C
+# 5. The Listener (HTTPS) 
 resource "aws_lb_listener" "https" {
   load_balancer_arn = aws_lb.this.arn
   port              = "443"

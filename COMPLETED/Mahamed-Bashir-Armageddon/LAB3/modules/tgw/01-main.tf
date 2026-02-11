@@ -13,7 +13,7 @@ resource "aws_ec2_transit_gateway_vpc_attachment" "this" {
 
 # REQUESTER LOGIC (Tokyo initiates)
 resource "aws_ec2_transit_gateway_peering_attachment" "request" {
-  # --- THE FIX: Only activate if we are requester AND we have a Peer ID ---
+  # Only activate if we are requester AND we have a Peer ID
   count = var.is_requester && var.peer_tgw_id != null ? 1 : 0
 
   peer_region             = var.peer_region
@@ -33,9 +33,9 @@ resource "aws_ec2_transit_gateway_peering_attachment_accepter" "accept" {
 }
 
 
-# --- MALGUS AUDIT FIX: TGW STATIC ROUTE ---
+# --- TGW STATIC ROUTE ---
 resource "aws_ec2_transit_gateway_route" "peering" {
-  # --- THE FIX: Only build the route if the Attachment actually exists ---
+  # Only build the route if the Attachment actually exists
   count = var.remote_cidr != null && ((var.is_requester && var.peer_tgw_id != null) || var.peering_attachment_id != null) ? 1 : 0
 
   destination_cidr_block         = var.remote_cidr

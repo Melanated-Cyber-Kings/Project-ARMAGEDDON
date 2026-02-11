@@ -13,7 +13,7 @@ provider "aws" {
 }
 
 resource "aws_secretsmanager_secret" "rds_secrets" {
-  # This creates one secret per item in your active_missions list
+  
   for_each = toset(var.active_missions)
   
   name = "${each.value}/rds/mysql"

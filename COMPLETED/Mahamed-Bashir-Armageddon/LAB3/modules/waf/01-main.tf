@@ -10,7 +10,7 @@ terraform {
 
 resource "aws_wafv2_web_acl" "this" {
   name  = "${var.name_prefix}-waf"
-  scope = "CLOUDFRONT" # Lab 2 standard
+  scope = "CLOUDFRONT" 
 
   default_action {
     allow {}
@@ -28,7 +28,7 @@ resource "aws_wafv2_web_acl" "this" {
     priority = 1
 
     override_action {
-      none {} # Corrected block syntax
+      none {} 
     }
 
     statement {

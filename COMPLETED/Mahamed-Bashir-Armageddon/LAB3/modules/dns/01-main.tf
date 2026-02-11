@@ -1,6 +1,6 @@
 # 1. Create the Hosted Zone specifically for the subdomain
 resource "aws_route53_zone" "this" {
-  name = var.domain_name # This will be lab2.couch2cloud.dev
+  name = var.domain_name 
   tags = { Name = "${var.name_prefix}-subdomain-zone" }
 }
 
@@ -27,7 +27,7 @@ resource "aws_route53_record" "validation" {
 # 3. CloudFront Alias Record
 resource "aws_route53_record" "edge_alias" {
   zone_id = aws_route53_zone.this.zone_id
-  name    = var.domain_name # Points lab2.couch2cloud.dev
+  name    = var.domain_name 
   type    = "A"
 
   alias {

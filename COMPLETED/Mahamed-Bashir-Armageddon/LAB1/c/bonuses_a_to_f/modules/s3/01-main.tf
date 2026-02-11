@@ -19,7 +19,7 @@ resource "aws_s3_bucket_versioning" "this" {
 }
 
 # -------------------------------------------------------------------------
-# SECURITY: BLOCK PUBLIC ACCESS TO BUCKET
+# SECURITY: BLOCK PUBLIC ACCESS
 # -------------------------------------------------------------------------
 resource "aws_s3_bucket_public_access_block" "this" {
   bucket = aws_s3_bucket.this.id

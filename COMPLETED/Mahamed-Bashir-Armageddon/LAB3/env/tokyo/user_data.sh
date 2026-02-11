@@ -1,8 +1,4 @@
 #!/bin/bash
-# ----------------------------------------------------------------
-# APPLICATION BOOTSTRAP: FLASK RDS CLIENT
-# ----------------------------------------------------------------
-
 # 1. System Dependencies
 dnf update -y
 dnf install -y python3-pip git mariadb105 amazon-cloudwatch-agent

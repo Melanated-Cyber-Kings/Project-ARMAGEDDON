@@ -10,7 +10,7 @@ variable "instance_type" {
   type = string
 }
 
-variable "name_prefix" {  # <--- THIS IS THE KEY
+variable "name_prefix" {  
   description = "The naming prefix (e.g., armageddon-lab-1c)"
   type        = string
 }
@@ -40,7 +40,7 @@ variable "public_ip" {
 variable "target_group_arn_for_asg" {
 description = "The ARN of the ALB Target Group for the ASG to attach to."
 type = string
-default = "" # Make it optional so it doesn't break Lab 1
+default = ""
 }
 variable "private_app_subnet_ids" {
 description = "The private subnets for the ASG to launch instances into."

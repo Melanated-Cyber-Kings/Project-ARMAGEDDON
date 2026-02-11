@@ -1,7 +1,7 @@
 variable "active_missions" {
   description = "List of active lab environments requiring secrets"
   type        = list(string)
-  default     = ["lab-3"] # Add more as you progress
+  default     = ["lab-3"] 
 }
 
 variable "region" {

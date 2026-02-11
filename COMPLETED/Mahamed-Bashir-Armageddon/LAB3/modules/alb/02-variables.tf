@@ -18,7 +18,7 @@ variable "certificate_arn"    {
     type = string 
     }
 
-# HANDSHAKE RULES (Used in 04-listener-rules.tf)
+# HANDSHAKE RULES
 variable "header_name"        { 
     type = string 
     }

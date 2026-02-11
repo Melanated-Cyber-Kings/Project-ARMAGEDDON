@@ -41,7 +41,7 @@ variable "rtb_public_cidr" {
   type = string
 }
 ############################################################
-variable "name_prefix" {  # <--- THIS IS THE KEY
+variable "name_prefix" {  
   description = "The naming prefix"
   type        = string
 }

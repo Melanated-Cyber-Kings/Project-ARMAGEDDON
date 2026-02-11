@@ -3,7 +3,7 @@
 resource "aws_route_table" "public" {
   vpc_id = aws_vpc.main.id
 
-  #default gateway route
+  
   route {
     cidr_block = var.rtb_public_cidr
     gateway_id = aws_internet_gateway.main.id
@@ -26,8 +26,7 @@ resource "aws_route_table_association" "public_a" {
 resource "aws_route_table" "private" {
   vpc_id = aws_vpc.main.id
 
-  # No internet route required for RDS
-  # AWS automatically adds the local VPC route
+  
 
   tags = {
     Name = "${var.env_prefix}-private-rtb"

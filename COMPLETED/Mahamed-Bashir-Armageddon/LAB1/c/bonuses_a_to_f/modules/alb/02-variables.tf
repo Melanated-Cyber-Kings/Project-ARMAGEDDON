@@ -1,4 +1,4 @@
-variable "name_prefix" {  # <--- THIS IS THE KEY
+variable "name_prefix" {  
   description = "The naming prefix"
   type        = string
 }
@@ -13,7 +13,7 @@ variable "security_group_ids" {
     }
 variable "target_id" { 
     type = string 
-    } # The EC2 ID
+    }
 
 variable "certificate_arn" {
   description = "ACM Certificate ARN for HTTPS"

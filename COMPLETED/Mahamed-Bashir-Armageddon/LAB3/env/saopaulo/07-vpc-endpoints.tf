@@ -8,7 +8,7 @@ resource "aws_vpc_endpoint" "ssm" {
   service_name        = "com.amazonaws.${var.region}.ssm"
   vpc_endpoint_type   = "Interface"
   subnet_ids = module.vpc.private_app_subnet_ids
-  security_group_ids  = [module.security.vpce_sg_id] # <--- FROM MODULE
+  security_group_ids  = [module.security.vpce_sg_id] 
   private_dns_enabled = true
 }
 

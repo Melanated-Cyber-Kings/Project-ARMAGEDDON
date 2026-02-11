@@ -58,5 +58,5 @@ output "hosted_zone_name_servers" {
 output "origin_handshake_secret" {
   description = "The 32-character secret injected into headers. Proof of 'Secret Handshake'."
   value       = local.header_value
-  sensitive   = true # Terraform will hide this unless you use '-raw'
+  sensitive   = true 
 }

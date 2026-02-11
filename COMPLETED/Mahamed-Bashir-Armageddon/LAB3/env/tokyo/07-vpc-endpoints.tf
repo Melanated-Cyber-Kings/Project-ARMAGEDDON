@@ -1,7 +1,5 @@
-# envs/lab-1c/07-vpc-endpoints.tf
-
 # --------------------------------------------------------
-# VPC ENDPOINTS (The Wormholes)
+# VPC ENDPOINTS
 # --------------------------------------------------------
 
 # 1. SSM (Core)
@@ -10,11 +8,11 @@ resource "aws_vpc_endpoint" "ssm" {
   service_name        = "com.amazonaws.${var.region}.ssm"
   vpc_endpoint_type   = "Interface"
   subnet_ids = module.vpc.private_app_subnet_ids
-  security_group_ids  = [module.security.vpce_sg_id] # <--- FROM MODULE
+  security_group_ids  = [module.security.vpce_sg_id] 
   private_dns_enabled = true
 }
 
-# 2. EC2Messages (Command Delivery)
+# 2. EC2Messages
 resource "aws_vpc_endpoint" "ec2messages" {
   vpc_id              = module.vpc.vpc_id
   service_name        = "com.amazonaws.${var.region}.ec2messages"
@@ -24,7 +22,7 @@ resource "aws_vpc_endpoint" "ec2messages" {
   private_dns_enabled = true
 }
 
-# 3. SSMMessages (Session Channel)
+# 3. SSMMessages
 resource "aws_vpc_endpoint" "ssmmessages" {
   vpc_id              = module.vpc.vpc_id
   service_name        = "com.amazonaws.${var.region}.ssmmessages"
@@ -34,7 +32,7 @@ resource "aws_vpc_endpoint" "ssmmessages" {
   private_dns_enabled = true
 }
 
-# 4. S3 Gateway (Package Repos)
+# 4. S3 Gateway
 resource "aws_vpc_endpoint" "s3" {
   vpc_id            = module.vpc.vpc_id
   service_name      = "com.amazonaws.${var.region}.s3"
@@ -42,7 +40,7 @@ resource "aws_vpc_endpoint" "s3" {
   route_table_ids   = [module.vpc.public_route_table_id, module.vpc.private_route_table_id]
 }
 
-# 5. Secrets Manager (Cred Retrieval)
+# 5. Secrets Manager
 resource "aws_vpc_endpoint" "secretsmanager" {
   vpc_id              = module.vpc.vpc_id
   service_name        = "com.amazonaws.${var.region}.secretsmanager"
@@ -62,8 +60,7 @@ resource "aws_vpc_endpoint" "logs" {
   private_dns_enabled = true
 }
 
-# 7. STS (Token Service)
-# Required if you want to run 'aws sts get-caller-identity' in your private subnets
+# 7. STS
 resource "aws_vpc_endpoint" "sts" {
   vpc_id              = module.vpc.vpc_id
   service_name        = "com.amazonaws.${var.region}.sts"

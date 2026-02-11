@@ -20,7 +20,7 @@ data "aws_secretsmanager_secret_version" "rds" {
   secret_id = data.aws_secretsmanager_secret.rds.id
 }
 
-# 2. THE EDGE CERT (VIRGINIA) - Mandatory for CloudFront Global Distribution
+# 2. THE EDGE CERT (VIRGINIA)
 resource "aws_acm_certificate" "edge_cert" {
   provider          = aws.us_east_1 
   domain_name       = var.domain_name
@@ -30,7 +30,7 @@ resource "aws_acm_certificate" "edge_cert" {
   tags = merge(local.tags, { Name = "${local.name_prefix}-edge-cert" })
 }
 
-# 3. THE ORIGIN CERT (TOKYO) - Mandatory for the Regional ALB
+# 3. THE ORIGIN CERT (TOKYO)
 resource "aws_acm_certificate" "origin_cert" {
   domain_name       = var.domain_name
   validation_method = "DNS"

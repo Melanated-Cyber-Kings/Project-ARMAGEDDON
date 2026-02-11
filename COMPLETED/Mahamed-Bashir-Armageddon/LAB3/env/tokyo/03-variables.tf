@@ -5,7 +5,7 @@ variable "project" {
 }
 
 variable "env_prefix" {
-  description = "Mission identifier (e.g., lab-2a)"
+  description = "Mission identifier"
   type        = string
   default     = "lab-2a"
 }

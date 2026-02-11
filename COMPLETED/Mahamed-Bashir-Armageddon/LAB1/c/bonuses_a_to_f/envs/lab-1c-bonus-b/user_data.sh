@@ -33,7 +33,6 @@ EOF
 /opt/aws/amazon-cloudwatch-agent/bin/amazon-cloudwatch-agent-ctl -a fetch-config -m ec2 -c file:/opt/aws/amazon-cloudwatch-agent/bin/config.json -s
 
 # 3. Install Python Dependencies via NAT Gateway
-# No longer using --no-index; hitting PyPI directly
 pip3 install flask pymysql boto3
 
 # 4. Application Setup

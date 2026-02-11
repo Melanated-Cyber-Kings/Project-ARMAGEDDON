@@ -1,10 +1,10 @@
-# Default Region Provider
+# Default Region
 provider "aws" {
-  region = var.region #ap-northeast-1
+  region = var.region 
   
 }
 
-# The Global Region (us-east-1) for CloudFront and ACM
+# The Global Region (us-east-1)
 provider "aws" {
   alias  = "us_east_1"
   region = "us-east-1"
