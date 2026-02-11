@@ -1,0 +1,56 @@
+[
+    [
+        {
+            "DestinationCidrBlock": "172.17.0.0/16",
+            "TransitGatewayId": "tgw-0b75a4e4c0ce80b41",
+            "Origin": "CreateRoute",
+            "State": "active"
+        },
+        {
+            "DestinationCidrBlock": "172.18.0.0/16",
+            "GatewayId": "local",
+            "Origin": "CreateRouteTable",
+            "State": "active"
+        },
+        {
+            "DestinationCidrBlock": "0.0.0.0/0",
+            "NatGatewayId": "nat-098f99e9c6511aa36",
+            "Origin": "CreateRoute",
+            "State": "active"
+        },
+        {
+            "DestinationPrefixListId": "pl-6aa54003",
+            "GatewayId": "vpce-007f0c7cbbba5870e",
+            "Origin": "CreateRoute",
+            "State": "active"
+        }
+    ],
+    [
+        {
+            "DestinationCidrBlock": "172.18.0.0/16",
+            "GatewayId": "local",
+            "Origin": "CreateRouteTable",
+            "State": "active"
+        },
+        {
+            "DestinationCidrBlock": "0.0.0.0/0",
+            "GatewayId": "igw-06a60b61d65f60daf",
+            "Origin": "CreateRoute",
+            "State": "active"
+        },
+        {
+            "DestinationPrefixListId": "pl-6aa54003",
+            "GatewayId": "vpce-007f0c7cbbba5870e",
+            "Origin": "CreateRoute",
+            "State": "active"
+        }
+    ],
+    [
+        {
+            "DestinationCidrBlock": "172.18.0.0/16",
+            "GatewayId": "local",
+            "Origin": "CreateRouteTable",
+            "State": "active"
+        }
+    ]
+]
