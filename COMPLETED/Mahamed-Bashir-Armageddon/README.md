@@ -1,4 +1,21 @@
-# Project Armageddon: Multi-Region Medical Cloud Architecture
+<div align="center">
+  <a href="https://github.com/M-Bash" target="_blank">
+    <img src="https://img.shields.io/badge/GitHub-Profile-181717?style=for-the-badge&logo=github&logoColor=white" alt="GitHub" />
+  </a>
+  &nbsp;
+  <a href="https://www.linkedin.com/in/mahamed-bashir" target="_blank">
+    <img src="https://img.shields.io/badge/LinkedIn-Connect-0077B5?style=for-the-badge&logo=linkedin&logoColor=white" alt="LinkedIn" />
+  </a>
+</div>
+
+<p align="center">
+  <br />
+  <b>Author:</b> Mahamed Bashir — Cloud Infrastructure Engineer
+</p>
+
+---
+
+# TokyoAPPI: Multi-Region Medical Cloud Architecture
 
 ![Build Status](https://img.shields.io/badge/Build-Passing-success?style=for-the-badge&logo=github)
 ![Terraform](https://img.shields.io/badge/IaC-Terraform_v1.5+-purple?style=for-the-badge&logo=terraform&logoColor=white)
@@ -6,7 +23,7 @@
 ![Compliance](https://img.shields.io/badge/Compliance-APPI_Strict-blue?style=for-the-badge)
 
 ## 1. Executive Summary
-**Project Armageddon** is a reference implementation of a medical-grade cloud infrastructure designed to satisfy strict **Data Residency (Japan APPI)** requirements while enabling global, low-latency access.
+**Project TokyoAPPI** is a reference implementation of a medical-grade cloud infrastructure designed to satisfy strict **Data Residency (Japan APPI)** requirements while enabling global, low-latency access.
 
 The architecture evolves from a single-region foundation into a complex **Hub-and-Spoke topology**, enforcing a unidirectional data dependency where the Tokyo Hub acts as the immutable "Data Authority" and the São Paulo Spoke operates as a stateless compute extension.
 
@@ -82,10 +99,7 @@ All compliance controls have been verified against the SEIR Foundations specific
 
 | Control | Mechanism | Status |
 | :--- | :--- | :--- |
-| **Data Residency** | Physical Isolation of RDS to Tokyo | ✅ **VERIFIED** |
-| **Network Integrity** | Private IP routing via TGW Corridor | ✅ **VERIFIED** |
-| **Edge Security** | WAF Attached & Origin Cloaked | ✅ **VERIFIED** |
-| **Global Access** | Active-Passive Origin Failover | ✅ **VERIFIED** |
-
-**Engineer:** Mahamed Bashir  
-**Submission Date:** February 9, 2026
+| **Data Residency** | Physical Isolation of RDS to Tokyo | ✅ **CONFIRMED** |
+| **Network Integrity** | Private IP routing via TGW Corridor | ✅ **CONFIRMED** |
+| **Edge Security** | WAF Attached & Origin Cloaked | ✅ **CONFIRMED** |
+| **Global Access** | Active-Passive Origin Failover | ✅ **CONFIRMED** |
