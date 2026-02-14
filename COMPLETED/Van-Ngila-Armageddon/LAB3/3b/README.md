@@ -78,6 +78,48 @@ Lab 3 implements a **hub-and-spoke multi-region architecture** between **Tokyo (
 - **Origin cloaking**: ALB blocks direct traffic, accepts only from CloudFront
 - **Stateless compute**: Horizontal scaling in São Paulo
 
+## 💰 Cost Analysis
+
+The architecture is designed for **cost optimization** while preserving the ability to restore for grading or production use.
+
+### **Full Running Cost (All Resources Active)**
+| Resource | Region | Monthly Cost (est.) |
+|----------|--------|---------------------|
+| RDS MySQL (db.t3.micro) | Tokyo | $200 |
+| EC2 (t3.micro) | São Paulo | $30 |
+| NAT Gateway | São Paulo | $32 |
+| Application Load Balancer | São Paulo | $18 |
+| Data Transfer (cross-region) | Both | $10 |
+| **TOTAL** | | **~$280/month** |
+
+### **Cost-Optimized State (Preserved for Grading)**
+| Resource | Status | Monthly Cost (est.) |
+|----------|--------|---------------------|
+| RDS MySQL | **Stopped** (data retained) | $50 |
+| EC2 | **Stopped** (EBS only) | $5 |
+| NAT Gateway | **Deleted** | $0 |
+| ALB | **Deleted** | $0 |
+| Transit Gateways | Idle | $0 |
+| VPCs, SGs, Route Tables | Idle | $0 |
+| **TOTAL** | | **~$55/month** |
+
+**Savings:** **~82% reduction** (from $280 to $55/month).
+
+### **Cost Optimization Actions**
+- EC2 instances stopped (can be started in <5 minutes)
+- RDS stopped (data retained, starts in ~5 minutes)
+- NAT Gateway deleted (recreatable via Terraform)
+- ALB deleted (recreatable via Terraform)
+- TGW peering preserved (no cost when idle)
+- Cross-region data transfer eliminated
+
+### **Restoration for Grading**
+A one‑command script (`cost_restore_for_grading.sh`) restores the minimal resources needed for validation:
+- Start RDS
+- Start EC2
+- Re-add static TGW routes
+- All within 10 minutes, costing only a few dollars per validation.
+
 ## 🔧 Technical Implementation
 
 ### **Transit Gateway Architecture**
@@ -279,9 +321,21 @@ This multi-region architecture demonstrates strict adherence to Japan's APPI (Ac
 
 ---
 
+## 💼 Cost Optimization Scripts
+
+To preserve the architecture for grading while minimizing costs, the following scripts are provided:
+
+- `cost_saver_stop_all.sh` – Stops EC2/RDS, deletes NAT Gateway/ALB (82% cost reduction)
+- `cost_restore_for_grading.sh` – One‑command restoration of resources for validation
+- `cost_status_check.sh` – Dashboard of current resource status and estimated costs
+
+These scripts ensure the architecture remains intact and can be quickly validated without incurring unnecessary expenses.
+
+---
+
 **Architectural Sign-off:**  
 **Lab 3 Multi-Region Compliance validated and approved for production standards.**
 
 **Vany FERRAND**  
 Senior Principal Multi-Cloud Architect & Engineering Lead  
-*2026-02-10*
+*2026-02-11*
