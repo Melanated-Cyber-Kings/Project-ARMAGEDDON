@@ -1,0 +1,29 @@
+{
+    "TransitGatewayPeeringAttachments": [
+        {
+            "TransitGatewayAttachmentId": "tgw-attach-03c5cb529155b1bd5",
+            "RequesterTgwInfo": {
+                "TransitGatewayId": "tgw-0f75d1c62300ad055",
+                "OwnerId": "582600397173",
+                "Region": "ap-northeast-1"
+            },
+            "AccepterTgwInfo": {
+                "TransitGatewayId": "tgw-0b75a4e4c0ce80b41",
+                "OwnerId": "582600397173",
+                "Region": "sa-east-1"
+            },
+            "Status": {
+                "Code": "available",
+                "Message": "Available"
+            },
+            "State": "available",
+            "CreationTime": "2026-02-08T23:12:37.000Z",
+            "Tags": [
+                {
+                    "Key": "Name",
+                    "Value": "armageddon-shinjuku-lab-3-peering-request"
+                }
+            ]
+        }
+    ]
+}

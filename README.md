@@ -1,95 +1,105 @@
-<h1 align="center">📌 Instructions</h1>
+<div align="center">
+  <a href="https://github.com/M-Bash" target="_blank">
+    <img src="https://img.shields.io/badge/GitHub-Profile-181717?style=for-the-badge&logo=github&logoColor=white" alt="GitHub" />
+  </a>
+  &nbsp;
+  <a href="https://www.linkedin.com/in/mahamed-bashir" target="_blank">
+    <img src="https://img.shields.io/badge/LinkedIn-Connect-0077B5?style=for-the-badge&logo=linkedin&logoColor=white" alt="LinkedIn" />
+  </a>
+</div>
 
+<p align="center">
+  <br />
+  <b>Author:</b> Mahamed Bashir — Cloud Infrastructure Engineer
+</p>
 
-<br>
+---
 
+# TokyoAPPI: Multi-Region Medical Cloud Architecture
 
-<br>
+![Build Status](https://img.shields.io/badge/Build-Passing-success?style=for-the-badge&logo=github)
+![Terraform](https://img.shields.io/badge/IaC-Terraform_v1.5+-purple?style=for-the-badge&logo=terraform&logoColor=white)
+![AWS](https://img.shields.io/badge/Provider-AWS-orange?style=for-the-badge&logo=amazon-aws&logoColor=white)
+![Compliance](https://img.shields.io/badge/Compliance-APPI_Strict-blue?style=for-the-badge)
 
-1. Pull or clone Armageddon Repo on your gitbash terminal to your git on your local machine. You will only be allowed to pull once you have cloned the repo. 
+## 1. Executive Summary
+**Project TokyoAPPI** is a reference implementation of a medical-grade cloud infrastructure designed to satisfy strict **Data Residency (Japan APPI)** requirements while enabling global, low-latency access.
 
-<br>
+The architecture evolves from a single-region foundation into a complex **Hub-and-Spoke topology**, enforcing a unidirectional data dependency where the Tokyo Hub acts as the immutable "Data Authority" and the São Paulo Spoke operates as a stateless compute extension.
 
-```bash
-git clone git@github.com:Melanated-Cyber-Kings/Project-ARMAGEDDON.git
+### 📂 [View Full Audit Evidence & Chain of Custody](./DELIVERABLES/README.md)
+
+## 2. High-Level Architecture
+The system leverages **Transit Gateway Peering** to create a private, encrypted backbone between regions, ensuring Protected Health Information (PHI) never traverses the public internet during cross-region writes.
+
+```mermaid
+graph TD
+    User((Global User)) -->|HTTPS| CF[CloudFront Edge + WAFv2]
+    
+    CF -->|Primary Origin| ALBT[Tokyo ALB]
+    CF -->|Failover Origin| ALBS[São Paulo ALB]
+    
+    subgraph "Tokyo Hub (Data Authority)"
+        ALBT --> EC2T[App Tier]
+        EC2T --> RDST[(RDS MySQL)]
+        EC2T --> TGWT[TGW Hub]
+    end
+    
+    subgraph "São Paulo Spoke (Stateless)"
+        ALBS --> EC2S[Compute Tier]
+        EC2S -.->|SSM Config Bridge| RDST
+        EC2S --> TGWS[TGW Spoke]
+    end
+    
+    TGWT <==>|Encrypted Peering| TGWS
 ```
 
-<br>
+## 3. Curriculum Roadmap & Delivery Modules
 
-```bash
-git pull origin "name of your branch goes here"
-```
-<br>
+This project was executed in three distinct phases, mirroring the evolution of a production environment.
 
-2. Navigate to the cloned repo location in your gitbash terminal and create folder Lab 1a, Lab 1b and Lab 1c. These are the folders that will have your documentation and code.
+### 🏛️ [Phase 1: Foundations & Identity](./LAB1/README.md)
+**Objective:** Hardening the cloud perimeter and identity posture.
+*   **Zero-Trust Identity:** Eliminated long-lived credentials by implementing **IAM Instance Profiles** for all compute resources.
+*   **Secret Rotation:** Integrated **AWS Secrets Manager** for automated database credential rotation.
+*   **Observability:** Deployed custom CloudWatch metrics ("The Panic Button") to monitor application-to-database health.
 
-<br>
+### 🛡️ [Phase 2: Edge Security & Cloaking](./LAB2/README.md)
+**Objective:** Establishing a "Double-Lock" perimeter defense.
+*   **Origin Cloaking:** Restricted Load Balancer ingress to the **CloudFront Managed Prefix List** (Layer 4) and enforced a custom **X-Origin-Secret** handshake (Layer 7).
+*   **Edge Defense:** Deployed **AWS WAFv2** with managed rule sets (SQLi, Common Threats) to scrub traffic before it hits the VPC.
+*   **Cache Strategy:** Implemented Origin-Driven Caching (`s-maxage`) to optimize content delivery while respecting data freshness.
 
-3. Create your branches and switch into it immediately. (I have created the names as I want you to create your branches)
+### 🌐 [Phase 3: Multi-Region Compliance](./LAB3/README.md)
+**Objective:** Enforcing Data Residency via Asymmetric Routing.
+*   **The "Legal Corridor":** Established a private **Transit Gateway (TGW) Peering** connection between `ap-northeast-1` and `sa-east-1`.
+*   **Stateless Enforcement:** Implemented conditional Terraform logic (`count = 0`) to physically prevent database creation in the Spoke region.
+*   **The "Triple Tap":** Executed a multi-stage deployment protocol to resolve circular dependencies between TGW Peering requests, acceptances, and route propagation.
 
-<br>
+## 4. Repository Structure
 
-```bash
-git checkout -b Mahamed-Bashir-Armageddon-Branch
-```
-```bash
-git checkout -b Van-Ngila-Armageddon-Branch
-```
-```bash
-git checkout -b Adedji-Adeyemi-Armageddon-Branch
-```
-```bash
-git checkout -b Jay-Bailey-Armageddon-Branch
-```
-```bash
-git checkout -b Daniel-Bryce-Armageddon-Branch
-```
-```bash
-git checkout -b ST-Tucker-Armageddon-Branch
-```
-```bash
-git checkout -b Trevore-Jerome-Armageddon-Branch
-```
-```bash
-git checkout -b Voloxar-Karsze-Armageddon-Branch
-```
-```bash
-git checkout -b Mark-Thornhill-Armageddon-Branch
-```
-```bash
-git checkout -b Anunnaki-MetuNetter-AmenRa-Armageddon-Branch
-```
-```bash
-git checkout -b Shawn-Mosby-Armageddon-Branch
-```
-```bash
-git checkout -b Cameron-Cleveland-Armageddon-Branch
-```
-```bash
-git checkout -b Campanella-Godfrey-Jr-Armageddon-Branch
-```
-```bash
-git checkout -b Alastair-Davis-Armageddon-Branch
+```text
+Project-ARMAGEDDON/
+├── DELIVERABLES/           # Verified Audit Artifacts & Screenshots
+│   ├── LAB1/               # IAM/Secrets JSON Proofs
+│   ├── LAB2/               # WAF/Cloaking/Cache Proofs
+│   └── LAB3/               # Residency/Corridor/Routing Proofs
+├── LAB1/                   # Phase 1 Source Code
+├── LAB2/                   # Phase 2 Source Code
+├── LAB3/                   # Phase 3 Source Code (Final State)
+│   ├── env/tokyo           # Hub State Configuration
+│   ├── env/saopaulo        # Spoke State Configuration
+│   └── modules/            # Reusable Terraform Modules
+└── README.md               # Master Documentation
 ```
 
-<br>
-   
-5. Create Readme.md files in each folder you created above this will be the file that you will document your Armageddon Labs in and that will be presented to THEO, so make sure it's readable and that someone who wouldnt know how to do the homework/project can follow with little to no difficulty.
+## 5. Verification Status
 
+All compliance controls have been verified against the SEIR Foundations specifications.
 
-
-<br>
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+| Control | Mechanism | Status |
+| :--- | :--- | :--- |
+| **Data Residency** | Physical Isolation of RDS to Tokyo | ✅ **CONFIRMED** |
+| **Network Integrity** | Private IP routing via TGW Corridor | ✅ **CONFIRMED** |
+| **Edge Security** | WAF Attached & Origin Cloaked | ✅ **CONFIRMED** |
+| **Global Access** | Active-Passive Origin Failover | ✅ **CONFIRMED** |

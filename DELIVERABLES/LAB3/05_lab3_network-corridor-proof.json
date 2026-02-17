@@ -1,0 +1,154 @@
+{
+  "tokyo": {
+    "region": "ap-northeast-1",
+    "transit_gateways": [
+      {
+        "TransitGatewayId": "tgw-0f75d1c62300ad055",
+        "TransitGatewayArn": "arn:aws:ec2:ap-northeast-1:582600397173:transit-gateway/tgw-0f75d1c62300ad055",
+        "State": "available",
+        "OwnerId": "582600397173",
+        "Description": "armageddon-shinjuku-lab-3-tgw",
+        "CreationTime": "2026-02-08 20:54:11+00:00",
+        "Options": {
+          "AmazonSideAsn": 64512,
+          "AutoAcceptSharedAttachments": "disable",
+          "DefaultRouteTableAssociation": "enable",
+          "AssociationDefaultRouteTableId": "tgw-rtb-0b7324465899f6dcd",
+          "DefaultRouteTablePropagation": "enable",
+          "PropagationDefaultRouteTableId": "tgw-rtb-0b7324465899f6dcd",
+          "VpnEcmpSupport": "enable",
+          "DnsSupport": "enable",
+          "SecurityGroupReferencingSupport": "disable",
+          "MulticastSupport": "disable",
+          "EncryptionSupport": {
+            "EncryptionState": "disabled"
+          }
+        },
+        "Tags": [
+          {
+            "Key": "Name",
+            "Value": "armageddon-shinjuku-lab-3-tgw"
+          }
+        ]
+      }
+    ],
+    "attachments": [
+      {
+        "TransitGatewayAttachmentId": "tgw-attach-03c5cb529155b1bd5",
+        "TransitGatewayId": "tgw-0f75d1c62300ad055",
+        "TransitGatewayOwnerId": "582600397173",
+        "ResourceOwnerId": "582600397173",
+        "ResourceType": "peering",
+        "ResourceId": "tgw-0b75a4e4c0ce80b41",
+        "State": "available",
+        "Association": {
+          "TransitGatewayRouteTableId": "tgw-rtb-0b7324465899f6dcd",
+          "State": "associated"
+        },
+        "CreationTime": "2026-02-08 23:12:37+00:00",
+        "Tags": [
+          {
+            "Key": "Name",
+            "Value": "armageddon-shinjuku-lab-3-peering-request"
+          }
+        ]
+      },
+      {
+        "TransitGatewayAttachmentId": "tgw-attach-0128063b987919b1c",
+        "TransitGatewayId": "tgw-0f75d1c62300ad055",
+        "TransitGatewayOwnerId": "582600397173",
+        "ResourceOwnerId": "582600397173",
+        "ResourceType": "vpc",
+        "ResourceId": "vpc-0bba0d4e85c6e9ea6",
+        "State": "available",
+        "Association": {
+          "TransitGatewayRouteTableId": "tgw-rtb-0b7324465899f6dcd",
+          "State": "associated"
+        },
+        "CreationTime": "2026-02-08 20:55:29+00:00",
+        "Tags": [
+          {
+            "Key": "Name",
+            "Value": "armageddon-shinjuku-lab-3-tgw-attach"
+          }
+        ]
+      }
+    ]
+  },
+  "saopaulo": {
+    "region": "sa-east-1",
+    "transit_gateways": [
+      {
+        "TransitGatewayId": "tgw-0b75a4e4c0ce80b41",
+        "TransitGatewayArn": "arn:aws:ec2:sa-east-1:582600397173:transit-gateway/tgw-0b75a4e4c0ce80b41",
+        "State": "available",
+        "OwnerId": "582600397173",
+        "Description": "armageddon-liberdade-lab-3-tgw",
+        "CreationTime": "2026-02-08 21:57:43+00:00",
+        "Options": {
+          "AmazonSideAsn": 64512,
+          "AutoAcceptSharedAttachments": "disable",
+          "DefaultRouteTableAssociation": "enable",
+          "AssociationDefaultRouteTableId": "tgw-rtb-0759f8447d941040e",
+          "DefaultRouteTablePropagation": "enable",
+          "PropagationDefaultRouteTableId": "tgw-rtb-0759f8447d941040e",
+          "VpnEcmpSupport": "enable",
+          "DnsSupport": "enable",
+          "SecurityGroupReferencingSupport": "disable",
+          "MulticastSupport": "disable",
+          "EncryptionSupport": {
+            "EncryptionState": "disabled"
+          }
+        },
+        "Tags": [
+          {
+            "Key": "Name",
+            "Value": "armageddon-liberdade-lab-3-tgw"
+          }
+        ]
+      }
+    ],
+    "attachments": [
+      {
+        "TransitGatewayAttachmentId": "tgw-attach-03c5cb529155b1bd5",
+        "TransitGatewayId": "tgw-0b75a4e4c0ce80b41",
+        "TransitGatewayOwnerId": "582600397173",
+        "ResourceOwnerId": "582600397173",
+        "ResourceType": "peering",
+        "ResourceId": "tgw-0f75d1c62300ad055",
+        "State": "available",
+        "Association": {
+          "TransitGatewayRouteTableId": "tgw-rtb-0759f8447d941040e",
+          "State": "associated"
+        },
+        "CreationTime": "2026-02-08 23:13:05+00:00",
+        "Tags": [
+          {
+            "Key": "Name",
+            "Value": "armageddon-liberdade-lab-3-peering-accept"
+          }
+        ]
+      },
+      {
+        "TransitGatewayAttachmentId": "tgw-attach-035796cdc406cbe98",
+        "TransitGatewayId": "tgw-0b75a4e4c0ce80b41",
+        "TransitGatewayOwnerId": "582600397173",
+        "ResourceOwnerId": "582600397173",
+        "ResourceType": "vpc",
+        "ResourceId": "vpc-081535ddfca645980",
+        "State": "available",
+        "Association": {
+          "TransitGatewayRouteTableId": "tgw-rtb-0759f8447d941040e",
+          "State": "associated"
+        },
+        "CreationTime": "2026-02-08 21:58:20+00:00",
+        "Tags": [
+          {
+            "Key": "Name",
+            "Value": "armageddon-liberdade-lab-3-tgw-attach"
+          }
+        ]
+      }
+    ]
+  }
+}

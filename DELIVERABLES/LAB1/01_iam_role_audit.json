@@ -1,0 +1,26 @@
+{
+    "Role": {
+        "Path": "/",
+        "RoleName": "armageddon-shinjuku-lab-3-ec2-secrets-role",
+        "RoleId": "AROAYPJNQSF2ZYO2FQR4R",
+        "Arn": "arn:aws:iam::582600397173:role/armageddon-shinjuku-lab-3-ec2-secrets-role",
+        "CreateDate": "2026-02-08T20:54:11Z",
+        "AssumeRolePolicyDocument": {
+            "Version": "2012-10-17",
+            "Statement": [
+                {
+                    "Effect": "Allow",
+                    "Principal": {
+                        "Service": "ec2.amazonaws.com"
+                    },
+                    "Action": "sts:AssumeRole"
+                }
+            ]
+        },
+        "MaxSessionDuration": 3600,
+        "RoleLastUsed": {
+            "LastUsedDate": "2026-02-11T00:27:50Z",
+            "Region": "ap-northeast-1"
+        }
+    }
+}
