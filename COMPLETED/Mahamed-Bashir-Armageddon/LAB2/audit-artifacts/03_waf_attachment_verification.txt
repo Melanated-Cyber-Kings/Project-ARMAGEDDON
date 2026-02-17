@@ -1,3 +1,0 @@
-aws cloudfront get-distribution --id E1YO9AOVYWJV94 --query "Distribution.DistributionConfig.WebACLId" --output text
-Verified WAF Association via CloudFront API:
-arn:aws:wafv2:us-east-1:582600397173:global/webacl/armageddon-shinjuku-lab-3-waf/74d7584b-4ab4-4be1-9543-2002bc73ef1b

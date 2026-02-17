@@ -1,9 +1,0 @@
-{
-    "Metrics": [
-        {
-            "Namespace": "Lab/RDSApp",
-            "MetricName": "DBConnectionErrors",
-            "Dimensions": []
-        }
-    ]
-}

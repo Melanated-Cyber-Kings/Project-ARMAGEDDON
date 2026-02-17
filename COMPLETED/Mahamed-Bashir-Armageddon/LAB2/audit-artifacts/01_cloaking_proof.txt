@@ -1,2 +1,0 @@
-LAYER 1 (Network): Direct access to the ALB from unauthorized IPs results in a Connection Timeout. This confirms the Security Group is successfully restricted to the CloudFront Managed Prefix List.
-LAYER 2 (Handshake): The ALB Listener Rule is configured to return a 403 Forbidden only if a request manages to reach the ALB but lacks the valid X-Origin-Secret header.
