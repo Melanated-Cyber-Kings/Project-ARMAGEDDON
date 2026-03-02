@@ -1,0 +1,107 @@
+# provider "aws" {
+#   alias  = "use1"
+#   region = "us-east-1"
+# }
+
+
+
+# S3 bucket to store CloudFront logs
+resource "aws_s3_bucket" "cf_logs2" {
+  bucket = lower("my-cloudfront-logs-${var.project}-sao-paulo-${random_string.short_string.result}")  # must be globally unique
+  provider = aws.use1
+
+
+  tags = {
+    Name = "${var.project}-sao-paulo-cloudfront-logs"
+  }
+}
+
+#(Optional but recommended) Block public access to the logs bucket
+resource "aws_s3_bucket_public_access_block" "cf_logs2" {
+  bucket = aws_s3_bucket.cf_logs2.id
+  provider = aws.use1
+
+  block_public_acls       = true
+  block_public_policy     = true
+  ignore_public_acls      = true
+  restrict_public_buckets = true
+}
+
+
+# # Set ownership controls for the S3 bucket (bucket owner preferred)
+# resource "aws_s3_bucket_ownership_controls" "cf_logs2" {
+#   bucket = aws_s3_bucket.cf_logs2.id
+#   #provider = aws.use1
+
+#   rule {
+#     object_ownership = "BucketOwnerEnforced"
+#   }
+# }
+
+# Set the ACL to private for the S3 bucket
+# resource "aws_s3_bucket_acl" "cf_logs2" {
+#   bucket = aws_s3_bucket.cf_logs2.id
+#   #provider = aws.use1
+#   acl    = "private"
+
+#   depends_on = [aws_s3_bucket_ownership_controls.waf_logs]
+# }
+
+# # Create an IAM role to allow WAF to write logs to the S3 bucket
+# resource "aws_iam_role" "cf_logging_role2" {
+#   name = "${var.project}-cf-logging-role2"
+
+#   assume_role_policy = jsonencode({
+#     Version = "2012-10-17"
+#     Statement = [
+#       {
+#         Effect    = "Allow"
+#         Action    = "sts:AssumeRole"
+#         Principal = {
+#           Service = "wafv2.amazonaws.com"
+#         }
+#       }
+#     ]
+#   })
+# }
+
+# # Attach policy to the IAM role allowing it to write to the S3 bucket
+# resource "aws_iam_role_policy" "cf_logging_policy2" {
+#   name = "${var.project}-cf-logging-policy"
+#   role = aws_iam_role.cf_logging_role2.id
+
+#   policy = jsonencode({
+#     Version = "2012-10-17"
+#     Statement = [
+#       {
+#         Effect   = "Allow"
+#         Action   = "s3:PutObject"
+#         Resource = "arn:aws:s3:::${aws_s3_bucket.cf_logs2.bucket}/*"
+#       }
+#     ]
+#   })
+# }
+
+
+# Allow ACLs (required for CloudFront logging)
+resource "aws_s3_bucket_ownership_controls" "cf_logs2" {
+  bucket = aws_s3_bucket.cf_logs2.id
+  provider = aws.use1
+
+  rule {
+    # Must NOT be BucketOwnerEnforced for logging
+    object_ownership = "BucketOwnerPreferred"
+  }
+}
+
+# Give CloudFront log delivery permissions via canned ACL
+resource "aws_s3_bucket_acl" "cf_logs2" {
+  bucket = aws_s3_bucket.cf_logs2.id
+  provider = aws.use1
+
+  acl    = "log-delivery-write"
+
+  depends_on = [
+    aws_s3_bucket_ownership_controls.cf_logs2
+  ]
+}

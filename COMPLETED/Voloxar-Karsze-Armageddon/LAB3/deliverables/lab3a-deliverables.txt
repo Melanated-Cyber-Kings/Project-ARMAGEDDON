@@ -1,0 +1,106 @@
+lab3a deliverables:
+
+nc -vz lab-mysql.czokoi6ocbw7.ap-northeast-1.rds.amazonaws.com 3306
+Ncat: Version 7.93 ( https://nmap.org/ncat )
+Ncat: Connected to 172.17.12.13:3306.
+Ncat: 0 bytes sent, 0 bytes received in 0.28 seconds.
+
+sao paulo info:
+aws ec2 describe-route-tables --filters "Name=vpc-id,Values=vpc-01f816f7869be7681" --query "RouteTables[].Routes[]"  --region sa-east-1
+[
+    {
+        "DestinationCidrBlock": "10.17.0.0/16",
+        "GatewayId": "local",
+        "Origin": "CreateRouteTable",
+        "State": "active"
+    },
+    {
+        "DestinationCidrBlock": "0.0.0.0/0",
+        "GatewayId": "igw-0f1b9e2402c12805b",
+        "Origin": "CreateRoute",
+        "State": "active"
+    },
+    {
+        "DestinationCidrBlock": "10.17.0.0/16",
+        "GatewayId": "local",
+        "Origin": "CreateRouteTable",
+        "State": "active"
+    },
+    {
+        "DestinationCidrBlock": "172.17.0.0/16",
+        "TransitGatewayId": "tgw-0163b97ca04ceeaf6",
+        "Origin": "CreateRoute",
+        "State": "active"
+    },
+    {
+        "DestinationCidrBlock": "10.17.0.0/16",
+        "GatewayId": "local",
+        "Origin": "CreateRouteTable",
+        "State": "active"
+    },
+    {
+        "DestinationCidrBlock": "0.0.0.0/0",
+        "NatGatewayId": "nat-09508f0a01713e453",
+        "Origin": "CreateRoute",
+        "State": "active"
+    }
+]
+
+
+tokyo info:
+aws ec2 describe-route-tables --filters "Name=vpc-id,Values=vpc-09ddaafa666ce81be" --query "RouteTables[].Routes[]"  --region ap-northeast-1
+[
+    {
+        "DestinationCidrBlock": "172.17.0.0/16",
+        "GatewayId": "local",
+        "Origin": "CreateRouteTable",
+        "State": "active"
+    },
+    {
+        "DestinationCidrBlock": "172.17.0.0/16",
+        "GatewayId": "local",
+        "Origin": "CreateRouteTable",
+        "State": "active"
+    },
+    {
+        "DestinationCidrBlock": "0.0.0.0/0",
+        "GatewayId": "igw-097668b370b554751",
+        "Origin": "CreateRoute",
+        "State": "active"
+    },
+    {
+        "DestinationCidrBlock": "172.17.0.0/16",
+        "GatewayId": "local",
+        "Origin": "CreateRouteTable",
+        "State": "active"
+    },
+    {
+        "DestinationCidrBlock": "10.17.0.0/16",
+        "TransitGatewayId": "tgw-035ae38d0f134e83a",
+        "Origin": "CreateRoute",
+        "State": "active"
+    },
+    {
+        "DestinationCidrBlock": "0.0.0.0/0",
+        "NatGatewayId": "nat-00000c6d46de1d2bc",
+        "Origin": "CreateRoute",
+        "State": "active"
+    },
+    {
+        "DestinationPrefixListId": "pl-61a54008",
+        "GatewayId": "vpce-0c0fdd6b174314e7d",
+        "Origin": "CreateRoute",
+        "State": "active"
+    }
+] 
+
+Outputs:
+.
+.
+.
+tokyo_rds_endpoint = "lab-mysql.czokoi6ocbw7.ap-northeast-1.rds.amazonaws.com"
+tokyo_tgw_id = "tgw-attach-00a2e0c61d431eb8f"
+tokyo_vpc_cidr = "172.17.0.0/16"
+
+
+

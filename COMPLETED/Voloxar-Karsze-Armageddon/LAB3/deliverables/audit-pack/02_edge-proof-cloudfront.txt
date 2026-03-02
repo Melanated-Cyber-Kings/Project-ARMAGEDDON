@@ -1,0 +1,205 @@
+curl -I https://theswordptdemo.site/api/public-feed
+HTTP/2 200 
+content-type: application/json
+content-length: 101
+date: Fri, 27 Feb 2026 18:41:51 GMT
+cache-control: public, s-maxage=30, max-age=0
+server: Werkzeug/3.1.6 Python/3.9.25
+x-cache: Miss from cloudfront
+via: 1.1 fe8af35c363442c3ecc406bdb489733e.cloudfront.net (CloudFront)
+x-amz-cf-pop: MIA3-P3
+x-amz-cf-id: Y1cDajHZvo7qhDXBDKcY5nNx_ASzYq_bXWPABeveuXzw5PiGRSaxww==
+
+curl -I https://theswordptdemo.site/api/public-feed
+HTTP/2 200 
+content-type: application/json
+content-length: 91
+date: Fri, 27 Feb 2026 18:42:34 GMT
+cache-control: public, s-maxage=30, max-age=0
+server: Werkzeug/3.1.6 Python/3.9.25
+x-cache: Hit from cloudfront
+via: 1.1 f6f4782af042282825a7e9efc782df96.cloudfront.net (CloudFront)
+x-amz-cf-pop: MIA3-P3
+x-amz-cf-id: leU-9O_2-u19eYwevxMNyS4Bcd8tiZcenreUdVjOXkuutcJMrGtCGw==
+age: 7
+
+curl -I https://theswordptdemo.site/api/public-feed
+HTTP/2 200 
+content-type: application/json
+content-length: 91
+date: Fri, 27 Feb 2026 18:42:34 GMT
+cache-control: public, s-maxage=30, max-age=0
+server: Werkzeug/3.1.6 Python/3.9.25
+x-cache: Hit from cloudfront
+via: 1.1 9700dbefcaf4a5da8ff0c118308f25e6.cloudfront.net (CloudFront)
+x-amz-cf-pop: MIA3-P3
+x-amz-cf-id: gBKFBn38w8YgBhcUfBLPTwZe1Mhc43-1hcfzqx-9s1aLhgm60vK8fw==
+age: 15
+
+
+
+------------------
+
+aws elbv2 describe-load-balancers \
+  --query "LoadBalancers[].{Name:LoadBalancerName,DNS:DNSName,SG:SecurityGroups}"
+[
+    {
+        "Name": "Armageddon-alb01",
+        "DNS": "Armageddon-alb01-262758143.ap-northeast-1.elb.amazonaws.com",
+        "SG": [
+            "sg-09c7438376577a6c9"
+        ]
+    }
+]
+
+
+aws ec2 describe-security-groups \
+  --group-ids sg-09c7438376577a6c9
+  
+"SecurityGroups": [
+        {
+            "GroupId": "sg-09c7438376577a6c9",
+            "IpPermissionsEgress": [
+                {
+                    "IpProtocol": "tcp",
+                    "FromPort": 80,
+                    "ToPort": 80,
+                    "UserIdGroupPairs": [
+                        {
+                            "Description": "Only to target ec2 group on port 80",
+                            "UserId": "323890959615",
+                            "GroupId": "sg-054e97de635ff379a"
+                        }
+                    ],
+                    "IpRanges": [],
+                    "Ipv6Ranges": [],
+                    "PrefixListIds": []
+                }
+            ],
+            "Tags": [
+                {
+                    "Key": "Name",
+                    "Value": "Armageddon-alb-sg01"
+                }
+            ],
+            "VpcId": "vpc-0da43bb3a36136540",
+            "SecurityGroupArn": "arn:aws:ec2:ap-northeast-1:323890959615:security-group/sg-09c7438376577a6c9",
+            "OwnerId": "323890959615",
+            "GroupName": "Armageddon-alb-sg01",
+            "Description": "ALB security group",
+            "IpPermissions": [
+                {
+                    "IpProtocol": "tcp",
+                    "FromPort": 80,
+                    "ToPort": 80,
+                    "UserIdGroupPairs": [],
+                    "IpRanges": [
+                        {
+                            "Description": "HTTP from internet",
+                            "CidrIp": "0.0.0.0/0"
+                        }
+                    ],
+                    "Ipv6Ranges": [],
+                    "PrefixListIds": []
+                },
+                {
+                    "IpProtocol": "tcp",
+                    "FromPort": 443,
+                    "ToPort": 443,
+                    "UserIdGroupPairs": [],
+                    "IpRanges": [
+                        {
+                            "Description": "HTTPS from internet",
+                            "CidrIp": "0.0.0.0/0"
+                        }
+                    ],
+                    "Ipv6Ranges": [],
+                    "PrefixListIds": [
+                        {
+                            "PrefixListId": "pl-58a04531"
+                        }
+                    ]
+                }
+            ]
+        }
+    ]
+}
+
+
+aws ec2 describe-managed-prefix-lists \
+  --query "PrefixLists[?PrefixListName=='com.amazonaws.global.cloudfront.origin-facing'].PrefixListId"
+[
+    "pl-58a04531"
+]
+
+
+aws elbv2 describe-load-balancers \
+  --query "LoadBalancers[].DNSName"
+[
+    "Armageddon-alb01-262758143.ap-northeast-1.elb.amazonaws.com"
+]
+
+curl -I http://Armageddon-alb01-262758143.ap-northeast-1.elb.amazonaws.com
+HTTP/1.1 301 Moved Permanently
+Server: awselb/2.0
+Date: Fri, 27 Feb 2026 18:52:41 GMT
+Content-Type: text/html
+Content-Length: 134
+Connection: keep-alive
+Location: https://armageddon-alb01-262758143.ap-northeast-1.elb.amazonaws.com:443/
+
+curl -Ik https://Armageddon-alb01-262758143.ap-northeast-1.elb.amazonaws.com
+HTTP/2 403 
+server: awselb/2.0
+date: Fri, 27 Feb 2026 18:53:16 GMT
+content-type: text/plain; charset=utf-8
+content-length: 9
+
+
+[ssm-user@ip-10-17-11-21 ~]$ python3 malgus_cloudfront_log_explainer.py --bucket my-cloudfront-logs-armageddon-tokyo-ttyd7  --prefix cloudfront
+Found 55 objects. Analyzing latest 3:
+  - s3://my-cloudfront-logs-armageddon-tokyo-ttyd7/cloudfront/E38FNHMWV6O35L.2026-03-01-07.1cb8f877.gz
+  - s3://my-cloudfront-logs-armageddon-tokyo-ttyd7/cloudfront/E38FNHMWV6O35L.2026-03-01-07.822f8e03.gz
+  - s3://my-cloudfront-logs-armageddon-tokyo-ttyd7/cloudfront/E38FNHMWV6O35L.2026-03-01-07.b0c59e9b.gz
+
+=== CloudFront Cache Outcome Report (Standard Logs) ===
+Core total (Hit/Miss/RefreshHit): 323
+All counted lines/notes:          323
+
+Core outcomes:
+  Hit             298   (92.3% of core)
+  Miss             25   (7.7% of core)
+  RefreshHit        0   (0.0% of core)
+
+Interpretation (ops):
+  • High Hit% usually means lower latency & lower origin load.
+  • High Miss% suggests caching policy mismatch, uncacheable headers,
+    query-string/cookie variance, or origin Cache-Control behavior.
+  • RefreshHit means CloudFront revalidated with origin and served cached content (often good).
+=======================================================
+
+
+
+[ssm-user@ip-10-17-11-21 ~]$ python3 malgus_cloudfront_log_explainer.py --bucket my-cloudfront-logs-armageddon-sao-paulo-j84ri  --prefix cloudfront
+Found 53 objects. Analyzing latest 3:
+  - s3://my-cloudfront-logs-armageddon-sao-paulo-j84ri/cloudfront/E33GYSTTPOYM1Z.2026-03-01-07.44d290cf.gz
+  - s3://my-cloudfront-logs-armageddon-sao-paulo-j84ri/cloudfront/E33GYSTTPOYM1Z.2026-03-01-07.8bf91716.gz
+  - s3://my-cloudfront-logs-armageddon-sao-paulo-j84ri/cloudfront/E33GYSTTPOYM1Z.2026-03-01-07.db5804ed.gz
+
+=== CloudFront Cache Outcome Report (Standard Logs) ===
+Core total (Hit/Miss/RefreshHit): 388
+All counted lines/notes:          388
+
+Core outcomes:
+  Hit             358   (92.3% of core)
+  Miss             30   (7.7% of core)
+  RefreshHit        0   (0.0% of core)
+
+Interpretation (ops):
+  • High Hit% usually means lower latency & lower origin load.
+  • High Miss% suggests caching policy mismatch, uncacheable headers,
+    query-string/cookie variance, or origin Cache-Control behavior.
+  • RefreshHit means CloudFront revalidated with origin and served cached content (often good).
+=======================================================  
+
+
