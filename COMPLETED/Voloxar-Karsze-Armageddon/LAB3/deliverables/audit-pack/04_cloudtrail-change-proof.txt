@@ -1,0 +1,45 @@
+aws cloudtrail lookup-events \
+  --region ap-northeast-1 \
+  --max-results 10 \
+  --query "Events[].{Time:EventTime,User:Username,Event:EventName,Source:EventSource}" \
+  --output table
+--------------------------------------------------------------------------------------------------------------------------
+|                                                      LookupEvents                                                      |
++----------------------------+--------------------------------------+----------------------------+-----------------------+
+|            Event           |               Source                 |           Time             |         User          |
++----------------------------+--------------------------------------+----------------------------+-----------------------+
+|  UpdateInstanceInformation |  ssm.amazonaws.com                   |  2026-02-27T12:57:24-06:00 |  i-0f3fb1e40cf6b629b  |
+|  UpdateInstanceInformation |  ssm.amazonaws.com                   |  2026-02-27T12:52:24-06:00 |  i-0f3fb1e40cf6b629b  |
+|  DescribeLoadBalancers     |  elasticloadbalancing.amazonaws.com  |  2026-02-27T12:52:19-06:00 |  AWSCLI               |
+|  DescribeManagedPrefixLists|  ec2.amazonaws.com                   |  2026-02-27T12:51:30-06:00 |  AWSCLI               |
+|  ListInstanceAssociations  |  ssm.amazonaws.com                   |  2026-02-27T12:51:09-06:00 |  i-0f3fb1e40cf6b629b  |
+|  DescribeSecurityGroups    |  ec2.amazonaws.com                   |  2026-02-27T12:49:29-06:00 |  AWSCLI               |
+|  DescribeSecurityGroups    |  ec2.amazonaws.com                   |  2026-02-27T12:47:54-06:00 |  AWSCLI               |
+|  UpdateInstanceInformation |  ssm.amazonaws.com                   |  2026-02-27T12:47:24-06:00 |  i-0f3fb1e40cf6b629b  |
+|  DescribeLoadBalancers     |  elasticloadbalancing.amazonaws.com  |  2026-02-27T12:46:47-06:00 |  AWSCLI               |
+|  UpdateInstanceInformation |  ssm.amazonaws.com                   |  2026-02-27T12:42:24-06:00 |  i-0f3fb1e40cf6b629b  |
++----------------------------+--------------------------------------+----------------------------+-----------------------+
+
+aws cloudtrail lookup-events \
+  --region sa-east-1 \
+  --max-results 10 \
+  --query "Events[].{Time:EventTime,User:Username,Event:EventName,Source:EventSource}" \
+  --output table
+--------------------------------------------------------------------------------------------------------
+|                                             LookupEvents                                             |
++----------------------------+--------------------+-----------------------------+----------------------+
+|            Event           |      Source        |            Time             |        User          |
++----------------------------+--------------------+-----------------------------+----------------------+
+|  ListInstanceAssociations  |  ssm.amazonaws.com |  2026-02-27T13:00:15-06:00  |  i-0b5e6b2c6cc90b83f |
+|  UpdateInstanceInformation |  ssm.amazonaws.com |  2026-02-27T13:00:03-06:00  |  i-0b5e6b2c6cc90b83f |
+|  UpdateInstanceInformation |  ssm.amazonaws.com |  2026-02-27T12:55:03-06:00  |  i-0b5e6b2c6cc90b83f |
+|  ListInstanceAssociations  |  ssm.amazonaws.com |  2026-02-27T12:50:31-06:00  |  i-0b5e6b2c6cc90b83f |
+|  UpdateInstanceInformation |  ssm.amazonaws.com |  2026-02-27T12:50:03-06:00  |  i-0b5e6b2c6cc90b83f |
+|  UpdateInstanceInformation |  ssm.amazonaws.com |  2026-02-27T12:45:03-06:00  |  i-0b5e6b2c6cc90b83f |
+|  ListInstanceAssociations  |  ssm.amazonaws.com |  2026-02-27T12:40:11-06:00  |  i-0b5e6b2c6cc90b83f |
+|  UpdateInstanceInformation |  ssm.amazonaws.com |  2026-02-27T12:40:04-06:00  |  i-0b5e6b2c6cc90b83f |
+|  UpdateInstanceInformation |  ssm.amazonaws.com |  2026-02-27T12:40:03-06:00  |  i-0b5e6b2c6cc90b83f |
+|  DescribeDBInstances       |  rds.amazonaws.com |  2026-02-27T12:37:33-06:00  |  AWSCLI              |
++----------------------------+--------------------+-----------------------------+----------------------+
+
+

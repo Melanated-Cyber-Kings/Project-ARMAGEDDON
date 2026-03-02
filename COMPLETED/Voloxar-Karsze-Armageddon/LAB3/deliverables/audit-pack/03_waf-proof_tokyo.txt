@@ -1,0 +1,29 @@
+============================================
+Web ACL ARN:
+arn:aws:wafv2:us-east-1:323890959615:global/webacl/Armageddon_cf_waf01_5423v/2802a00c-8382-4131-9470-8abf2ca1bd43
+
+WAF Logging Destination ARN:
+arn:aws:s3:::aws-waf-logs-armageddon-tokyo-5423v
+
+Detected S3 Bucket: aws-waf-logs-armageddon-tokyo-5423v
+
+Latest Log File: AWSLogs/323890959615/WAFLogs/cloudfront/Armageddon_cf_waf01_5423v/2026/02/27/18/15/323890959615_waflogs_cloudfront_Armageddon_cf_waf01_5423v_20260227T1815Z_e6fcca17.log.gz
+
+Recent BLOCK Log Entries (Last 5):
+
+--------------------------------------------
+Recent ALLOW Log Entries (Last 5):
+{"timestamp":1772216359327,"formatVersion":1,"webaclId":"arn:aws:wafv2:us-east-1:323890959615:global/webacl/Armageddon_cf_waf01_5423v/2802a00c-8382-4131-9470-8abf2ca1bd43","terminatingRuleId":"Default_Action","terminatingRuleType":"REGULAR","action":"ALLOW","terminatingRuleMatchDetails":[],"httpSourceName":"CF","httpSourceId":"E8EBUUU5O6BIC","ruleGroupList":[{"ruleGroupId":"AWS#AWSManagedRulesCommonRuleSet","terminatingRule":null,"nonTerminatingMatchingRules":[],"excludedRules":null,"customerConfig":null}],"rateBasedRuleList":[],"nonTerminatingMatchingRules":[],"requestHeadersInserted":null,"responseCodeSent":null,"httpRequest":{"clientIp":"176.65.148.161","country":"NL","headers":[{"name":"Host","value":"theswordptdemo.site"},{"name":"User-Agent","value":"Mozilla/5.0 (compatible; Let's Encrypt validation server; +https://www.letsencrypt.org)"},{"name":"Accept","value":"*/*"},{"name":"Referer","value":"http://theswordptdemo.site/_next"}],"uri":"/_next","args":"","httpVersion":"HTTP/1.1","httpMethod":"HEAD","requestId":"uZHqQYLCI9tNufSY_xdzT7WI1be5LFTejUPKjekQN2BhY7Btmrt3-g==","fragment":"","scheme":"https","host":"theswordptdemo.site"},"ja3Fingerprint":"20b279993ae2e137e62b9647c6d768fb","ja4Fingerprint":"t13d131100_f57a46bbacb6_ab7e3b40a677"}
+{"timestamp":1772216357033,"formatVersion":1,"webaclId":"arn:aws:wafv2:us-east-1:323890959615:global/webacl/Armageddon_cf_waf01_5423v/2802a00c-8382-4131-9470-8abf2ca1bd43","terminatingRuleId":"Default_Action","terminatingRuleType":"REGULAR","action":"ALLOW","terminatingRuleMatchDetails":[],"httpSourceName":"CF","httpSourceId":"E8EBUUU5O6BIC","ruleGroupList":[{"ruleGroupId":"AWS#AWSManagedRulesCommonRuleSet","terminatingRule":null,"nonTerminatingMatchingRules":[],"excludedRules":null,"customerConfig":null}],"rateBasedRuleList":[],"nonTerminatingMatchingRules":[],"requestHeadersInserted":null,"responseCodeSent":null,"httpRequest":{"clientIp":"176.65.148.161","country":"NL","headers":[{"name":"Host","value":"theswordptdemo.site"},{"name":"User-Agent","value":"Mozilla/5.0 (compatible; Let's Encrypt validation server; +https://www.letsencrypt.org)"},{"name":"Accept","value":"*/*"},{"name":"Referer","value":"http://theswordptdemo.site"}],"uri":"/","args":"","httpVersion":"HTTP/1.1","httpMethod":"HEAD","requestId":"dpU9p7msBEBM0sNbkBPedp0qzNAZHXKPStOdikjVOb2kiE6aCbbyqw==","fragment":"","scheme":"https","host":"theswordptdemo.site"},"ja3Fingerprint":"20b279993ae2e137e62b9647c6d768fb","ja4Fingerprint":"t13d131100_f57a46bbacb6_ab7e3b40a677"}
+{"timestamp":1772216358327,"formatVersion":1,"webaclId":"arn:aws:wafv2:us-east-1:323890959615:global/webacl/Armageddon_cf_waf01_5423v/2802a00c-8382-4131-9470-8abf2ca1bd43","terminatingRuleId":"Default_Action","terminatingRuleType":"REGULAR","action":"ALLOW","terminatingRuleMatchDetails":[],"httpSourceName":"CF","httpSourceId":"E8EBUUU5O6BIC","ruleGroupList":[{"ruleGroupId":"AWS#AWSManagedRulesCommonRuleSet","terminatingRule":null,"nonTerminatingMatchingRules":[],"excludedRules":null,"customerConfig":null}],"rateBasedRuleList":[],"nonTerminatingMatchingRules":[],"requestHeadersInserted":null,"responseCodeSent":null,"httpRequest":{"clientIp":"176.65.148.161","country":"NL","headers":[{"name":"Host","value":"theswordptdemo.site"},{"name":"User-Agent","value":"Mozilla/5.0 (compatible; Let's Encrypt validation server; +https://www.letsencrypt.org)"},{"name":"Accept","value":"*/*"},{"name":"Range","value":"bytes=0-2048"},{"name":"Referer","value":"http://theswordptdemo.site"}],"uri":"/","args":"","httpVersion":"HTTP/1.1","httpMethod":"GET","requestId":"0kgj1UseE5gpL79CWKWq6Xn9_zUYQZsk4d0VH0jMSuv1qAm-nlvccw==","fragment":"","scheme":"https","host":"theswordptdemo.site"},"ja3Fingerprint":"20b279993ae2e137e62b9647c6d768fb","ja4Fingerprint":"t13d131100_f57a46bbacb6_ab7e3b40a677"}
+
+--------------------------------------------
+Action Summary (ALLOW vs BLOCK):
+      3 ALLOW
+
+--------------------------------------------
+WAF Logging Destination Options (Documented):
+1. Amazon CloudWatch Logs
+2. Amazon S3
+3. Amazon Kinesis Data Firehose
+

@@ -1,0 +1,62 @@
+# provider "aws" {
+#   alias  = "use1"
+#   region = "us-east-1"
+# }
+
+
+# S3 bucket to store CloudFront logs
+resource "aws_s3_bucket" "cf_logs1" {
+  bucket = lower("my-cloudfront-logs-${var.project}-tokyo-${random_string.short_string.result}")  # must be globally unique
+  provider = aws.use1
+
+
+  tags = {
+    Name = "${var.project}-tokyo-cloudfront-logs"
+  }
+}
+
+#(Optional but recommended) Block public access to the logs bucket
+resource "aws_s3_bucket_public_access_block" "cf_logs1" {
+  bucket = aws_s3_bucket.cf_logs1.id
+  provider = aws.use1
+
+
+  block_public_acls       = true
+  block_public_policy     = true
+  ignore_public_acls      = true
+  restrict_public_buckets = true
+}
+
+
+# # Set ownership controls for the S3 bucket (bucket owner preferred)
+# resource "aws_s3_bucket_ownership_controls" "cf_logs1" {
+#   bucket = aws_s3_bucket.cf_logs1.id
+#   #provider = aws.use1
+
+#   rule {
+#     object_ownership = "BucketOwnerEnforced"
+#   }
+# }
+
+# Allow ACLs (required for CloudFront logging)
+resource "aws_s3_bucket_ownership_controls" "cf_logs1" {
+  bucket = aws_s3_bucket.cf_logs1.id
+  provider = aws.use1
+
+  rule {
+    # Must NOT be BucketOwnerEnforced for logging
+    object_ownership = "BucketOwnerPreferred"
+  }
+}
+
+# Give CloudFront log delivery permissions via canned ACL
+resource "aws_s3_bucket_acl" "cf_logs1" {
+  bucket = aws_s3_bucket.cf_logs1.id
+  provider = aws.use1
+
+  acl    = "log-delivery-write"
+
+  depends_on = [
+    aws_s3_bucket_ownership_controls.cf_logs1
+  ]
+}

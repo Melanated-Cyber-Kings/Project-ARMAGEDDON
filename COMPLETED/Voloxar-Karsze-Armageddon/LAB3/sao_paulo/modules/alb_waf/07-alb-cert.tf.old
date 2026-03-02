@@ -1,0 +1,4 @@
+# resource "aws_acm_certificate" "liberdade_cert" {
+#   domain_name       = "${var.app_subdomain}.${var.domain_name}"
+#   validation_method = "DNS"
+# }

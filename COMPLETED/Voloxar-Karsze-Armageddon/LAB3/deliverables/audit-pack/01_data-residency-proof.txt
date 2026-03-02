@@ -1,0 +1,14 @@
+aws rds describe-db-instances --region ap-northeast-1 \
+  --query "DBInstances[].{DB:DBInstanceIdentifier,AZ:AvailabilityZone,Region:'ap-northeast-1',Endpoint:Endpoint.Address}"
+[
+    {
+        "DB": "lab-mysql",
+        "AZ": "ap-northeast-1c",
+        "Region": "ap-northeast-1",
+        "Endpoint": "lab-mysql.czokoi6ocbw7.ap-northeast-1.rds.amazonaws.com"
+    }
+]
+
+aws rds describe-db-instances --region sa-east-1 \
+  --query "DBInstances[].DBInstanceIdentifier"
+[]
