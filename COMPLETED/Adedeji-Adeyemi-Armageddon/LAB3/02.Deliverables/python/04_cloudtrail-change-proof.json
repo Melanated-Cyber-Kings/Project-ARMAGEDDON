@@ -1,0 +1,80 @@
+{
+  "trail_status": "ACTIVE",
+  "recent_management_events": [
+    {
+      "EventId": "a9ae73d8-fecf-4b19-9a83-d8f0b0dd6f96",
+      "EventName": "DescribeLaunchTemplateVersions",
+      "EventTime": "2026-03-07 21:48:03+00:00",
+      "User": "AutoScaling",
+      "Resources": [
+        "lt-0f20d9a64c382e6b6"
+      ]
+    },
+    {
+      "EventId": "f532c7a9-4453-48fe-a91b-127f93ced9e9",
+      "EventName": "ListOutposts",
+      "EventTime": "2026-03-07 21:47:57+00:00",
+      "User": "root",
+      "Resources": []
+    },
+    {
+      "EventId": "3fc1c6b8-ab59-480e-b7c6-334972cbfe23",
+      "EventName": "DescribeTargetHealth",
+      "EventTime": "2026-03-07 21:47:56+00:00",
+      "User": "root",
+      "Resources": []
+    },
+    {
+      "EventId": "57046c7b-af41-4963-9b26-6a2103eb9caf",
+      "EventName": "DescribeTargetHealth",
+      "EventTime": "2026-03-07 21:47:56+00:00",
+      "User": "root",
+      "Resources": []
+    },
+    {
+      "EventId": "2555a239-0712-48ae-b8c1-ffe0f38bb0f7",
+      "EventName": "DescribeLaunchTemplateVersions",
+      "EventTime": "2026-03-07 21:47:53+00:00",
+      "User": "AutoScaling",
+      "Resources": [
+        "lt-0f20d9a64c382e6b6"
+      ]
+    },
+    {
+      "EventId": "5f55f55b-72cb-4472-be80-38c2f0a7b75c",
+      "EventName": "DescribeDBClusters",
+      "EventTime": "2026-03-07 21:47:52+00:00",
+      "User": "root",
+      "Resources": []
+    },
+    {
+      "EventId": "bcc059ab-bb2f-4d02-8173-3e6bb8fe4d00",
+      "EventName": "DescribeDBInstances",
+      "EventTime": "2026-03-07 21:47:52+00:00",
+      "User": "root",
+      "Resources": []
+    },
+    {
+      "EventId": "d84e9ff0-bcd8-4fe2-9bed-6480da21661f",
+      "EventName": "DescribeCapacityReservations",
+      "EventTime": "2026-03-07 21:47:48+00:00",
+      "User": "root",
+      "Resources": []
+    },
+    {
+      "EventId": "9d37ac52-5649-4a1c-b355-d556efb0926f",
+      "EventName": "ListZonalShifts",
+      "EventTime": "2026-03-07 21:47:46+00:00",
+      "User": "root",
+      "Resources": []
+    },
+    {
+      "EventId": "fdd49d61-70f7-4ef8-827a-683c846856fd",
+      "EventName": "DescribeVpcPeeringConnections",
+      "EventTime": "2026-03-07 21:47:45+00:00",
+      "User": "root",
+      "Resources": []
+    }
+  ],
+  "assertion": "PASS"
+}

@@ -1,0 +1,42 @@
+winpty python malgus_cloudfront_log_explainer.py --bucket medical-vault-audit-logs-sprint3-v1-200819971986 --prefix AWSLogs/
+
+curl -i https://d1wv9anm7jcutd.cloudfront.net/static/example.txt
+HTTP/1.1 502 Bad Gateway
+Content-Type: text/html
+Content-Length: 507
+Connection: keep-alive
+Server: CloudFront
+Date: Sat, 07 Mar 2026 22:19:56 GMT
+Expires: Sat, 07 Mar 2026 22:19:56 GMT
+X-Cache: Error from cloudfront
+Via: 1.1 f5d98cd57a87aced5329b054059877a8.cloudfront.net (CloudFront)
+X-Amz-Cf-Pop: CPT51-P1
+X-Amz-Cf-Id: plAxKixkFcgnh9xNd7sC01NQ_1nQ96tzy_K6D1JkuVzSqKVdfk0pAQ==
+
+
+Found 1009 objects. Analyzing latest 3:
+  - s3://medical-vault-audit-logs-sprint3-v1-200819971986/AWSLogs/420228061920/CloudTrail/us-west-2/2026/03/07/42022806
+1920_CloudTrail_us-west-2_20260307T2220Z_CqbuLBzY1owE7uwK.json.gz
+  - s3://medical-vault-audit-logs-sprint3-v1-200819971986/AWSLogs/420228061920/CloudTrail/us-west-2/2026/03/07/42022806
+1920_CloudTrail_us-west-2_20260307T2220Z_btw9gfmIkTzQfsZX.json.gz
+  - s3://medical-vault-audit-logs-sprint3-v1-200819971986/AWSLogs/420228061920/CloudTrail/us-west-2/2026/03/07/42022806
+1920_CloudTrail_us-west-2_20260307T2220Z_zf4umVMkpDNv1XXI.json.gz
+
+=== CloudFront Cache Outcome Report (Standard Logs) ===
+Core total (Hit/Miss/RefreshHit): 0
+All counted lines/notes:          3
+
+Core outcomes:
+  Hit               0   (0.0% of core)
+  Miss              0   (0.0% of core)
+  RefreshHit        0   (0.0% of core)
+
+Other outcomes / parsing notes (top 20):
+  Other:(missing_fields_header)        3
+
+Interpretation (ops):
+  • High Hit% usually means lower latency & lower origin load.
+  • High Miss% suggests caching policy mismatch, uncacheable headers,
+    query-string/cookie variance, or origin Cache-Control behavior.
+  • RefreshHit means CloudFront revalidated with origin and served cached content (often good).
+=======================================================

@@ -1,0 +1,6 @@
+{
+  "log_group": "aws-waf-logs-medical-vault",
+  "active_streams": 0,
+  "status": "WAITING_FOR_TRAFFIC",
+  "assertion": "LOG_GROUP_FOUND"
+}
