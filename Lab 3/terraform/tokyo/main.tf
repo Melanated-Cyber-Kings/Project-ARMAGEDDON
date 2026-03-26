@@ -95,7 +95,7 @@ resource "aws_route" "tokyo_to_sao_paulo" {
 
 # Add IAM module for SSM access
 module "tokyo_iam" {
-  source = "../modules/iam"
+  source = "../modules/IAM"
   
   name_prefix  = "tokyo-shinjuku"
   common_tags  = local.common_tags
