@@ -11,7 +11,7 @@ locals {
 # DATA SOURCES - Reference EXISTING infrastructure
 data "aws_vpc" "existing" {
   provider = aws.tokyo
-  id = var.existing_vpc_id
+  id = "vpc-0953ed8a996a3162d" #var.existing_vpc_id
 }
 
 # Data source to find MAIN route table
@@ -87,7 +87,7 @@ resource "aws_ec2_transit_gateway_peering_attachment_accepter" "tokyo_accepter" 
 resource "aws_route" "tokyo_to_sao_paulo" {
   provider = aws.tokyo
 
-  route_table_id         = "rtb-095703082c49fef13"   # data.aws_route_table.main.route_table_id
+  route_table_id         = "rtb-07829d9fe15fe7c35"   # data.aws_route_table.main.route_table_id
   destination_cidr_block = var.sao_paulo_vpc_cidr  # "10.103.0.0/16"
   transit_gateway_id     = aws_ec2_transit_gateway.hub.id
 }
