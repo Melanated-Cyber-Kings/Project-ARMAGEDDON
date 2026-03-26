@@ -25,7 +25,7 @@ data "aws_route_table" "main" {
   }
 }
 
-# Create Transit Gateway (Hub)
+# Create Transit Gateway(Hub)
 resource "aws_ec2_transit_gateway" "hub" {
   provider = aws.tokyo
   
